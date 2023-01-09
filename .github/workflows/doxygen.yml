@@ -10,6 +10,7 @@ jobs:
   doxygen:
     runs-on: ubuntu-latest
     steps:
-      - uses: mattnotmitt/doxygen-action@v1.9.5
-      with:
+      - name: create doc
+        uses: mattnotmitt/doxygen-action@v1.9.5
+        with:
           additional-packages: font-fira-code
