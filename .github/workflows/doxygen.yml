@@ -10,6 +10,8 @@ jobs:
   doxygen:
     runs-on: ubuntu-latest
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
       - name: create doc
         uses: mattnotmitt/doxygen-action@v1.9.5
         with:
