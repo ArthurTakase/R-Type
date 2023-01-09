@@ -27,8 +27,6 @@ set(
   src/ECS/Components/PositionComponent.cpp
   src/ECS/Components/HitboxComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
-  src/Server/Server.cpp
-  src/Client/Client.cpp
 )
 
 add_executable(${PROJECT_NAME} ${RTYPE_SRC})
@@ -43,8 +41,6 @@ target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Entity)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Components)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Systems)
 target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
-target_include_directories(${PROJECT_NAME} PRIVATE include/Client)
-target_include_directories(${PROJECT_NAME} PRIVATE include/Server)
 
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
