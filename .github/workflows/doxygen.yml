@@ -10,16 +10,6 @@ jobs:
   doxygen:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Install Doxygen
-        run: sudo apt-get install doxygen
-      - name: Generate Doxygen documentation
-        uses: takyamamoto/doxygen-action@v1
-        with:
-          doxyfile: Doxyfile
-      - name: Deploy documentation to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./html
+      - uses: mattnotmitt/doxygen-action@v1.9.5
+      with:
+          additional-packages: font-fira-code
