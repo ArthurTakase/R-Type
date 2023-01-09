@@ -1,0 +1,16 @@
+name: Cmake
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: '3.17.x'
+    - name: checkout repo
+      uses: actions/checkout@v2
+    - name: build
+      run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && cd ..
