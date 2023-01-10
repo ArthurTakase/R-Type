@@ -43,6 +43,7 @@ set(
 set(
   TESTS_SRC
   tests/HitboxComponent.cpp
+  tests/PositionComponent.cpp
 )
 
 # ------------------------------
