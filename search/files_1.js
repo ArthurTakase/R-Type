@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['hitboxcomponent_2ecpp_0',['HitboxComponent.cpp',['../src_2ECS_2Components_2HitboxComponent_8cpp.html',1,'(Global Namespace)'],['../tests_2HitboxComponent_8cpp.html',1,'(Global Namespace)']]],
-  ['hitboxsystem_2ecpp_1',['HitboxSystem.cpp',['../HitboxSystem_8cpp.html',1,'']]]
+  ['entity_2ecpp_0',['Entity.cpp',['../_entity_8cpp.html',1,'']]],
+  ['entity_2ehpp_1',['Entity.hpp',['../_entity_8hpp.html',1,'']]],
+  ['entitymanager_2ecpp_2',['EntityManager.cpp',['../_entity_manager_8cpp.html',1,'']]],
+  ['entitymanager_2ehpp_3',['EntityManager.hpp',['../_entity_manager_8hpp.html',1,'']]]
 ];

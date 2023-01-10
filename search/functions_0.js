@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['main_0',['main',['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main.cpp']]]
+  ['addcomponent_0',['addComponent',['../class_entity.html#a43e3e04bf71eb494b3b3c509f092ad07',1,'Entity']]],
+  ['asystem_1',['ASystem',['../class_a_system.html#a2df84db69b6e34d11ce5cb806e228eca',1,'ASystem']]]
 ];
