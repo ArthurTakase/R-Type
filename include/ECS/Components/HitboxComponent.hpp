@@ -11,6 +11,9 @@
 
 #include "IComponent.hpp"
 
+/**
+ * @brief Component for the hitbox of an entity. Contain the width and the height of the box.
+ */
 class HitboxComponent : public IComponent
 {
   public:

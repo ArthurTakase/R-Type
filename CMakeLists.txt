@@ -42,7 +42,7 @@ set(
 
 set(
   TESTS_SRC
-  tests/sample.cpp
+  tests/HitboxComponent.cpp
 )
 
 # ------------------------------
