@@ -78,3 +78,25 @@ TEST(EntityManagerTest, getEntities)
     manager->createEnemy();
     EXPECT_EQ(manager->getEntities().size(), 8);
 }
+
+TEST(EntityManagerTest, getEntsByComps)
+{
+    auto manager = std::make_unique<EntityManager>();
+    manager->createPlayer();
+    manager->createPlayer();
+    manager->createPlayer();
+    manager->createEnemy();
+    manager->createEnemy();
+    manager->createEnemy();
+    manager->createEnemy();
+    manager->createEnemy();
+    auto entities = manager->getEntsByComps<HitboxComponent, PositionComponent>();
+    EXPECT_EQ(entities.size(), 3);
+    EXPECT_EQ(manager->getEntities().size(), 8);
+    auto entities2 = manager->getEntsByComps<HitboxComponent>();
+    EXPECT_EQ(entities2.size(), 3);
+    EXPECT_EQ(manager->getEntities().size(), 8);
+    auto entities3 = manager->getEntsByComps<PositionComponent>();
+    EXPECT_EQ(entities3.size(), 8);
+    EXPECT_EQ(manager->getEntities().size(), 8);
+}

@@ -11,6 +11,9 @@
 
 #include "IComponent.hpp"
 
+/**
+ * @brief Component used to store the position of an entity
+ */
 class PositionComponent : public IComponent
 {
   public:

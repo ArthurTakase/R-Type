@@ -9,6 +9,9 @@
 
 #include "ASystem.hpp"
 
+/**
+ * @brief System used to check if an entity is colliding with another
+ */
 class HitboxSystem : public ASystem
 {
   public:

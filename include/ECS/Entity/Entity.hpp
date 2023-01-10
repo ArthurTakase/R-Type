@@ -15,6 +15,10 @@
 #include "IComponent.hpp"
 #include "InstanceOf.hpp"
 
+/**
+ * @brief Entity part of the ECS. It can be linked to many components to add attributes to it. No variable must be
+ * directly located in this object.
+ */
 class Entity
 {
   public:
@@ -34,6 +38,12 @@ class Entity
     std::vector<std::unique_ptr<IComponent>> _components = {};
 
   public:
+    /**
+     * @brief Add a component to the entity
+     *
+     * @tparam T component type
+     * @param component object constructor (ex: HitboxComponent(10, 10))
+     */
     template <typename T>
     void addComponent(const T& component) noexcept
     {
@@ -41,6 +51,12 @@ class Entity
         _components.push_back(std::move(component_ptr));
     };
 
+    /**
+     * @brief Get a component from the entity
+     *
+     * @tparam T component type
+     * @return std::optional<std::reference_wrapper<T>> component reference
+     */
     template <typename T>
     std::optional<std::reference_wrapper<T>> getComponent() noexcept
     {
@@ -53,6 +69,13 @@ class Entity
         return {};
     };
 
+    /**
+     * @brief Remove a component from the entity
+     *
+     * @tparam T component type
+     * @return true if the component was removed
+     * @return false if the component was not found
+     */
     template <typename T>
     bool removeComponent() noexcept
     {
@@ -65,6 +88,13 @@ class Entity
         return false;
     };
 
+    /**
+     * @brief Check if the entity has a component
+     *
+     * @tparam T component type
+     * @return true if the entity has the component
+     * @return false if the entity does not have the component
+     */
     template <typename T>
     bool hasComponent() noexcept
     {
@@ -73,6 +103,14 @@ class Entity
         return false;
     };
 
+    /**
+     * @brief Check if the entity has multiple components
+     *
+     * @tparam T component type
+     * @tparam Args component types
+     * @return true if the entity has all the components
+     * @return false if the entity does not have all the components
+     */
     template <typename T, typename... Args>
     bool hasComponents() noexcept
     {

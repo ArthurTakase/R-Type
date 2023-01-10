@@ -46,6 +46,8 @@ set(
   tests/PositionComponent.cpp
   tests/Entity.cpp
   tests/EntityManager.cpp
+  tests/HitboxSystem.cpp
+  tests/Tools.cpp
 )
 
 # ------------------------------

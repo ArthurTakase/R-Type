@@ -15,6 +15,9 @@
 #include "InstanceOf.hpp"
 #include "PositionComponent.hpp"
 
+/**
+ * @brief Object used to create the different entities of the software
+ */
 class EntityManager
 {
   public:
@@ -37,6 +40,13 @@ class EntityManager
     std::shared_ptr<Entity>               getEntity(size_t id) const noexcept;
     std::vector<std::shared_ptr<Entity>>& getEntities() noexcept;
 
+    /**
+     * @brief Get all entities that have the given components
+     *
+     * @tparam T component type
+     * @tparam Args component types
+     * @return std::vector<std::shared_ptr<Entity>> entities
+     */
     template <typename T, typename... Args>
     std::vector<std::shared_ptr<Entity>> getEntsByComps()
     {

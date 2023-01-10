@@ -12,6 +12,10 @@
 
 #include "Entity.hpp"
 
+/**
+ * @brief System part of the ECS. It gets a vector with the entities and applies various methods according to the
+ * components they have
+ */
 class ASystem
 {
   public:

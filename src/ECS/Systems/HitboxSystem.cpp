@@ -13,11 +13,20 @@
 #include "HitboxComponent.hpp"
 #include "PositionComponent.hpp"
 
+/**
+ * It's a constructor for the HitboxSystem class
+ *
+ * @param shared_ptr A smart pointer that manages the lifetime of an object.
+ */
 HitboxSystem::HitboxSystem(std::vector<std::shared_ptr<Entity>>& entities)
     : ASystem(entities)
 {
 }
 
+/**
+ * For each entity in the system, check if it has a hitbox and a position component, and if it does,
+ * check if it's colliding with anything
+ */
 void HitboxSystem::run()
 {
     for (auto& entity : _entities) {
@@ -26,6 +35,13 @@ void HitboxSystem::run()
     }
 }
 
+/**
+ * It checks if the entity is colliding with anything else in the system
+ *
+ * @param entity The entity to check collision for.
+ *
+ * @return A boolean value.
+ */
 bool HitboxSystem::checkCollision(std::shared_ptr<Entity>& entity) const noexcept
 {
     for (auto& otherEntity : _entities) {

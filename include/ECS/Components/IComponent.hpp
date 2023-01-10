@@ -10,6 +10,9 @@
 #include <cstddef>
 #include <string>
 
+/**
+ * @brief Interface for all components
+ */
 class IComponent
 {
   public:
