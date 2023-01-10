@@ -23,6 +23,6 @@ jobs:
       - name: build
         run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && cd ..
       - name: tests
-        run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && clear  && ./build/runTests
+        run: ./build/runTests
       - name: coverage
-        run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && clear && gcovr -r . --exclude "build/" --exclude "tests/"
+        run: gcovr -r . --exclude "build/" --exclude "tests/"
