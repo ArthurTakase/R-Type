@@ -44,6 +44,7 @@ set(
   TESTS_SRC
   tests/HitboxComponent.cpp
   tests/PositionComponent.cpp
+  tests/Entity.cpp
 )
 
 # ------------------------------
