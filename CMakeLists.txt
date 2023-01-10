@@ -45,6 +45,7 @@ set(
   tests/HitboxComponent.cpp
   tests/PositionComponent.cpp
   tests/Entity.cpp
+  tests/EntityManager.cpp
 )
 
 # ------------------------------
