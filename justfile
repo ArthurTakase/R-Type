@@ -10,3 +10,7 @@ launch:
     mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && clear && ./build/R-Type
 valgrind:
     just build && valgrind --leak-check=full ./build/R-Type
+tests:
+    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && clear  && ./build/runTests
+coverage:
+    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && clear && gcovr -r . --exclude "build/" --exclude "tests/"

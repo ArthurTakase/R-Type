@@ -16,11 +16,12 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
 
-# file(COPY assets/ DESTINATION assets/)
+# ------------------------------
+# FILES
+# ------------------------------
 
 set(
   RTYPE_SRC
-  src/main.cpp
   src/RType.cpp
   src/ECS/Entity/Entity.cpp
   src/ECS/Entity/EntityManager.cpp
@@ -29,18 +30,53 @@ set(
   src/ECS/Systems/HitboxSystem.cpp
 )
 
-add_executable(${PROJECT_NAME} ${RTYPE_SRC})
+set(
+  RTYPE_INCLUDES
+  include
+  include/ECS
+  include/ECS/Entity
+  include/ECS/Components
+  include/ECS/Systems
+  include/Tools
+)
 
-# add_subdirectory(src/Lib)
-# target_link_libraries(${PROJECT_NAME} raylib_encapsulation)
+set(
+  TESTS_SRC
+  tests/sample.cpp
+)
 
-# Ajouter ici les dossiers contenants les .hpp
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Entity)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Components)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Systems)
-target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
+# ------------------------------
+# R-TYPE
+# ------------------------------
 
+add_executable(${PROJECT_NAME} src/main.cpp ${RTYPE_SRC})
+target_include_directories(${PROJECT_NAME} PRIVATE ${RTYPE_INCLUDES})
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+
+# ------------------------------
+# TESTS
+# ------------------------------
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+  SOURCE_DIR ${CMAKE_BINARY_DIR}/googletest-src
+)
+FetchContent_GetProperties(googletest)
+if(NOT googletest_POPULATED)
+  FetchContent_Populate(googletest)
+  add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src ${CMAKE_BINARY_DIR}/googletest-build)
+endif()
+include_directories(${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
+include_directories(${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -fprofile-arcs -ftest-coverage")
+  set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
+add_executable(runTests ${TESTS_SRC} ${RTYPE_SRC})
+target_include_directories(runTests PRIVATE ${RTYPE_INCLUDES})
+target_link_libraries(runTests gtest gtest_main gmock pthread)
