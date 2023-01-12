@@ -1,9 +1,10 @@
 var dir_59425e443f801f1f2fd8bbe4959a3ccf =
 [
-    [ "Entity.cpp", "tests_2_entity_8cpp.html", "tests_2_entity_8cpp" ],
-    [ "EntityManager.cpp", "tests_2_entity_manager_8cpp.html", "tests_2_entity_manager_8cpp" ],
-    [ "HitboxComponent.cpp", "tests_2_hitbox_component_8cpp.html", "tests_2_hitbox_component_8cpp" ],
-    [ "HitboxSystem.cpp", "tests_2_hitbox_system_8cpp.html", "tests_2_hitbox_system_8cpp" ],
-    [ "PositionComponent.cpp", "tests_2_position_component_8cpp.html", "tests_2_position_component_8cpp" ],
-    [ "Tools.cpp", "_tools_8cpp.html", "_tools_8cpp" ]
+    [ "Entity_t.cpp", "_entity__t_8cpp.html", "_entity__t_8cpp" ],
+    [ "EntityIterator_t.cpp", "_entity_iterator__t_8cpp.html", "_entity_iterator__t_8cpp" ],
+    [ "EntityManager_t.cpp", "_entity_manager__t_8cpp.html", "_entity_manager__t_8cpp" ],
+    [ "HitboxComponent_t.cpp", "_hitbox_component__t_8cpp.html", "_hitbox_component__t_8cpp" ],
+    [ "HitboxSystem_t.cpp", "_hitbox_system__t_8cpp.html", "_hitbox_system__t_8cpp" ],
+    [ "PositionComponent_t.cpp", "_position_component__t_8cpp.html", "_position_component__t_8cpp" ],
+    [ "Tools_t.cpp", "_tools__t_8cpp.html", "_tools__t_8cpp" ]
 ];

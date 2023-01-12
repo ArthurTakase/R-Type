@@ -4,7 +4,6 @@ var class_position_component =
     [ "~PositionComponent", "class_position_component.html#a6686fbd2230704471345916b7bfb4ffd", null ],
     [ "PositionComponent", "class_position_component.html#a5900f77d549bad5e5666435ddcdcaebf", null ],
     [ "PositionComponent", "class_position_component.html#a18c3ac21675c7c9213a46a25ede0f470", null ],
-    [ "getPos", "class_position_component.html#ad1e689044ea790fbed7bda4ab77b8ff4", null ],
     [ "getX", "class_position_component.html#aa35733496247a12aae4aa9b81ff6a670", null ],
     [ "getY", "class_position_component.html#a5716fcecbff8c095da53c840647e82d0", null ],
     [ "operator=", "class_position_component.html#a3f57131cb597a2cff35def77627f53e3", null ],

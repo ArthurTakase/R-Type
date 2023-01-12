@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_5fentities_0',['_entities',['../class_a_system.html#a220f054fc7d76238e2cad779b6cf5385',1,'ASystem']]]
+  ['_5fmanager_0',['_manager',['../class_a_system.html#ad14a6d6c35346088f111e29dcce555b6',1,'ASystem']]]
 ];
