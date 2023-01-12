@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <utility>
-
 #include "IComponent.hpp"
 
 /**
@@ -25,12 +23,11 @@ class PositionComponent : public IComponent
     PositionComponent& operator=(const PositionComponent& rhs) noexcept = delete;
     PositionComponent& operator=(PositionComponent&& rhs) noexcept      = delete;
 
-    int                 getX() const noexcept;
-    int                 getY() const noexcept;
-    void                setX(int x) noexcept;
-    void                setY(int y) noexcept;
-    void                setPos(int x, int y) noexcept;
-    std::pair<int, int> getPos() const noexcept;
+    int  getX() const noexcept;
+    int  getY() const noexcept;
+    void setX(int x) noexcept;
+    void setY(int y) noexcept;
+    void setPos(int x, int y) noexcept;
 
   private:
     int _x;

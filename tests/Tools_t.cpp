@@ -13,7 +13,7 @@
 #include "InstanceOf.hpp"
 #include "PositionComponent.hpp"
 
-TEST(Tools, instanceOf)
+TEST(Tools_, instanceOf)
 {
     auto pos = std::make_unique<PositionComponent>(10, 10);
 

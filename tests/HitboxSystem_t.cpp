@@ -5,15 +5,15 @@
 ** HitboxSystem
 */
 
-#include "HitboxSystem.hpp"
-
 #include <gtest/gtest.h>
 
+#include "EntityIterator.hpp"
 #include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
+#include "HitboxSystem.hpp"
 #include "PositionComponent.hpp"
 
-TEST(HitboxSystemTest, run)
+TEST(HitboxSystem_, run)
 {
     std::string captured_output;
 
@@ -21,14 +21,14 @@ TEST(HitboxSystemTest, run)
     manager->createPlayer();
     manager->createPlayer();
     manager->createPlayer();
-    manager->getEntity(0)->getComponent<PositionComponent>()->get().setPos(100, 100);
+    manager->getEntity(0)->getComponent<PositionComponent>()->setPos(100, 100);
 
-    auto entities = manager->getEntsByComps<HitboxComponent, PositionComponent>();
-    auto system   = std::make_unique<HitboxSystem>(entities);
+    auto system =
+        std::make_unique<HitboxSystem>(EntityIterator<PositionComponent, HitboxComponent>(manager->getEntities()));
 
     testing::internal::CaptureStdout();
     system->run();
     captured_output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(captured_output, "Collision detected\nCollision detected\n");
+    EXPECT_EQ(captured_output, "Collision detected between 1 and 2\nCollision detected between 2 and 1\n");
 }

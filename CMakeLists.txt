@@ -42,12 +42,13 @@ set(
 
 set(
   TESTS_SRC
-  tests/HitboxComponent.cpp
-  tests/PositionComponent.cpp
-  tests/Entity.cpp
-  tests/EntityManager.cpp
-  tests/HitboxSystem.cpp
-  tests/Tools.cpp
+  tests/HitboxComponent_t.cpp
+  tests/PositionComponent_t.cpp
+  tests/Entity_t.cpp
+  tests/EntityManager_t.cpp
+  tests/HitboxSystem_t.cpp
+  tests/Tools_t.cpp
+  tests/EntityIterator_t.cpp
 )
 
 # ------------------------------

@@ -5,20 +5,19 @@
 ** Entity
 */
 
-#include "Entity.hpp"
-
 #include <gtest/gtest.h>
 
+#include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "PositionComponent.hpp"
 
-TEST(EntityTest, getId)
+TEST(Entity_, getId)
 {
     auto entity = std::make_unique<Entity>(1);
     EXPECT_EQ(entity->getId(), 1);
 }
 
-TEST(EntityTest, getComponents)
+TEST(Entity_, getComponents)
 {
     auto entity = std::make_unique<Entity>(1);
     EXPECT_EQ(entity->getComponents().size(), 0);
@@ -26,7 +25,7 @@ TEST(EntityTest, getComponents)
     EXPECT_EQ(entity->getComponents().size(), 1);
 }
 
-TEST(EntityTest, addComponent)
+TEST(Entity_, addComponent)
 {
     auto entity = std::make_unique<Entity>(1);
     entity->addComponent(HitboxComponent(10, 10));
@@ -35,7 +34,7 @@ TEST(EntityTest, addComponent)
     EXPECT_EQ(entity->getComponents().size(), 2);
 }
 
-TEST(EntityTest, getComponent)
+TEST(Entity_, getComponent)
 {
     auto entity = std::make_unique<Entity>(1);
     entity->addComponent(HitboxComponent(10, 10));
@@ -43,7 +42,7 @@ TEST(EntityTest, getComponent)
     EXPECT_FALSE(entity->getComponent<PositionComponent>());
 }
 
-TEST(EntityTest, removeComponent)
+TEST(Entity_, removeComponent)
 {
     auto entity = std::make_unique<Entity>(1);
     entity->addComponent(HitboxComponent(10, 10));
@@ -60,7 +59,7 @@ TEST(EntityTest, removeComponent)
     EXPECT_EQ(entity->getComponents().size(), 0);
 }
 
-TEST(EntityTest, hasComponent)
+TEST(Entity_, hasComponent)
 {
     auto entity = std::make_unique<Entity>(1);
     entity->addComponent(HitboxComponent(10, 10));
@@ -68,7 +67,7 @@ TEST(EntityTest, hasComponent)
     EXPECT_FALSE(entity->hasComponent<PositionComponent>());
 }
 
-TEST(EntityTest, hasComponents)
+TEST(Entity_, hasComponents)
 {
     auto entity = std::make_unique<Entity>(1);
     entity->addComponent(HitboxComponent(10, 10));

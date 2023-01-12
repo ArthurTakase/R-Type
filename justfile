@@ -14,3 +14,5 @@ tests:
     just debug && ./build/runTests
 coverage:
     just tests && gcovr -r . --exclude "build/" --exclude "tests/"
+clear:
+    rm -rf build/

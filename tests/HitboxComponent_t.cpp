@@ -5,50 +5,41 @@
 ** HitboxComponent Unit Test
 */
 
-#include "HitboxComponent.hpp"
-
 #include <gtest/gtest.h>
 
 #include "Entity.hpp"
+#include "HitboxComponent.hpp"
 
-TEST(HitboxComponentTest, getWidth)
+TEST(HitboxComponent_, getWidth)
 {
     auto hitbox = std::make_unique<HitboxComponent>(10, 10);
     EXPECT_EQ(hitbox->getWidth(), 10);
 }
 
-TEST(HitboxComponentTest, getHeight)
+TEST(HitboxComponent_, getHeight)
 {
     auto hitbox = std::make_unique<HitboxComponent>(10, 10);
     EXPECT_EQ(hitbox->getHeight(), 10);
 }
 
-TEST(HitboxComponentTest, setWidth)
+TEST(HitboxComponent_, setWidth)
 {
     auto hitbox = std::make_unique<HitboxComponent>(10, 10);
     hitbox->setWidth(20);
     EXPECT_EQ(hitbox->getWidth(), 20);
 }
 
-TEST(HitboxComponentTest, setHeight)
+TEST(HitboxComponent_, setHeight)
 {
     auto hitbox = std::make_unique<HitboxComponent>(10, 10);
     hitbox->setHeight(20);
     EXPECT_EQ(hitbox->getHeight(), 20);
 }
 
-TEST(HitboxComponentTest, setSize)
+TEST(HitboxComponent_, setSize)
 {
     auto hitbox = std::make_unique<HitboxComponent>(10, 10);
     hitbox->setSize(20, 20);
     EXPECT_EQ(hitbox->getWidth(), 20);
     EXPECT_EQ(hitbox->getHeight(), 20);
-}
-
-TEST(HitboxComponentTest, getSize)
-{
-    auto hitbox = std::make_unique<HitboxComponent>(10, 10);
-    auto size   = hitbox->getSize();
-    EXPECT_EQ(size.first, 10);
-    EXPECT_EQ(size.second, 10);
 }

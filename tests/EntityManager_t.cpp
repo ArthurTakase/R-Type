@@ -5,11 +5,11 @@
 ** EntityManager
 */
 
-#include "EntityManager.hpp"
-
 #include <gtest/gtest.h>
 
-TEST(EntityManagerTest, createPlayer)
+#include "EntityManager.hpp"
+
+TEST(EntityManager_, createPlayer)
 {
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
@@ -18,7 +18,7 @@ TEST(EntityManagerTest, createPlayer)
     EXPECT_TRUE(player->getComponent<HitboxComponent>());
 }
 
-TEST(EntityManagerTest, createEnemy)
+TEST(EntityManager_, createEnemy)
 {
     auto manager = std::make_unique<EntityManager>();
     manager->createEnemy();
@@ -27,7 +27,7 @@ TEST(EntityManagerTest, createEnemy)
     EXPECT_FALSE(enemy->getComponent<HitboxComponent>());
 }
 
-TEST(EntityManagerTest, removeEntity)
+TEST(EntityManager_, removeEntity)
 {
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
@@ -48,7 +48,7 @@ TEST(EntityManagerTest, removeEntity)
     EXPECT_FALSE(manager->removeEntity(20));
 }
 
-TEST(EntityManagerTest, getEntity)
+TEST(EntityManager_, getEntity)
 {
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
@@ -65,7 +65,7 @@ TEST(EntityManagerTest, getEntity)
     EXPECT_TRUE(manager->getEntity(5));
 }
 
-TEST(EntityManagerTest, getEntities)
+TEST(EntityManager_, getEntities)
 {
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
@@ -76,27 +76,5 @@ TEST(EntityManagerTest, getEntities)
     manager->createEnemy();
     manager->createPlayer();
     manager->createEnemy();
-    EXPECT_EQ(manager->getEntities().size(), 8);
-}
-
-TEST(EntityManagerTest, getEntsByComps)
-{
-    auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createPlayer();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    auto entities = manager->getEntsByComps<HitboxComponent, PositionComponent>();
-    EXPECT_EQ(entities.size(), 3);
-    EXPECT_EQ(manager->getEntities().size(), 8);
-    auto entities2 = manager->getEntsByComps<HitboxComponent>();
-    EXPECT_EQ(entities2.size(), 3);
-    EXPECT_EQ(manager->getEntities().size(), 8);
-    auto entities3 = manager->getEntsByComps<PositionComponent>();
-    EXPECT_EQ(entities3.size(), 8);
     EXPECT_EQ(manager->getEntities().size(), 8);
 }

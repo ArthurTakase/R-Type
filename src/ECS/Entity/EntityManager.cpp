@@ -18,7 +18,7 @@ EntityManager::EntityManager() {}
  */
 void EntityManager::createPlayer() noexcept
 {
-    _entities.emplace_back(std::make_shared<Entity>(get_id()));
+    _entities.emplace_back(std::make_unique<Entity>(get_id()));
     _entities.back()->addComponent(PositionComponent(10, 8));
     _entities.back()->addComponent(HitboxComponent(15, 21));
 }
@@ -28,7 +28,7 @@ void EntityManager::createPlayer() noexcept
  */
 void EntityManager::createEnemy() noexcept
 {
-    _entities.emplace_back(std::make_shared<Entity>(get_id()));
+    _entities.emplace_back(std::make_unique<Entity>(get_id()));
     _entities.back()->addComponent(PositionComponent(10, 8));
 }
 
@@ -57,10 +57,10 @@ bool EntityManager::removeEntity(size_t id) noexcept
  *
  * @return A pointer to an entity.
  */
-std::shared_ptr<Entity> EntityManager::getEntity(size_t id) const noexcept
+Entity* EntityManager::getEntity(size_t id) const noexcept
 {
     for (auto& entity : _entities) {
-        if (entity->getId() == id) { return entity; }
+        if (entity->getId() == id) { return entity.get(); }
     }
     return nullptr;
 }
@@ -70,7 +70,7 @@ std::shared_ptr<Entity> EntityManager::getEntity(size_t id) const noexcept
  *
  * @return A reference to the vector of entities.
  */
-std::vector<std::shared_ptr<Entity>>& EntityManager::getEntities() noexcept
+std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
 {
     return _entities;
 }

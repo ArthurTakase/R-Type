@@ -14,50 +14,60 @@
 #include "PositionComponent.hpp"
 
 /**
- * It's a constructor for the HitboxSystem class
+ * It takes an iterator of entities with a position and hitbox component, and stores it in a private
+ * member variable
  *
- * @param shared_ptr A smart pointer that manages the lifetime of an object.
+ * @param it The iterator to use for the system.
  */
-HitboxSystem::HitboxSystem(std::vector<std::shared_ptr<Entity>>& entities)
-    : ASystem(entities)
+HitboxSystem::HitboxSystem(EntityIterator<PositionComponent, HitboxComponent> it)
+    : _it(EntityIterator<PositionComponent, HitboxComponent>(it))
 {
 }
 
 /**
- * For each entity in the system, check if it has a hitbox and a position component, and if it does,
- * check if it's colliding with anything
+ * For each entity in the system, check if it collides with any other entity in the system
  */
 void HitboxSystem::run()
 {
-    for (auto& entity : _entities) {
-        assert((entity->hasComponents<HitboxComponent, PositionComponent>()));
-        if (checkCollision(entity)) { std::cout << "Collision detected" << std::endl; }
+    size_t other;
+
+    for (; !_it.isEnd(); ++_it) {
+        assert((_it.get()->hasComponents<HitboxComponent, PositionComponent>()));
+        try {
+            if ((other = checkCollision(_it.get())) != -1) {
+                std::cout << "Collision detected between " << _it.get()->getId() << " and " << other << std::endl;
+            }
+        } catch (const std::exception& e) {
+            std::cerr << e.what() << std::endl;
+        }
     }
 }
 
 /**
- * It checks if the entity is colliding with anything else in the system
+ * If the entity's hitbox is colliding with another entity's hitbox, return the other entity's id
  *
- * @param entity The entity to check collision for.
+ * @param entity The entity to check for collisions with.
  *
- * @return A boolean value.
+ * @return The id of the entity that is colliding with the entity passed in.
  */
-bool HitboxSystem::checkCollision(std::shared_ptr<Entity>& entity) const noexcept
+int HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
 {
-    for (auto& otherEntity : _entities) {
-        if (!otherEntity->hasComponents<HitboxComponent, PositionComponent>()) continue;
-        if (otherEntity == entity) { continue; }
+    for (auto other = EntityIterator<PositionComponent, HitboxComponent>(_it.it); !other.isEnd(); ++other) {
+        if (other.get() == entity) { continue; }
 
-        auto& hitbox      = entity->getComponent<HitboxComponent>()->get();
-        auto& pos         = entity->getComponent<PositionComponent>()->get();
-        auto& otherHitbox = otherEntity->getComponent<HitboxComponent>()->get();
-        auto& otherPos    = otherEntity->getComponent<PositionComponent>()->get();
+        assert((other.get()->hasComponents<HitboxComponent, PositionComponent>()));
 
-        if (pos.getX() + hitbox.getWidth() >= otherPos.getX() && pos.getX() <= otherPos.getX() + otherHitbox.getWidth()
-            && pos.getY() + hitbox.getHeight() >= otherPos.getY()
-            && pos.getY() <= otherPos.getY() + otherHitbox.getHeight()) {
-            return true;
+        auto hitbox      = entity->getComponent<HitboxComponent>();
+        auto pos         = entity->getComponent<PositionComponent>();
+        auto otherHitbox = other.get()->getComponent<HitboxComponent>();
+        auto otherPos    = other.get()->getComponent<PositionComponent>();
+
+        if (pos->getX() + hitbox->getWidth() >= otherPos->getX()
+            && pos->getX() <= otherPos->getX() + otherHitbox->getWidth()
+            && pos->getY() + hitbox->getHeight() >= otherPos->getY()
+            && pos->getY() <= otherPos->getY() + otherHitbox->getHeight()) {
+            return other.get()->getId();
         }
     }
-    return false;
+    return -1;
 }

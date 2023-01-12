@@ -10,7 +10,7 @@
 #include <memory>
 #include <vector>
 
-#include "Entity.hpp"
+#include "EntityManager.hpp"
 
 /**
  * @brief System part of the ECS. It gets a vector with the entities and applies various methods according to the
@@ -19,8 +19,8 @@
 class ASystem
 {
   public:
-    ASystem(std::vector<std::shared_ptr<Entity>>& entities) noexcept
-        : _entities(entities){};
+    ASystem(std::unique_ptr<EntityManager>& manager) noexcept
+        : _manager(manager){};
     virtual ~ASystem() noexcept = default;
     // ASystem(const ASystem& other) noexcept = delete;
     // ASystem(ASystem&& other) noexcept      = delete;
@@ -29,8 +29,8 @@ class ASystem
     // ASystem& operator=(ASystem&& rhs) noexcept = delete;
 
     virtual void run() = 0;
-    inline void  setEntities(std::vector<std::shared_ptr<Entity>>& entities) noexcept { _entities = entities; }
 
   protected:
-    std::vector<std::shared_ptr<Entity>>& _entities;
+    // std::vector<std::unique_ptr<Entity>>& _entities;
+    std::unique_ptr<EntityManager>& _manager;
 };

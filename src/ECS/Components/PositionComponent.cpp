@@ -47,17 +47,6 @@ int PositionComponent::getY() const noexcept
 }
 
 /**
- * It returns a pair of integers, the first being the x coordinate and the second being the y
- * coordinate
- *
- * @return A pair of ints
- */
-std::pair<int, int> PositionComponent::getPos() const noexcept
-{
-    return std::make_pair(_x, _y);
-}
-
-/**
  * Sets the x position of the entity.
  *
  * @param x The x coordinate of the position.

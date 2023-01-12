@@ -24,8 +24,8 @@ class Entity
   public:
     Entity(size_t id);
     ~Entity() noexcept;
-    Entity(const Entity& other) noexcept = delete;
-    Entity(Entity&& other) noexcept      = delete;
+    Entity(const Entity& other) noexcept = default;
+    Entity(Entity&& other) noexcept      = default;
 
     Entity& operator=(const Entity& rhs) noexcept = delete;
     Entity& operator=(Entity&& rhs) noexcept      = delete;
@@ -52,21 +52,17 @@ class Entity
     };
 
     /**
-     * @brief Get a component from the entity
-     *
-     * @tparam T component type
-     * @return std::optional<std::reference_wrapper<T>> component reference
+     * @brief Get the corresponding component
+     * @tparam T Component type
+     * @return T* if component exist, nullptr otherwise
      */
     template <typename T>
-    std::optional<std::reference_wrapper<T>> getComponent() noexcept
+    T* getComponent() noexcept
     {
         for (auto& i : _components) {
-            if (Type::instanceOf<T>(i.get())) {
-                auto value = dynamic_cast<T*>(i.get());
-                return (std::reference_wrapper<T>(*value));
-            }
+            if (Type::instanceOf<T>(i.get())) { return dynamic_cast<T*>(i.get()); }
         }
-        return {};
+        return nullptr;
     };
 
     /**

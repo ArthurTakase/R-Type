@@ -72,13 +72,3 @@ void HitboxComponent::setSize(size_t width, size_t height) noexcept
     _width  = width;
     _height = height;
 }
-
-/**
- * It returns a pair of size_t's, the first being the width and the second being the height
- *
- * @return A pair of size_t's
- */
-std::pair<size_t, size_t> HitboxComponent::getSize() const noexcept
-{
-    return std::make_pair(_width, _height);
-}
