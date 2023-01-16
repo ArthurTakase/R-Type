@@ -27,6 +27,7 @@ set(
   src/ECS/Entity/EntityManager.cpp
   src/ECS/Components/TransformComponent.cpp
   src/ECS/Components/HitboxComponent.cpp
+  src/ECS/Components/MouvementComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
 )
 
@@ -49,6 +50,7 @@ set(
   tests/HitboxSystem_t.cpp
   tests/Tools_t.cpp
   tests/EntityIterator_t.cpp
+  tests/MouvementComponent_t.cpp
 )
 
 # ------------------------------
