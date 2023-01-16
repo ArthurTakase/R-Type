@@ -19,7 +19,7 @@ EntityManager::EntityManager() {}
 void EntityManager::createPlayer() noexcept
 {
     _entities.emplace_back(std::make_unique<Entity>(get_id()));
-    _entities.back()->addComponent(PositionComponent(10, 8));
+    _entities.back()->addComponent(TransformComponent(10, 8));
     _entities.back()->addComponent(HitboxComponent(15, 21));
 }
 
@@ -29,7 +29,7 @@ void EntityManager::createPlayer() noexcept
 void EntityManager::createEnemy() noexcept
 {
     _entities.emplace_back(std::make_unique<Entity>(get_id()));
-    _entities.back()->addComponent(PositionComponent(10, 8));
+    _entities.back()->addComponent(TransformComponent(10, 8));
 }
 
 /**

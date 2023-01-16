@@ -11,12 +11,12 @@
 
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
-#include "PositionComponent.hpp"
+#include "TransformComponent.hpp"
 
 TEST(Tools_, instanceOf)
 {
-    auto pos = std::make_unique<PositionComponent>(10, 10);
+    auto pos = std::make_unique<TransformComponent>(10, 10);
 
-    EXPECT_TRUE(Type::instanceOf<PositionComponent>(pos.get()));
+    EXPECT_TRUE(Type::instanceOf<TransformComponent>(pos.get()));
     EXPECT_FALSE(Type::instanceOf<HitboxComponent>(pos.get()));
 }

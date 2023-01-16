@@ -11,7 +11,7 @@
 #include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
 #include "HitboxSystem.hpp"
-#include "PositionComponent.hpp"
+#include "TransformComponent.hpp"
 
 TEST(HitboxSystem_, run)
 {
@@ -21,10 +21,10 @@ TEST(HitboxSystem_, run)
     manager->createPlayer();
     manager->createPlayer();
     manager->createPlayer();
-    manager->getEntity(0)->getComponent<PositionComponent>()->setPos(100, 100);
+    manager->getEntity(0)->getComponent<TransformComponent>()->setPos(100, 100);
 
     auto system =
-        std::make_unique<HitboxSystem>(EntityIterator<PositionComponent, HitboxComponent>(manager->getEntities()));
+        std::make_unique<HitboxSystem>(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()));
 
     testing::internal::CaptureStdout();
     system->run();

@@ -14,7 +14,7 @@
 #include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
 #include "HitboxSystem.hpp"
-#include "PositionComponent.hpp"
+#include "TransformComponent.hpp"
 
 class RType
 {

@@ -25,7 +25,7 @@ set(
   src/RType.cpp
   src/ECS/Entity/Entity.cpp
   src/ECS/Entity/EntityManager.cpp
-  src/ECS/Components/PositionComponent.cpp
+  src/ECS/Components/TransformComponent.cpp
   src/ECS/Components/HitboxComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
 )
@@ -43,7 +43,7 @@ set(
 set(
   TESTS_SRC
   tests/HitboxComponent_t.cpp
-  tests/PositionComponent_t.cpp
+  tests/TransformComponent_t.cpp
   tests/Entity_t.cpp
   tests/EntityManager_t.cpp
   tests/HitboxSystem_t.cpp

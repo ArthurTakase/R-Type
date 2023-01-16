@@ -11,7 +11,7 @@
 #include "EntityIterator.hpp"
 #include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
-#include "PositionComponent.hpp"
+#include "TransformComponent.hpp"
 
 TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 {
@@ -23,10 +23,10 @@ TEST(EntityIterator, search_hitbox_and_position_and_check_both)
     manager->createEnemy();
     manager->createPlayer();
 
-    auto it = EntityIterator<HitboxComponent, PositionComponent>(manager->getEntities());
+    auto it = EntityIterator<HitboxComponent, TransformComponent>(manager->getEntities());
 
     while (!it.isEnd()) {
-        EXPECT_TRUE((it.get()->hasComponents<HitboxComponent, PositionComponent>()));
+        EXPECT_TRUE((it.get()->hasComponents<HitboxComponent, TransformComponent>()));
         ++it;
     }
 }
@@ -38,7 +38,7 @@ TEST(EntityIterator, search_position_and_check_for_hitbox)
     manager->createEnemy();
     manager->createEnemy();
 
-    auto it = EntityIterator<PositionComponent>(manager->getEntities());
+    auto it = EntityIterator<TransformComponent>(manager->getEntities());
 
     while (!it.isEnd()) {
         EXPECT_FALSE((it.get()->hasComponents<HitboxComponent>()));
