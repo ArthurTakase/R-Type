@@ -2,7 +2,7 @@
 ** EPITECH PROJECT, 2022
 ** YEP
 ** File description:
-** TransformComponent.cpp
+** MouvementComponent.hpp
 */
 
 #pragma once

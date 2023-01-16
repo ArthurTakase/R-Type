@@ -28,6 +28,7 @@ set(
   src/ECS/Components/TransformComponent.cpp
   src/ECS/Components/HitboxComponent.cpp
   src/ECS/Components/MouvementComponent.cpp
+  src/ECS/Components/StatComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
 )
 
@@ -51,6 +52,7 @@ set(
   tests/Tools_t.cpp
   tests/EntityIterator_t.cpp
   tests/MouvementComponent_t.cpp
+  tests/StatComponent_t.cpp
 )
 
 # ------------------------------
