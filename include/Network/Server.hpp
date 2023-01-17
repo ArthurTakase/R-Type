@@ -14,7 +14,7 @@ class Server
 {
   public:
     Server() noexcept = delete;
-    explicit Server(uint16_t port);
+    explicit Server(uint16_t port, unsigned int amount_of_clients);
 
     Server(const Server& other) noexcept = delete;
     Server(Server&& other) noexcept      = default;
@@ -25,7 +25,7 @@ class Server
 
     // setters
     void setLooping(bool value) noexcept;
-
+    void receive(void* data, sockaddr_in client_address) const;
     void run();
 
   protected:

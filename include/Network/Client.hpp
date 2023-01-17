@@ -26,7 +26,7 @@ class Client
     void setLooping(bool value) noexcept;
 
     void run();
-    void send();
+    void send(sockaddr_in address);
     void receive();
 
   protected:

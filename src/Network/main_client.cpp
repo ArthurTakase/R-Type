@@ -14,8 +14,6 @@ int main()
     try {
         Client client(4243);
 
-        char send_data[] = "Hello server";
-
         // client.run();
         // => voir comment ajouter à la boucle run de mon serveur et mon client l'envoi et la réception des données
         // Send data to the server

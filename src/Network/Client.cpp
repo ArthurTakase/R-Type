@@ -39,10 +39,12 @@ void Client::run()
     // TODO : finir la loop dans server.cpp et faire la même chose ici
 }
 
-void Client::send()
+void Client::send(sockaddr_in address)
 {
+    const char* data = "Hello world";
     // appeller la fonction send de mon socket avec tous les bons paramètres
-    //  socket_.send();
+    socket_.send(data, sizeof(data), address);
+    std::cout << "Message sent to server" << std::endl;
 }
 
 void Client::receive()

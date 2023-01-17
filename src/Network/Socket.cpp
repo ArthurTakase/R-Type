@@ -60,5 +60,7 @@ unsigned int SocketHandler::receive(void* data, int data_size, sockaddr_in& clie
     int       received_bytes =
         recvfrom(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&client_address), &address_len);
     if (received_bytes < 0) { throw NetworkExecError("Error receiving data from the client "); }
+
+    std::cout << data << std::endl;
     return received_bytes;
 }
