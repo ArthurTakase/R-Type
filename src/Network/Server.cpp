@@ -11,26 +11,24 @@
 
 #include "Error.hpp"
 
-[[nodiscard]] Server::Server(uint16_t port, unsigned int amount_of_clients)
+[[nodiscard]] Server::Server(uint16_t port)
     : socket_(SocketHandler{ port })
 {
     // setup of select
     FD_ZERO(&readFds_);
     FD_SET(socket_.getSocketFd(), &readFds_);
 
-    // pas sûr d'avoir besoin du timeout
-    // timeout.tv_sec  = timeout_seconds;
-    // timeout.tv_usec = 0;
-
-    // if (listen(socket_.getSocketFd(), amount_of_clients) < 0) { throw NetworkExecError("Failed to listen on
-    // socket."); }
-
     std::cout << "Server created" << std::endl;
 }
 
-void Server::setLooping(bool value) noexcept
+void Server::stop() noexcept
 {
-    looping_ = value;
+    looping_ = false;
+}
+
+void Server::reset() noexcept
+{
+    looping_ = true;
 }
 
 void Server::run()
@@ -40,26 +38,40 @@ void Server::run()
         int status = select(socket_.getSocketFd() + 1, &readFds_, nullptr, nullptr, nullptr);
         if (status < 0) { throw NetworkExecError("Error while using the socket with select"); }
         for (int i = 0; i != socket_.getSocketFd() + 1; i++) {
-            if (FD_ISSET(i, &readFds_)) {
-                // check if new host ? connect if it's the case
-                // use accept method of the server class
-                // après call la fonction qui va récupérer la data (celle qui fait un recvfrom dans la socket)
-            }
+            if (FD_ISSET(i, &readFds_)) { receive(); }
         }
     }
 }
 
-void Server::receive(void* data, sockaddr_in client_address) const
+bool Server::isKnownClient(sockaddr_in address) const
 {
-    socket_.receive(data, sizeof(data), client_address);
+    for (const auto& client : clients_) {
+        if (client.address_->sin_addr.s_addr == address.sin_addr.s_addr) { return true; }
+    }
+    return false;
 }
 
-// void Server::accept()
-// {
-//     // accept a connexion from the queue
-//     auto      address     = socket_.getAddress();
-//     socklen_t len_address = sizeof(address);
+void Server::addClient(sockaddr_in address) noexcept
+{
+    ClientInfos client(address, clients_.size());
+    clients_.push_back(std::move(client));
+}
 
-//     int connection = ::accept(socket_.getSocketFd(), reinterpret_cast<sockaddr*>(&address), &len_address);
-//     if (connection < 0) { throw NetworkExecError("Accept failed"); }
-// }
+void Server::receive()
+{
+    ReceivedInfos infoReceived = socket_.receive();
+
+    // add the client to the list of recognized hosts if it's not already in it
+    if (!isKnownClient(infoReceived.address_)) {
+        std::cout << "NEW CLIENT" << std::endl; // TODO: A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
+        addClient(infoReceived.address_);
+    }
+
+    handleData(infoReceived);
+    std::cout << "END OF RECEPTION" << std::endl;
+}
+
+void Server::handleData(ReceivedInfos infos) const noexcept
+{
+    // TODO: traiter les données reçues pour notre logique de jeu
+}
