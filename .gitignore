@@ -27,3 +27,4 @@ asio-src
 googletest-build
 googletest-src
 runTests
+generate_compile_command
