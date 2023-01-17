@@ -12,7 +12,7 @@
 int main()
 {
     try {
-        Client client(4243);
+        Client client;
 
         // client.run();
         // => voir comment ajouter à la boucle run de mon serveur et mon client l'envoi et la réception des données

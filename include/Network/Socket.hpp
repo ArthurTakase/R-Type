@@ -7,9 +7,12 @@
 
 #pragma once
 
-#include <netinet/in.h> // For sockaddr_in
-#include <sys/socket.h> // For socket functions
-#include <unistd.h>     // For close
+#include <sys/socket.h>
+#include <unistd.h>
+
+#include <string_view>
+
+#include "InfoStruct.hpp"
 
 class SocketHandler
 {
@@ -27,14 +30,11 @@ class SocketHandler
     [[nodiscard]] int         getSocketFd() const noexcept;
     [[nodiscard]] sockaddr_in getAddress() const noexcept;
 
-    void                       send(const void* data, int data_size, sockaddr_in client_address) const;
-    [[nodiscard]] unsigned int receive(void* data, int data_size, sockaddr_in& client_address) const;
+    void                  send(const void* data, int data_size, sockaddr_in client_address) const;
+    [[nodiscard]] ReceivedInfos receive() const;
 
   protected:
   private:
     int         socketFd_;
     sockaddr_in address_;
-
-    // methods
-    void bind();
 };

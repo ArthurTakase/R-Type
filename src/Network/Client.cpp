@@ -11,22 +11,9 @@
 
 #include "Error.hpp"
 
-[[nodiscard]] Client::Client(uint16_t port)
-    : socket_(SocketHandler{ port })
+[[nodiscard]] Client::Client() noexcept
 {
-    // setup of select
-    FD_ZERO(&read_fds);
-    FD_SET(socket_.getSocketFd(), &read_fds);
-
-    // timeout.tv_sec  = timeout_seconds;
-    // timeout.tv_usec = 0;
-
     std::cout << "Client created" << std::endl;
-}
-
-void Client::setTimeout(unsigned int seconds) noexcept
-{
-    if (seconds > 0) { timeout_ = seconds; }
 }
 
 void Client::setLooping(bool value) noexcept
@@ -42,8 +29,7 @@ void Client::run()
 void Client::send(sockaddr_in address)
 {
     const char* data = "Hello world";
-    // appeller la fonction send de mon socket avec tous les bons paramètres
-    socket_.send(data, sizeof(data), address);
+    //trouver un moyen de send la data ????
     std::cout << "Message sent to server" << std::endl;
 }
 

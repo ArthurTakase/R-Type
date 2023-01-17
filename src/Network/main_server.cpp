@@ -13,14 +13,9 @@
 int main()
 {
     try {
-        Server server(4242, 4);
+        Server server(4242);
 
-        // server.run();
-        // => voir comment ajouter à la boucle run de mon serveur et mon client l'envoi et la réception des données
-        // Send data to the server
-        // client.send(send_data, sizeof(send_data));
-        // server.send(send_data, sizeof(send_data));
-
+        server.run();
     } catch (Error const& error) {
         std::cerr << error.what() << std::endl;
         return (84);

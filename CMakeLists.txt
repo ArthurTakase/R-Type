@@ -33,6 +33,7 @@ set(
 set(RTYPE_SERVER
   src/Network/Socket.cpp
   src/Network/Server.cpp
+  src/Network/InfoStruct.cpp
   src/Network/main_server.cpp
   src/Error/Error.cpp
 )
