@@ -10,11 +10,21 @@
 #include <cassert>
 #include <iostream>
 
+/**
+ * It's a constructor that takes an EntityIterator as a parameter and assigns it to the EntityIterator
+ * member variable
+ *
+ * @param it The iterator that will be used to iterate over the entities.
+ */
 MouvementSystem::MouvementSystem(EntityIterator<TransformComponent, MouvementComponent> it)
     : _it(EntityIterator<TransformComponent, MouvementComponent>(it))
 {
 }
 
+/**
+ * It iterates over all entities that have a MouvementComponent and a TransformComponent, and updates
+ * the TransformComponent's position according to the MouvementComponent's speed and direction
+ */
 void MouvementSystem::run()
 {
     size_t other;

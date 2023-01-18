@@ -12,8 +12,8 @@
 /**
  * It's a constructor that takes three parameters and assigns them to the three member variables
  *
- * @param dirX The direction of the movement on the X axis.
- * @param dirY The direction of the movement on the Y axis.
+ * @param dirX The direction of the movement on the X axis. (-1, 0 or 1)
+ * @param dirY The direction of the movement on the Y axis. (-1, 0 or 1)
  * @param speed the speed of the entity
  */
 MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)
@@ -61,7 +61,7 @@ float MouvementComponent::getSpeed() const noexcept
 /**
  * It sets the direction of the entity on the X axis
  *
- * @param x The x-coordinate of the direction vector. (-1, 1 or 0)
+ * @param x The x-coordinate of the direction vector. (-1, 0 or 1)
  */
 void MouvementComponent::setDirX(int x) noexcept
 {
@@ -71,7 +71,7 @@ void MouvementComponent::setDirX(int x) noexcept
 /**
  * It sets the direction of the Y axis
  *
- * @param y The y-axis direction of the movement. (-1, 1 or 0)
+ * @param y The y-axis direction of the movement. (-1, 0 or 1)
  */
 void MouvementComponent::setDirY(int y) noexcept
 {

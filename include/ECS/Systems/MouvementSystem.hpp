@@ -11,6 +11,10 @@
 #include "MouvementComponent.hpp"
 #include "TransformComponent.hpp"
 
+/**
+ * @brief A system that will update the position of the entities that have a TransformComponent and a
+ * MouvementComponent.
+ */
 class MouvementSystem
 {
   public:
