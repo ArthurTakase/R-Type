@@ -16,9 +16,14 @@
     std::cout << "Client created" << std::endl;
 }
 
-void Client::setLooping(bool value) noexcept
+void Client::stop() noexcept
 {
-    looping_ = value;
+    looping_ = false;
+}
+
+void Client::reset() noexcept
+{
+    looping_ = true;
 }
 
 void Client::run()
@@ -26,17 +31,12 @@ void Client::run()
     // TODO : finir la loop dans server.cpp et faire la même chose ici
 }
 
-void Client::send(sockaddr_in address)
+void Client::send(void *data)
 {
-    const char* data = "Hello world";
-    //trouver un moyen de send la data ????
+
     std::cout << "Message sent to server" << std::endl;
 }
 
 void Client::receive()
 {
-    // appeller la fonction receive avec tous les bons paramètres
-
-    // int received_bytes = socket_.receive();
-    // if (received_bytes > 0) { std::cout << "Received data from server: " << receive_data << std::endl; }
 }

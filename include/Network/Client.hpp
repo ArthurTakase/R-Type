@@ -20,15 +20,13 @@ class Client
     Client& operator=(const Client& rhs) noexcept = delete;
     Client& operator=(Client&& rhs) noexcept      = default;
 
-    // setters
-    void setLooping(bool value) noexcept;
-
     void run();
-    void send(sockaddr_in address);
+    void send(void *data);
     void receive();
+    void stop() noexcept;
+    void reset() noexcept;
 
   protected:
   private:
-    bool          looping_ = true;
-    fd_set        read_fds;
+    bool looping_ = true;
 };

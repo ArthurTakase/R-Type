@@ -5,19 +5,26 @@
 ** main_client
 */
 
+#include <cstdlib>
 #include <iostream>
 
 #include "Client.hpp"
 #include "Error.hpp"
-int main()
+
+int getPort(int ac, const char* const av[])
+{
+    int value = 0;
+    if (ac != 2) throw Error("Usage: ./client [server port]");
+
+    value = std::atoi(av[1]);
+    if (value < 0) throw Error("Port must be a positive number");
+    return (value);
+}
+int main(int ac, const char* const av[])
 {
     try {
-        Client client;
-
-        // client.run();
-        // => voir comment ajouter à la boucle run de mon serveur et mon client l'envoi et la réception des données
-        // Send data to the server
-        // client.send(send_data, sizeof(send_data));
+        Client client(av[1]);
+        client.run();
 
     } catch (Error const& error) {
         std::cerr << error.what() << std::endl;

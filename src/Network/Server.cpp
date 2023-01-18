@@ -7,7 +7,7 @@
 
 #include "Server.hpp"
 
-#include <iostream> //A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
+#include <iostream> //TODO:A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
 
 #include "Error.hpp"
 
@@ -31,14 +31,26 @@ void Server::reset() noexcept
     looping_ = true;
 }
 
+bool Server::isQueueEmpty(unsigned int index) const noexcept
+{
+    if (clients_[index].dataToSend_.size() == 0) { return (true); }
+    return (false);
+}
+
 void Server::run()
 {
+    add((void *)"Hello\n");
+
     while (looping_) {
         // Wait for data on the socket
-        int status = select(socket_.getSocketFd() + 1, &readFds_, nullptr, nullptr, nullptr);
+        int status = select(socket_.getSocketFd() + 1, &readFds_, &writeFds_, nullptr, nullptr);
         if (status < 0) { throw NetworkExecError("Error while using the socket with select"); }
         for (int i = 0; i != socket_.getSocketFd() + 1; i++) {
             if (FD_ISSET(i, &readFds_)) { receive(); }
+            if (FD_ISSET(i, &writeFds_) && !isQueueEmpty(i)) {
+                // TODO : remplacer le void * par le format de données sérialisées
+                send(getDataFromQueue(i), i);
+            }
         }
     }
 }
@@ -59,19 +71,46 @@ void Server::addClient(sockaddr_in address) noexcept
 
 void Server::receive()
 {
-    ReceivedInfos infoReceived = socket_.receive();
+    try {
+        ReceivedInfos infoReceived = socket_.receive();
 
-    // add the client to the list of recognized hosts if it's not already in it
-    if (!isKnownClient(infoReceived.address_)) {
-        std::cout << "NEW CLIENT" << std::endl; // TODO: A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-        addClient(infoReceived.address_);
+        // add the client to the list of recognized hosts if it's not already in it
+        if (!isKnownClient(infoReceived.address_)) {
+            std::cout << "NEW CLIENT" << std::endl; // TODO: A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
+            addClient(infoReceived.address_);
+        }
+        handleData(infoReceived);
+        std::cout << "END OF RECEPTION" << std::endl;
+    } catch (const NetworkExecError& e) {
+        std::cerr << e.what() << std::endl;
     }
+}
 
-    handleData(infoReceived);
-    std::cout << "END OF RECEPTION" << std::endl;
+void Server::send(void* data, unsigned int clientIndex) const
+{
+    std::cout << "SENDING DATA" << std::endl;
+    try {
+        socket_.send(data, sizeof(data), *clients_[clientIndex].address_);
+    } catch (const NetworkExecError& e) {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void* Server::getDataFromQueue(unsigned int index) noexcept
+{
+    void* data = clients_[index].dataToSend_.front();
+    clients_[index].dataToSend_.pop();
+    return (data);
 }
 
 void Server::handleData(ReceivedInfos infos) const noexcept
 {
+    std::cout << "PREPARING DATA" << std::endl;
     // TODO: traiter les données reçues pour notre logique de jeu
+}
+
+void Server::add(void* data) noexcept
+{
+    std::cout << "ADDING DATA TO QUEUE" << std::endl;
+    clients_[0].dataToSend_.push(data); // TODO: erase this method
 }

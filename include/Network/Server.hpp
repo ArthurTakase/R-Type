@@ -27,17 +27,22 @@ class Server
     void run();
     void stop() noexcept;
     void reset() noexcept;
+    void add(void* data) noexcept; // TODO: remove this function (only meant to be here for tests)
 
   protected:
   private:
-    SocketHandler         socket_;
-    bool                  looping_ = true;
-    fd_set                readFds_;
+    SocketHandler            socket_;
+    bool                     looping_ = true;
+    fd_set                   readFds_;
+    fd_set                   writeFds_;
     std::vector<ClientInfos> clients_ = {};
 
     // methods
     void receive();
+    void send(void* data, unsigned int clientIndex) const;
     bool isKnownClient(sockaddr_in address) const;
     void addClient(sockaddr_in address) noexcept;
     void handleData(ReceivedInfos infos) const noexcept;
+    bool isQueueEmpty(unsigned int index) const noexcept;
+    void *getDataFromQueue(unsigned int index) noexcept;  //TODO: change the type to return serialized data
 };

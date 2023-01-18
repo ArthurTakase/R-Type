@@ -10,6 +10,7 @@
 #include <stddef.h>
 
 #include <memory>
+#include <queue>
 
 struct ReceivedInfos {
     void*       data_;
@@ -21,4 +22,5 @@ struct ClientInfos {
     explicit ClientInfos(sockaddr_in addr, unsigned long value) noexcept;
     std::unique_ptr<sockaddr_in> address_;
     unsigned long                index_;
+    std::queue <void*>           dataToSend_ = {};   //TODO: à changer en queue de données sérialisées quand ça sera implémenté
 };

@@ -19,9 +19,9 @@ SocketHandler::SocketHandler(uint16_t port) // init the socket (ipv6, UDP)
     std::cout << "Socket created" << std::endl;
 
     // make the socket listen to a port passed in parameter
-    address_.sin_port        = htons(port);       // to translate the port to an endianess network
-    address_.sin_addr.s_addr = htonl(INADDR_ANY); // allows to listen on all local interfaces
-    address_.sin_family      = AF_INET;           // our address is IPv6
+    address_.sin_port        = htons(port);
+    address_.sin_addr.s_addr = htonl(INADDR_ANY);
+    address_.sin_family      = AF_INET;
 
     if (::bind(socketFd_, reinterpret_cast<sockaddr*>(&address_), sizeof(address_)) == -1)
         throw InitError("Socket binding to port failed.");
@@ -29,7 +29,7 @@ SocketHandler::SocketHandler(uint16_t port) // init the socket (ipv6, UDP)
 
 SocketHandler::~SocketHandler() noexcept
 {
-    ::close(socketFd_);
+    close(socketFd_);
 }
 
 int SocketHandler::getSocketFd() const noexcept
@@ -42,11 +42,12 @@ sockaddr_in SocketHandler::getAddress() const noexcept
     return address_;
 }
 
-void SocketHandler::send(const void* data, int data_size, sockaddr_in client_address) const
+void SocketHandler::send(const void* data, int data_size, sockaddr_in destAddr) const
 {
-    int sent_bytes =
-        sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&client_address), sizeof(client_address));
+    std::cout << "SENDING DATA" << std::endl;
+    int sent_bytes = sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&destAddr), sizeof(destAddr));
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
+    std::cout << "DATA SENT" << std::endl;
 }
 
 ReceivedInfos SocketHandler::receive() const
@@ -69,7 +70,7 @@ ReceivedInfos SocketHandler::receive() const
     // réservé pour l'ID du client,
     //  comme ça on pourra le repérer facilement dans mon vecteur de clients stocké dans mon serveur
 
-    // exemple pour tester avec une string :
+    // exemple pour tester avec une string la réception de données:
     // ((char *)buffer)[bytesReceived] = '\0';
     // std::cout << "SERVER RECEIVED : " << (char *)buffer << std::endl;
     return infos;

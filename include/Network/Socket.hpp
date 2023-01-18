@@ -30,7 +30,7 @@ class SocketHandler
     [[nodiscard]] int         getSocketFd() const noexcept;
     [[nodiscard]] sockaddr_in getAddress() const noexcept;
 
-    void                  send(const void* data, int data_size, sockaddr_in client_address) const;
+    void                        send(const void* data, int data_size, sockaddr_in client_address) const;
     [[nodiscard]] ReceivedInfos receive() const;
 
   protected:
