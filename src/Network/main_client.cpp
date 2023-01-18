@@ -23,7 +23,8 @@ int getPort(int ac, const char* const av[])
 int main(int ac, const char* const av[])
 {
     try {
-        Client client(av[1]);
+        int port = getPort(ac, av);
+        Client client(port);
         client.run();
 
     } catch (Error const& error) {

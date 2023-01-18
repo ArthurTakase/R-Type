@@ -11,7 +11,7 @@
 
 #include "Error.hpp"
 
-[[nodiscard]] Client::Client() noexcept
+[[nodiscard]] Client::Client(uint16_t port) noexcept : servPort_(port), socket_(Socket{ port })
 {
     std::cout << "Client created" << std::endl;
 }
@@ -33,7 +33,6 @@ void Client::run()
 
 void Client::send(void *data)
 {
-
     std::cout << "Message sent to server" << std::endl;
 }
 

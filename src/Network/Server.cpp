@@ -12,7 +12,7 @@
 #include "Error.hpp"
 
 [[nodiscard]] Server::Server(uint16_t port)
-    : socket_(SocketHandler{ port })
+    : socket_(Socket{ port })
 {
     // setup of select
     FD_ZERO(&readFds_);
@@ -39,8 +39,6 @@ bool Server::isQueueEmpty(unsigned int index) const noexcept
 
 void Server::run()
 {
-    add((void *)"Hello\n");
-
     while (looping_) {
         // Wait for data on the socket
         int status = select(socket_.getSocketFd() + 1, &readFds_, &writeFds_, nullptr, nullptr);
@@ -107,10 +105,4 @@ void Server::handleData(ReceivedInfos infos) const noexcept
 {
     std::cout << "PREPARING DATA" << std::endl;
     // TODO: traiter les données reçues pour notre logique de jeu
-}
-
-void Server::add(void* data) noexcept
-{
-    std::cout << "ADDING DATA TO QUEUE" << std::endl;
-    clients_[0].dataToSend_.push(data); // TODO: erase this method
 }

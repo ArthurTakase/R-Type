@@ -14,17 +14,17 @@
 
 #include "InfoStruct.hpp"
 
-class SocketHandler
+class Socket
 {
   public:
-    explicit SocketHandler(uint16_t port);
+    explicit Socket(uint16_t port);
 
-    SocketHandler(const SocketHandler& other) noexcept = delete;
-    SocketHandler(SocketHandler&& other) noexcept      = default;
-    ~SocketHandler() noexcept;
+    Socket(const Socket& other) noexcept = delete;
+    Socket(Socket&& other) noexcept      = default;
+    ~Socket() noexcept;
 
-    SocketHandler& operator=(const SocketHandler& rhs) noexcept = delete;
-    SocketHandler& operator=(SocketHandler&& rhs) noexcept      = default;
+    Socket& operator=(const Socket& rhs) noexcept = delete;
+    Socket& operator=(Socket&& rhs) noexcept      = default;
 
     // getters
     [[nodiscard]] int         getSocketFd() const noexcept;

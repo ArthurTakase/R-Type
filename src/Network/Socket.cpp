@@ -11,7 +11,7 @@
 
 #include "Error.hpp"
 
-SocketHandler::SocketHandler(uint16_t port) // init the socket (ipv6, UDP)
+Socket::Socket(uint16_t port) // init the socket (ipv6, UDP)
 {
     socketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
 
@@ -27,22 +27,22 @@ SocketHandler::SocketHandler(uint16_t port) // init the socket (ipv6, UDP)
         throw InitError("Socket binding to port failed.");
 }
 
-SocketHandler::~SocketHandler() noexcept
+Socket::~Socket() noexcept
 {
     close(socketFd_);
 }
 
-int SocketHandler::getSocketFd() const noexcept
+int Socket::getSocketFd() const noexcept
 {
     return socketFd_;
 }
 
-sockaddr_in SocketHandler::getAddress() const noexcept
+sockaddr_in Socket::getAddress() const noexcept
 {
     return address_;
 }
 
-void SocketHandler::send(const void* data, int data_size, sockaddr_in destAddr) const
+void Socket::send(const void* data, int data_size, sockaddr_in destAddr) const
 {
     std::cout << "SENDING DATA" << std::endl;
     int sent_bytes = sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&destAddr), sizeof(destAddr));
@@ -50,7 +50,7 @@ void SocketHandler::send(const void* data, int data_size, sockaddr_in destAddr) 
     std::cout << "DATA SENT" << std::endl;
 }
 
-ReceivedInfos SocketHandler::receive() const
+ReceivedInfos Socket::receive() const
 {
     sockaddr_in   address = { 0 };
     socklen_t     addrLen = sizeof(address);

@@ -27,11 +27,10 @@ class Server
     void run();
     void stop() noexcept;
     void reset() noexcept;
-    void add(void* data) noexcept; // TODO: remove this function (only meant to be here for tests)
 
   protected:
   private:
-    SocketHandler            socket_;
+    Socket            socket_;
     bool                     looping_ = true;
     fd_set                   readFds_;
     fd_set                   writeFds_;

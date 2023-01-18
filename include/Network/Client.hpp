@@ -11,7 +11,7 @@
 class Client
 {
   public:
-    explicit Client() noexcept;
+    explicit Client(uint16_t port) noexcept;
 
     Client(const Client& other) noexcept = delete;
     Client(Client&& other) noexcept      = default;
@@ -21,12 +21,14 @@ class Client
     Client& operator=(Client&& rhs) noexcept      = default;
 
     void run();
-    void send(void *data);
+    void send(void* data);
     void receive();
     void stop() noexcept;
     void reset() noexcept;
 
   protected:
   private:
-    bool looping_ = true;
+    bool          looping_ = true;
+    int           servPort_;
+    Socket socket_;
 };
