@@ -21,6 +21,8 @@ void EntityManager::createPlayer() noexcept
     _entities.emplace_back(std::make_unique<Entity>(get_id()));
     _entities.back()->addComponent(TransformComponent(10, 8));
     _entities.back()->addComponent(HitboxComponent(15, 21));
+    _entities.back()->addComponent(StatComponent(100, 5));
+    _entities.back()->addComponent(MouvementComponent(1, 0, 1));
 }
 
 /**

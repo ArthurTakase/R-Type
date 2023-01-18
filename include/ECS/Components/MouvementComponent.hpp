@@ -15,24 +15,24 @@
 
 class MouvementComponent : public IComponent
 {
-    public:
-        MouvementComponent(float dirX, float dirY, float speed);
-        ~MouvementComponent() noexcept;
-        MouvementComponent(const MouvementComponent& other) noexcept = default;
-        MouvementComponent(MouvementComponent&& other) noexcept      = delete;
+  public:
+    MouvementComponent(int dirX, int dirY, float speed);
+    ~MouvementComponent() noexcept;
+    MouvementComponent(const MouvementComponent& other) noexcept = default;
+    MouvementComponent(MouvementComponent&& other) noexcept      = delete;
 
-        MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = delete;
-        MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = delete;
+    MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = delete;
+    MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = delete;
 
-        float getDirX() const noexcept;
-        float getDirY() const noexcept;
-        float getSpeed() const noexcept;
-        void setDirX(float x) noexcept;
-        void setDirY(float y) noexcept;
-        void setSpeed(float speed) noexcept;
+    float getDirX() const noexcept;
+    float getDirY() const noexcept;
+    float getSpeed() const noexcept;
+    void  setDirX(int x) noexcept;
+    void  setDirY(int y) noexcept;
+    void  setSpeed(float speed) noexcept;
 
-    private:
-        float _dirX;
-        float _dirY;
-        float _speed;
+  private:
+    int   _dirX;
+    int   _dirY;
+    float _speed;
 };

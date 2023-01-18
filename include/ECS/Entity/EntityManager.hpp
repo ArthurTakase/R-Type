@@ -13,6 +13,8 @@
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
+#include "MouvementComponent.hpp"
+#include "StatComponent.hpp"
 #include "TransformComponent.hpp"
 
 /**

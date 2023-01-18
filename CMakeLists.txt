@@ -30,6 +30,7 @@ set(
   src/ECS/Components/MouvementComponent.cpp
   src/ECS/Components/StatComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
+  src/ECS/Systems/MouvementSystem.cpp
 )
 
 set(
@@ -53,6 +54,7 @@ set(
   tests/EntityIterator_t.cpp
   tests/MouvementComponent_t.cpp
   tests/StatComponent_t.cpp
+  tests/MouvementSystem_t.cpp
 )
 
 # ------------------------------
