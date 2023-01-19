@@ -34,9 +34,7 @@ void HitboxSystem::run()
     for (; !_it.isEnd(); ++_it) {
         assert((_it.get()->hasComponents<HitboxComponent, TransformComponent>()));
         try {
-            if ((other = checkCollision(_it.get())) != -1) {
-                std::cout << "Collision detected between " << _it.get()->getId() << " and " << other << std::endl;
-            }
+            checkCollision(_it.get());
         } catch (const std::exception& e) {
             std::cerr << e.what() << std::endl;
         }
@@ -50,7 +48,7 @@ void HitboxSystem::run()
  *
  * @return The id of the entity that is colliding with the entity passed in.
  */
-int HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
+void HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
 {
     for (auto other = EntityIterator<TransformComponent, HitboxComponent>(_it.it); !other.isEnd(); ++other) {
         if (other.get() == entity) { continue; }
@@ -66,8 +64,7 @@ int HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
             && pos->getX() <= otherPos->getX() + otherHitbox->getWidth()
             && pos->getY() + hitbox->getHeight() >= otherPos->getY()
             && pos->getY() <= otherPos->getY() + otherHitbox->getHeight()) {
-            return other.get()->getId();
+            entity->getComponent<HitboxComponent>()->onCollision(other.get());
         }
     }
-    return -1;
 }

@@ -30,5 +30,5 @@ TEST(HitboxSystem_, run)
     system->run();
     captured_output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(captured_output, "Collision detected between 1 and 2\nCollision detected between 2 and 1\n");
+    EXPECT_EQ(captured_output, "Collision\nCollision\n");
 }

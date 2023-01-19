@@ -26,7 +26,7 @@ class HitboxSystem
     HitboxSystem& operator=(HitboxSystem&& rhs) noexcept      = delete;
 
     void run();
-    int  checkCollision(std::unique_ptr<Entity>& entity) const;
+    void checkCollision(std::unique_ptr<Entity>& entity) const;
 
   private:
     EntityIterator<TransformComponent, HitboxComponent> _it;

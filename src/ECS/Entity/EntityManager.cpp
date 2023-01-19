@@ -7,6 +7,8 @@
 
 #include "EntityManager.hpp"
 
+#include <iostream>
+
 /**
  * `EntityManager::EntityManager()` is the constructor for the `EntityManager` class
  */
@@ -23,6 +25,9 @@ void EntityManager::createPlayer() noexcept
     _entities.back()->addComponent(HitboxComponent(15, 21));
     _entities.back()->addComponent(StatComponent(100, 5));
     _entities.back()->addComponent(MouvementComponent(1, 0, 1));
+    _entities.back()->getComponent<HitboxComponent>()->setOnCollision(
+        std::function<void(std::unique_ptr<Entity> & entity)>{
+            [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; } });
 }
 
 /**

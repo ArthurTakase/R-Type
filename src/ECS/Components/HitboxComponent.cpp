@@ -72,3 +72,13 @@ void HitboxComponent::setSize(size_t width, size_t height) noexcept
     _width  = width;
     _height = height;
 }
+
+void HitboxComponent::setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept
+{
+    _onCollision = onCollision;
+}
+
+void HitboxComponent::onCollision(std::unique_ptr<Entity>& entity) const noexcept
+{
+    _onCollision(entity);
+}

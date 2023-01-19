@@ -7,6 +7,10 @@
 
 #pragma once
 
+#include <functional>
+#include <memory>
+
+#include "Entity.hpp"
 #include "IComponent.hpp"
 
 /**
@@ -28,8 +32,11 @@ class HitboxComponent : public IComponent
     void   setWidth(size_t width) noexcept;
     void   setHeight(size_t height) noexcept;
     void   setSize(size_t width, size_t height) noexcept;
+    void   setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept;
+    void   onCollision(std::unique_ptr<Entity>& entity) const noexcept;
 
   private:
-    size_t _width;
-    size_t _height;
+    size_t                                        _width;
+    size_t                                        _height;
+    std::function<void(std::unique_ptr<Entity>&)> _onCollision;
 };
