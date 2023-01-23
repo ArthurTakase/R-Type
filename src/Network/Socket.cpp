@@ -13,6 +13,11 @@
 
 Socket::Socket(uint16_t port) // init the socket (ipv6, UDP)
 {
+#ifdef WIN32
+    WSADATA wsa;
+    int     err = WSAStartup(MAKEWORD(2, 2), &wsa);
+    if (err < 0) { throw InitError("WSAStartup failed."); }
+#endif
     socketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
 
     if (socketFd_ == -1) { throw InitError("Socket initialization failed."); }
@@ -23,13 +28,16 @@ Socket::Socket(uint16_t port) // init the socket (ipv6, UDP)
     address_.sin_addr.s_addr = htonl(INADDR_ANY);
     address_.sin_family      = AF_INET;
 
-    if (::bind(socketFd_, reinterpret_cast<sockaddr*>(&address_), sizeof(address_)) == -1)
+    if (::bind(socketFd_, reinterpret_cast<SOCKADDR*>(&address_), sizeof(address_)) == -1)
         throw InitError("Socket binding to port failed.");
 }
 
 Socket::~Socket() noexcept
 {
-    close(socketFd_);
+#ifdef WIN32
+    WSACleanup();
+#endif
+    closesocket(socketFd_);
 }
 
 int Socket::getSocketFd() const noexcept
@@ -45,7 +53,7 @@ sockaddr_in Socket::getAddress() const noexcept
 void Socket::send(const void* data, int data_size, sockaddr_in destAddr) const
 {
     std::cout << "SENDING DATA" << std::endl;
-    int sent_bytes = sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&destAddr), sizeof(destAddr));
+    int sent_bytes = sendto(socketFd_, data, data_size, 0, reinterpret_cast<SOCKADDR*>(&destAddr), sizeof(destAddr));
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
     std::cout << "DATA SENT" << std::endl;
 }
@@ -58,7 +66,7 @@ ReceivedInfos Socket::receive() const
     ReceivedInfos infos;
 
     ssize_t bytesReceived =
-        recvfrom(socketFd_, buffer, sizeof(buffer), 0, reinterpret_cast<sockaddr*>(&address), &addrLen);
+        recvfrom(socketFd_, buffer, sizeof(buffer), 0, reinterpret_cast<SOCKADDR*>(&address), &addrLen);
 
     if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client "); }
 
@@ -69,9 +77,5 @@ ReceivedInfos Socket::receive() const
     // TODO : quand on va récupérer la data sous forme de bitset, il faut qu'un emplacement (toujours le même) soit
     // réservé pour l'ID du client,
     //  comme ça on pourra le repérer facilement dans mon vecteur de clients stocké dans mon serveur
-
-    // exemple pour tester avec une string la réception de données:
-    // ((char *)buffer)[bytesReceived] = '\0';
-    // std::cout << "SERVER RECEIVED : " << (char *)buffer << std::endl;
     return infos;
 }

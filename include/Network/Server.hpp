@@ -30,18 +30,18 @@ class Server
 
   protected:
   private:
-    Socket            socket_;
+    Socket                   socket_;
     bool                     looping_ = true;
     fd_set                   readFds_;
     fd_set                   writeFds_;
     std::vector<ClientInfos> clients_ = {};
 
     // methods
-    void receive();
-    void send(void* data, unsigned int clientIndex) const;
-    bool isKnownClient(sockaddr_in address) const;
-    void addClient(sockaddr_in address) noexcept;
-    void handleData(ReceivedInfos infos) const noexcept;
-    bool isQueueEmpty(unsigned int index) const noexcept;
-    void *getDataFromQueue(unsigned int index) noexcept;  //TODO: change the type to return serialized data
+    void  receive();
+    void  send(void* data, unsigned int clientIndex) const;
+    bool  isKnownClient(sockaddr_in address) const;
+    void  addClient(sockaddr_in address) noexcept;
+    void  handleData(ReceivedInfos infos) const noexcept;
+    bool  isQueueEmpty(unsigned int index) const noexcept;
+    void* getDataFromQueue(unsigned int index) noexcept; // TODO: change the type to return serialized data
 };

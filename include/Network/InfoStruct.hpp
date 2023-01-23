@@ -6,7 +6,15 @@
 */
 #pragma once
 
+#ifdef WIN32
+
+#include <winsock2.h>
+
+#elif defined(linux)
+
 #include <netinet/in.h>
+
+#endif
 #include <stddef.h>
 
 #include <memory>
@@ -22,5 +30,5 @@ struct ClientInfos {
     explicit ClientInfos(sockaddr_in addr, unsigned long value) noexcept;
     std::unique_ptr<sockaddr_in> address_;
     unsigned long                index_;
-    std::queue <void*>           dataToSend_ = {};   //TODO: à changer en queue de données sérialisées quand ça sera implémenté
+    std::queue<void*> dataToSend_ = {}; // TODO: à changer en queue de données sérialisées quand ça sera implémenté
 };

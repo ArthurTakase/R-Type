@@ -7,8 +7,23 @@
 
 #pragma once
 
+#ifdef WIN32
+
+#include <winsock2.h>
+
+#elif defined(linux)
+
+#include <arpa/inet.h>
+#include <netinet/in.h>
 #include <sys/socket.h>
+#include <sys/types.h>
 #include <unistd.h>
+typedef int                SOCKET;
+typedef struct sockaddr_in SOCKADDR_IN;
+typedef struct sockaddr    SOCKADDR;
+#define closesocket(s) close(s)
+
+#endif
 
 #include <string_view>
 
@@ -28,13 +43,13 @@ class Socket
 
     // getters
     [[nodiscard]] int         getSocketFd() const noexcept;
-    [[nodiscard]] sockaddr_in getAddress() const noexcept;
+    [[nodiscard]] SOCKADDR_IN getAddress() const noexcept;
 
-    void                        send(const void* data, int data_size, sockaddr_in client_address) const;
+    void                        send(const void* data, int data_size, SOCKADDR_IN client_address) const;
     [[nodiscard]] ReceivedInfos receive() const;
 
   protected:
   private:
-    int         socketFd_;
-    sockaddr_in address_;
+    SOCKET      socketFd_;
+    SOCKADDR_IN address_;
 };

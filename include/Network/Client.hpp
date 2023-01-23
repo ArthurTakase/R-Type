@@ -28,7 +28,7 @@ class Client
 
   protected:
   private:
-    bool          looping_ = true;
-    int           servPort_;
+    bool   looping_ = true;
+    int    servPort_;
     Socket socket_;
 };
