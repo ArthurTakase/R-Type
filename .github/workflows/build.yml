@@ -1,4 +1,4 @@
-name: Build/Test/Cover Project [Windows]
+name: Build/Test/Cover Project
 
 on: push
 
@@ -18,12 +18,6 @@ jobs:
         run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
         run: cd build && make
-      - name: tests
-        run: ./build/runTests
-      - name: install gcovr
-        run: sudo apt-get install -y gcovr
-      - name: launch coverage
-        run: gcovr -r . --exclude "build/" --exclude "tests/"
   Windows:
     runs-on: windows-latest
     steps:
@@ -47,3 +41,13 @@ jobs:
       run: cmake --build build
     - name: explore
       run: dir -s
+  Tests:
+    runs-on: ubuntu-latest
+    needs: [Linux]
+    steps:
+      - name: tests
+        run: ./build/runTests
+      - name: install gcovr
+        run: sudo apt-get install -y gcovr
+      - name: launch coverage
+        run: gcovr -r . --exclude "build/" --exclude "tests/"
