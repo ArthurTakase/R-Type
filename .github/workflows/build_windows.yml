@@ -19,7 +19,7 @@ jobs:
     - name: create build folder
       run: mkdir -p build
     - name: build cmake
-      run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+      run: cd build && cmake -DCMAKE_CXX_COMPILER=cl -DCMAKE_BUILD_TYPE=Release ..
     - name: explore
       run: dir -s
     - name: launch makefile
