@@ -18,9 +18,8 @@ jobs:
         cmake-version: "3.17.x"
     - run: mkdir -p build && cd build
     - name: build cmake
-      run: cmake -DCMAKE_BUILD_TYPE=Release ..
+      run: pwd && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
     - name: explore
       run: dir -s
     - name: launch makefile
-      run: make
-    - run: cd ..
+      run: pwd && cd build && make
