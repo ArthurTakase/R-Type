@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
+    - name: Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
     - name: Setup cmake
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
