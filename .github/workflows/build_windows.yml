@@ -16,10 +16,12 @@ jobs:
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
         cmake-version: "3.17.x"
-    - run: mkdir -p build && cd build
+    - name: create build folder
+      run: mkdir -p build
     - name: build cmake
-      run: pwd && cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+      run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
     - name: explore
       run: dir -s
+    - run: cat build/Makefile
     - name: launch makefile
-      run: pwd && cd build && make
+      run: cd build && make

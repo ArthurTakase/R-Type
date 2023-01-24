@@ -12,7 +12,8 @@ jobs:
           cmake-version: "3.17.x"
       - name: checkout repo
         uses: actions/checkout@v2
-      - run: mkdir -p build && cd build
+      - name: create build folder
+        run: mkdir -p build
       - name: build
         run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
