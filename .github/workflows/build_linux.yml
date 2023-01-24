@@ -14,10 +14,9 @@ jobs:
         uses: actions/checkout@v2
       - run: mkdir -p build && cd build
       - name: build
-        run: cmake -DCMAKE_BUILD_TYPE=Release ..
+        run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
-        run: make
-      - run: cd ..
+        run: cd build && make
       - name: tests
         run: ./build/runTests
       - name: install gcovr
