@@ -1,0 +1,58 @@
+name: Build/Test/Cover Project [Windows]
+
+on: push
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: "3.17.x"
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: create build folder
+        run: mkdir -p build
+      - name: build
+        run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+      - name: makefile
+        run: cd build && make
+      - name: tests
+        run: ./build/runTests
+      - name: install gcovr
+        run: sudo apt-get install -y gcovr
+      - name: launch coverage
+        run: gcovr -r . --exclude "build/" --exclude "tests/"
+  Windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: "3.17.x"
+    - name: Installing vcpkg (windows)
+      run: |
+        cd ..
+        git clone https://github.com/Microsoft/vcpkg.git
+        cd vcpkg
+        git checkout --force 2020.01
+        .\bootstrap-vcpkg.bat
+        .\vcpkg.exe install cppzmq:x64-windows
+    - name: Running cmake (windows)
+      run: |
+        cd ${{ github.workspace }}
+        mkdir build
+        cd build
+        cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}
+                  /../vcpkg/scripts/buildsystems/vcpkg.cmake
+    - name: Build Solution (windows)
+      run: |
+        cd build
+        MSBuild.exe CMakeHelloWorld.sln
