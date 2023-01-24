@@ -12,8 +12,12 @@ jobs:
           cmake-version: "3.17.x"
       - name: checkout repo
         uses: actions/checkout@v2
+      - run: mkdir -p build && cd build
       - name: build
-        run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && cd ..
+        run: cmake -DCMAKE_BUILD_TYPE=Release ..
+      - name: makefile
+        run: make
+      - run: cd ..
       - name: tests
         run: ./build/runTests
       - name: install gcovr
