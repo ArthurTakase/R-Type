@@ -37,22 +37,9 @@ jobs:
       uses: jwlawson/actions-setup-cmake@v1.13
       with:
         cmake-version: "3.17.x"
-    - name: Installing vcpkg (windows)
-      run: |
-        cd ..
-        git clone https://github.com/Microsoft/vcpkg.git
-        cd vcpkg
-        git checkout --force 2020.01
-        .\bootstrap-vcpkg.bat
-        .\vcpkg.exe install cppzmq:x64-windows
-    - name: Running cmake (windows)
-      run: |
-        cd ${{ github.workspace }}
-        mkdir build
-        cd build
-        cmake .. -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}
-                  /../vcpkg/scripts/buildsystems/vcpkg.cmake
-    - name: Build Solution (windows)
-      run: |
-        cd build
-        MSBuild.exe CMakeHelloWorld.sln
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Create build folder
+      run: mkdir build
+    - name: Build
+      run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
