@@ -22,6 +22,5 @@ jobs:
       run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
     - name: explore
       run: dir -s
-    - run: cat build/Makefile
     - name: launch makefile
       run: cd build && make
