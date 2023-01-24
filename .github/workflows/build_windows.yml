@@ -1,0 +1,16 @@
+name: Build/Test/Cover Project [Windows]
+
+on: push
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: "3.17.x"
+      - name: build
+        run: cmake -DCMAKE_BUILD_TYPE=Release
