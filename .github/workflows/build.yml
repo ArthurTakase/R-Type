@@ -43,7 +43,7 @@ jobs:
       run: mkdir build
     - name: Launch cmake
       run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-    - name: explore
-      run: dir -s
     - name: Launch build
       run: cmake --build build
+    - name: explore
+      run: dir -s
