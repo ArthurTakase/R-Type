@@ -29,6 +29,7 @@ set(
   src/ECS/Components/HitboxComponent.cpp
   src/ECS/Components/MouvementComponent.cpp
   src/ECS/Components/StatComponent.cpp
+  src/ECS/Components/DrawableComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
   src/ECS/Systems/MouvementSystem.cpp
 )
@@ -55,6 +56,7 @@ set(
   tests/MouvementComponent_t.cpp
   tests/StatComponent_t.cpp
   tests/MouvementSystem_t.cpp
+  tests/DrawableComponent_t.cpp
 )
 
 # ------------------------------
