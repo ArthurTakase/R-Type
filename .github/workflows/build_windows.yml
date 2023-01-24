@@ -8,8 +8,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-    - name: Ninja
-      uses: seanmiddleditch/gha-setup-ninja@master
     - name: Setup MSVC
       uses: ilammy/msvc-dev-cmd@v1
     - name: Add msbuild to PATH
@@ -19,6 +17,6 @@ jobs:
       with:
         cmake-version: "3.17.x"
     - name: explore
-      run: dir /s /b /o:gn
+      run: dir -s
     - name: build
       run: mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make && cd ..
