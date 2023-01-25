@@ -28,6 +28,8 @@ jobs:
             ${{ runner.os }}-
       - name: launch
         run: ./build/R-type
+      - name: Release
+        uses: softprops/action-gh-release@v1
   Windows:
     runs-on: windows-latest
     steps:
