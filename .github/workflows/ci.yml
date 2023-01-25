@@ -13,7 +13,7 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v2
       - name: create build folder
-        run: mkdir -p build
+        run: mkdir build
       - name: build
         run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
@@ -50,10 +50,10 @@ jobs:
     - name: Cache build
       uses: actions/cache@v3
       with:
-        path: build
-        key: ${{ runner.os }}-buildWindows-${{ hashFiles('**/CMakeLists.txt') }}
+        path: buildWindows
+        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
         restore-keys: |
-          ${{ runner.os }}-buildWindows-
+          ${{ runner.os }}-build-
           ${{ runner.os }}-
   Tests:
     runs-on: ubuntu-latest
@@ -111,10 +111,10 @@ jobs:
       - name: Restore Build
         uses: actions/cache@v3
         with:
-          path: build
-          key: ${{ runner.os }}-buildWindows-${{ hashFiles('**/CMakeLists.txt') }}
+          path: buildWindows
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
           restore-keys: |
-            ${{ runner.os }}-buildWindows-
+            ${{ runner.os }}-build-
             ${{ runner.os }}-
       - name: Archive Build
         uses: thedoctor0/zip-release@0.7.0
