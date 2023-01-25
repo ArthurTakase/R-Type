@@ -26,8 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: launch
-        run: ./build/R-type
       - name: Release
         uses: softprops/action-gh-release@v1
   Windows:
