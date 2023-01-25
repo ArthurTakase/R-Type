@@ -1,9 +1,6 @@
 name: Rtype CI
 
-on:
-  push:
-    tags:
-      - '*'
+on: push
 
 jobs:
   Linux:
@@ -114,8 +111,9 @@ jobs:
         with:
           type: 'zip'
           filename: 'release_linux.zip'
-      - name: Upload Release
-        uses: ncipollo/release-action@v1.12.0
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          artifacts: "release_linux.zip"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release_linux.zip
+          overwrite: true
