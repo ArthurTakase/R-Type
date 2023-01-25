@@ -50,7 +50,7 @@ jobs:
     - name: Cache build
       uses: actions/cache@v3
       with:
-        path: buildWindows
+        path: build
         key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
         restore-keys: |
           ${{ runner.os }}-build-
@@ -111,7 +111,7 @@ jobs:
       - name: Restore Build
         uses: actions/cache@v3
         with:
-          path: buildWindows
+          path: build
           key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-
