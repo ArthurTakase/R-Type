@@ -103,7 +103,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
   ReleaseWindows:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     needs: [Tests, Windows]
     permissions:
       contents: write
