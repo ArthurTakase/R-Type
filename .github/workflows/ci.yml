@@ -26,6 +26,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - name: launch
+        run: ./build/Rtype
   Windows:
     runs-on: windows-latest
     steps:
