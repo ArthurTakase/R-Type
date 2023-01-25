@@ -3,9 +3,6 @@ name: Rtype CI
 on: push
 
 jobs:
-# ------------------------------------ #
-#      Try to build Linux version      #
-# ------------------------------------ #
   Linux:
     runs-on: ubuntu-latest
     steps:
@@ -29,9 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-# ------------------------------------ #
-#     Try to build Windows version     #
-# ------------------------------------ #
   Windows:
     runs-on: windows-latest
     steps:
@@ -61,9 +55,6 @@ jobs:
         restore-keys: |
           ${{ runner.os }}-buildWindows-
           ${{ runner.os }}-
-# ------------------------------------ #
-# Unit tests & coverage on Linux Build #
-# ------------------------------------ #
   Tests:
     runs-on: ubuntu-latest
     needs: [Linux, Windows]
@@ -84,9 +75,6 @@ jobs:
         run: sudo apt-get install -y gcovr
       - name: launch coverage
         run: gcovr -r . --exclude "build/" --exclude "tests/"
-# ------------------------------------ #
-#  Create documentation (main branch)  #
-# ------------------------------------ #
   Doxygen:
     runs-on: ubuntu-latest
     needs: [Tests]
@@ -105,9 +93,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./doxydoc/html
-# ------------------------------------ #
-# Send notif to discord (main/develop) #
-# ------------------------------------ #
   DiscordNotification:
     runs-on: ubuntu-latest
     needs: [Tests]
@@ -117,9 +102,6 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
-# ------------------------------------ #
-#   Release the Windows build (main)   #
-# ------------------------------------ #
   ReleaseWindows:
     runs-on: ubuntu-latest
     needs: [Tests, Windows]
@@ -146,9 +128,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: windows.zip
           overwrite: true
-# ------------------------------------ #
-#    Release the Linux build (main)    #
-# ------------------------------------ #
   ReleaseLinux:
     runs-on: ubuntu-latest
     needs: [Tests, Linux]
