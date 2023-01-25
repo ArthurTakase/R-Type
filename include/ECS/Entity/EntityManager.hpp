@@ -13,7 +13,9 @@
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
-#include "PositionComponent.hpp"
+#include "MouvementComponent.hpp"
+#include "StatComponent.hpp"
+#include "TransformComponent.hpp"
 
 /**
  * @brief Object used to create the different entities of the software

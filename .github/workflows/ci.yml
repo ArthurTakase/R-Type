@@ -1,0 +1,158 @@
+name: Rtype CI
+
+on: push
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: Setup cmake
+        uses: jwlawson/actions-setup-cmake@v1.13
+        with:
+          cmake-version: "3.17.x"
+      - name: create build folder
+        run: mkdir build
+      - name: build
+        run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+      - name: makefile
+        run: cd build && make
+      - name: Cache build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+  Windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: "3.17.x"
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Create build folder
+      run: mkdir build
+    - name: Launch cmake
+      run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    - name: Launch build
+      run: cmake --build build
+    - name: Cache build
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+  Tests:
+    runs-on: ubuntu-latest
+    needs: [Linux, Windows]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Restore build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: tests
+        run: ./build/runTests
+      - name: install gcovr
+        run: sudo apt-get install -y gcovr
+      - name: launch coverage
+        run: gcovr -r . --exclude "build/" --exclude "tests/"
+  Doxygen:
+    runs-on: ubuntu-latest
+    needs: [Tests]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
+      - name: create doc
+        uses: mattnotmitt/doxygen-action@v1.9.5
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./doxydoc/html
+  DiscordNotification:
+    runs-on: ubuntu-latest
+    needs: [Tests]
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop'
+    steps:
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+  ReleaseWindows:
+    runs-on: windows-latest
+    needs: [Tests, Windows]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Restore Build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Archive Build
+        uses: thedoctor0/zip-release@0.7.0
+        with:
+          path: build
+          type: 'zip'
+          filename: 'windows.zip'
+      - name: Upload Build
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: windows.zip
+          overwrite: true
+  ReleaseLinux:
+    runs-on: ubuntu-latest
+    needs: [Tests, Linux]
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Restore Build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Archive Build
+        uses: thedoctor0/zip-release@0.7.0
+        with:
+          path: build
+          type: 'zip'
+          filename: 'linux.zip'
+      - name: Upload Build
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: linux.zip
+          overwrite: true

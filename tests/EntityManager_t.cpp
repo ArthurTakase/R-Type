@@ -14,7 +14,7 @@ TEST(EntityManager_, createPlayer)
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
     auto player = manager->getEntity(0);
-    EXPECT_TRUE(player->getComponent<PositionComponent>());
+    EXPECT_TRUE(player->getComponent<TransformComponent>());
     EXPECT_TRUE(player->getComponent<HitboxComponent>());
 }
 
@@ -23,7 +23,7 @@ TEST(EntityManager_, createEnemy)
     auto manager = std::make_unique<EntityManager>();
     manager->createEnemy();
     auto enemy = manager->getEntity(0);
-    EXPECT_TRUE(enemy->getComponent<PositionComponent>());
+    EXPECT_TRUE(enemy->getComponent<TransformComponent>());
     EXPECT_FALSE(enemy->getComponent<HitboxComponent>());
 }
 

@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(R-Type)
 
-set(OpenGL_GL_PREFERENCE GLVND)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-g")
+
+set(TEST_BUILD runTests)
 
 if(UNIX)
   find_program(TIDY "clang-tidy")
@@ -17,51 +18,41 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
 endif()
 
 # ------------------------------
-# FILES
+# R-TYPE
 # ------------------------------
 
+# Sources
 set(
   RTYPE_SRC
   src/RType.cpp
   src/ECS/Entity/Entity.cpp
   src/ECS/Entity/EntityManager.cpp
-  src/ECS/Components/PositionComponent.cpp
+  src/ECS/Components/TransformComponent.cpp
   src/ECS/Components/HitboxComponent.cpp
+  src/ECS/Components/MouvementComponent.cpp
+  src/ECS/Components/StatComponent.cpp
+  src/ECS/Components/DrawableComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
+  src/ECS/Systems/MouvementSystem.cpp
 )
 
-set(
-  RTYPE_INCLUDES
-  include
-  include/ECS
-  include/ECS/Entity
-  include/ECS/Components
-  include/ECS/Systems
-  include/Tools
-)
-
-set(
-  TESTS_SRC
-  tests/HitboxComponent_t.cpp
-  tests/PositionComponent_t.cpp
-  tests/Entity_t.cpp
-  tests/EntityManager_t.cpp
-  tests/HitboxSystem_t.cpp
-  tests/Tools_t.cpp
-  tests/EntityIterator_t.cpp
-)
-
-# ------------------------------
-# R-TYPE
-# ------------------------------
-
+# Merge
 add_executable(${PROJECT_NAME} src/main.cpp ${RTYPE_SRC})
-target_include_directories(${PROJECT_NAME} PRIVATE ${RTYPE_INCLUDES})
+
+# Includes
+target_include_directories(${PROJECT_NAME} PRIVATE include)
+target_include_directories(${PROJECT_NAME} PRIVATE include/ECS)
+target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Entity)
+target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Components)
+target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Systems)
+target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
+
+# Options
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
 # ------------------------------
-# TESTS
+# Fetch GoogleTest
 # ------------------------------
 
 include(FetchContent)
@@ -83,6 +74,36 @@ if(CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
 endif()
 
-add_executable(runTests ${TESTS_SRC} ${RTYPE_SRC})
-target_include_directories(runTests PRIVATE ${RTYPE_INCLUDES})
-target_link_libraries(runTests gtest gtest_main gmock pthread)
+# ------------------------------
+# TESTS
+# ------------------------------
+
+# Sources
+set(
+  TESTS_SRC
+  tests/HitboxComponent_t.cpp
+  tests/TransformComponent_t.cpp
+  tests/Entity_t.cpp
+  tests/EntityManager_t.cpp
+  tests/HitboxSystem_t.cpp
+  tests/Tools_t.cpp
+  tests/EntityIterator_t.cpp
+  tests/MouvementComponent_t.cpp
+  tests/StatComponent_t.cpp
+  tests/MouvementSystem_t.cpp
+  tests/DrawableComponent_t.cpp
+)
+
+# Merge
+add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SRC})
+
+# Includes
+target_include_directories(${TEST_BUILD} PRIVATE include)
+target_include_directories(${TEST_BUILD} PRIVATE include/ECS)
+target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Entity)
+target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Components)
+target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Systems)
+target_include_directories(${TEST_BUILD} PRIVATE include/Tools)
+
+# Options
+target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)

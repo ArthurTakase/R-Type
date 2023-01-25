@@ -10,8 +10,8 @@
 
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
-#include "PositionComponent.hpp"
 #include "RType.hpp"
+#include "TransformComponent.hpp"
 
 int main()
 {

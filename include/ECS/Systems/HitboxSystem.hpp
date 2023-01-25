@@ -7,8 +7,9 @@
 
 #pragma once
 
-#include "ASystem.hpp"
 #include "EntityIterator.hpp"
+#include "HitboxComponent.hpp"
+#include "TransformComponent.hpp"
 
 /**
  * @brief System used to check if an entity is colliding with another
@@ -16,7 +17,7 @@
 class HitboxSystem
 {
   public:
-    HitboxSystem(EntityIterator<PositionComponent, HitboxComponent> it);
+    HitboxSystem(EntityIterator<TransformComponent, HitboxComponent> it);
     ~HitboxSystem() noexcept                         = default;
     HitboxSystem(const HitboxSystem& other) noexcept = default;
     HitboxSystem(HitboxSystem&& other) noexcept      = delete;
@@ -25,8 +26,8 @@ class HitboxSystem
     HitboxSystem& operator=(HitboxSystem&& rhs) noexcept      = delete;
 
     void run();
-    int  checkCollision(std::unique_ptr<Entity>& entity) const;
+    void checkCollision(std::unique_ptr<Entity>& entity) const;
 
   private:
-    EntityIterator<PositionComponent, HitboxComponent> _it;
+    EntityIterator<TransformComponent, HitboxComponent> _it;
 };
