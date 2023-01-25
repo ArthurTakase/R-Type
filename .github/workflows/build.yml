@@ -95,11 +95,8 @@ jobs:
         uses: Ilshidur/action-discord@master
   Release:
     runs-on: ubuntu-latest
-    needs: [Doxygen, DiscordNotification]
-    # if: github.ref == 'refs/heads/main'
+    needs: [Tests, Linux]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
       - name: Restore build
         uses: actions/cache@v3
         with:
@@ -108,23 +105,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Archive Release
+        uses: thedoctor0/zip-release@0.7.0
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Upload Release Asset
-        id: upload-release-asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          type: 'zip'
+          filename: 'release_linux.zip'
+      - name: Upload Release
+        uses: ncipollo/release-action@v1.12.0
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./build/Release/MyProject
-          asset_name: MyProject
-          asset_content_type: application/octet-stream
+          artifacts: "release_linux.zip"
+          token: ${{ secrets.GITHUB_TOKEN }}
