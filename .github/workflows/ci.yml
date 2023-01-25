@@ -5,6 +5,8 @@ on: push
 jobs:
   Linux:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.13
