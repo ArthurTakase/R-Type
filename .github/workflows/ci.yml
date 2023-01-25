@@ -26,8 +26,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: Release
-        uses: softprops/action-gh-release@v1
+      - run: ls -lR
+      - name: Archive Build
+        uses: thedoctor0/zip-release@0.7.0
+        with:
+          type: 'zip'
+          filename: 'windows.zip'
+      - name: Upload Build
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: windows.zip
+          overwrite: true
   Windows:
     runs-on: windows-latest
     steps:
