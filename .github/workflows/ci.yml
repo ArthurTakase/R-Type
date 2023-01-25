@@ -5,15 +5,13 @@ on: push
 jobs:
   Linux:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v2
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
           cmake-version: "3.17.x"
-      - name: checkout repo
-        uses: actions/checkout@v2
       - name: create build folder
         run: mkdir build
       - name: build
@@ -28,18 +26,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - run: ls -lR
-      - name: Archive Build
-        uses: thedoctor0/zip-release@0.7.0
-        with:
-          type: 'zip'
-          filename: 'windows.zip'
-      - name: Upload Build
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: windows.zip
-          overwrite: true
   Windows:
     runs-on: windows-latest
     steps:
@@ -119,6 +105,7 @@ jobs:
   ReleaseWindows:
     runs-on: windows-latest
     needs: [Tests, Windows]
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
     steps:
@@ -145,6 +132,7 @@ jobs:
   ReleaseLinux:
     runs-on: ubuntu-latest
     needs: [Tests, Linux]
+    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
     steps:
