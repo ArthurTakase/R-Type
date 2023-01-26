@@ -31,29 +31,35 @@ set(
 )
 
 set(RTYPE_SERVER
-  src/Network/Socket.cpp
+  src/Network/SocketFactory.cpp
+
+  # if(UNIX)
+  src/Network/LinuxSocket.cpp
+
+  # else()
+  src/Network/WindowsSocket.cpp
+
+  # endif()
   src/Network/Server.cpp
-  src/Network/InfoStruct.cpp
-  src/Network/main_server.cpp
   src/Error/Error.cpp
+  src/Network/main_server.cpp
 )
 
-set(RTYPE_CLIENT
-  src/Network/Socket.cpp
-  src/Network/Client.cpp
-  src/Network/main_client.cpp
-  src/Error/Error.cpp
-)
+# set(RTYPE_CLIENT
+# src/Network/Socket.cpp
+# src/Network/Client.cpp
+# src/Network/main_client.cpp
+# src/Error/Error.cpp
+# )
 
 add_executable(${PROJECT_NAME} ${RTYPE_SRC})
 add_executable(server ${RTYPE_SERVER})
-add_executable(client ${RTYPE_CLIENT})
 
+# add_executable(client ${RTYPE_CLIENT})
 if(WIN32)
   target_link_libraries(server wsock32 ws2_32)
   target_link_libraries(client wsock32 ws2_32)
 endif()
-
 
 # Ajouter ici les dossiers contenants les .hpp de l'exec du R-Type
 target_include_directories(${PROJECT_NAME} PRIVATE include)
@@ -69,13 +75,14 @@ target_include_directories(server PRIVATE include/Network)
 target_include_directories(server PRIVATE include/Tools)
 
 # Ajouter ici les dossiers contenants les .hpp de l'exec du Client
-target_include_directories(client PRIVATE include/Network)
-target_include_directories(client PRIVATE include/Tools)
+# target_include_directories(client PRIVATE include/Network)
+# target_include_directories(client PRIVATE include/Tools)
 
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 target_compile_options(server PUBLIC ${CXX_FLAGS})
-target_compile_options(client PUBLIC ${CXX_FLAGS})
 
+# target_compile_options(client PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 set_property(TARGET server PROPERTY CXX_STANDARD 20)
-set_property(TARGET client PROPERTY CXX_STANDARD 20)
+
+# set_property(TARGET client PROPERTY CXX_STANDARD 20)

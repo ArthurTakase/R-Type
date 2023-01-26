@@ -7,22 +7,22 @@
 
 #include "Server.hpp"
 
+#include <algorithm>
 #include <iostream> //TODO:A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
 
 #include "Error.hpp"
+#include "SocketFactory.hpp"
 
-#include <sstream>
-
-[[nodiscard]] Server::Server(uint16_t port)
-    : socket_(Socket{ port })
+[[nodiscard]] Server::Server(Address::Port port)
+    : socket_(SocketFactory::createSocket(port))
 {
     // setup of select
     FD_ZERO(&readFds_);
     FD_ZERO(&writeFds_);
-    FD_SET(socket_.getSocketFd(), &readFds_);
-    FD_SET(socket_.getSocketFd(), &writeFds_);
+    FD_SET(socket_->getSocketFd(), &readFds_);
+    FD_SET(socket_->getSocketFd(), &writeFds_);
 
-    std::cout << "Server created" << std::endl;
+    std::cout << "Server created" << std::endl; // TODO: remove when code is functionnal
 }
 
 void Server::stop() noexcept
@@ -35,81 +35,67 @@ void Server::reset() noexcept
     looping_ = true;
 }
 
-bool Server::isQueueEmpty(unsigned int index) const noexcept
-{
-    if (clients_.size() < index) { return (true); }
-    if (clients_[index].dataToSend_.size() == 0) { return (true); }
-    return (false);
-}
-
 void Server::run()
 {
     while (looping_) {
-        // Wait for data on the socket
-        int status = select(socket_.getSocketFd() + 1, &readFds_, &writeFds_, nullptr, nullptr);
-        if (status == SOCKET_ERROR) {
-                int iError = WSAGetLastError();
-                if (iError == WSAEWOULDBLOCK) printf("recv failed with error: WSAEWOULDBLOCK\n");
-                else
-                    printf("select failed with error: %ld\n", iError);
-            throw NetworkExecError("Error while using the socket with select");
-        }
-        for (int i = 0; i != socket_.getSocketFd() + 1; i++) {
-            if (FD_ISSET(i, &readFds_)) { receive(); }
-            if (FD_ISSET(i, &writeFds_) && !isQueueEmpty(i)) {
-                // TODO : remplacer le void * par le format de données sérialisées
-                send(getDataFromQueue(i), i);
-            }
-        }
+        // TODO: understand why i can't call &writeFds_ in select
+        int status = select(socket_->getSocketFd() + 1, &readFds_, nullptr, nullptr, nullptr);
+        if (status < 0) { throw NetworkExecError("Error while using the socket with select"); }
+        if (FD_ISSET(socket_->getSocketFd(), &readFds_)) { receive(); }
+        if (FD_ISSET(socket_->getSocketFd(), &writeFds_)) { send(); }
     }
 }
 
-bool Server::isKnownClient(sockaddr_in address) const
+bool Server::isKnownClient(Address address) const
 {
-    for (const auto& client : clients_) {
-        if (client.address_->sin_addr.s_addr == address.sin_addr.s_addr) { return true; }
-    }
-    return false;
+    auto iterator = std::find_if(
+        clients_.begin(), clients_.end(), [&address](const Client& client) { return (address == client.address); });
+    return (iterator != clients_.end());
 }
 
-void Server::addClient(sockaddr_in address) noexcept
+void Server::addClient(Address address) noexcept
 {
-    ClientInfos client(address, clients_.size());
-    clients_.push_back(std::move(client));
+    Client client{ .address = address };
+    clients_.push_back(client);
 }
 
 void Server::receive()
 {
     try {
-        ReceivedInfos infoReceived = socket_.receive();
-
-        // add the client to the list of recognized hosts if it's not already in it
-        if (!isKnownClient(infoReceived.address_)) {
+        ReceivedInfos infoReceived = socket_->receive();
+        if (!isKnownClient(infoReceived.address)) {
             std::cout << "NEW CLIENT" << std::endl; // TODO: A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-            addClient(infoReceived.address_);
+            addClient(infoReceived.address);
         }
         handleData(infoReceived);
-        std::cout << "END OF RECEPTION" << std::endl;
+        std::cout << "END OF RECEPTION" << std::endl; // TODO: remove
     } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
 
-void Server::send(void* data, unsigned int clientIndex) const
+void Server::send() noexcept
 {
-    std::cout << "SENDING DATA" << std::endl;
+    for (auto client : clients_) {
+        if (client.dataToSend.size() != 0) { sendToClient(client, getDataFromQueue(client)); }
+    }
+}
+
+void Server::sendToClient(Client& client, RawData blob) // blob : binary large object
+{
     try {
-        socket_.send(data, sizeof(data), *clients_[clientIndex].address_);
+        socket_->send(blob.data(), blob.size(), client.address);
     } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
+        client.dataToSend.push(blob);
     }
 }
 
-void* Server::getDataFromQueue(unsigned int index) noexcept
+RawData Server::getDataFromQueue(Client& client) noexcept
 {
-    void* data = clients_[index].dataToSend_.front();
-    clients_[index].dataToSend_.pop();
-    return (data);
+    RawData blob = client.dataToSend.front();
+    client.dataToSend.pop();
+    return (blob);
 }
 
 void Server::handleData(ReceivedInfos infos) const noexcept
