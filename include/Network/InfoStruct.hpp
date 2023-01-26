@@ -7,11 +7,11 @@
 #pragma once
 
 #ifdef WIN32
-
 #include <winsock2.h>
+typedef SSIZE_T ssize_t;
 
 #elif defined(linux)
-
+#include <unistd.h>
 #include <netinet/in.h>
 
 #endif
@@ -22,7 +22,7 @@
 
 struct ReceivedInfos {
     void*       data_;
-    ssize_t     dataSize_;
+    SSIZE_T     dataSize_;
     sockaddr_in address_;
 };
 

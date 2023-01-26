@@ -20,7 +20,7 @@ Socket::Socket(uint16_t port) // init the socket (ipv6, UDP)
 #endif
     socketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
 
-    if (socketFd_ == -1) { throw InitError("Socket initialization failed."); }
+    if (socketFd_ < 1) { throw InitError("Socket initialization failed."); }
     std::cout << "Socket created" << std::endl;
 
     // make the socket listen to a port passed in parameter
@@ -28,7 +28,7 @@ Socket::Socket(uint16_t port) // init the socket (ipv6, UDP)
     address_.sin_addr.s_addr = htonl(INADDR_ANY);
     address_.sin_family      = AF_INET;
 
-    if (::bind(socketFd_, reinterpret_cast<SOCKADDR*>(&address_), sizeof(address_)) == -1)
+    if (bind(socketFd_, reinterpret_cast<SOCKADDR*>(&address_), sizeof(address_)) != 0)
         throw InitError("Socket binding to port failed.");
 }
 
@@ -53,7 +53,12 @@ sockaddr_in Socket::getAddress() const noexcept
 void Socket::send(const void* data, int data_size, sockaddr_in destAddr) const
 {
     std::cout << "SENDING DATA" << std::endl;
+#ifdef WIN32
+    int sent_bytes = sendto(socketFd_, reinterpret_cast<const char *>(data), data_size, 0, reinterpret_cast<SOCKADDR*>(&destAddr), sizeof(destAddr));
+
+#else
     int sent_bytes = sendto(socketFd_, data, data_size, 0, reinterpret_cast<SOCKADDR*>(&destAddr), sizeof(destAddr));
+#endif
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
     std::cout << "DATA SENT" << std::endl;
 }
@@ -65,9 +70,14 @@ ReceivedInfos Socket::receive() const
     void*         buffer  = malloc(1024);
     ReceivedInfos infos;
 
+    #ifdef WIN32
+    ssize_t bytesReceived =
+        recvfrom(socketFd_, reinterpret_cast<char *>(buffer), sizeof(buffer), 0, reinterpret_cast<SOCKADDR*>(&address), &addrLen);
+
+    #else
     ssize_t bytesReceived =
         recvfrom(socketFd_, buffer, sizeof(buffer), 0, reinterpret_cast<SOCKADDR*>(&address), &addrLen);
-
+    #endif
     if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client "); }
 
     infos.address_  = address;

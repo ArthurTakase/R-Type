@@ -11,12 +11,16 @@
 
 #include "Error.hpp"
 
+#include <sstream>
+
 [[nodiscard]] Server::Server(uint16_t port)
     : socket_(Socket{ port })
 {
     // setup of select
     FD_ZERO(&readFds_);
+    FD_ZERO(&writeFds_);
     FD_SET(socket_.getSocketFd(), &readFds_);
+    FD_SET(socket_.getSocketFd(), &writeFds_);
 
     std::cout << "Server created" << std::endl;
 }
@@ -33,6 +37,7 @@ void Server::reset() noexcept
 
 bool Server::isQueueEmpty(unsigned int index) const noexcept
 {
+    if (clients_.size() < index) { return (true); }
     if (clients_[index].dataToSend_.size() == 0) { return (true); }
     return (false);
 }
@@ -42,7 +47,13 @@ void Server::run()
     while (looping_) {
         // Wait for data on the socket
         int status = select(socket_.getSocketFd() + 1, &readFds_, &writeFds_, nullptr, nullptr);
-        if (status < 0) { throw NetworkExecError("Error while using the socket with select"); }
+        if (status == SOCKET_ERROR) {
+                int iError = WSAGetLastError();
+                if (iError == WSAEWOULDBLOCK) printf("recv failed with error: WSAEWOULDBLOCK\n");
+                else
+                    printf("select failed with error: %ld\n", iError);
+            throw NetworkExecError("Error while using the socket with select");
+        }
         for (int i = 0; i != socket_.getSocketFd() + 1; i++) {
             if (FD_ISSET(i, &readFds_)) { receive(); }
             if (FD_ISSET(i, &writeFds_) && !isQueueEmpty(i)) {

@@ -49,6 +49,12 @@ add_executable(${PROJECT_NAME} ${RTYPE_SRC})
 add_executable(server ${RTYPE_SERVER})
 add_executable(client ${RTYPE_CLIENT})
 
+if(WIN32)
+  target_link_libraries(server wsock32 ws2_32)
+  target_link_libraries(client wsock32 ws2_32)
+endif()
+
+
 # Ajouter ici les dossiers contenants les .hpp de l'exec du R-Type
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS)
