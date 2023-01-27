@@ -8,16 +8,13 @@
 #pragma once
 
 #ifdef WIN32
-#include <iphlpapi.h>
 #include <stdio.h>
-#include <windows.h>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
 #include <string_view>
 
 #include "ISocket.hpp"
-#include "InfoStruct.hpp" //TODO: à enlever de l'abstraction
 
 class WindowsSocket : public ISocket
 {
@@ -43,7 +40,7 @@ class WindowsSocket : public ISocket
     // attributes
     SOCKET            socketFd_;
     SOCKADDR_IN       address_;
-    std::vector<char> receivedBuffer_;
+    mutable std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 

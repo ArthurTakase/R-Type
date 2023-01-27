@@ -9,6 +9,7 @@
 
 #include <memory>
 #include <vector>
+#include <winsock2.h>
 
 #include "ISocket.hpp"
 

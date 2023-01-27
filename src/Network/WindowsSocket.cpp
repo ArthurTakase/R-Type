@@ -96,7 +96,7 @@ ReceivedInfos WindowsSocket::receive() const
 
     if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client "); }
 
-    infos.address_ = winAddressToAddress(address);
+    infos.address = winAddressToAddress(address);
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);
 
     // TODO : quand on va récupérer la data sous forme de bitset, il faut qu'un emplacement (toujours le même) soit
