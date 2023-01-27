@@ -35,9 +35,9 @@ set(RTYPE_SERVER
   src/Network/LinuxSocket.cpp
   src/Network/WindowsSocket.cpp
   src/Network/Server.cpp
-  src/Network/FdSetFactory.cpp
-  src/Network/LinuxFdSet.cpp
-  src/Network/WindowsFdSet.cpp
+  src/Network/SocketSelectorFactory.cpp
+  src/Network/LinuxSocketSelector.cpp
+  src/Network/WindowsSocketSelector.cpp
   src/Network/main_server.cpp
   src/Error/Error.cpp
 )

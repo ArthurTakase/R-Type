@@ -10,8 +10,8 @@
 #include <memory>
 #include <vector>
 
-#include "FdSet.hpp"
 #include "ISocket.hpp"
+#include "SocketSelector.hpp"
 
 class Server
 {
@@ -33,14 +33,11 @@ class Server
   protected:
   private:
     // attributes
-    bool                     looping_  = true;
-    int                      tickrate_ = 60;
-    std::vector<Client>      clients_  = {};
-    std::unique_ptr<ISocket> socket_;
-
-    // elements for select
-    std::unique_ptr<FdSet> readFds_;
-    std::unique_ptr<FdSet> writeFds_;
+    bool                            looping_  = true;
+    int                             tickrate_ = 60;
+    std::vector<Client>             clients_  = {};
+    std::unique_ptr<ISocket>        socket_;
+    std::unique_ptr<SocketSelector> selector_;
 
     // methods
     void                  receive();
