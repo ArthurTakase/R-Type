@@ -9,8 +9,8 @@
 
 #include <memory>
 #include <vector>
-#include <winsock2.h>
 
+#include "FdSet.hpp"
 #include "ISocket.hpp"
 
 class Server
@@ -39,8 +39,8 @@ class Server
     std::unique_ptr<ISocket> socket_;
 
     // elements for select
-    fd_set         readFds_;
-    fd_set         writeFds_;
+    std::unique_ptr<FdSet> readFds_;
+    std::unique_ptr<FdSet> writeFds_;
 
     // methods
     void                  receive();

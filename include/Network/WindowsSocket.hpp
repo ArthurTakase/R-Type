@@ -38,14 +38,14 @@ class WindowsSocket : public ISocket
   protected:
   private:
     // attributes
-    SOCKET            socketFd_;
-    SOCKADDR_IN       address_;
+    SOCKET                    socketFd_;
+    SOCKADDR_IN               address_;
     mutable std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 
     // methods
-    static Address      winAddressToAddress(SOCKADDR_IN address) noexcept;
+    static Address     winAddressToAddress(SOCKADDR_IN address) noexcept;
     static SOCKADDR_IN addressToWinAddress(Address address) noexcept;
 };
 #endif

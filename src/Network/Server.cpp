@@ -11,16 +11,16 @@
 #include <iostream> //TODO:A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
 
 #include "Error.hpp"
+#include "FdSetFactory.hpp"
 #include "SocketFactory.hpp"
 
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
+    , readFds_(FdSetFactory::createFdSet())
+    , writeFds_(FdSetFactory::createFdSet())
 {
-    // setup of select
-    FD_ZERO(&readFds_);
-    FD_ZERO(&writeFds_);
-    FD_SET(socket_->getSocketFd(), &readFds_);
-    FD_SET(socket_->getSocketFd(), &writeFds_);
+    readFds_->add(socket_->getSocketFd());
+    writeFds_->add(socket_->getSocketFd());
 
     std::cout << "Server created" << std::endl; // TODO: remove when code is functionnal
 }
@@ -39,10 +39,10 @@ void Server::run()
 {
     while (looping_) {
         // TODO: understand why i can't call &writeFds_ in select
-        int status = select(socket_->getSocketFd() + 1, &readFds_, nullptr, nullptr, nullptr);
-        if (status < 0) { throw NetworkExecError("Error while using the socket with select"); }
-        if (FD_ISSET(socket_->getSocketFd(), &readFds_)) { receive(); }
-        if (FD_ISSET(socket_->getSocketFd(), &writeFds_)) { send(); }
+        int status = readFds_->select(socket_->getSocketFd() + 1);
+        if (status < 0) { throw NetworkExecError("Error while using the socket with select."); }
+        if (readFds_->isSet(socket_->getSocketFd())) { receive(); }
+        if (writeFds_->isSet(socket_->getSocketFd())) { send(); }
     }
 }
 
