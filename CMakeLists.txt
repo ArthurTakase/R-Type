@@ -51,6 +51,28 @@ target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
+# -----------------------------
+# SFML
+# -----------------------------
+
+# Force the script to use FetchContent and not CPM internally to fetch asio
+option(SFML_USE_CPM "Download SFML with CPM instead of FetchContent" OFF)
+option(
+  SFML_CPM_FETCHCONTENT_COMPAT
+  "Should SFML be declared with FetchContent functions to be compatible. This doesn't not allow CPM cache to work."
+  ON
+)
+# Download this repository
+include(FetchContent)
+FetchContent_Declare(
+  sfml
+  GIT_REPOSITORY https://github.com/SFML/SFML.git
+  GIT_TAG 2.5.1
+)
+FetchContent_MakeAvailable(sfml)
+
+target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system)
+
 # ------------------------------
 # Fetch GoogleTest
 # ------------------------------
