@@ -91,9 +91,6 @@ ReceivedInfos LinuxSocket::receive() const
 
     infos.address = linuxAddressToAddress(address);
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);
-    // TODO : quand on va récupérer la data sous forme de bitset, il faut qu'un emplacement (toujours le même) soit
-    // réservé pour l'ID du client,
-    //  comme ça on pourra le repérer facilement dans mon vecteur de clients stocké dans mon serveur
     return infos;
 }
 

@@ -32,8 +32,7 @@ struct ReceivedInfos {
 
 struct Client {
     Address             address;
-    std::queue<RawData> dataToSend = {}; // TODO: à changer en queue de données sérialisées quand ça
-                                         // sera implémenté
+    std::queue<RawData> dataToSend = {};
 };
 
 class ISocket

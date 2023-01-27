@@ -75,7 +75,7 @@ void Server::receive()
 
 void Server::send() noexcept
 {
-    for (auto client : clients_) {
+    for (auto& client : clients_) {
         if (client.dataToSend.size() != 0) { sendToClient(client, getDataFromQueue(client)); }
     }
 }
