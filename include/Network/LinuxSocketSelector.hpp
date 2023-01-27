@@ -23,12 +23,12 @@ class LinuxFdSet
     LinuxFdSet& operator=(const LinuxFdSet& rhs) noexcept = default;
     LinuxFdSet& operator=(LinuxFdSet&& rhs) noexcept      = default;
 
-    fd_set &get() noexcept;
-    void   add(int fd) noexcept;
-    void   remove(int fd) noexcept;
-    bool   isSet(int fd) const noexcept;
-    int    select() noexcept;
-    void   clear() noexcept;
+    fd_set& get() noexcept;
+    void    add(int fd) noexcept;
+    void    remove(int fd) noexcept;
+    bool    isSet(int fd) const noexcept;
+    int     select() noexcept;
+    void    clear() noexcept;
 
   protected:
   private:
@@ -46,9 +46,9 @@ class LinuxSocketSelector : public SocketSelector
     LinuxSocketSelector& operator=(const LinuxSocketSelector& rhs) noexcept = delete;
     LinuxSocketSelector& operator=(LinuxSocketSelector&& rhs) noexcept      = default;
 
-    void add(ISocket &socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    void remove(ISocket &socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    bool isSet(ISocket &socket, Operation type) const noexcept final;
+    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
+    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
+    bool isSet(ISocket& socket, Operation type) const noexcept final;
     void select(bool isRead, bool isWrite, bool isExcept) final;
     void clear(bool isRead, bool isWrite, bool isExcept) noexcept final;
 

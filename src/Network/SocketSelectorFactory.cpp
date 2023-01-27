@@ -10,8 +10,7 @@
 #include "LinuxSocketSelector.hpp"
 #include "WindowsSocketSelector.hpp"
 
-std::unique_ptr<SocketSelector> SocketSelectorFactory::createSocketSelector(
-    int socketFd)
+std::unique_ptr<SocketSelector> SocketSelectorFactory::createSocketSelector(int socketFd)
 {
 #ifdef WIN32
     return std::make_unique<WindowsSocketSelector>(socketFd);
