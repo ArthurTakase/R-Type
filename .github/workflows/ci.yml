@@ -16,7 +16,7 @@ jobs:
       - name: create build folder
         run: mkdir build
       - name: build
-        run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+        run: cd build && cmake -DTESTS=ON -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
         run: cd build && make
       - name: Cache build

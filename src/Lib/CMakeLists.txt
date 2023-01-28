@@ -19,14 +19,13 @@ FetchContent_MakeAvailable(sfml)
 
 add_library(
     ${PROJECT_NAME}
-    SFML.cpp
+    Lib.cpp
+    Window.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC  sfml-audio sfml-graphics sfml-network)
-
-# set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
-# set_property(TARGET ${PROJECT_NAME} PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
-
-# target_link_libraries(${PROJECT_NAME} PRIVATE sfml-graphics sfml-window sfml-system)
+target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)
+include_directories(${CMAKE_BINARY_DIR}/../../include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)

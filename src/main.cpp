@@ -5,8 +5,8 @@
 ** main
 */
 
-#include <SFML/Window.hpp>
-#include <bitset>
+// #include <SFML/Window.hpp>
+// #include <bitset>
 #include <iostream>
 #include <memory>
 
@@ -18,6 +18,21 @@
 
 int main()
 {
-    testSFML();
+    auto  lib    = std::make_unique<Lib>();
+    auto& window = lib->getWindow();
+
+    while (window.isOpen()) {
+        window.clear();
+
+        auto key = window.getKeyPressed();
+
+        if (key == 255) {
+            window.close();
+            break;
+        }
+
+        window.refresh();
+    }
+
     return 0;
 }
