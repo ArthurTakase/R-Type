@@ -31,7 +31,7 @@ class Udp_Client {
         return (socket.send(message.c_str(), message.size() + 1, serverip_, serverport_) == sf::Socket::Done) ? true : false;
     }
     std::string  getServerIp() const noexcept { return serverip_; }
-    void           setServerIp(std::string new_ip) noexcept { serverip_ = new_ip; }
+    void           setServerIp(const std::string& new_ip) noexcept { serverip_ = new_ip; }
     unsigned short getServerPort() const noexcept { return serverport_; }
     unsigned short setPort(const unsigned short new_port) noexcept { return serverport_ = new_port; }
 
