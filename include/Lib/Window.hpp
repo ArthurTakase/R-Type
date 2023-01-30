@@ -13,6 +13,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <bitset>
 
+enum WINDOW_KEY { QUIT = 255 };
+
 class Window
 {
   public:

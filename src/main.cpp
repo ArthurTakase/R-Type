@@ -15,6 +15,7 @@
 #include "Lib.hpp"
 #include "RType.hpp"
 #include "TransformComponent.hpp"
+#include "Window.hpp"
 
 int main()
 {
@@ -26,7 +27,7 @@ int main()
 
         auto key = window.getKeyPressed();
 
-        if (key == 255) {
+        if (key == WINDOW_KEY::QUIT) {
             window.close();
             break;
         }
