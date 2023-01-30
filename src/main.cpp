@@ -5,8 +5,6 @@
 ** main
 */
 
-// #include <SFML/Window.hpp>
-// #include <bitset>
 #include <iostream>
 #include <memory>
 
@@ -15,7 +13,6 @@
 #include "Lib.hpp"
 #include "RType.hpp"
 #include "TransformComponent.hpp"
-#include "Window.hpp"
 
 int main()
 {
