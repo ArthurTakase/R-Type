@@ -26,11 +26,11 @@ class Window
     Window& operator=(const Window& rhs) noexcept = delete;
     Window& operator=(Window&& rhs) noexcept      = delete;
 
-    void           close();
-    void           clear();
-    void           refresh();
-    bool           isOpen();
-    std::bitset<8> getKeyPressed();
+    void close();
+    void clear();
+    void refresh();
+    bool isOpen();
+    int  getKeyPressed();
 
   private:
     sf::RenderWindow window;

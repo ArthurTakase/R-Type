@@ -58,12 +58,12 @@ bool Window::isOpen()
  *
  * @return A bitset of 8 bits.
  */
-std::bitset<8> Window::getKeyPressed()
+int Window::getKeyPressed()
 {
     sf::Event event;
 
-    if (!window.pollEvent(event)) return std::bitset<8>(0);
-    if (event.type == sf::Event::Closed) return std::bitset<8>(255);
-    if (event.type == sf::Event::KeyPressed) return std::bitset<8>(event.key.code);
-    return std::bitset<8>(0);
+    if (!window.pollEvent(event)) return 0;
+    if (event.type == sf::Event::Closed) return 255;
+    if (event.type == sf::Event::KeyPressed) return event.key.code;
+    return 0;
 }
