@@ -10,13 +10,11 @@
 #include <iostream>
 
 /**
- * `Window::Window()` is a constructor function that creates a window with the title "SFML works!" and
- * a size of 800x600
+ * It opens the window
  */
-Window::Window()
+void Window::open(int width, int height, const std::string& title)
 {
-    window.create(sf::VideoMode(800, 600), "SFML works!");
-    std::cout << "SFML Window Loaded" << std::endl;
+    window.create(sf::VideoMode(width, height), title);
 }
 
 /**
@@ -66,4 +64,21 @@ int Window::getKeyPressed()
     if (event.type == sf::Event::Closed) return 255;
     if (event.type == sf::Event::KeyPressed) return event.key.code;
     return 0;
+}
+
+/**
+ * It draws a sprite on the window
+ *
+ * @param sprite The sprite to draw.
+ */
+void Window::draw(Sprite& sprite)
+{
+    sf::Texture texture;
+    sf::Sprite  tempSprite;
+
+    texture.loadFromFile(sprite.getSpritePath());
+    tempSprite.setTexture(texture);
+    tempSprite.setPosition(sprite.getX(), sprite.getY());
+
+    window.draw(tempSprite);
 }
