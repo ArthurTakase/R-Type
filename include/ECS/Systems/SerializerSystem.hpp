@@ -32,8 +32,7 @@ namespace Serializer
 class SerializerSystem
 {
   public:
-    //! Default constructor
-    SerializerSystem();
+    SerializerSystem(std::vector<std::unique_ptr<Entity>>& entities);
     virtual ~SerializerSystem() noexcept = default;
 
     SerializerSystem(const SerializerSystem& other)                = delete;
@@ -44,7 +43,9 @@ class SerializerSystem
     std::bitset<ENTITYSIZE> Serialize(std::unique_ptr<Entity> const& entity) const noexcept;
     std::bitset<INPUTSIZE>  Serialize(int& keyCode) const noexcept;
 
+    void run() noexcept;
+
   protected:
   private:
-    std::unique_ptr<EntityIterator<TransformComponent, DrawableComponent>> _it;
+    EntityIterator<TransformComponent, DrawableComponent> _it;
 };

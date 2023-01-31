@@ -17,7 +17,7 @@
 class HitboxSystem
 {
   public:
-    HitboxSystem(EntityIterator<TransformComponent, HitboxComponent> it);
+    HitboxSystem(std::vector<std::unique_ptr<Entity>>& entities);
     ~HitboxSystem() noexcept                         = default;
     HitboxSystem(const HitboxSystem& other) noexcept = default;
     HitboxSystem(HitboxSystem&& other) noexcept      = delete;

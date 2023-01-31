@@ -19,8 +19,8 @@
  *
  * @param it The iterator to use for the system.
  */
-HitboxSystem::HitboxSystem(EntityIterator<TransformComponent, HitboxComponent> it)
-    : _it(EntityIterator<TransformComponent, HitboxComponent>(it))
+HitboxSystem::HitboxSystem(std::vector<std::unique_ptr<Entity>>& entities)
+    : _it(EntityIterator<TransformComponent, HitboxComponent>(entities))
 {
 }
 
@@ -39,6 +39,7 @@ void HitboxSystem::run()
             std::cerr << e.what() << std::endl;
         }
     }
+    _it.reset();
 }
 
 /**

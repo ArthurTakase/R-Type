@@ -23,8 +23,7 @@ TEST(HitboxSystem_, run)
     manager->createPlayer();
     manager->getEntity(0)->getComponent<TransformComponent>()->setPos(100, 100);
 
-    auto system =
-        std::make_unique<HitboxSystem>(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()));
+    auto system = std::make_unique<HitboxSystem>(manager->getEntities());
 
     testing::internal::CaptureStdout();
     system->run();

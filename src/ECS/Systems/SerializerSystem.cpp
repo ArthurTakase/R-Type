@@ -9,10 +9,18 @@
 
 using namespace Serializer;
 
-SerializerSystem::SerializerSystem()
-    : _it(nullptr)
+SerializerSystem::SerializerSystem(std::vector<std::unique_ptr<Entity>>& entities)
+    : _it(EntityIterator<TransformComponent, DrawableComponent>(entities))
 {
-    std::cout << "Serializer Ready" << std::endl;
+}
+
+void SerializerSystem::run() noexcept
+{
+    for (; !_it.isEnd(); ++_it) {
+        std::bitset<ENTITYSIZE> x = Serialize(_it.get());
+        std::cout << x << std::endl;
+    }
+    _it.reset();
 }
 
 /**

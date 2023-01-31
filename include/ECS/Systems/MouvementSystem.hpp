@@ -18,7 +18,7 @@
 class MouvementSystem
 {
   public:
-    MouvementSystem(EntityIterator<TransformComponent, MouvementComponent> it);
+    MouvementSystem(std::vector<std::unique_ptr<Entity>>& entities);
     ~MouvementSystem() noexcept                            = default;
     MouvementSystem(const MouvementSystem& other) noexcept = default;
     MouvementSystem(MouvementSystem&& other) noexcept      = delete;
