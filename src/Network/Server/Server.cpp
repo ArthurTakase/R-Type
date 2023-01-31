@@ -9,6 +9,7 @@
 
 #include <algorithm>
 #include <iostream> //TODO:A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
+#include <thread>
 
 #include "Error.hpp"
 #include "SocketFactory.hpp"
@@ -34,6 +35,17 @@ void Server::reset() noexcept
 
 void Server::run()
 {
+    // std::string buffer;
+    // std::thread input_task([&]() {
+    //     while (true) {
+    //         std::cin >> buffer;
+    //         RawData tmp;
+    //         std::copy(buffer.begin(), buffer.end(), std::back_inserter(tmp));
+
+    //         for (auto& client : clients_) { client.dataToSend.push(tmp); }
+    //     }
+    // });
+
     while (looping_) {
         try {
             selector_->select(true, true, false);
@@ -43,6 +55,7 @@ void Server::run()
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
     }
+    // input_task.join();
 }
 
 bool Server::isKnownClient(Address address) const
