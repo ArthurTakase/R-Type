@@ -33,6 +33,7 @@ set(
   src/ECS/Components/StatComponent.cpp
   src/ECS/Components/DrawableComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
+  src/ECS/Systems/SerializerSystem.cpp
   src/ECS/Systems/MouvementSystem.cpp
 )
 
