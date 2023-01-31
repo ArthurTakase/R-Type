@@ -8,6 +8,7 @@
 #pragma once
 
 #include <memory>
+#include <thread>
 #include <vector>
 
 #include "ISocket.hpp"
@@ -38,6 +39,8 @@ class Server
     std::vector<Client>             clients_  = {};
     std::unique_ptr<ISocket>        socket_;
     std::unique_ptr<SocketSelector> selector_;
+    std::thread                     gameThread_;
+    std::thread                     networkThread_;
 
     // methods
     void                  receive();
@@ -48,4 +51,8 @@ class Server
     void                  handleData(ReceivedInfos infos) const noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
     void                  checkData() noexcept;
+
+    // thread methods
+    void communicate() noexcept;
+    void gameLoop() const noexcept;
 };

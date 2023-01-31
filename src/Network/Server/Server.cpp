@@ -8,8 +8,7 @@
 #include "Server.hpp"
 
 #include <algorithm>
-#include <iostream> //TODO:A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-#include <thread>
+#include <iostream>
 
 #include "Error.hpp"
 #include "SocketFactory.hpp"
@@ -18,9 +17,10 @@
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
     , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
+    , gameThread_([&]() { gameLoop(); })
+    , networkThread_([&]() { communicate(); })
 {
     selector_->add(*socket_, true, true, false);
-    std::cout << "Server created" << std::endl; // TODO: remove when code is functionnal
 }
 
 void Server::stop() noexcept
@@ -35,17 +35,12 @@ void Server::reset() noexcept
 
 void Server::run()
 {
-    // std::string buffer;
-    // std::thread input_task([&]() {
-    //     while (true) {
-    //         std::cin >> buffer;
-    //         RawData tmp;
-    //         std::copy(buffer.begin(), buffer.end(), std::back_inserter(tmp));
+    gameThread_.join();
+    networkThread_.join();
+}
 
-    //         for (auto& client : clients_) { client.dataToSend.push(tmp); }
-    //     }
-    // });
-
+void Server::communicate() noexcept
+{
     while (looping_) {
         try {
             selector_->select(true, true, false);
@@ -55,7 +50,11 @@ void Server::run()
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
     }
-    // input_task.join();
+}
+
+void Server::gameLoop() const noexcept
+{
+    // TODO : insert game loop
 }
 
 bool Server::isKnownClient(Address address) const
@@ -75,12 +74,8 @@ void Server::receive()
 {
     try {
         ReceivedInfos infoReceived = socket_->receive();
-        if (!isKnownClient(infoReceived.address)) {
-            std::cout << "NEW CLIENT" << std::endl; // TODO: A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-            addClient(infoReceived.address);
-        }
+        if (!isKnownClient(infoReceived.address)) { addClient(infoReceived.address); }
         handleData(infoReceived);
-        std::cout << "END OF RECEPTION" << std::endl; // TODO: remove
     } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
     }
