@@ -10,6 +10,10 @@ add_library(
     src/WindowsSocketSelector.cpp
 )
 
+if(WIN32)
+  target_link_libraries(NetworkLib wsock32 ws2_32)
+endif()
+
 target_include_directories(NetworkLib PUBLIC include)
 target_link_libraries(NetworkLib Error)
 set_property(TARGET NetworkLib PROPERTY CXX_STANDARD 20)
