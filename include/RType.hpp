@@ -8,12 +8,11 @@
 #pragma once
 
 #include <memory>
-#include <vector>
 
-#include "Entity.hpp"
 #include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
 #include "HitboxSystem.hpp"
+#include "SerializerSystem.hpp"
 #include "TransformComponent.hpp"
 
 class RType
@@ -28,6 +27,7 @@ class RType
     RType& operator=(RType&& rhs) noexcept      = delete;
 
   private:
-    std::unique_ptr<EntityManager> _entityManager;
-    std::unique_ptr<HitboxSystem>  _hitboxSystem;
+    std::unique_ptr<EntityManager>    _entityManager;
+    std::unique_ptr<HitboxSystem>     _hitboxSystem;
+    std::unique_ptr<SerializerSystem> _serializerSystem;
 };

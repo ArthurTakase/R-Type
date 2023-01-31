@@ -43,5 +43,5 @@ class EntityManager
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
 
   private:
-    size_t get_id();
+    size_t createId();
 };

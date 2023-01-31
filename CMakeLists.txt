@@ -33,6 +33,7 @@ set(
   src/ECS/Components/StatComponent.cpp
   src/ECS/Components/DrawableComponent.cpp
   src/ECS/Systems/HitboxSystem.cpp
+  src/ECS/Systems/SerializerSystem.cpp
   src/ECS/Systems/MouvementSystem.cpp
 )
 
@@ -119,3 +120,10 @@ if (DEFINED TESTS)
   target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
 
 endif()
+
+# ------------------------------
+# SFML
+# ------------------------------
+
+add_subdirectory(src/Lib)
+target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
