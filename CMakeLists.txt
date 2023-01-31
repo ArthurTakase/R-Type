@@ -53,12 +53,18 @@ target_include_directories(${PROJECT_NAME} PRIVATE include/SFML)
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 
+# ------------------------------
+# SFML
+# ------------------------------
+
+add_subdirectory(src/Lib)
+target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
+
+# ------------------------------
+# TESTS
+# ------------------------------
 
 if (DEFINED TESTS)
-  # ------------------------------
-  # Fetch GoogleTest
-  # ------------------------------
-
   include(FetchContent)
   FetchContent_Declare(
     googletest
@@ -78,10 +84,6 @@ if (DEFINED TESTS)
     set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
   endif()
 
-  # ------------------------------
-  # TESTS
-  # ------------------------------
-
   # Sources
   set(
     TESTS_SRC
@@ -96,6 +98,9 @@ if (DEFINED TESTS)
     tests/StatComponent_t.cpp
     tests/MouvementSystem_t.cpp
     tests/DrawableComponent_t.cpp
+    tests/Sprite_t.cpp
+    tests/Window_t.cpp
+    tests/Lib_t.cpp
   )
 
   # Merge
@@ -112,6 +117,7 @@ if (DEFINED TESTS)
 
   # Options
   target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
+  target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
 
 endif()
 

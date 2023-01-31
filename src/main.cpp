@@ -16,7 +16,8 @@
 
 int main()
 {
-    auto  lib    = std::make_unique<Lib>();
+    auto lib = std::make_unique<Lib>();
+    lib->getWindow().open(800, 600, "R-Type");
     auto& window = lib->getWindow();
 
     while (window.isOpen()) {

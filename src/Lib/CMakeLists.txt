@@ -21,6 +21,7 @@ add_library(
     ${PROJECT_NAME}
     Lib.cpp
     Window.cpp
+    Sprite.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
