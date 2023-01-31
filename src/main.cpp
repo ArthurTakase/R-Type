@@ -11,8 +11,8 @@
 #include "Entity.hpp"
 #include "Error.hpp"
 #include "HitboxComponent.hpp"
-#include "PositionComponent.hpp"
 #include "RType.hpp"
+#include "TransformComponent.hpp"
 
 int main()
 {

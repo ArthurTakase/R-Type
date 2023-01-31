@@ -5,7 +5,6 @@ on: push
 jobs:
   Linux:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
@@ -29,37 +28,35 @@ jobs:
             ${{ runner.os }}-
   Windows:
     runs-on: windows-latest
-    continue-on-error: true
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-      - name: Setup MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-      - name: Add msbuild to PATH
-        uses: microsoft/setup-msbuild@v1.0.2
-      - name: Setup cmake
-        uses: jwlawson/actions-setup-cmake@v1.13
-        with:
-          cmake-version: "3.17.x"
-      - name: Install Ninja
-        uses: seanmiddleditch/gha-setup-ninja@master
-      - name: Create build folder
-        run: mkdir build
-      - name: Launch cmake
-        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
-      - name: Launch build
-        run: cmake --build build
-      - name: Cache build
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: "3.17.x"
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Create build folder
+      run: mkdir build
+    - name: Launch cmake
+      run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    - name: Launch build
+      run: cmake --build build
+    - name: Cache build
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
   Tests:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     needs: [Linux, Windows]
     steps:
       - name: Checkout code
@@ -75,7 +72,7 @@ jobs:
       - name: tests
         run: ./build/runTests
       - name: install gcovr
-        run: yum install -y gcovr
+        run: sudo apt-get install -y gcovr
       - name: launch coverage
         run: gcovr -r . --exclude "build/" --exclude "tests/"
   Doxygen:
@@ -124,8 +121,8 @@ jobs:
         uses: thedoctor0/zip-release@0.7.0
         with:
           path: build
-          type: "zip"
-          filename: "windows.zip"
+          type: 'zip'
+          filename: 'windows.zip'
       - name: Upload Build
         uses: svenstaro/upload-release-action@v2
         with:
@@ -134,7 +131,6 @@ jobs:
           overwrite: true
   ReleaseLinux:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     needs: [Tests, Linux]
     if: github.ref == 'refs/heads/main'
     permissions:
@@ -152,8 +148,8 @@ jobs:
         uses: thedoctor0/zip-release@0.7.0
         with:
           path: build
-          type: "zip"
-          filename: "linux.zip"
+          type: 'zip'
+          filename: 'linux.zip'
       - name: Upload Build
         uses: svenstaro/upload-release-action@v2
         with:
