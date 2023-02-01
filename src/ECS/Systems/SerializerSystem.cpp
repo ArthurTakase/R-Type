@@ -2,6 +2,7 @@
 
 #include <bitset>
 #include <iostream>
+#include <memory>
 
 #include "DrawableComponent.hpp"
 #include "EntityIterator.hpp"
@@ -51,7 +52,7 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
     x <<= ENTITYSIZE - index;
     index += YSIZE;
     y <<= ENTITYSIZE - index;
-    index += IDSPRiTESIZE;
+    index += IDSPRITESIZE;
     idSprite <<= ENTITYSIZE - index;
     index += WIDTHSIZE;
     width <<= ENTITYSIZE - index;
@@ -79,4 +80,19 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
 std::bitset<INPUTSIZE> SerializerSystem::Serialize(int& keyCode) const noexcept
 {
     return std::bitset<INPUTSIZE>(keyCode);
+}
+
+/**
+ * De Serialize
+ *
+ * @param The keycode you want to serialize
+ *
+ * @return A bitset of the keycode
+ */
+std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE>) const
+{
+    // TODO find a way to add
+    std::unique_ptr<Entity> entity = std::make_unique<Entity>(0);
+
+    return entity;
 }

@@ -15,7 +15,7 @@ namespace Serializer
 #define ENTITYSIZE 88
 #define XSIZE 16
 #define YSIZE 16
-#define IDSPRiTESIZE 8
+#define IDSPRITESIZE 8
 #define WIDTHSIZE 8
 #define HEIGHTSIZE 8
 #define SCALEXSIZE 8
@@ -42,6 +42,8 @@ class SerializerSystem
 
     std::bitset<ENTITYSIZE> Serialize(std::unique_ptr<Entity> const& entity) const noexcept;
     std::bitset<INPUTSIZE>  Serialize(int& keyCode) const noexcept;
+    std::unique_ptr<Entity> DeSerialize(std::bitset<ENTITYSIZE>) const;
+    int                     DeSerialize(std::bitset<INPUTSIZE>) const;
 
     void run() noexcept;
 
