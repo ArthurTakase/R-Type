@@ -5,9 +5,21 @@
 ** main
 */
 
+#include <bitset>
+#include <iostream>
+#include <memory>
+#include <vector>
+
+#include "DrawableComponent.hpp"
+#include "HitboxComponent.hpp"
+#include "Lib.hpp"
 #include "RType.hpp"
+#include "SerializerSystem.hpp"
+#include "TransformComponent.hpp"
 
 int main()
 {
-    auto lib = std::make_unique<RType>();
+    RType rtype;
+
+    return 0;
 }

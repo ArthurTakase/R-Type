@@ -31,52 +31,32 @@ RType::RType()
     // _entityManager->getEntities().back()->addComponent<DrawableComponent>(23, 32, 140, 220, 3);
 
     // Serializer
+    std::unique_ptr<Entity> entity    = std::make_unique<Entity>(_entityManager->createId());
+    auto                    transform = TransformComponent(234, 69);
+    auto                    drawable  = DrawableComponent(23, 32, 140, 220, 3);
+    entity->addComponent(transform);
+    entity->addComponent(drawable);
     _serializerSystem = std::make_unique<SerializerSystem>(_entityManager);
 
-    auto data = _serializerSystem->Serialize(_entityManager->getEntities().back());
+    auto data = _serializerSystem->Serialize(entity);
     std::cout << data << std::endl;
+    _serializerSystem->DeSerialize(data);
 
     // Loop
-    while (window.isOpen()) {
-        window.clear();
+    // while (window.isOpen()) {
+    //     window.clear();
 
-        auto key = window.getKeyPressed();
+    //     auto key = window.getKeyPressed();
 
-        if (key == WINDOW_KEY::QUIT) {
-            window.close();
-            break;
-        }
+    //     if (key == WINDOW_KEY::QUIT) {
+    //         window.close();
+    //         break;
+    //     }
 
-        _serializerSystem->run();
+    //     _serializerSystem->run();
 
-        window.refresh();
-    }
-
-    auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createPlayer();
-
-    auto it = EntityIterator<HitboxComponent, TransformComponent>(manager->getEntities());
-
-    std::cout << "Part 1" << std::endl;
-
-    while (!it.isEnd()) {
-        std::cout << it.get()->getId() << std::endl;
-        ++it;
-    }
-    it.reset();
-
-    std::cout << "Part 2" << std::endl;
-
-    while (!it.isEnd()) {
-        std::cout << it.get()->getId() << std::endl;
-        ++it;
-    }
-    it.reset();
+    //     window.refresh();
+    // }
 }
 
 RType::~RType() noexcept {}

@@ -95,21 +95,41 @@ std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> da
     std::bitset<ENTITYSIZE> bigbit(
         "0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111");
     std::bitset<ENTITYSIZE> smallbit(
-        "0000000000000000000000000000000000000000000000000000000000000000000000000000000111111111");
+        "0000000000000000000000000000000000000000000000000000000000000000000000000000000011111111");
     std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
 
-    int x        = ((data >> (ENTITYSIZE - XSIZE)) & bigbit).to_ulong();
-    int y        = ((data >> (ENTITYSIZE - YSIZE)) & bigbit).to_ulong();
-    int idSprite = ((data >> (ENTITYSIZE - IDSPRITESIZE) & smallbit)).to_ulong();
-    int width    = ((data >> (ENTITYSIZE - WIDTHSIZE) & smallbit)).to_ulong();
-    int heigth   = ((data >> (ENTITYSIZE - HEIGHTSIZE) & smallbit)).to_ulong();
-    int scaleX   = ((data >> (ENTITYSIZE - SCALEXSIZE) & smallbit)).to_ulong();
-    int scaleY   = ((data >> (ENTITYSIZE - SCALEYSIZE) & smallbit)).to_ulong();
-    int offsetX  = ((data >> (ENTITYSIZE - OFFSETXSIZE) & smallbit)).to_ulong();
-    int offsetY  = ((data >> (ENTITYSIZE - OFFSETYSIZE) & smallbit)).to_ulong();
+    int index = 0;
+    int x     = ((data >> (ENTITYSIZE - (index + XSIZE))) & bigbit).to_ulong();
+    index += XSIZE;
+    int y = ((data >> (ENTITYSIZE - (index + YSIZE))) & bigbit).to_ulong();
+    index += YSIZE;
+    int idSprite = ((data >> (ENTITYSIZE - (index + IDSPRITESIZE)) & smallbit)).to_ulong();
+    index += IDSPRITESIZE;
+    int width = ((data >> (ENTITYSIZE - (index + WIDTHSIZE)) & smallbit)).to_ulong();
+    index += WIDTHSIZE;
+    int heigth = ((data >> (ENTITYSIZE - (index + HEIGHTSIZE)) & smallbit)).to_ulong();
+    index += HEIGHTSIZE;
+    int scaleX = ((data >> (ENTITYSIZE - (index + SCALEXSIZE)) & smallbit)).to_ulong();
+    index += SCALEXSIZE;
+    int scaleY = ((data >> (ENTITYSIZE - (index + SCALEYSIZE)) & smallbit)).to_ulong();
+    index += SCALEYSIZE;
+    int offsetX = ((data >> (ENTITYSIZE - (index + OFFSETXSIZE)) & smallbit)).to_ulong();
+    index += OFFSETXSIZE;
+    int offsetY = ((data >> (ENTITYSIZE - (index + OFFSETYSIZE)) & smallbit)).to_ulong();
+
+    std::cout << x << std::endl;
+    std::cout << y << std::endl;
+    std::cout << idSprite << std::endl;
+    std::cout << width << std::endl;
+    std::cout << heigth << std::endl;
+    std::cout << scaleX << std::endl;
+    std::cout << scaleY << std::endl;
+    std::cout << offsetX << std::endl;
+    std::cout << offsetY << std::endl;
 
     auto transform = TransformComponent(x, y);
     auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
+    transform.setScale(scaleX, scaleY);
 
     entity->addComponent(transform);
     entity->addComponent(drawable);
