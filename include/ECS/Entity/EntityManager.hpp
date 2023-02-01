@@ -34,6 +34,7 @@ class EntityManager
     void createPlayer() noexcept;
     void createEnemy() noexcept;
 
+    size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;
     Entity*                               getEntity(size_t id) const noexcept;
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
@@ -41,7 +42,4 @@ class EntityManager
 
   private:
     std::vector<std::unique_ptr<Entity>> _entities;
-
-  private:
-    size_t createId();
 };

@@ -90,10 +90,29 @@ std::bitset<INPUTSIZE> SerializerSystem::Serialize(int& keyCode) const noexcept
  *
  * @return A bitset of the keycode
  */
-std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE>) const
+std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
 {
-    // TODO find a way to add
-    std::unique_ptr<Entity> entity = std::make_unique<Entity>(0);
+    std::bitset<ENTITYSIZE> bigbit(
+        "0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111");
+    std::bitset<ENTITYSIZE> smallbit(
+        "0000000000000000000000000000000000000000000000000000000000000000000000000000000111111111");
+    std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
+
+    int x        = ((data >> (ENTITYSIZE - XSIZE)) & bigbit).to_ulong();
+    int y        = ((data >> (ENTITYSIZE - YSIZE)) & bigbit).to_ulong();
+    int idSprite = ((data >> (ENTITYSIZE - IDSPRITESIZE) & smallbit)).to_ulong();
+    int width    = ((data >> (ENTITYSIZE - WIDTHSIZE) & smallbit)).to_ulong();
+    int heigth   = ((data >> (ENTITYSIZE - HEIGHTSIZE) & smallbit)).to_ulong();
+    int scaleX   = ((data >> (ENTITYSIZE - SCALEXSIZE) & smallbit)).to_ulong();
+    int scaleY   = ((data >> (ENTITYSIZE - SCALEYSIZE) & smallbit)).to_ulong();
+    int offsetX  = ((data >> (ENTITYSIZE - OFFSETXSIZE) & smallbit)).to_ulong();
+    int offsetY  = ((data >> (ENTITYSIZE - OFFSETYSIZE) & smallbit)).to_ulong();
+
+    auto transform = TransformComponent(x, y);
+    auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
+
+    entity->addComponent(transform);
+    entity->addComponent(drawable);
 
     return entity;
 }

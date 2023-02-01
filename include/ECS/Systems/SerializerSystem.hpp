@@ -43,7 +43,7 @@ class SerializerSystem
 
     std::bitset<ENTITYSIZE> Serialize(std::unique_ptr<Entity> const& entity) const noexcept;
     std::bitset<INPUTSIZE>  Serialize(int& keyCode) const noexcept;
-    std::unique_ptr<Entity> DeSerialize(std::bitset<ENTITYSIZE>) const;
+    std::unique_ptr<Entity> DeSerialize(std::bitset<ENTITYSIZE> data) const;
     int                     DeSerialize(std::bitset<INPUTSIZE>) const;
 
     void run() noexcept;

@@ -89,7 +89,7 @@ std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
  *
  * @return The id of the last entity in the vector plus one.
  */
-size_t EntityManager::createId()
+size_t EntityManager::createId() const noexcept
 {
     if (_entities.empty()) { return 0; }
     return _entities[_entities.size() - 1]->getId() + 1;
