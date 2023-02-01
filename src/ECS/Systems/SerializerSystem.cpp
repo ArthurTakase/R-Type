@@ -10,8 +10,9 @@
 
 using namespace Serializer;
 
-SerializerSystem::SerializerSystem(std::vector<std::unique_ptr<Entity>>& entities)
-    : _it(EntityIterator<TransformComponent, DrawableComponent>(entities))
+SerializerSystem::SerializerSystem(std::unique_ptr<EntityManager>& manager) noexcept
+    : _manager(manager)
+    , _it(EntityIterator<TransformComponent, DrawableComponent>(manager->getEntities()))
 {
 }
 

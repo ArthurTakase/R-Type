@@ -19,8 +19,9 @@
  *
  * @param it The iterator to use for the system.
  */
-HitboxSystem::HitboxSystem(std::vector<std::unique_ptr<Entity>>& entities)
-    : _it(EntityIterator<TransformComponent, HitboxComponent>(entities))
+HitboxSystem::HitboxSystem(std::unique_ptr<EntityManager>& manager) noexcept
+    : _manager(manager)
+    , _it(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
 {
 }
 

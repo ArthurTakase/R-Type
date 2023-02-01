@@ -23,7 +23,7 @@ TEST(MouvementSystem_, run)
     manager->getEntity(1)->getComponent<MouvementComponent>()->setDirY(1);
     manager->getEntity(1)->getComponent<MouvementComponent>()->setDirX(0);
 
-    auto system = std::make_unique<MouvementSystem>(manager->getEntities());
+    auto system = std::make_unique<MouvementSystem>(manager);
 
     system->run();
 

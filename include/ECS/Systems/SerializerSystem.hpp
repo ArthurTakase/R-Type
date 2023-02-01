@@ -5,6 +5,7 @@
 
 #include "DrawableComponent.hpp"
 #include "EntityIterator.hpp"
+#include "EntityManager.hpp"
 #include "TransformComponent.hpp"
 
 /**
@@ -32,7 +33,7 @@ namespace Serializer
 class SerializerSystem
 {
   public:
-    SerializerSystem(std::vector<std::unique_ptr<Entity>>& entities);
+    SerializerSystem(std::unique_ptr<EntityManager>& manager) noexcept;
     virtual ~SerializerSystem() noexcept = default;
 
     SerializerSystem(const SerializerSystem& other)                = delete;
@@ -50,4 +51,5 @@ class SerializerSystem
   protected:
   private:
     EntityIterator<TransformComponent, DrawableComponent> _it;
+    std::unique_ptr<EntityManager>&                       _manager;
 };

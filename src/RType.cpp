@@ -21,36 +21,36 @@ RType::RType()
     , _hitboxSystem(nullptr)
     , _serializerSystem(nullptr)
 {
-    // // Window
-    // auto lib = std::make_unique<Lib>();
-    // lib->getWindow().open(800, 600, "R-Type");
-    // auto& window = lib->getWindow();
+    // Window
+    auto lib = std::make_unique<Lib>();
+    lib->getWindow().open(800, 600, "R-Type");
+    auto& window = lib->getWindow();
 
-    // // EntityManager
-    // _entityManager->createPlayer();
-    // // _entityManager->getEntities().back()->addComponent<DrawableComponent>(23, 32, 140, 220, 3);
+    // EntityManager
+    _entityManager->createPlayer();
+    // _entityManager->getEntities().back()->addComponent<DrawableComponent>(23, 32, 140, 220, 3);
 
-    // // Serializer
-    // _serializerSystem = std::make_unique<SerializerSystem>(_entityManager->getEntities());
+    // Serializer
+    _serializerSystem = std::make_unique<SerializerSystem>(_entityManager);
 
-    // auto data = _serializerSystem->Serialize(_entityManager->getEntities().back());
-    // std::cout << data << std::endl;
+    auto data = _serializerSystem->Serialize(_entityManager->getEntities().back());
+    std::cout << data << std::endl;
 
-    // // Loop
-    // while (window.isOpen()) {
-    //     window.clear();
+    // Loop
+    while (window.isOpen()) {
+        window.clear();
 
-    //     auto key = window.getKeyPressed();
+        auto key = window.getKeyPressed();
 
-    //     if (key == WINDOW_KEY::QUIT) {
-    //         window.close();
-    //         break;
-    //     }
+        if (key == WINDOW_KEY::QUIT) {
+            window.close();
+            break;
+        }
 
-    //     _serializerSystem->run();
+        _serializerSystem->run();
 
-    //     window.refresh();
-    // }
+        window.refresh();
+    }
 
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
