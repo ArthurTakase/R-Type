@@ -117,16 +117,6 @@ std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> da
     index += OFFSETXSIZE;
     int offsetY = ((data >> (ENTITYSIZE - (index + OFFSETYSIZE)) & smallbit)).to_ulong();
 
-    std::cout << x << std::endl;
-    std::cout << y << std::endl;
-    std::cout << idSprite << std::endl;
-    std::cout << width << std::endl;
-    std::cout << heigth << std::endl;
-    std::cout << scaleX << std::endl;
-    std::cout << scaleY << std::endl;
-    std::cout << offsetX << std::endl;
-    std::cout << offsetY << std::endl;
-
     auto transform = TransformComponent(x, y);
     auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
     transform.setScale(scaleX, scaleY);
