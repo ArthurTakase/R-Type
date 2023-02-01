@@ -94,3 +94,8 @@ size_t EntityManager::createId()
     if (_entities.empty()) { return 0; }
     return _entities[_entities.size() - 1]->getId() + 1;
 }
+
+void EntityManager::addEntity(std::unique_ptr<Entity>& entity) noexcept
+{
+    _entities.emplace_back(std::move(entity));
+}
