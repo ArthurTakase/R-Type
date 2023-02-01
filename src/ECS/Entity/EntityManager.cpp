@@ -95,6 +95,11 @@ size_t EntityManager::createId()
     return _entities[_entities.size() - 1]->getId() + 1;
 }
 
+/**
+ * Add an entity to the entities list
+ *
+ * @param entity The entity you wish to add
+ */
 void EntityManager::addEntity(std::unique_ptr<Entity>& entity) noexcept
 {
     _entities.emplace_back(std::move(entity));
