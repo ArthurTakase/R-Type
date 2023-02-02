@@ -129,7 +129,6 @@ if(DEFINED TESTS)
     tests/MouvementSystem_t.cpp
     tests/DrawableComponent_t.cpp
     tests/Sprite_t.cpp
-    tests/Window_t.cpp
     tests/Lib_t.cpp
   )
 

@@ -24,7 +24,7 @@ enum WINDOW_KEY { QUIT = 255 };
 class Window
 {
   public:
-    Window() noexcept                    = default;
+    Window() noexcept;
     ~Window() noexcept                   = default;
     Window(const Window& other) noexcept = delete;
     Window(Window&& other) noexcept      = delete;
