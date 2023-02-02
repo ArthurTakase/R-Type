@@ -26,16 +26,6 @@ endif()
 set(
   RTYPE_SRC
   src/RType.cpp
-  src/ECS/Entity/Entity.cpp
-  src/ECS/Entity/EntityManager.cpp
-  src/ECS/Components/TransformComponent.cpp
-  src/ECS/Components/HitboxComponent.cpp
-  src/ECS/Components/MouvementComponent.cpp
-  src/ECS/Components/StatComponent.cpp
-  src/ECS/Components/DrawableComponent.cpp
-  src/ECS/Systems/HitboxSystem.cpp
-  src/ECS/Systems/MouvementSystem.cpp
-  src/ECS/Systems/SerializerSystem.cpp
 )
 
 # ------------------------------
@@ -89,6 +79,12 @@ set_property(TARGET server PROPERTY CXX_STANDARD 20)
 # ------------------------------
 add_subdirectory(src/Lib)
 target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
+
+# ------------------------------
+# ECS
+# ------------------------------
+add_subdirectory(src/ECS)
+target_link_libraries(${PROJECT_NAME} ECSEncapsulation)
 
 # ------------------------------
 # TESTS
@@ -149,5 +145,6 @@ if(DEFINED TESTS)
   # Options
   target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
   target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
+  target_link_libraries(${TEST_BUILD} ECSEncapsulation)
 
 endif()
