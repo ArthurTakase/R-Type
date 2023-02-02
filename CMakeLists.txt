@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 3.17)
 project(R-Type)
 
+# ------------------------------
+# R-TYPE
+# ------------------------------
+
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-g")
 
@@ -18,77 +22,76 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
 
-# ------------------------------
-# R-TYPE
-# ------------------------------
-
-# Sources
-set(
-  RTYPE_SRC
-  src/RType.cpp
-)
-
-# ------------------------------
-# SERVER
-# ------------------------------
-
-# Includes
+# Libs
 add_subdirectory(Error)
 add_subdirectory(NetworkLib)
+add_subdirectory(src/Lib)
+add_subdirectory(src/ECS)
 
-set(RTYPE_SERVER
+# ------------------------------
+# Server
+# ------------------------------
+
+set(RTYPE_SERVER r-type_server)
+
+set(RTYPE_SERVER_SRC
   src/Network/Server/Server.cpp
   src/Network/Server/main.cpp
 )
 
-# Merge
-add_executable(${PROJECT_NAME} src/main.cpp ${RTYPE_SRC})
-add_executable(server ${RTYPE_SERVER})
-
-target_link_libraries(${PROJECT_NAME} Error)
-target_link_libraries(server Error)
-target_link_libraries(server NetworkLib)
+add_executable(${RTYPE_SERVER} ${RTYPE_SERVER_SRC})
 
 if(WIN32)
-  target_link_libraries(server wsock32 ws2_32)
+  target_link_libraries(${RTYPE_SERVER} wsock32 ws2_32)
 endif()
 
-# Ajouter ici les dossiers contenants les .hpp de l'exec du R-Type
-target_include_directories(${PROJECT_NAME} PRIVATE include)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Entity)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Components)
-target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Systems)
-target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
-target_include_directories(${PROJECT_NAME} PRIVATE include/SFML)
-target_include_directories(${PROJECT_NAME} PRIVATE include/Network)
+target_link_libraries(${RTYPE_SERVER} Error)
+target_link_libraries(${RTYPE_SERVER} NetworkLib)
 
-# Ajouter ici les dossiers contenants les .hpp de l'exec du Server
-target_include_directories(server PRIVATE include/Network)
-target_include_directories(server PRIVATE include/Tools)
+set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
+target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
 
-# Options
-target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
-target_compile_options(server PUBLIC ${CXX_FLAGS})
+target_include_directories(${RTYPE_SERVER} PRIVATE include/Network)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/Network/Server)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
 
-set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
-set_property(TARGET server PROPERTY CXX_STANDARD 20)
 
 # ------------------------------
-# SFML
+# Client
 # ------------------------------
-add_subdirectory(src/Lib)
-target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
 
-# ------------------------------
-# ECS
-# ------------------------------
-add_subdirectory(src/ECS)
-target_link_libraries(${PROJECT_NAME} ECSEncapsulation)
+set(RTYPE_CLIENT r-type_client)
+
+set(RTYPE_CLIENT_SRC
+  src/Network/Client/RClient.cpp
+  src/Network/Client/main.cpp
+)
+
+add_executable(${RTYPE_CLIENT} src/Network/Client/main.cpp ${RTYPE_CLIENT_SRC})
+
+target_include_directories(${RTYPE_CLIENT} PRIVATE include)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Tools)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/Client)
+target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
+
+target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
+set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
+
+target_link_libraries(${RTYPE_CLIENT} Error)
+target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
+target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
+
 
 # ------------------------------
 # TESTS
 # ------------------------------
+
 if(DEFINED TESTS)
   include(FetchContent)
   FetchContent_Declare(
