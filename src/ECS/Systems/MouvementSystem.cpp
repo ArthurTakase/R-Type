@@ -16,8 +16,9 @@
  *
  * @param it The iterator that will be used to iterate over the entities.
  */
-MouvementSystem::MouvementSystem(EntityIterator<TransformComponent, MouvementComponent> it)
-    : _it(EntityIterator<TransformComponent, MouvementComponent>(it))
+MouvementSystem::MouvementSystem(std::unique_ptr<EntityManager>& manager) noexcept
+    : _manager(manager)
+    , _it(EntityIterator<TransformComponent, MouvementComponent>(manager->getEntities()))
 {
 }
 
@@ -38,4 +39,5 @@ void MouvementSystem::run()
         transform->setX(transform->getX() + (mouvement->getSpeed() * mouvement->getDirX()));
         transform->setY(transform->getY() + (mouvement->getSpeed() * mouvement->getDirY()));
     }
+    _it.reset();
 }

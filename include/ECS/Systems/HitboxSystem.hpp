@@ -8,6 +8,7 @@
 #pragma once
 
 #include "EntityIterator.hpp"
+#include "EntityManager.hpp"
 #include "HitboxComponent.hpp"
 #include "TransformComponent.hpp"
 
@@ -17,7 +18,7 @@
 class HitboxSystem
 {
   public:
-    HitboxSystem(EntityIterator<TransformComponent, HitboxComponent> it);
+    HitboxSystem(std::unique_ptr<EntityManager>& manager) noexcept;
     ~HitboxSystem() noexcept                         = default;
     HitboxSystem(const HitboxSystem& other) noexcept = default;
     HitboxSystem(HitboxSystem&& other) noexcept      = delete;
@@ -30,4 +31,5 @@ class HitboxSystem
 
   private:
     EntityIterator<TransformComponent, HitboxComponent> _it;
+    std::unique_ptr<EntityManager>&                     _manager;
 };

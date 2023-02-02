@@ -15,6 +15,8 @@
 
 TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 {
+    std::string captured_output;
+
     auto manager = std::make_unique<EntityManager>();
     manager->createPlayer();
     manager->createEnemy();
@@ -25,10 +27,23 @@ TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 
     auto it = EntityIterator<HitboxComponent, TransformComponent>(manager->getEntities());
 
+    testing::internal::CaptureStdout();
+
     while (!it.isEnd()) {
-        EXPECT_TRUE((it.get()->hasComponents<HitboxComponent, TransformComponent>()));
+        std::cout << it.get()->getId() << std::endl;
         ++it;
     }
+    it.reset();
+
+    while (!it.isEnd()) {
+        std::cout << it.get()->getId() << std::endl;
+        ++it;
+    }
+    it.reset();
+
+    captured_output = testing::internal::GetCapturedStdout();
+
+    EXPECT_EQ(captured_output, "0\n3\n5\n0\n3\n5\n");
 }
 
 TEST(EntityIterator, search_position_and_check_for_hitbox)
@@ -44,4 +59,5 @@ TEST(EntityIterator, search_position_and_check_for_hitbox)
         EXPECT_FALSE((it.get()->hasComponents<HitboxComponent>()));
         ++it;
     }
+    it.reset();
 }

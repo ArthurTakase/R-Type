@@ -40,6 +40,8 @@ class EntityIterator
 
     bool isEnd() { return idx >= it.size(); }
 
+    void reset() { idx = 0; }
+
   private:
     void skip()
     {

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "EntityIterator.hpp"
+#include "EntityManager.hpp"
 #include "MouvementComponent.hpp"
 #include "TransformComponent.hpp"
 
@@ -18,7 +19,7 @@
 class MouvementSystem
 {
   public:
-    MouvementSystem(EntityIterator<TransformComponent, MouvementComponent> it);
+    MouvementSystem(std::unique_ptr<EntityManager>& manager) noexcept;
     ~MouvementSystem() noexcept                            = default;
     MouvementSystem(const MouvementSystem& other) noexcept = default;
     MouvementSystem(MouvementSystem&& other) noexcept      = delete;
@@ -30,4 +31,5 @@ class MouvementSystem
 
   private:
     EntityIterator<TransformComponent, MouvementComponent> _it;
+    std::unique_ptr<EntityManager>&                        _manager;
 };
