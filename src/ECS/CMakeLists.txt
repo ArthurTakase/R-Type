@@ -29,6 +29,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/.
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include/ECS/Components)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include/ECS/Systems)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Tools)
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)
 
 include_directories(${CMAKE_BINARY_DIR}/../../include)
 include_directories(${CMAKE_BINARY_DIR}/../../include/ECS)
@@ -36,3 +37,4 @@ include_directories(${CMAKE_BINARY_DIR}/../../include/ECS/Entity)
 include_directories(${CMAKE_BINARY_DIR}/../../include/ECS/Components)
 include_directories(${CMAKE_BINARY_DIR}/../../include/ECS/Systems)
 include_directories(${CMAKE_BINARY_DIR}/../../include/Tools)
+include_directories(${CMAKE_BINARY_DIR}/../../include/Lib)

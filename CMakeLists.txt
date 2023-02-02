@@ -33,13 +33,13 @@ add_subdirectory(src/ECS)
 # ------------------------------
 
 set(RTYPE_SERVER r-type_server)
+set(SERVER_DIR src/Network/Server)
 
 set(RTYPE_SERVER_SRC
-  src/Network/Server/Server.cpp
-  src/Network/Server/main.cpp
+  ${SERVER_DIR}/Server.cpp
 )
 
-add_executable(${RTYPE_SERVER} ${RTYPE_SERVER_SRC})
+add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})
 
 if(WIN32)
   target_link_libraries(${RTYPE_SERVER} wsock32 ws2_32)
@@ -61,13 +61,13 @@ target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
 # ------------------------------
 
 set(RTYPE_CLIENT r-type_client)
+set(CLIENT_DIR src/Network/Client)
 
 set(RTYPE_CLIENT_SRC
-  src/Network/Client/RClient.cpp
-  src/Network/Client/main.cpp
+  ${CLIENT_DIR}/RClient.cpp
 )
 
-add_executable(${RTYPE_CLIENT} src/Network/Client/main.cpp ${RTYPE_CLIENT_SRC})
+add_executable(${RTYPE_CLIENT} ${CLIENT_DIR}/main.cpp ${RTYPE_CLIENT_SRC})
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
@@ -133,7 +133,11 @@ if(DEFINED TESTS)
   )
 
   # Merge
-  add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SRC})
+  add_executable(${TEST_BUILD}
+    ${TESTS_SRC}
+    ${RTYPE_SERVER_SRC}
+    ${RTYPE_CLIENT_SRC}
+  )
 
   # Includes
   target_include_directories(${TEST_BUILD} PRIVATE include)
@@ -143,10 +147,17 @@ if(DEFINED TESTS)
   target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Systems)
   target_include_directories(${TEST_BUILD} PRIVATE include/Tools)
   target_include_directories(${TEST_BUILD} PRIVATE include/Lib)
+  target_include_directories(${TEST_BUILD} PRIVATE include/Network)
+  target_include_directories(${TEST_BUILD} PRIVATE include/Network/Server)
+  target_include_directories(${TEST_BUILD} PRIVATE include/Network/Client)
+  target_include_directories(${TEST_BUILD} PRIVATE NetworkLib/include)
+  target_include_directories(${TEST_BUILD} PRIVATE Error)
 
   # Options
   target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
   target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
   target_link_libraries(${TEST_BUILD} ECSEncapsulation)
+  target_link_libraries(${TEST_BUILD} Error)
+  target_link_libraries(${TEST_BUILD} NetworkLib)
 
 endif()
