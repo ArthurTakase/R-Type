@@ -11,7 +11,7 @@ launch:
 valgrind:
     just build && valgrind --leak-check=full ./build/R-Type
 tests:
-    just debug && ./build/runTests
+    mkdir -p build && cd build && cmake -DTESTS=ON -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && ./build/runTests
 coverage:
     just tests && gcovr -r . --exclude "build/" --exclude "tests/"
 clear:

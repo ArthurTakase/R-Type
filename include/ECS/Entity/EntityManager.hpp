@@ -31,17 +31,15 @@ class EntityManager
     EntityManager& operator=(const EntityManager& rhs) noexcept = delete;
     EntityManager& operator=(EntityManager&& rhs) noexcept      = delete;
 
-  private:
-    std::vector<std::unique_ptr<Entity>> _entities;
-
-  public:
     void createPlayer() noexcept;
     void createEnemy() noexcept;
 
+    size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;
     Entity*                               getEntity(size_t id) const noexcept;
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
+    void                                  addEntity(std::unique_ptr<Entity>& entity) noexcept;
 
   private:
-    size_t get_id();
+    std::vector<std::unique_ptr<Entity>> _entities;
 };

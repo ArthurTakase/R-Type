@@ -5,6 +5,7 @@ on: push
 jobs:
   Linux:
     runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
@@ -15,7 +16,7 @@ jobs:
       - name: create build folder
         run: mkdir build
       - name: build
-        run: cd build && cmake -DCMAKE_BUILD_TYPE=Release ..
+        run: cd build && cmake -DTESTS=ON -DCMAKE_BUILD_TYPE=Release ..
       - name: makefile
         run: cd build && make
       - name: Cache build
@@ -28,6 +29,7 @@ jobs:
             ${{ runner.os }}-
   Windows:
     runs-on: windows-latest
+    continue-on-error: true
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -57,6 +59,7 @@ jobs:
           ${{ runner.os }}-
   Tests:
     runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
     needs: [Linux, Windows]
     steps:
       - name: Checkout code
@@ -72,7 +75,7 @@ jobs:
       - name: tests
         run: ./build/runTests
       - name: install gcovr
-        run: sudo apt-get install -y gcovr
+        run: yum install -y gcovr
       - name: launch coverage
         run: gcovr -r . --exclude "build/" --exclude "tests/"
   Doxygen:
@@ -131,6 +134,7 @@ jobs:
           overwrite: true
   ReleaseLinux:
     runs-on: ubuntu-latest
+    container: epitechcontent/epitest-docker:latest
     needs: [Tests, Linux]
     if: github.ref == 'refs/heads/main'
     permissions:

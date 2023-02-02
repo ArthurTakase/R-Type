@@ -20,7 +20,8 @@ EntityManager::EntityManager() {}
  */
 void EntityManager::createPlayer() noexcept
 {
-    _entities.emplace_back(std::make_unique<Entity>(get_id()));
+    // TODO add components before add Entity to list
+    _entities.emplace_back(std::make_unique<Entity>(createId()));
     _entities.back()->addComponent(TransformComponent(10, 8));
     _entities.back()->addComponent(HitboxComponent(15, 21));
     _entities.back()->addComponent(StatComponent(100, 5));
@@ -35,7 +36,8 @@ void EntityManager::createPlayer() noexcept
  */
 void EntityManager::createEnemy() noexcept
 {
-    _entities.emplace_back(std::make_unique<Entity>(get_id()));
+    // TODO add components before add Entity to list
+    _entities.emplace_back(std::make_unique<Entity>(createId()));
     _entities.back()->addComponent(TransformComponent(10, 8));
 }
 
@@ -87,8 +89,18 @@ std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
  *
  * @return The id of the last entity in the vector plus one.
  */
-size_t EntityManager::get_id()
+size_t EntityManager::createId() const noexcept
 {
     if (_entities.empty()) { return 0; }
     return _entities[_entities.size() - 1]->getId() + 1;
+}
+
+/**
+ * Add an entity to the entities list
+ *
+ * @param entity The entity you wish to add
+ */
+void EntityManager::addEntity(std::unique_ptr<Entity>& entity) noexcept
+{
+    _entities.emplace_back(std::move(entity));
 }

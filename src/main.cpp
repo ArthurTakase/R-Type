@@ -5,13 +5,18 @@
 ** main
 */
 
+#include <bitset>
 #include <iostream>
 #include <memory>
+#include <vector>
 
+#include "DrawableComponent.hpp"
 #include "Entity.hpp"
 #include "Error.hpp"
 #include "HitboxComponent.hpp"
+#include "Lib.hpp"
 #include "RType.hpp"
+#include "SerializerSystem.hpp"
 #include "TransformComponent.hpp"
 
 int main()

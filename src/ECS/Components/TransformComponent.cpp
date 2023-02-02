@@ -99,7 +99,7 @@ void TransformComponent::setPos(int x, int y) noexcept
  *
  * @return The scaleX value of the TransformComponent.
  */
-int TransformComponent::getScaleX() const noexcept
+float TransformComponent::getScaleX() const noexcept
 {
     return _scaleX;
 }
@@ -109,7 +109,7 @@ int TransformComponent::getScaleX() const noexcept
  *
  * @return The scaleY variable.
  */
-int TransformComponent::getScaleY() const noexcept
+float TransformComponent::getScaleY() const noexcept
 {
     return _scaleY;
 }
