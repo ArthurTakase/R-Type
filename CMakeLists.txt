@@ -8,6 +8,7 @@ set(TEST_BUILD runTests)
 
 if(UNIX)
   find_program(TIDY "clang-tidy")
+
   if(TIDY)
     set(CMAKE_CXX_CLANG_TIDY "clang-tidy")
   endif()
@@ -37,10 +38,32 @@ set(
   src/ECS/Systems/SerializerSystem.cpp
 )
 
-# Merge
-add_executable(${PROJECT_NAME} src/main.cpp ${RTYPE_SRC})
+# ------------------------------
+# SERVER
+# ------------------------------
 
 # Includes
+add_subdirectory(Error)
+add_subdirectory(NetworkLib)
+
+set(RTYPE_SERVER
+  src/Network/Server/Server.cpp
+  src/Network/Server/main.cpp
+)
+
+# Merge
+add_executable(${PROJECT_NAME} src/main.cpp ${RTYPE_SRC})
+add_executable(server ${RTYPE_SERVER})
+
+target_link_libraries(${PROJECT_NAME} Error)
+target_link_libraries(server Error)
+target_link_libraries(server NetworkLib)
+
+if(WIN32)
+  target_link_libraries(server wsock32 ws2_32)
+endif()
+
+# Ajouter ici les dossiers contenants les .hpp de l'exec du R-Type
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Entity)
@@ -48,23 +71,29 @@ target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Components)
 target_include_directories(${PROJECT_NAME} PRIVATE include/ECS/Systems)
 target_include_directories(${PROJECT_NAME} PRIVATE include/Tools)
 target_include_directories(${PROJECT_NAME} PRIVATE include/SFML)
+target_include_directories(${PROJECT_NAME} PRIVATE include/Network)
+
+# Ajouter ici les dossiers contenants les .hpp de l'exec du Server
+target_include_directories(server PRIVATE include/Network)
+target_include_directories(server PRIVATE include/Tools)
 
 # Options
 target_compile_options(${PROJECT_NAME} PUBLIC ${CXX_FLAGS})
+target_compile_options(server PUBLIC ${CXX_FLAGS})
+
 set_property(TARGET ${PROJECT_NAME} PROPERTY CXX_STANDARD 20)
+set_property(TARGET server PROPERTY CXX_STANDARD 20)
 
 # ------------------------------
 # SFML
 # ------------------------------
-
 add_subdirectory(src/Lib)
 target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
 
 # ------------------------------
 # TESTS
 # ------------------------------
-
-if (DEFINED TESTS)
+if(DEFINED TESTS)
   include(FetchContent)
   FetchContent_Declare(
     googletest
@@ -72,10 +101,12 @@ if (DEFINED TESTS)
     SOURCE_DIR ${CMAKE_BINARY_DIR}/googletest-src
   )
   FetchContent_GetProperties(googletest)
+
   if(NOT googletest_POPULATED)
     FetchContent_Populate(googletest)
     add_subdirectory(${CMAKE_BINARY_DIR}/googletest-src ${CMAKE_BINARY_DIR}/googletest-build)
   endif()
+
   include_directories(${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
   include_directories(${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)
 
