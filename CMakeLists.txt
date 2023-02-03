@@ -4,7 +4,6 @@ project(R-Type)
 # ------------------------------
 # R-TYPE
 # ------------------------------
-
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_FLAGS_DEBUG_INIT "-g")
 
@@ -31,7 +30,6 @@ add_subdirectory(src/ECS)
 # ------------------------------
 # Server
 # ------------------------------
-
 set(RTYPE_SERVER r-type_server)
 set(SERVER_DIR src/Network/Server)
 
@@ -67,23 +65,23 @@ target_include_directories(${RTYPE_SERVER} PRIVATE include/Lib)
 # ------------------------------
 # Client
 # ------------------------------
-
 set(RTYPE_CLIENT r-type_client)
 set(CLIENT_DIR src/Network/Client)
 
 set(RTYPE_CLIENT_SRC
-  ${CLIENT_DIR}/RClient.cpp
+  ${CLIENT_DIR}/UdpClient.cpp
 )
 
 add_executable(${RTYPE_CLIENT} ${CLIENT_DIR}/main.cpp ${RTYPE_CLIENT_SRC})
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
+# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
+# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
+# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
+# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Tools)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
+
+# target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/Client)
 target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
@@ -92,14 +90,13 @@ target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
 
 target_link_libraries(${RTYPE_CLIENT} Error)
-target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
-target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
-
+target_link_libraries(${RTYPE_CLIENT} NetworkLib)
+# target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
+# target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
 
 # ------------------------------
 # TESTS
 # ------------------------------
-
 if(DEFINED TESTS)
   include(FetchContent)
   FetchContent_Declare(
@@ -166,5 +163,4 @@ if(DEFINED TESTS)
   target_link_libraries(${TEST_BUILD} ECSEncapsulation)
   target_link_libraries(${TEST_BUILD} Error)
   target_link_libraries(${TEST_BUILD} NetworkLib)
-
 endif()
