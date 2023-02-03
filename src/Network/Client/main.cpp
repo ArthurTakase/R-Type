@@ -8,8 +8,8 @@
 #include <cstdlib>
 #include <iostream>
 
-#include "Client.hpp"
 #include "Error.hpp"
+#include "RClient.hpp"
 
 int getPort(int ac, const char* const av[])
 {
@@ -23,8 +23,8 @@ int getPort(int ac, const char* const av[])
 int main(int ac, const char* const av[])
 {
     try {
-        int    port = getPort(ac, av);
-        Client client(port);
+        int     port = getPort(ac, av);
+        RClient client(port);
         client.run();
 
     } catch (Error const& error) {

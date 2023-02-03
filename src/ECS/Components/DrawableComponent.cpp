@@ -126,3 +126,23 @@ void DrawableComponent::setTextureId(int textureId) noexcept
 {
     _textureId = textureId;
 }
+
+/**
+ * It sets the sprite of the drawable component
+ *
+ * @param sprite The sprite to use.
+ */
+void DrawableComponent::setSprite(Sprite* sprite) noexcept
+{
+    _sprite = sprite;
+}
+
+/**
+ * It returns the sprite of the drawable component
+ *
+ * @return The sprite of the drawable component.
+ */
+Sprite* DrawableComponent::getSprite() const noexcept
+{
+    return _sprite;
+}

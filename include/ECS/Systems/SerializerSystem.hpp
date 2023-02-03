@@ -34,7 +34,7 @@ class SerializerSystem
 {
   public:
     SerializerSystem(std::unique_ptr<EntityManager>& manager) noexcept;
-    virtual ~SerializerSystem() noexcept = default;
+    ~SerializerSystem() noexcept = default;
 
     SerializerSystem(const SerializerSystem& other)                = delete;
     SerializerSystem(SerializerSystem&& other) noexcept            = delete;
