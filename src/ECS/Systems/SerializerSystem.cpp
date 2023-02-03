@@ -48,6 +48,7 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
     std::bitset<ENTITYSIZE> scaleY(1);
     std::bitset<ENTITYSIZE> offsetX(drawable->getOffsetX());
     std::bitset<ENTITYSIZE> offsetY(drawable->getOffsetY());
+    std::bitset<ENTITYSIZE> id(entity->getId());
 
     index += XSIZE;
     x <<= ENTITYSIZE - index;
@@ -67,8 +68,10 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
     offsetX <<= ENTITYSIZE - index;
     index += OFFSETYSIZE;
     offsetY <<= ENTITYSIZE - index;
+    index += IDSIZE;
+    id <<= ENTITYSIZE - index;
 
-    return x | y | idSprite | width | height | scaleX | scaleY | offsetX | offsetY;
+    return x | y | idSprite | width | height | scaleX | scaleY | offsetX | offsetY | id;
 }
 
 /**
@@ -87,16 +90,13 @@ std::bitset<INPUTSIZE> SerializerSystem::Serialize(int& keyCode) const noexcept
  * De Serialize
  *
  * @param The keycode you want to serialize
- *
- * @return A bitset of the keycode
  */
-std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
+void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
 {
     std::bitset<ENTITYSIZE> bigbit(
         "0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111");
     std::bitset<ENTITYSIZE> smallbit(
         "0000000000000000000000000000000000000000000000000000000000000000000000000000000011111111");
-    std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
 
     int index = 0;
     int x     = ((data >> (ENTITYSIZE - (index + XSIZE))) & bigbit).to_ulong();
@@ -116,13 +116,34 @@ std::unique_ptr<Entity> SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> da
     int offsetX = ((data >> (ENTITYSIZE - (index + OFFSETXSIZE)) & smallbit)).to_ulong();
     index += OFFSETXSIZE;
     int offsetY = ((data >> (ENTITYSIZE - (index + OFFSETYSIZE)) & smallbit)).to_ulong();
+    index += OFFSETYSIZE;
+    int id = ((data >> (ENTITYSIZE - (index + IDSIZE)) & smallbit)).to_ulong();
+    index += IDSIZE;
 
-    auto transform = TransformComponent(x, y);
-    auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
-    transform.setScale(scaleX, scaleY);
+    if (_manager->getEntity(id) == nullptr) {
+        std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
 
-    entity->addComponent(transform);
-    entity->addComponent(drawable);
+        auto transform = TransformComponent(x, y);
+        auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
+        transform.setScale(scaleX, scaleY);
 
-    return entity;
+        entity->addComponent(transform);
+        entity->addComponent(drawable);
+
+        _manager->addEntity(entity);
+    } else {
+        auto entity = _manager->getEntity(id);
+
+        auto transform = entity->getComponent<TransformComponent>();
+        auto drawable  = entity->getComponent<DrawableComponent>();
+
+        transform->setX(x);
+        transform->setY(y);
+        transform->setScale(scaleX, scaleY);
+        drawable->setOffsetX(offsetX);
+        drawable->setOffsetY(offsetY);
+        drawable->setWidth(width);
+        drawable->setHeight(heigth);
+        drawable->setTextureId(idSprite);
+    }
 }

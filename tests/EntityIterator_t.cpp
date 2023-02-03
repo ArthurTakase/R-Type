@@ -35,6 +35,13 @@ TEST(EntityIterator, search_hitbox_and_position_and_check_both)
     }
     it.reset();
 
+    manager->createPlayer();
+    manager->createEnemy();
+    manager->createEnemy();
+    manager->createPlayer();
+    manager->createEnemy();
+    manager->createPlayer();
+
     while (!it.isEnd()) {
         std::cout << it.get()->getId() << std::endl;
         ++it;
@@ -43,7 +50,7 @@ TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 
     captured_output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(captured_output, "0\n3\n5\n0\n3\n5\n");
+    EXPECT_EQ(captured_output, "0\n3\n5\n0\n3\n5\n6\n9\n11\n");
 }
 
 TEST(EntityIterator, search_position_and_check_for_hitbox)
