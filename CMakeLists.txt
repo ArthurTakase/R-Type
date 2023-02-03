@@ -37,6 +37,7 @@ set(SERVER_DIR src/Network/Server)
 
 set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/Server.cpp
+  ${SERVER_DIR}/ServerGameInstance.cpp
 )
 
 add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})
@@ -47,14 +48,21 @@ endif()
 
 target_link_libraries(${RTYPE_SERVER} Error)
 target_link_libraries(${RTYPE_SERVER} NetworkLib)
+target_link_libraries(${RTYPE_SERVER} ECSEncapsulation)
+target_link_libraries(${RTYPE_SERVER} CMakeSFMLProject)
 
 set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
 target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
 
+target_include_directories(${RTYPE_SERVER} PRIVATE include)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network/Server)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
-
+target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Entity)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Components)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Systems)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/Lib)
 
 # ------------------------------
 # Client
@@ -129,7 +137,6 @@ if(DEFINED TESTS)
     tests/MouvementSystem_t.cpp
     tests/DrawableComponent_t.cpp
     tests/Sprite_t.cpp
-    tests/Lib_t.cpp
   )
 
   # Merge
