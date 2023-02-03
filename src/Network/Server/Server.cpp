@@ -17,15 +17,17 @@
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
     , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
-    , gameThread_([&]() { gameLoop(); })
-    , networkThread_([&]() { communicate(); })
 {
     selector_->add(*socket_, true, true, false);
+
+    gameThread_    = std::thread([&]() { gameLoop(); });
+    networkThread_ = std::thread([&]() { communicate(); });
 }
 
 void Server::stop() noexcept
 {
     looping_ = false;
+    gameInstance_.stop();
 }
 
 void Server::reset() noexcept
@@ -52,9 +54,21 @@ void Server::communicate() noexcept
     }
 }
 
-void Server::gameLoop() const noexcept
+void Server::gameLoop() noexcept
 {
     // TODO : insert game loop
+    while (looping_) {
+        if (looping_ == false && clients_.size() == 0) {
+            // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
+            // window est fermée
+            stop();
+        } else {
+            gameInstance_.run();
+        }
+        // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset le
+        // jeu)
+    }
+    std::cout << "game loop end" << std::endl;
 }
 
 bool Server::isKnownClient(Address address) const

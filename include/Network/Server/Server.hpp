@@ -12,6 +12,7 @@
 #include <vector>
 
 #include "ISocket.hpp"
+#include "ServerGameInstance.hpp"
 #include "SocketSelector.hpp"
 
 class Server
@@ -41,6 +42,7 @@ class Server
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;
     std::thread                     networkThread_;
+    RType                           gameInstance_;
 
     // methods
     void                  receive();
@@ -54,5 +56,5 @@ class Server
 
     // thread methods
     void communicate() noexcept;
-    void gameLoop() const noexcept;
+    void gameLoop() noexcept;
 };
