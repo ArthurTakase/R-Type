@@ -23,7 +23,6 @@ WindowsSocket::WindowsSocket(Address::Port port)
     if (socketFd_ < 1) { throw InitError("Socket initialization failed."); }
     std::cout << "Socket created" << std::endl;
 
-    // make the socket listen to a port passed in parameter
     address_.sin_port        = htons(port);
     address_.sin_addr.s_addr = htonl(INADDR_ANY);
     address_.sin_family      = AF_INET;
