@@ -14,9 +14,11 @@ set(
   Components/MouvementComponent.cpp
   Components/StatComponent.cpp
   Components/DrawableComponent.cpp
+  Components/BehaviorComponent.cpp
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/SerializerSystem.cpp
+  Systems/BehaviorSystem.cpp
 )
 
 # Merge
