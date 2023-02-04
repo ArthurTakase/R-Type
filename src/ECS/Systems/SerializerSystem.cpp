@@ -1,16 +1,21 @@
 #include "SerializerSystem.hpp"
 
 #include <iostream>
+#include <memory>
+
+#include "IDeserializer.hpp"
 
 SerializerSystem::SerializerSystem(std::unique_ptr<EntityManager>& manager) noexcept
     : manager_(manager)
     , it_(EntityIterator<TransformComponent, DrawableComponent>(manager->getEntities()))
+    , serializer_(std::make_unique<Serializer>())
+    , deserializer_(std::make_unique<Deserializer>())
 {
 }
 
 void SerializerSystem::run() noexcept
 {
-    for (; !it_.isEnd(); ++_it) {
+    for (; !it_.isEnd(); ++it_) {
         std::bitset<ENTITYSIZE> x = Serialize(it_.get());
         std::cout << x << std::endl;
     }
@@ -18,7 +23,7 @@ void SerializerSystem::run() noexcept
 }
 
 /**
- * Serialize a key code
+ * Serialize an Entity
  *
  * @param The Entity you want to serialise
  *
@@ -40,67 +45,43 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
  */
 std::bitset<INPUTSIZE> SerializerSystem::Serialize(int& keyCode) const noexcept
 {
-    return std::bitset<INPUTSIZE>(keyCode);
+    return serializer_->Serialize(keyCode);
 }
 
 /**
  * De Serialize
  *
- * @param The keycode you want to serialize
+ * @param The Entity you want to serialize
  */
 void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
 {
-    std::bitset<ENTITYSIZE> bigbit(
-        "0000000000000000000000000000000000000000000000000000000000000000000000011111111111111111");
-    std::bitset<ENTITYSIZE> smallbit(
-        "0000000000000000000000000000000000000000000000000000000000000000000000000000000011111111");
+    EntityInfo entityInfo = deserializer_->Deserialize(data);
 
-    int index = 0;
-    int x     = ((data >> (ENTITYSIZE - (index + XSIZE))) & bigbit).to_ulong();
-    index += XSIZE;
-    int y = ((data >> (ENTITYSIZE - (index + YSIZE))) & bigbit).to_ulong();
-    index += YSIZE;
-    int idSprite = ((data >> (ENTITYSIZE - (index + IDSPRITESIZE)) & smallbit)).to_ulong();
-    index += IDSPRITESIZE;
-    int width = ((data >> (ENTITYSIZE - (index + WIDTHSIZE)) & smallbit)).to_ulong();
-    index += WIDTHSIZE;
-    int heigth = ((data >> (ENTITYSIZE - (index + HEIGHTSIZE)) & smallbit)).to_ulong();
-    index += HEIGHTSIZE;
-    int scaleX = ((data >> (ENTITYSIZE - (index + SCALEXSIZE)) & smallbit)).to_ulong();
-    index += SCALEXSIZE;
-    int scaleY = ((data >> (ENTITYSIZE - (index + SCALEYSIZE)) & smallbit)).to_ulong();
-    index += SCALEYSIZE;
-    int offsetX = ((data >> (ENTITYSIZE - (index + OFFSETXSIZE)) & smallbit)).to_ulong();
-    index += OFFSETXSIZE;
-    int offsetY = ((data >> (ENTITYSIZE - (index + OFFSETYSIZE)) & smallbit)).to_ulong();
-    index += OFFSETYSIZE;
-    int id = ((data >> (ENTITYSIZE - (index + IDSIZE)) & smallbit)).to_ulong();
-
-    // TODO Transfer the responsability of create entity
-    if (manager_->getEntity(id) == nullptr) {
+    if (manager_->getEntity(entityInfo.id) == nullptr) {
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_->createId());
 
-        auto transform = TransformComponent(x, y);
-        auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
-        transform.setScale(scaleX, scaleY);
+        auto transform = TransformComponent(entityInfo.x, entityInfo.y);
+        auto drawable  = DrawableComponent(
+            entityInfo.offsetX, entityInfo.offsetY, entityInfo.width, entityInfo.heigth, entityInfo.idSprite);
+        transform.setScale(entityInfo.scaleX, entityInfo.scaleY);
 
         entity->addComponent(transform);
         entity->addComponent(drawable);
 
         manager_->addEntity(entity);
     } else {
-        auto entity = manager_->getEntity(id);
+        auto entity = manager_->getEntity(entityInfo.id);
 
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
 
-        transform->setX(x);
-        transform->setY(y);
-        transform->setScale(scaleX, scaleY);
-        drawable->setOffsetX(offsetX);
-        drawable->setOffsetY(offsetY);
-        drawable->setWidth(width);
-        drawable->setHeight(heigth);
-        drawable->setTextureId(idSprite);
+        transform->setX(entityInfo.x);
+        transform->setY(entityInfo.y);
+        transform->setScale(entityInfo.scaleX, entityInfo.scaleY);
+        drawable->setOffsetX(entityInfo.offsetX);
+        drawable->setOffsetY(entityInfo.offsetY);
+        drawable->setWidth(entityInfo.width);
+        drawable->setHeight(entityInfo.heigth);
+        drawable->setTextureId(entityInfo.idSprite);
     }
 }
