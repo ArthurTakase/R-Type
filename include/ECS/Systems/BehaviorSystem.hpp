@@ -28,6 +28,6 @@ class BehaviorSystem
     void run();
 
   private:
-    EntityIterator<BehaviorComponent> _it;
-    std::unique_ptr<EntityManager>&   _manager;
+    EntityIterator<BehaviorComponent> it_;
+    std::unique_ptr<EntityManager>&   manager_;
 };

@@ -30,6 +30,6 @@ class HitboxSystem
     void checkCollision(std::unique_ptr<Entity>& entity) const;
 
   private:
-    EntityIterator<TransformComponent, HitboxComponent> _it;
-    std::unique_ptr<EntityManager>&                     _manager;
+    EntityIterator<TransformComponent, HitboxComponent> it_;
+    std::unique_ptr<EntityManager>&                     manager_;
 };

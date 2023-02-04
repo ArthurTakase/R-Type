@@ -1,28 +1,20 @@
 #include "SerializerSystem.hpp"
 
-#include <bitset>
 #include <iostream>
-#include <memory>
-
-#include "DrawableComponent.hpp"
-#include "EntityIterator.hpp"
-#include "TransformComponent.hpp"
-
-using namespace Serializer;
 
 SerializerSystem::SerializerSystem(std::unique_ptr<EntityManager>& manager) noexcept
-    : _manager(manager)
-    , _it(EntityIterator<TransformComponent, DrawableComponent>(manager->getEntities()))
+    : manager_(manager)
+    , it_(EntityIterator<TransformComponent, DrawableComponent>(manager->getEntities()))
 {
 }
 
 void SerializerSystem::run() noexcept
 {
-    for (; !_it.isEnd(); ++_it) {
-        std::bitset<ENTITYSIZE> x = Serialize(_it.get());
+    for (; !it_.isEnd(); ++_it) {
+        std::bitset<ENTITYSIZE> x = Serialize(it_.get());
         std::cout << x << std::endl;
     }
-    _it.reset();
+    it_.reset();
 }
 
 /**
@@ -36,42 +28,7 @@ std::bitset<ENTITYSIZE> SerializerSystem::Serialize(std::unique_ptr<Entity> cons
 {
     if (!entity->hasComponents<TransformComponent, DrawableComponent>()) { return std ::bitset<ENTITYSIZE>(0); }
 
-    int                     index    = 0;
-    auto                    pos      = entity->getComponent<TransformComponent>();
-    auto                    drawable = entity->getComponent<DrawableComponent>();
-    std::bitset<ENTITYSIZE> x(pos->getX());
-    std::bitset<ENTITYSIZE> y(pos->getY());
-    std::bitset<ENTITYSIZE> idSprite(drawable->getTextureId());
-    std::bitset<ENTITYSIZE> width(drawable->getWidth());
-    std::bitset<ENTITYSIZE> height(drawable->getHeight());
-    std::bitset<ENTITYSIZE> scaleX(1);
-    std::bitset<ENTITYSIZE> scaleY(1);
-    std::bitset<ENTITYSIZE> offsetX(drawable->getOffsetX());
-    std::bitset<ENTITYSIZE> offsetY(drawable->getOffsetY());
-    std::bitset<ENTITYSIZE> id(entity->getId());
-
-    index += XSIZE;
-    x <<= ENTITYSIZE - index;
-    index += YSIZE;
-    y <<= ENTITYSIZE - index;
-    index += IDSPRITESIZE;
-    idSprite <<= ENTITYSIZE - index;
-    index += WIDTHSIZE;
-    width <<= ENTITYSIZE - index;
-    index += HEIGHTSIZE;
-    height <<= ENTITYSIZE - index;
-    index += SCALEXSIZE;
-    scaleX <<= ENTITYSIZE - index;
-    index += SCALEYSIZE;
-    scaleY <<= ENTITYSIZE - index;
-    index += OFFSETXSIZE;
-    offsetX <<= ENTITYSIZE - index;
-    index += OFFSETYSIZE;
-    offsetY <<= ENTITYSIZE - index;
-    index += IDSIZE;
-    id <<= ENTITYSIZE - index;
-
-    return x | y | idSprite | width | height | scaleX | scaleY | offsetX | offsetY | id;
+    return serializer_->Serialize(entity);
 }
 
 /**
@@ -120,8 +77,8 @@ void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
     int id = ((data >> (ENTITYSIZE - (index + IDSIZE)) & smallbit)).to_ulong();
 
     // TODO Transfer the responsability of create entity
-    if (_manager->getEntity(id) == nullptr) {
-        std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
+    if (manager_->getEntity(id) == nullptr) {
+        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_->createId());
 
         auto transform = TransformComponent(x, y);
         auto drawable  = DrawableComponent(offsetX, offsetY, width, heigth, idSprite);
@@ -130,9 +87,9 @@ void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
         entity->addComponent(transform);
         entity->addComponent(drawable);
 
-        _manager->addEntity(entity);
+        manager_->addEntity(entity);
     } else {
-        auto entity = _manager->getEntity(id);
+        auto entity = manager_->getEntity(id);
 
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();

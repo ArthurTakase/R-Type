@@ -20,8 +20,8 @@
  * @param it The iterator to use for the system.
  */
 HitboxSystem::HitboxSystem(std::unique_ptr<EntityManager>& manager) noexcept
-    : _manager(manager)
-    , _it(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
+    : manager_(manager)
+    , it_(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
 {
 }
 
@@ -32,15 +32,15 @@ void HitboxSystem::run()
 {
     size_t other;
 
-    for (; !_it.isEnd(); ++_it) {
-        assert((_it.get()->hasComponents<HitboxComponent, TransformComponent>()));
+    for (; !it_.isEnd(); ++_it) {
+        assert((it_.get()->hasComponents<HitboxComponent, TransformComponent>()));
         try {
-            checkCollision(_it.get());
+            checkCollision(it_.get());
         } catch (const std::exception& e) {
             std::cerr << e.what() << std::endl;
         }
     }
-    _it.reset();
+    it_.reset();
 }
 
 /**
@@ -52,7 +52,7 @@ void HitboxSystem::run()
  */
 void HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
 {
-    for (auto other = EntityIterator<TransformComponent, HitboxComponent>(_it.it); !other.isEnd(); ++other) {
+    for (auto other = EntityIterator<TransformComponent, HitboxComponent>(it_.it); !other.isEnd(); ++other) {
         if (other.get() == entity) { continue; }
 
         assert((other.get()->hasComponents<HitboxComponent, TransformComponent>()));

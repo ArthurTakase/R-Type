@@ -30,6 +30,6 @@ class MouvementSystem
     void run();
 
   private:
-    EntityIterator<TransformComponent, MouvementComponent> _it;
-    std::unique_ptr<EntityManager>&                        _manager;
+    EntityIterator<TransformComponent, MouvementComponent> it_;
+    std::unique_ptr<EntityManager>&                        manager_;
 };
