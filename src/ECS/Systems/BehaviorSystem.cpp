@@ -30,7 +30,7 @@ void BehaviorSystem::run()
 {
     size_t other;
 
-    for (; !it_.isEnd(); ++_it) {
+    for (; !it_.isEnd(); ++it_) {
         assert((it_.get()->hasComponents<BehaviorComponent>()));
         it_.get()->getComponent<BehaviorComponent>()->onUpdate();
     }

@@ -32,7 +32,7 @@ void HitboxSystem::run()
 {
     size_t other;
 
-    for (; !it_.isEnd(); ++_it) {
+    for (; !it_.isEnd(); ++it_) {
         assert((it_.get()->hasComponents<HitboxComponent, TransformComponent>()));
         try {
             checkCollision(it_.get());

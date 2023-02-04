@@ -30,7 +30,7 @@ void MouvementSystem::run()
 {
     size_t other;
 
-    for (; !it_.isEnd(); ++_it) {
+    for (; !it_.isEnd(); ++it_) {
         assert((it_.get()->hasComponents<MouvementComponent, TransformComponent>()));
 
         auto mouvement = it_.get()->getComponent<MouvementComponent>();
