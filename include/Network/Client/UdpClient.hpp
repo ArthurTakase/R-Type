@@ -10,8 +10,10 @@
 #include <memory>
 #include <thread>
 
+#include "Game.hpp"
 #include "ISocket.hpp"
 #include "SocketSelector.hpp"
+
 class UdpClient
 {
   public:
@@ -39,16 +41,27 @@ class UdpClient
     std::thread                     gameThread_;
     std::thread                     networkThread_;
     std::queue<RawData>             dataToSend_ = {};
-
-    // TODO : add a game instance in the client
+    Game                            game_;
 
     // methods
     void    receive();
     void    send();
-    void    handleData(ReceivedInfos infos) const noexcept;
+    void    handleData(ReceivedInfos infos) noexcept;
     RawData getDataFromQueue() noexcept;
 
     // thread methods
     void communicate() noexcept;
     void gameLoop() noexcept;
+
+    // Game
+    void deserializeEntity(int x,
+        int                    y,
+        int                    idSprite,
+        int                    width,
+        int                    height,
+        int                    scaleX,
+        int                    scaleY,
+        int                    offsetX,
+        int                    offsetY,
+        int                    id) noexcept;
 };
