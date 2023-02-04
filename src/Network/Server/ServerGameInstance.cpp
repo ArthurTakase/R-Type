@@ -35,3 +35,8 @@ void RType::run() const noexcept
 }
 
 RType::~RType() noexcept {}
+
+std::unique_ptr<EntityManager>& RType::getManager() noexcept
+{
+    return entityManager_;
+}

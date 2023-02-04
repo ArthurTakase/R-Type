@@ -24,9 +24,10 @@ class RType
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = default;
 
-    void run() const noexcept;
-    void reset() noexcept;
-    void stop() noexcept;
+    void                            run() const noexcept;
+    void                            reset() noexcept;
+    void                            stop() noexcept;
+    std::unique_ptr<EntityManager>& getManager() noexcept;
 
   private:
     bool                              looping_ = true;

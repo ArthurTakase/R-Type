@@ -57,13 +57,20 @@ void Server::communicate() noexcept
 void Server::gameLoop() noexcept
 {
     // TODO : insert game loop
+    std::cout << "game loop start" << std::endl;
     while (looping_) {
         if (looping_ == false && clients_.size() == 0) {
             // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
             // window est fermée
             stop();
         } else {
-            gameInstance_.run();
+            // std::cout << "coucou" << std::endl;
+            // auto&   entities = gameInstance_.getManager()->getEntities();
+            // RawData dataToSend;
+            // for (auto& entities : entities) { dataToSend.emplace_back(10); }
+            for (auto& client : clients_) { client.dataToSend.push({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }); }
+
+            // gameInstance_.run();
         }
         // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset le
         // jeu)
@@ -121,6 +128,6 @@ RawData Server::getDataFromQueue(Client& client) noexcept
 
 void Server::handleData(ReceivedInfos infos) const noexcept
 {
-    std::cout << "PREPARING DATA" << std::endl;
-    // TODO: traiter les données reçues pour notre logique de jeu
+    for (auto& data : infos.data) { std::cout << (int)data << " "; }
+    std::cout << std::endl;
 }

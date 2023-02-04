@@ -64,7 +64,7 @@ Address LinuxSocket::getAddress() const noexcept
 
 void LinuxSocket::send(const void* data, int data_size, Address destAddr) const
 {
-    std::cout << "SENDING DATA" << std::endl;
+    std::cout << "SENDING DATA TO " << destAddr.ip << ":" << destAddr.port << std::endl;
     sockaddr_in linuxDestAddr = addressToLinuxAddress(destAddr);
 
     int sent_bytes =
