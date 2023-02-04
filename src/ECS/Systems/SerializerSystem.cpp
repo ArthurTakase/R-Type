@@ -118,8 +118,8 @@ void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
     int offsetY = ((data >> (ENTITYSIZE - (index + OFFSETYSIZE)) & smallbit)).to_ulong();
     index += OFFSETYSIZE;
     int id = ((data >> (ENTITYSIZE - (index + IDSIZE)) & smallbit)).to_ulong();
-    index += IDSIZE;
 
+    // TODO Transfer the responsability of create entity
     if (_manager->getEntity(id) == nullptr) {
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(_manager->createId());
 
