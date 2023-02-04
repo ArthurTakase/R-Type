@@ -73,14 +73,14 @@ int Window::getKeyPressed()
  *
  * @param sprite The sprite to draw.
  */
-void Window::draw(Sprite& sprite)
+void Window::draw(Sprite* sprite)
 {
     sf::Texture texture;
     sf::Sprite  tempSprite;
 
-    texture.loadFromFile(sprite.getSpritePath());
+    texture.loadFromFile(sprite->getSpritePath());
     tempSprite.setTexture(texture);
-    tempSprite.setPosition(sprite.getX(), sprite.getY());
+    tempSprite.setPosition(sprite->getX(), sprite->getY());
 
     window.draw(tempSprite);
 }

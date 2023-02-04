@@ -38,7 +38,7 @@ class Window
     void refresh();
     bool isOpen();
     int  getKeyPressed();
-    void draw(Sprite& sprite);
+    void draw(Sprite* sprite);
 
   private:
     sf::RenderWindow window;
