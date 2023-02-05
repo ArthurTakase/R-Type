@@ -12,16 +12,25 @@
 #include "DrawableComponent.hpp"
 #include "TransformComponent.hpp"
 
-Game::Game()
+Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
+    : dataReceived_(packets)
+    , mutexForPacket_(mutex)
 {
     manager_ = std::make_unique<EntityManager>();
     lib_     = std::make_unique<Lib>();
 }
 
-void Game::run() const noexcept
+void Game::run() noexcept
 {
     lib_->getWindow().clear();
-
+    {
+        std::lock_guard<std::mutex> lock(mutexForPacket_);
+        while (!dataReceived_.empty()) {
+            auto& packet = dataReceived_.front();
+            deserializeEntity(packet);
+            dataReceived_.pop();
+        }
+    }
     for (auto& entity : manager_->getEntities()) {
         if (!entity->hasComponent<TransformComponent>() || !entity->hasComponent<DrawableComponent>()) { continue; }
 
@@ -36,21 +45,16 @@ void Game::run() const noexcept
         drawable->getSprite()->setX(transform->getX());
         drawable->getSprite()->setY(transform->getY());
 
-        std::cout << (int)transform->getX() << " " << (int)transform->getY() << std::endl;
+        // std::cout << (int)transform->getX() << " " << (int)transform->getY() << std::endl;
 
         lib_->getWindow().draw(drawable->getSprite());
-        lib_->getWindow().refresh();
     }
+    lib_->getWindow().refresh();
 }
 
-std::unique_ptr<EntityManager>& Game::getManager() noexcept
+Lib& Game::getLib() noexcept
 {
-    return manager_;
-}
-
-std::unique_ptr<Lib>& Game::getLib() noexcept
-{
-    return lib_;
+    return *lib_;
 }
 
 void Game::addSprite(std::string path, int x, int y) noexcept
@@ -61,4 +65,42 @@ void Game::addSprite(std::string path, int x, int y) noexcept
 Sprite* Game::getLastSprite() noexcept
 {
     return sprites_.back().get();
+}
+
+void Game::deserializeEntity(GamePacket packet) noexcept
+{
+    auto m_entity = manager_->getEntity(packet.id);
+
+    if (m_entity == nullptr) {
+        std::cout << "CREATING ENTITY ......................................." << std::endl;
+        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_->createId());
+
+        auto transform =
+            TransformComponent(packet.xpositive ? packet.x : -(packet.x), packet.ypositive ? packet.y : -(packet.y));
+        transform.setScale(packet.scaleX, packet.scaleY);
+
+        auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
+        addSprite("assets/r-typesheet" + std::to_string(packet.idSprite) + ".gif", packet.x, packet.y);
+        drawable.setSprite(getLastSprite());
+
+        entity->addComponent(transform);
+        entity->addComponent(drawable);
+
+        manager_->addEntity(std::move(entity));
+    } else {
+        auto transform = m_entity->getComponent<TransformComponent>();
+        auto drawable  = m_entity->getComponent<DrawableComponent>();
+
+        std::cout << "id :" << m_entity->getId() << std::endl;
+        std::cout << "xpositive = " << packet.xpositive << std::endl;
+        std::cout << "x = " << packet.x << std::endl;
+        transform->setX(packet.xpositive ? packet.x : -(packet.x));
+        transform->setY(packet.ypositive ? packet.y : -(packet.y));
+        transform->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
+        drawable->setOffsetX(packet.offsetX);
+        drawable->setOffsetY(packet.offsetY);
+        drawable->setWidth(packet.width);
+        drawable->setHeight(packet.height);
+        // drawable->setTextureId(packet.idSprite);
+    }
 }

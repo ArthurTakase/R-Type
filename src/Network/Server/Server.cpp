@@ -59,15 +59,12 @@ void Server::communicate() noexcept
 
 void Server::gameLoop() noexcept
 {
-    // TODO : insert game loop
-    std::cout << "game loop start" << std::endl;
-
-    gameInstance_.getManager()->createBackground(0);
-    // gameInstance_.getManager()->createBackground(255);
-    // gameInstance_.getManager()->createPlayer();
-    // gameInstance_.getManager()->createEnemy();
-    // gameInstance_.getManager()->createEnemy();
-    // gameInstance_.getManager()->createEnemy();
+    gameInstance_.getManager().createBackground(0);
+    // gameInstance_.getManager().createBackground(255);
+    // gameInstance_.getManager().createPlayer();
+    // gameInstance_.getManager().createEnemy();
+    // gameInstance_.getManager().createEnemy();
+    // gameInstance_.getManager().createEnemy();
 
     auto                                           end   = std::chrono::system_clock::now();
     std::chrono::high_resolution_clock::time_point start = { std::chrono::high_resolution_clock::now() };
@@ -81,23 +78,8 @@ void Server::gameLoop() noexcept
                 // window est fermée
                 stop();
             } else {
-                // RawData lolilol = {
-                //     1,
-                //     1,
-                //     3,
-                //     1,
-                //     5,
-                //     4,
-                //     4,
-                //     1,
-                //     1,
-                //     4,
-                //     4,
-                //     4,
-                // };
-                // for (auto& client : clients_) { client.dataToSend.push(lolilol); }
 
-                auto& entities = gameInstance_.getManager()->getEntities();
+                auto& entities = gameInstance_.getManager().getEntities();
                 std::cout << (int)entities.size() << std::endl;
                 RawData dataToSend;
                 dataToSend.reserve(entities.size() * 12);
@@ -195,6 +177,6 @@ void Server::handleData(ReceivedInfos infos) noexcept
     if (infos.data[0] == CLOSE_VALUE) { std::cout << "CLIENT DISCONNECT" << std::endl; }
 
     auto& behavior = gameInstance_.getBehaviorSystem();
-    behavior->setKey(infos.data[0]);
+    behavior.setKey(infos.data[0]);
     infos.data.clear();
 }

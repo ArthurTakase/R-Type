@@ -40,22 +40,22 @@ void RType::run() const noexcept
 
 RType::~RType() noexcept {}
 
-std::unique_ptr<EntityManager>& RType::getManager() noexcept
+EntityManager& RType::getManager() noexcept
 {
-    return entityManager_;
+    return *entityManager_;
 }
 
-std::unique_ptr<HitboxSystem>& RType::getHitboxSystem() noexcept
+HitboxSystem& RType::getHitboxSystem() noexcept
 {
-    return hitboxSystem_;
+    return *hitboxSystem_;
 }
 
-std::unique_ptr<SerializerSystem>& RType::getSerializerSystem() noexcept
+SerializerSystem& RType::getSerializerSystem() noexcept
 {
-    return serializerSystem_;
+    return *serializerSystem_;
 }
 
-std::unique_ptr<BehaviorSystem>& RType::getBehaviorSystem() noexcept
+BehaviorSystem& RType::getBehaviorSystem() noexcept
 {
-    return behaviorSystem_;
+    return *behaviorSystem_;
 }

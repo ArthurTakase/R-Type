@@ -127,7 +127,7 @@ size_t EntityManager::createId() const noexcept
  *
  * @param entity The entity you wish to add
  */
-void EntityManager::addEntity(std::unique_ptr<Entity>& entity) noexcept
+void EntityManager::addEntity(std::unique_ptr<Entity> &&entity) noexcept
 {
     entities_.emplace_back(std::move(entity));
 }

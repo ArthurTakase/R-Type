@@ -43,9 +43,12 @@ class UdpClient
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;
     std::thread                     networkThread_;
-    std::queue<RawData>             dataToSend_ = {};
+    std::queue<RawData>             dataToSend_     = {};
+    std::queue<GamePacket>          dataReceived_   = {};
+    std::mutex                      mutexForPacket_ = {};
     Game                            game_;
-    static constexpr int            CLOSE_VALUE = 255;
+
+    static constexpr int CLOSE_VALUE = 255;
 
     // methods
     void    receive();
@@ -56,18 +59,4 @@ class UdpClient
     // thread methods
     void communicate() noexcept;
     void gameLoop() noexcept;
-
-    // Game
-    void deserializeEntity(int x,
-        int                    xpositive,
-        int                    y,
-        int                    ypositive,
-        int                    idSprite,
-        int                    width,
-        int                    height,
-        int                    scaleX,
-        int                    scaleY,
-        int                    offsetX,
-        int                    offsetY,
-        int                    id) noexcept;
 };

@@ -21,13 +21,12 @@
     , socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , deserializer_(std::make_unique<Deserializer>())
+    , game_(dataReceived_, mutexForPacket_)
 {
     selector_->add(*socket_, true, true, false);
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
-
-    std::cout << "UdpClient created" << std::endl;
 }
 
 void UdpClient::stop() noexcept
@@ -48,7 +47,6 @@ void UdpClient::run()
 
 void UdpClient::communicate() noexcept
 {
-    // TODO : send a connection request to the server
     RawData data = { 12 };
     dataToSend_.push(data);
 
@@ -66,10 +64,10 @@ void UdpClient::communicate() noexcept
 void UdpClient::gameLoop() noexcept
 {
     auto& lib = game_.getLib();
-    lib->getWindow().open(256, 256, "Client RTYPE");
+    lib.getWindow().open(256, 256, "Client RTYPE");
 
     while (looping_) {
-        auto input = lib->getWindow().getKeyPressed();
+        auto input = lib.getWindow().getKeyPressed();
         if (input == 255 || input == 36) {
             looping_ = false;
             break;
@@ -79,7 +77,7 @@ void UdpClient::gameLoop() noexcept
     }
 
     dataToSend_.push({ CLOSE_VALUE });
-    lib->getWindow().close();
+    lib.getWindow().close();
 }
 
 void UdpClient::receive()
@@ -122,66 +120,23 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
 
     if (infos.data.size() % 12 == 0) {
         for (int i = 0; i < infos.data.size(); i += 10) {
-            deserializeEntity(infos.data[i],
-                infos.data[i + 1],
-                infos.data[i + 2],
-                infos.data[i + 3],
-                infos.data[i + 4],
-                infos.data[i + 5],
-                infos.data[i + 6],
-                infos.data[i + 7],
-                infos.data[i + 8],
-                infos.data[i + 9],
-                infos.data[i + 10],
-                infos.data[i + 11]);
+            GamePacket packet;
+            packet.x         = infos.data[i];
+            packet.xpositive = infos.data[i + 1];
+            packet.y         = infos.data[i + 2];
+            packet.ypositive = infos.data[i + 3];
+            packet.idSprite  = infos.data[i + 4];
+            packet.width     = infos.data[i + 5];
+            packet.height    = infos.data[i + 6];
+            packet.scaleX    = infos.data[i + 7];
+            packet.scaleY    = infos.data[i + 8];
+            packet.offsetX   = infos.data[i + 9];
+            packet.offsetY   = infos.data[i + 10];
+            packet.id        = infos.data[i + 11];
+            {
+                std::lock_guard<std::mutex> lock(mutexForPacket_);
+                dataReceived_.push(packet);
+            }
         }
-    }
-    infos.data.clear();
-}
-
-void UdpClient::deserializeEntity(int x,
-    int                               xpositive,
-    int                               y,
-    int                               ypositive,
-    int                               idSprite,
-    int                               width,
-    int                               height,
-    int                               scaleX,
-    int                               scaleY,
-    int                               offsetX,
-    int                               offsetY,
-    int                               id) noexcept
-{
-    auto& manager  = game_.getManager();
-    auto  m_entity = manager->getEntity(id);
-
-    if (m_entity == nullptr) {
-        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager->createId());
-
-        auto transform = TransformComponent(xpositive ? x : -x, ypositive ? y : -y);
-        transform.setScale(scaleX, scaleY);
-
-        auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
-        game_.addSprite("assets/r-typesheet" + std::to_string(idSprite) + ".gif", x, y);
-        drawable.setSprite(game_.getLastSprite());
-
-        entity->addComponent(transform);
-        entity->addComponent(drawable);
-
-        manager->addEntity(entity);
-    } else {
-        auto transform = m_entity->getComponent<TransformComponent>();
-        auto drawable  = m_entity->getComponent<DrawableComponent>();
-
-        std::cout << "xpositive = " << xpositive << std::endl;
-        std::cout << "x = " << x << std::endl;
-        transform->setX(xpositive ? x : -x);
-        transform->setY(ypositive ? y : -y);
-        transform->setScale((float)scaleX / 10, (float)scaleY / 10);
-        drawable->setOffsetX(offsetX);
-        drawable->setOffsetY(offsetY);
-        drawable->setWidth(width);
-        drawable->setHeight(height);
-        // drawable->setTextureId(idSprite);
     }
 }
