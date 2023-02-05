@@ -80,9 +80,7 @@ void Window::draw(Sprite* sprite, int xtexture, int ytexture, int width, int hei
     sf::Sprite  tempSprite;
 
     texture.loadFromFile(sprite->getSpritePath(), sf::IntRect(xtexture, ytexture, width, height));
-    // texture.loadFromFile(sprite->getSpritePath(), sf::IntRect(0, 0, sprite->getWidth(), sprite->getHeight()));
     tempSprite.setTexture(texture);
     tempSprite.setPosition(sprite->getX(), sprite->getY());
-
     window.draw(tempSprite);
 }

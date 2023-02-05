@@ -19,7 +19,6 @@ WindowsSocket::WindowsSocket(Address::Port port)
     socketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
 
     if (socketFd_ < 1) { throw InitError("Socket initialization failed."); }
-    std::cout << "Socket created" << std::endl;
 
     address_.sin_port        = htons(port);
     address_.sin_addr.s_addr = htonl(INADDR_ANY);
@@ -36,7 +35,7 @@ WindowsSocket::~WindowsSocket() noexcept
     closesocket(socketFd_);
 }
 
-ISocket::Fd WindowsSocket::getSocketFd() noexcept
+ISocket::Fd WindowsSocket::getSocketFd() const noexcept
 {
     return socketFd_;
 }

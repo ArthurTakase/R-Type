@@ -68,7 +68,7 @@ void SerializerSystem::DeSerialize(std::bitset<ENTITYSIZE> data) const
         entity->addComponent(transform);
         entity->addComponent(drawable);
 
-        manager_->addEntity(entity);
+        manager_->addEntity(std::move(entity));
     } else {
         auto entity = manager_->getEntity(entityInfo.id);
 

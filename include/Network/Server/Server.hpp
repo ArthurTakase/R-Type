@@ -35,15 +35,18 @@ class Server
   protected:
   private:
     // attributes
-    bool                            looping_  = true;
-    int                             tickrate_ = 60;
-    std::vector<Client>             clients_  = {};
-    std::unique_ptr<ISocket>        socket_;
-    std::unique_ptr<SocketSelector> selector_;
-    std::thread                     gameThread_;
-    std::thread                     networkThread_;
-    RType                           gameInstance_;
-    static constexpr int            CLOSE_VALUE = 255;
+    bool                                           looping_  = true;
+    int                                            tickrate_ = 60;
+    std::vector<Client>                            clients_  = {};
+    std::unique_ptr<ISocket>                       socket_;
+    std::unique_ptr<SocketSelector>                selector_;
+    std::thread                                    gameThread_;
+    std::thread                                    networkThread_;
+    RType                                          gameInstance_;
+    std::chrono::system_clock::time_point          end_;
+    std::chrono::high_resolution_clock::time_point start_;
+
+    static constexpr int CLOSE_VALUE = 255;
 
     // methods
     void                  receive();

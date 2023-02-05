@@ -27,13 +27,13 @@ class RType
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = default;
 
-    void                               run() const noexcept;
-    void                               reset() noexcept;
-    void                               stop() noexcept;
-    std::unique_ptr<EntityManager>&    getManager() noexcept;
-    std::unique_ptr<HitboxSystem>&     getHitboxSystem() noexcept;
-    std::unique_ptr<SerializerSystem>& getSerializerSystem() noexcept;
-    std::unique_ptr<BehaviorSystem>&   getBehaviorSystem() noexcept;
+    void              run() const noexcept;
+    void              reset() noexcept;
+    void              stop() noexcept;
+    EntityManager&    getManager() noexcept;
+    HitboxSystem&     getHitboxSystem() noexcept;
+    SerializerSystem& getSerializerSystem() noexcept;
+    BehaviorSystem&   getBehaviorSystem() noexcept;
 
   private:
     bool                              looping_ = true;
