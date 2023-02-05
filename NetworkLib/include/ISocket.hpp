@@ -23,7 +23,7 @@ inline bool operator==(const Address& lhs, const Address& rhs) noexcept
     return (lhs.port == rhs.port && lhs.ip == rhs.ip);
 }
 
-using RawData = std::vector<std::uint16_t>;
+using RawData = std::vector<std::uint64_t>;
 
 struct ReceivedInfos {
     RawData data;

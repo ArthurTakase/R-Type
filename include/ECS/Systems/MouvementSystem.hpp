@@ -21,7 +21,7 @@ class MouvementSystem
   public:
     MouvementSystem(std::unique_ptr<EntityManager>& manager) noexcept;
     ~MouvementSystem() noexcept                            = default;
-    MouvementSystem(const MouvementSystem& other) noexcept = default;
+    MouvementSystem(const MouvementSystem& other) noexcept = delete;
     MouvementSystem(MouvementSystem&& other) noexcept      = delete;
 
     MouvementSystem& operator=(const MouvementSystem& rhs) noexcept = delete;

@@ -12,6 +12,8 @@
 #include "BehaviorSystem.hpp"
 #include "EntityManager.hpp"
 #include "HitboxSystem.hpp"
+#include "MouvementComponent.hpp"
+#include "MouvementSystem.hpp"
 #include "SerializerSystem.hpp"
 
 class RType
@@ -39,4 +41,5 @@ class RType
     std::unique_ptr<HitboxSystem>     hitboxSystem_;
     std::unique_ptr<SerializerSystem> serializerSystem_;
     std::unique_ptr<BehaviorSystem>   behaviorSystem_;
+    std::unique_ptr<MouvementSystem>  mouvementSystem_;
 };

@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 
+#include "BehaviorComponent.hpp"
 #include "DrawableComponent.hpp"
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
@@ -34,6 +35,7 @@ class EntityManager
 
     void createPlayer() noexcept;
     void createEnemy() noexcept;
+    void createBackground(int x) noexcept;
 
     size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;

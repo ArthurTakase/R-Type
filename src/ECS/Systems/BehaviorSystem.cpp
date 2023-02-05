@@ -9,6 +9,7 @@
 
 #include <cassert>
 #include <iostream>
+#include <memory>
 
 /**
  * It takes a reference to a unique pointer to an EntityManager, and then it initializes the manager_
@@ -31,8 +32,10 @@ void BehaviorSystem::run()
     size_t other;
 
     for (; !it_.isEnd(); ++it_) {
-        assert((it_.get()->hasComponents<BehaviorComponent>()));
-        it_.get()->getComponent<BehaviorComponent>()->onUpdate(key_);
+        std::unique_ptr<Entity>& entity = it_.get();
+
+        assert((entity->hasComponents<BehaviorComponent>()));
+        entity->getComponent<BehaviorComponent>()->onUpdate(key_, entity);
     }
     it_.reset();
 }

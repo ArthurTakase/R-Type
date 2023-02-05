@@ -8,6 +8,7 @@
 #include "UdpClient.hpp"
 
 #include <iostream>
+#include <memory>
 
 #include "Deserializer.hpp"
 #include "DrawableComponent.hpp"
@@ -15,12 +16,11 @@
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
-#define CLOSE_VALUE 65535
-
 [[nodiscard]] UdpClient::UdpClient(Address serverAddress, Address::Port clientPort)
     : serverAddress_(serverAddress)
     , socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
+    , deserializer_(std::make_unique<Deserializer>())
 {
     selector_->add(*socket_, true, true, false);
 
@@ -28,8 +28,6 @@
     networkThread_ = std::thread([&]() { communicate(); });
 
     std::cout << "UdpClient created" << std::endl;
-
-    loadSprites();
 }
 
 void UdpClient::stop() noexcept
@@ -157,7 +155,8 @@ void UdpClient::deserializeEntity(int x,
         transform.setScale(scaleX, scaleY);
 
         auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
-        game_.addSprite(sprites_[idSprite], x, y);
+        std::cout << "idSprite = " << idSprite << std::endl;
+        game_.addSprite("assets/r-typesheet" + std::to_string(idSprite) + ".gif", x, y);
         drawable.setSprite(game_.getLastSprite());
 
         entity->addComponent(transform);
@@ -176,11 +175,6 @@ void UdpClient::deserializeEntity(int x,
         drawable->setOffsetY(offsetY);
         drawable->setWidth(width);
         drawable->setHeight(height);
-        drawable->setTextureId(idSprite);
+        // drawable->setTextureId(idSprite);
     }
-}
-
-void UdpClient::loadSprites() noexcept
-{
-    for (int i = 0; i < 43; i++) { sprites_.emplace_back("assets/r-typesheet" + std::to_string(i + 1) + ".gif"); }
 }

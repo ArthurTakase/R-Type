@@ -10,6 +10,11 @@
 #include <bitset>
 #include <string>
 
+namespace SpriteIds
+{
+#define BACKGROUND_ID 45
+}
+
 /**
  * @brief This class is used to create a sprite.
  *

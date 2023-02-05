@@ -27,9 +27,9 @@ class BehaviorComponent : public IComponent
     BehaviorComponent& operator=(const BehaviorComponent& rhs) noexcept = delete;
     BehaviorComponent& operator=(BehaviorComponent&& rhs) noexcept      = delete;
 
-    void setOnUpdate(std::function<void(int key)> onUpdate) noexcept;
-    void onUpdate(int key) const noexcept;
+    void setOnUpdate(std::function<void(int key, std::unique_ptr<Entity>& self)> onUpdate) noexcept;
+    void onUpdate(int key, std::unique_ptr<Entity>& self) const noexcept;
 
   private:
-    std::function<void(int key)> onUpdate_;
+    std::function<void(int key, std::unique_ptr<Entity>& self)> onUpdate_;
 };

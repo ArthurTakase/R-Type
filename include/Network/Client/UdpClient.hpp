@@ -10,6 +10,7 @@
 #include <memory>
 #include <thread>
 
+#include "Deserializer.hpp"
 #include "Game.hpp"
 #include "ISocket.hpp"
 #include "SocketSelector.hpp"
@@ -37,12 +38,13 @@ class UdpClient
     bool                            looping_ = true;
     Address                         serverAddress_;
     std::unique_ptr<ISocket>        socket_;
+    std::unique_ptr<IDeserializer>  deserializer_;
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;
     std::thread                     networkThread_;
     std::queue<RawData>             dataToSend_ = {};
     Game                            game_;
-    std::vector<std::string>        sprites_ = {};
+    static constexpr int            CLOSE_VALUE = 65535;
 
     // methods
     void    receive();
@@ -65,5 +67,4 @@ class UdpClient
         int                    offsetX,
         int                    offsetY,
         int                    id) noexcept;
-    void loadSprites() noexcept;
 };

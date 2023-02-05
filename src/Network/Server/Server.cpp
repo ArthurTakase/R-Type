@@ -14,8 +14,6 @@
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
-#define CLOSE_VALUE 65535
-
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
     , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
@@ -64,10 +62,12 @@ void Server::gameLoop() noexcept
     // TODO : insert game loop
     std::cout << "game loop start" << std::endl;
 
-    gameInstance_.getManager()->createPlayer();
-    gameInstance_.getManager()->createEnemy();
-    gameInstance_.getManager()->createEnemy();
-    gameInstance_.getManager()->createEnemy();
+    gameInstance_.getManager()->createBackground(0);
+    gameInstance_.getManager()->createBackground(600);
+    // gameInstance_.getManager()->createPlayer();
+    // gameInstance_.getManager()->createEnemy();
+    // gameInstance_.getManager()->createEnemy();
+    // gameInstance_.getManager()->createEnemy();
 
     while (looping_) {
         if (looping_ == false && clients_.size() == 0) {
@@ -85,7 +85,6 @@ void Server::gameLoop() noexcept
                 dataToSend.emplace_back(transform->getX());
                 dataToSend.emplace_back(transform->getY());
                 dataToSend.emplace_back(drawable->getTextureId());
-                std::cout << drawable->getTextureId() << std::endl;
                 dataToSend.emplace_back(drawable->getWidth());
                 dataToSend.emplace_back(drawable->getHeight());
                 dataToSend.emplace_back(transform->getScaleX() * 10);
@@ -100,7 +99,7 @@ void Server::gameLoop() noexcept
 
             for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
 
-            // gameInstance_.run();
+            gameInstance_.run();
         }
         // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset le
         // jeu)
