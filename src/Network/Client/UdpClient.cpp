@@ -74,7 +74,7 @@ void UdpClient::gameLoop() noexcept
             looping_ = false;
             break;
         }
-        if (input != 0) { dataToSend_.push({ (uint16_t)input }); }
+        if (input != 0) { dataToSend_.push({ (uint8_t)input }); }
         game_.run();
     }
 

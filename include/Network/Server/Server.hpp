@@ -43,7 +43,7 @@ class Server
     std::thread                     gameThread_;
     std::thread                     networkThread_;
     RType                           gameInstance_;
-    static constexpr int            CLOSE_VALUE = 65535;
+    static constexpr int            CLOSE_VALUE = 255;
 
     // methods
     void                  receive();

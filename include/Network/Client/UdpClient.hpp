@@ -44,7 +44,7 @@ class UdpClient
     std::thread                     networkThread_;
     std::queue<RawData>             dataToSend_ = {};
     Game                            game_;
-    static constexpr int            CLOSE_VALUE = 65535;
+    static constexpr int            CLOSE_VALUE = 255;
 
     // methods
     void    receive();

@@ -74,6 +74,7 @@ void Server::gameLoop() noexcept
         } else {
             auto&   entities = gameInstance_.getManager()->getEntities();
             RawData dataToSend;
+            dataToSend.reserve(entities.size() * 10);
             for (auto& entity : entities) {
                 if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
 
