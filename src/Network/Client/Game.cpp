@@ -12,6 +12,19 @@
 #include "DrawableComponent.hpp"
 #include "TransformComponent.hpp"
 
+/**
+ * Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
+ *     : dataReceived_(packets)
+ *     , mutexForPacket_(mutex)
+ * {
+ *     manager_ = std::make_unique<EntityManager>();
+ *     lib_     = std::make_unique<Lib>();
+ * }
+ *
+ * @param GamePacket This is a struct that contains the data that is sent from the
+ * server to the client.
+ * @param mutex This is a mutex that is used to lock the queue of packets.
+ */
 Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     : dataReceived_(packets)
     , mutexForPacket_(mutex)
@@ -20,6 +33,9 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     lib_     = std::make_unique<Lib>();
 }
 
+/**
+ * It clears the window, deserializes the packets received, and draws the entities
+ */
 void Game::run() noexcept
 {
     lib_->getWindow().clear();
@@ -50,21 +66,45 @@ void Game::run() noexcept
     lib_->getWindow().refresh();
 }
 
+/**
+ * This function returns a reference to the Lib object that is stored in the Game
+ * object.
+ *
+ * @return A reference to the lib_ object.
+ */
 Lib& Game::getLib() noexcept
 {
     return *lib_;
 }
 
+/**
+ * Add a sprite to the game.
+ *
+ * @param path The path to the image file.
+ * @param x The x position of the sprite
+ * @param y The y coordinate of the sprite.
+ */
 void Game::addSprite(std::string path, int x, int y) noexcept
 {
     sprites_.emplace_back(std::make_unique<Sprite>(path, x, y));
 }
 
+/**
+ * Return a pointer to the last sprite in the game.
+ *
+ * @return A pointer to the last sprite in the vector.
+ */
 Sprite* Game::getLastSprite() noexcept
 {
     return sprites_.back().get();
 }
 
+/**
+ * It deserializes a packet and creates an entity if it doesn't exist, or updates
+ * it if it does
+ *
+ * @param packet the packet received from the server
+ */
 void Game::deserializeEntity(GamePacket packet) noexcept
 {
     auto m_entity = manager_->getEntity(packet.id);

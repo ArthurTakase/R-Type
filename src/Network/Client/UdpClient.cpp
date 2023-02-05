@@ -16,6 +16,13 @@
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
+/**
+ * It creates a socket, a selector, a deserializer, a game, and two threads.
+ *
+ * @param serverAddress The address of the server to connect to.
+ * @param clientPort The port that the client will use to communicate with the
+ * server.
+ */
 [[nodiscard]] UdpClient::UdpClient(Address serverAddress, Address::Port clientPort)
     : serverAddress_(serverAddress)
     , socket_(SocketFactory::createSocket(clientPort))
@@ -29,25 +36,38 @@
     networkThread_ = std::thread([&]() { communicate(); });
 }
 
+/**
+ * It stops the looping_ variable from being true.
+ */
 void UdpClient::stop() noexcept
 {
     looping_ = false;
 }
 
+/**
+ * It resets the looping_ variable to true.
+ */
 void UdpClient::reset() noexcept
 {
     looping_ = true;
 }
 
+/**
+ * The run function joins the game and network threads
+ */
 void UdpClient::run()
 {
     gameThread_.join();
     networkThread_.join();
 }
 
+/**
+ * It waits for data to be received or sent, and then calls the appropriate
+ * function
+ */
 void UdpClient::communicate() noexcept
 {
-    RawData data = { 12 };
+    RawData data = {12};
     dataToSend_.push(data);
 
     while (looping_) {
@@ -61,6 +81,10 @@ void UdpClient::communicate() noexcept
     }
 }
 
+/**
+ * It runs the game loop, and when the user presses the escape key, it sends a
+ * CLOSE_VALUE to the server
+ */
 void UdpClient::gameLoop() noexcept
 {
     auto& lib = game_.getLib();
@@ -72,14 +96,17 @@ void UdpClient::gameLoop() noexcept
             looping_ = false;
             break;
         }
-        if (input != 0) { dataToSend_.push({ (uint8_t)input }); }
+        if (input != 0) { dataToSend_.push({(uint8_t)input}); }
         game_.run();
     }
 
-    dataToSend_.push({ CLOSE_VALUE });
+    dataToSend_.push({CLOSE_VALUE});
     lib.getWindow().close();
 }
 
+/**
+ * It receives data from the socket and handles it
+ */
 void UdpClient::receive()
 {
     try {
@@ -90,6 +117,9 @@ void UdpClient::receive()
     }
 }
 
+/**
+ * If there's data to send, send it
+ */
 void UdpClient::send()
 {
     if (dataToSend_.size() != 0) {
@@ -103,6 +133,11 @@ void UdpClient::send()
     }
 }
 
+/**
+ * It returns the first element of the queue and removes it from the queue.
+ *
+ * @return A RawData object.
+ */
 RawData UdpClient::getDataFromQueue() noexcept
 {
     RawData blob = dataToSend_.front();
@@ -110,6 +145,14 @@ RawData UdpClient::getDataFromQueue() noexcept
     return (blob);
 }
 
+/**
+ * It takes a vector of bytes, and if the size of the vector is a multiple of 12,
+ * it will create a GamePacket for each 12 bytes, and push it into a queue
+ *
+ * @param infos the data received
+ *
+ * @return A vector of bytes
+ */
 void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() < 2) return;

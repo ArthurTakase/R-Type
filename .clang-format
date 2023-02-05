@@ -65,4 +65,3 @@ AllowShortCaseLabelsOnASingleLine: true
 AllowShortFunctionsOnASingleLine: Inline
 AllowShortIfStatementsOnASingleLine: Always
 AllowShortLoopsOnASingleLine: true
-Cpp11BracedListStyle: false

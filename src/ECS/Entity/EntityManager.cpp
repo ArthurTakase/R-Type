@@ -30,7 +30,7 @@ void EntityManager::createPlayer() noexcept
     player->addComponent(StatComponent(100, 5));
     player->addComponent(MouvementComponent(0, 0, 1.0));
     player->getComponent<HitboxComponent>()->setOnCollision(std::function<void(std::unique_ptr<Entity> & entity)>{
-        [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; } });
+        [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; }});
     player->addComponent(DrawableComponent(0, 0, 36, 36, 5));
     entities_.emplace_back(std::move(player));
 }
@@ -55,11 +55,11 @@ void EntityManager::createBackground(int x) noexcept
     std::unique_ptr<Entity> background        = std::make_unique<Entity>(createId());
     auto                    behaviorComponent = BehaviorComponent();
     behaviorComponent.setOnUpdate(
-        std::function<void(int key, std::unique_ptr<Entity>& entity)>{ [](int key, std::unique_ptr<Entity>& entity) {
+        std::function<void(int key, std::unique_ptr<Entity>& entity)>{[](int key, std::unique_ptr<Entity>& entity) {
             auto transform = entity->getComponent<TransformComponent>();
 
             if (transform->getX() <= -255) { transform->setX(255); }
-        } });
+        }});
 
     background->addComponent(TransformComponent(x, 0));
     background->addComponent(DrawableComponent(0, 0, 255, 255, BACKGROUND_ID));

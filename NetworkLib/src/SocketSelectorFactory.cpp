@@ -10,6 +10,12 @@
 #include "LinuxSocketSelector.hpp"
 #include "WindowsSocketSelector.hpp"
 
+/**
+ * If the OS is Windows, return a WindowsSocketSelector, otherwise return a
+ * LinuxSocketSelector.
+ *
+ * @return A unique pointer to a SocketSelector object.
+ */
 std::unique_ptr<SocketSelector> SocketSelectorFactory::createSocketSelector()
 {
 #ifdef WIN32

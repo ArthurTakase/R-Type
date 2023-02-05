@@ -67,7 +67,7 @@ void Server::gameLoop() noexcept
     while (looping_) {
         end_ = std::chrono::system_clock::now();
         if (std::chrono::duration_cast<std::chrono::milliseconds>(end_ - start_).count() >= tickrate_) {
-            start_ = { std::chrono::high_resolution_clock::now() };
+            start_ = {std::chrono::high_resolution_clock::now()};
 
             if (clients_.size() == 0 && gameInstance_.getManager().getEntities().size() == 0) {
                 stop();
@@ -111,7 +111,7 @@ bool Server::isKnownClient(Address address) const
 
 void Server::addClient(Address address) noexcept
 {
-    Client client{ .address = address };
+    Client client{.address = address};
     clients_.push_back(client);
 }
 

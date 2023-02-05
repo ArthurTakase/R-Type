@@ -10,6 +10,13 @@
 #include "LinuxSocket.hpp"
 #include "WindowsSocket.hpp"
 
+/**
+ * If the OS is Windows, create a WindowsSocket, otherwise create a LinuxSocket.
+ *
+ * @param port The port to bind the socket to.
+ *
+ * @return A unique pointer to an ISocket object.
+ */
 std::unique_ptr<ISocket> SocketFactory::createSocket(Address::Port port)
 {
 #ifdef WIN32
