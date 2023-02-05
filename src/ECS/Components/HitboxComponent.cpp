@@ -9,39 +9,76 @@
 
 #include <iostream>
 
+/**
+ * It's a constructor for the HitboxComponent class
+ *
+ * @param width The width of the hitbox.
+ * @param height The height of the hitbox.
+ */
 HitboxComponent::HitboxComponent(size_t width, size_t height)
-    : _width(width)
-    , _height(height)
+    : width_(width)
+    , height_(height)
 {
 }
 
+/**
+ * It returns the width of the hitbox
+ *
+ * @return The width of the hitbox.
+ */
 size_t HitboxComponent::getWidth() const noexcept
 {
-    return _width;
+    return width_;
 }
 
+/**
+ * It returns the height of the hitbox
+ *
+ * @return The height of the hitbox.
+ */
 size_t HitboxComponent::getHeight() const noexcept
 {
-    return _height;
+    return height_;
 }
 
+/**
+ * It sets the width of the hitbox
+ *
+ * @param width The width of the hitbox.
+ */
 void HitboxComponent::setWidth(size_t width) noexcept
 {
-    _width = width;
+    width_ = width;
 }
 
+/**
+ * It sets the height of the hitbox
+ *
+ * @param height The height of the hitbox.
+ */
 void HitboxComponent::setHeight(size_t height) noexcept
 {
-    _height = height;
+    height_ = height;
 }
 
+/**
+ * It sets the width and height of the hitbox
+ *
+ * @param width The width of the hitbox.
+ * @param height The height of the hitbox.
+ */
 void HitboxComponent::setSize(size_t width, size_t height) noexcept
 {
-    _width  = width;
-    _height = height;
+    width_  = width;
+    height_ = height;
 }
 
-std::pair<size_t, size_t> HitboxComponent::getSize() const noexcept
+void HitboxComponent::setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept
 {
-    return std::make_pair(_width, _height);
+    onCollision_ = onCollision;
+}
+
+void HitboxComponent::onCollision(std::unique_ptr<Entity>& entity) const noexcept
+{
+    onCollision_(entity);
 }

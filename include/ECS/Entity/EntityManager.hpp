@@ -10,44 +10,39 @@
 #include <memory>
 #include <vector>
 
+#include "BehaviorComponent.hpp"
+#include "DrawableComponent.hpp"
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
-#include "PositionComponent.hpp"
+#include "MouvementComponent.hpp"
+#include "StatComponent.hpp"
+#include "TransformComponent.hpp"
 
+/**
+ * @brief Object used to create the different entities of the software
+ */
 class EntityManager
 {
   public:
     EntityManager();
     ~EntityManager() noexcept                          = default;
-    EntityManager(const EntityManager& other) noexcept = delete;
+    EntityManager(const EntityManager& other) noexcept = default;
     EntityManager(EntityManager&& other) noexcept      = delete;
 
     EntityManager& operator=(const EntityManager& rhs) noexcept = delete;
     EntityManager& operator=(EntityManager&& rhs) noexcept      = delete;
 
-  private:
-    std::vector<std::shared_ptr<Entity>> _entities;
-
-  public:
     void createPlayer() noexcept;
     void createEnemy() noexcept;
+    void createBackground(int x) noexcept;
 
+    size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;
-    std::shared_ptr<Entity>               getEntity(size_t id) const noexcept;
-    std::vector<std::shared_ptr<Entity>>& getEntities() noexcept;
-
-    template <typename T, typename... Args>
-    std::vector<std::shared_ptr<Entity>> getEntsByComps()
-    {
-        std::vector<std::shared_ptr<Entity>> entities;
-
-        for (auto& entity : _entities)
-            if (entity.get()->hasComponents<T, Args...>()) { entities.push_back(entity); }
-
-        return entities;
-    }
+    Entity*                               getEntity(size_t id) const noexcept;
+    std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
+    void                                  addEntity(std::unique_ptr<Entity>&& entity) noexcept;
 
   private:
-    size_t get_id();
+    std::vector<std::unique_ptr<Entity>> entities_;
 };

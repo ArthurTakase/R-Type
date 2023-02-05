@@ -1,10 +1,7 @@
 CMakeFiles/
 CMakeCache.txt
 *.cmake
-Makefile
-!Findraylib.cmake
 _deps/
-bomberman
 .vscode/
 *.log
 build/
@@ -16,6 +13,14 @@ null.d
 .history
 /Save
 build
-src/Lib/libraylib_encapsulation.a
 *.a
 .vs/
+doxydoc/
+Debug
+R-Type
+asio-prefix
+asio-src
+googletest-build
+googletest-src
+runTests
+generate_compile_command
