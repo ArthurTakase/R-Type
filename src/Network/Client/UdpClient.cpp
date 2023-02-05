@@ -66,7 +66,7 @@ void UdpClient::communicate() noexcept
 void UdpClient::gameLoop() noexcept
 {
     auto& lib = game_.getLib();
-    lib->getWindow().open(600, 400, "Client RTYPE");
+    lib->getWindow().open(256, 256, "Client RTYPE");
 
     while (looping_) {
         auto input = lib->getWindow().getKeyPressed();
