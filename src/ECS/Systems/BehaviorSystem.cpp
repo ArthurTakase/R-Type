@@ -32,7 +32,17 @@ void BehaviorSystem::run()
 
     for (; !it_.isEnd(); ++it_) {
         assert((it_.get()->hasComponents<BehaviorComponent>()));
-        it_.get()->getComponent<BehaviorComponent>()->onUpdate();
+        it_.get()->getComponent<BehaviorComponent>()->onUpdate(key_);
     }
     it_.reset();
+}
+
+void BehaviorSystem::setKey(int key) noexcept
+{
+    key_ = key;
+}
+
+int BehaviorSystem::getKey() const noexcept
+{
+    return key_;
 }

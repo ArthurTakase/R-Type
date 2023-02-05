@@ -42,6 +42,7 @@ class UdpClient
     std::thread                     networkThread_;
     std::queue<RawData>             dataToSend_ = {};
     Game                            game_;
+    std::vector<std::string>        sprites_ = {};
 
     // methods
     void    receive();
@@ -64,4 +65,5 @@ class UdpClient
         int                    offsetX,
         int                    offsetY,
         int                    id) noexcept;
+    void loadSprites() noexcept;
 };

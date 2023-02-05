@@ -36,8 +36,8 @@ class TransformComponent : public IComponent
     void  setScale(float x, float y) noexcept;
 
   private:
-    int   _x;
-    int   _y;
-    float _scaleX = 1.0;
-    float _scaleY = 1.0;
+    int   x_;
+    int   y_;
+    float scaleX_ = 1.0;
+    float scaleY_ = 1.0;
 };

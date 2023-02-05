@@ -14,23 +14,18 @@
 
 Game::Game()
 {
-    manager_         = std::make_unique<EntityManager>();
-    mouvementSystem_ = std::make_unique<MouvementSystem>(manager_);
-    hitboxSystem_    = std::make_unique<HitboxSystem>(manager_);
-    behaviorSystem_  = std::make_unique<BehaviorSystem>(manager_);
-    lib_             = std::make_unique<Lib>();
+    manager_ = std::make_unique<EntityManager>();
+    lib_     = std::make_unique<Lib>();
 }
 
 void Game::run() const noexcept
 {
-    mouvementSystem_->run();
-    hitboxSystem_->run();
-    behaviorSystem_->run();
-
     lib_->getWindow().clear();
 
     for (auto& entity : manager_->getEntities()) {
         if (!entity->hasComponent<TransformComponent>() || !entity->hasComponent<DrawableComponent>()) { continue; }
+
+        std::cout << "Entity has both components" << std::endl;
 
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
@@ -45,6 +40,8 @@ void Game::run() const noexcept
 
         lib_->getWindow().draw(drawable->getSprite());
     }
+
+    lib_->getWindow().refresh();
 }
 
 std::unique_ptr<EntityManager>& Game::getManager() noexcept

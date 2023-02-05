@@ -7,11 +7,8 @@
 
 #pragma once
 
-#include "BehaviorSystem.hpp"
 #include "EntityManager.hpp"
-#include "HitboxSystem.hpp"
 #include "Lib.hpp"
-#include "MouvementSystem.hpp"
 
 class Game
 {
@@ -32,9 +29,6 @@ class Game
 
   private:
     std::unique_ptr<EntityManager>       manager_;
-    std::unique_ptr<MouvementSystem>     mouvementSystem_;
-    std::unique_ptr<HitboxSystem>        hitboxSystem_;
-    std::unique_ptr<BehaviorSystem>      behaviorSystem_;
     std::unique_ptr<Lib>                 lib_;
     std::vector<std::unique_ptr<Sprite>> sprites_ = {};
 };

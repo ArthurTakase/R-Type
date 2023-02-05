@@ -50,7 +50,7 @@ class Server
     void                  sendToClient(Client& client, RawData blob);
     bool                  isKnownClient(Address address) const;
     void                  addClient(Address address) noexcept;
-    void                  handleData(ReceivedInfos infos) const noexcept;
+    void                  handleData(ReceivedInfos infos) noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
     void                  checkData() noexcept;
 

@@ -14,6 +14,8 @@
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
+#define CLOSE_VALUE 65535
+
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
     , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
@@ -58,17 +60,42 @@ void Server::gameLoop() noexcept
 {
     // TODO : insert game loop
     std::cout << "game loop start" << std::endl;
+
+    gameInstance_.getManager()->createPlayer();
+    gameInstance_.getManager()->createEnemy();
+    gameInstance_.getManager()->createEnemy();
+    gameInstance_.getManager()->createEnemy();
+
     while (looping_) {
         if (looping_ == false && clients_.size() == 0) {
             // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
             // window est fermée
             stop();
         } else {
-            // std::cout << "coucou" << std::endl;
-            // auto&   entities = gameInstance_.getManager()->getEntities();
-            // RawData dataToSend;
-            // for (auto& entities : entities) { dataToSend.emplace_back(10); }
-            for (auto& client : clients_) { client.dataToSend.push({ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }); }
+            auto&   entities = gameInstance_.getManager()->getEntities();
+            RawData dataToSend;
+            for (auto& entity : entities) {
+                if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
+
+                auto drawable  = entity->getComponent<DrawableComponent>();
+                auto transform = entity->getComponent<TransformComponent>();
+
+                dataToSend.emplace_back(transform->getX());
+                dataToSend.emplace_back(transform->getY());
+                dataToSend.emplace_back(drawable->getTextureId());
+                dataToSend.emplace_back(drawable->getWidth());
+                dataToSend.emplace_back(drawable->getHeight());
+                dataToSend.emplace_back(transform->getScaleX() * 10);
+                dataToSend.emplace_back(transform->getScaleY() * 10);
+                dataToSend.emplace_back(drawable->getOffsetX());
+                dataToSend.emplace_back(drawable->getOffsetY());
+                dataToSend.emplace_back(entity->getId());
+            }
+
+            if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
+            std::cout << "";
+
+            for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
 
             // gameInstance_.run();
         }
@@ -126,8 +153,16 @@ RawData Server::getDataFromQueue(Client& client) noexcept
     return (blob);
 }
 
-void Server::handleData(ReceivedInfos infos) const noexcept
+void Server::handleData(ReceivedInfos infos) noexcept
 {
     for (auto& data : infos.data) { std::cout << (int)data << " "; }
     std::cout << std::endl;
+
+    if (infos.data.size() == 0) { return; }
+
+    if (infos.data[0] == CLOSE_VALUE) { std::cout << "CLIENT DISCONNECT" << std::endl; }
+
+    auto& behavior = gameInstance_.getBehaviorSystem();
+    behavior->setKey(infos.data[0]);
+    infos.data.clear();
 }

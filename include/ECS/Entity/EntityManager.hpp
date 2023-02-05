@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 
+#include "DrawableComponent.hpp"
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
@@ -41,5 +42,5 @@ class EntityManager
     void                                  addEntity(std::unique_ptr<Entity>& entity) noexcept;
 
   private:
-    std::vector<std::unique_ptr<Entity>> _entities;
+    std::vector<std::unique_ptr<Entity>> entities_;
 };

@@ -29,6 +29,6 @@ class StatComponent : public IComponent
     void setDamage(int damage) noexcept;
 
   private:
-    int _life;
-    int _damage;
+    int life_;
+    int damage_;
 };

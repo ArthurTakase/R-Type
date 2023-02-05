@@ -21,6 +21,8 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
 
+file(COPY assets/ DESTINATION assets/)
+
 # Libs
 add_subdirectory(Error)
 add_subdirectory(NetworkLib)

@@ -45,7 +45,7 @@ ISocket::Fd WindowsSocket::getSocketFd() const noexcept
 
 Address WindowsSocket::winAddressToAddress(SOCKADDR_IN address) noexcept
 {
-    Address converted(address.sin_port, address.sin_addr.s_addr);
+    Address converted{ .port = ntohs(address.sin_port), .ip = ntohl(address.sin_addr.s_addr) };
     return converted;
 }
 
@@ -66,7 +66,6 @@ Address WindowsSocket::getAddress() const noexcept
 
 void WindowsSocket::send(const void* data, int data_size, Address destAddr) const
 {
-    std::cout << "SENDING DATA" << std::endl;
     SOCKADDR_IN winDestAddr = addressToWinAddress(destAddr);
 
     int sent_bytes = sendto(socketFd_,
@@ -77,7 +76,7 @@ void WindowsSocket::send(const void* data, int data_size, Address destAddr) cons
         sizeof(winDestAddr));
 
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
-    std::cout << "DATA SENT" << std::endl;
+    std::cout << "SENDING DATA" << std::endl;
 }
 
 ReceivedInfos WindowsSocket::receive() const

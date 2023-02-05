@@ -21,14 +21,15 @@ EntityManager::EntityManager() {}
 void EntityManager::createPlayer() noexcept
 {
     // TODO add components before add Entity to list
-    _entities.emplace_back(std::make_unique<Entity>(createId()));
-    _entities.back()->addComponent(TransformComponent(10, 8));
-    _entities.back()->addComponent(HitboxComponent(15, 21));
-    _entities.back()->addComponent(StatComponent(100, 5));
-    _entities.back()->addComponent(MouvementComponent(1, 0, 1));
-    _entities.back()->getComponent<HitboxComponent>()->setOnCollision(
+    entities_.emplace_back(std::make_unique<Entity>(createId()));
+    entities_.back()->addComponent(TransformComponent(10, 8));
+    entities_.back()->addComponent(HitboxComponent(15, 21));
+    entities_.back()->addComponent(StatComponent(100, 5));
+    entities_.back()->addComponent(MouvementComponent(1, 0, 1.0));
+    entities_.back()->getComponent<HitboxComponent>()->setOnCollision(
         std::function<void(std::unique_ptr<Entity> & entity)>{
             [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; } });
+    entities_.back()->addComponent(DrawableComponent(0, 0, 10, 10, 5));
 }
 
 /**
@@ -37,8 +38,9 @@ void EntityManager::createPlayer() noexcept
 void EntityManager::createEnemy() noexcept
 {
     // TODO add components before add Entity to list
-    _entities.emplace_back(std::make_unique<Entity>(createId()));
-    _entities.back()->addComponent(TransformComponent(10, 8));
+    entities_.emplace_back(std::make_unique<Entity>(createId()));
+    entities_.back()->addComponent(TransformComponent(10, 8));
+    entities_.back()->addComponent(DrawableComponent(0, 0, 10, 10, 5));
 }
 
 /**
@@ -50,9 +52,9 @@ void EntityManager::createEnemy() noexcept
  */
 bool EntityManager::removeEntity(size_t id) noexcept
 {
-    for (auto it = _entities.begin(); it != _entities.end(); it++) {
+    for (auto it = entities_.begin(); it != entities_.end(); it++) {
         if ((*it)->getId() == id) {
-            _entities.erase(it);
+            entities_.erase(it);
             return true;
         }
     }
@@ -68,7 +70,7 @@ bool EntityManager::removeEntity(size_t id) noexcept
  */
 Entity* EntityManager::getEntity(size_t id) const noexcept
 {
-    for (auto& entity : _entities) {
+    for (auto& entity : entities_) {
         if (entity->getId() == id) { return entity.get(); }
     }
     return nullptr;
@@ -81,7 +83,7 @@ Entity* EntityManager::getEntity(size_t id) const noexcept
  */
 std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
 {
-    return _entities;
+    return entities_;
 }
 
 /**
@@ -91,8 +93,8 @@ std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
  */
 size_t EntityManager::createId() const noexcept
 {
-    if (_entities.empty()) { return 0; }
-    return _entities[_entities.size() - 1]->getId() + 1;
+    if (entities_.empty()) { return 0; }
+    return entities_[entities_.size() - 1]->getId() + 1;
 }
 
 /**
@@ -102,5 +104,5 @@ size_t EntityManager::createId() const noexcept
  */
 void EntityManager::addEntity(std::unique_ptr<Entity>& entity) noexcept
 {
-    _entities.emplace_back(std::move(entity));
+    entities_.emplace_back(std::move(entity));
 }

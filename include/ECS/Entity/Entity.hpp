@@ -34,8 +34,8 @@ class Entity
     std::vector<std::unique_ptr<IComponent>>& getComponents() noexcept;
 
   private:
-    size_t                                   _id;
-    std::vector<std::unique_ptr<IComponent>> _components = {};
+    size_t                                   id_;
+    std::vector<std::unique_ptr<IComponent>> components_ = {};
 
   public:
     /**
@@ -48,7 +48,7 @@ class Entity
     void addComponent(const T& component) noexcept
     {
         auto component_ptr = std::make_unique<T>(component);
-        _components.push_back(std::move(component_ptr));
+        components_.push_back(std::move(component_ptr));
     };
 
     /**
@@ -59,7 +59,7 @@ class Entity
     template <typename T>
     T* getComponent() noexcept
     {
-        for (auto& i : _components) {
+        for (auto& i : components_) {
             if (Type::instanceOf<T>(i.get())) { return dynamic_cast<T*>(i.get()); }
         }
         return nullptr;
@@ -75,9 +75,9 @@ class Entity
     template <typename T>
     bool removeComponent() noexcept
     {
-        for (size_t i = 0; i < _components.size(); i++) {
-            if (Type::instanceOf<T>(_components[i].get())) {
-                _components.erase(_components.begin() + i);
+        for (size_t i = 0; i < components_.size(); i++) {
+            if (Type::instanceOf<T>(components_[i].get())) {
+                components_.erase(components_.begin() + i);
                 return true;
             }
         }
@@ -94,7 +94,7 @@ class Entity
     template <typename T>
     bool hasComponent() noexcept
     {
-        for (auto& i : _components)
+        for (auto& i : components_)
             if (Type::instanceOf<T>(i.get())) { return true; }
         return false;
     };

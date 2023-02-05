@@ -28,6 +28,8 @@
     networkThread_ = std::thread([&]() { communicate(); });
 
     std::cout << "UdpClient created" << std::endl;
+
+    loadSprites();
 }
 
 void UdpClient::stop() noexcept
@@ -114,8 +116,6 @@ RawData UdpClient::getDataFromQueue() noexcept
 
 void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
-    std::cout << "DATA RECEIVED" << std::endl;
-
     if (infos.data.size() == 0) return;
     if (infos.data.size() % 10 == 0) {
         for (int i = 0; i < infos.data.size(); i += 10) {
@@ -131,6 +131,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 infos.data[i + 9]);
         }
     }
+    infos.data.clear();
 }
 
 void UdpClient::deserializeEntity(int x,
@@ -144,17 +145,19 @@ void UdpClient::deserializeEntity(int x,
     int                               offsetY,
     int                               id) noexcept
 {
+    std::cout << "Deserialize entity" << std::endl;
     auto& manager  = game_.getManager();
     auto  m_entity = manager->getEntity(id);
 
     if (m_entity == nullptr) {
+        std::cout << "Create entity" << std::endl;
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager->createId());
 
         auto transform = TransformComponent(x, y);
         transform.setScale(scaleX, scaleY);
 
         auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
-        game_.addSprite("assets/spritesheet.png", x, y);
+        game_.addSprite(sprites_[idSprite], x, y);
         drawable.setSprite(game_.getLastSprite());
 
         entity->addComponent(transform);
@@ -162,6 +165,7 @@ void UdpClient::deserializeEntity(int x,
 
         manager->addEntity(entity);
     } else {
+        std::cout << "Update entity" << std::endl;
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 
@@ -174,4 +178,9 @@ void UdpClient::deserializeEntity(int x,
         drawable->setHeight(height);
         drawable->setTextureId(idSprite);
     }
+}
+
+void UdpClient::loadSprites() noexcept
+{
+    for (int i = 0; i < 43; i++) { sprites_.emplace_back("assets/r-typesheet" + std::to_string(i + 1) + ".gif"); }
 }

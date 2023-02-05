@@ -43,7 +43,7 @@ ISocket::Fd LinuxSocket::getSocketFd() const noexcept
 
 Address LinuxSocket::linuxAddressToAddress(sockaddr_in address) noexcept
 {
-    Address converted{ .port = address.sin_port, .ip = address.sin_addr.s_addr };
+    Address converted{ .port = ntohs(address.sin_port), .ip = ntohl(address.sin_addr.s_addr) };
     return converted;
 }
 
@@ -64,14 +64,13 @@ Address LinuxSocket::getAddress() const noexcept
 
 void LinuxSocket::send(const void* data, int data_size, Address destAddr) const
 {
-    std::cout << "SENDING DATA TO " << destAddr.ip << ":" << destAddr.port << std::endl;
     sockaddr_in linuxDestAddr = addressToLinuxAddress(destAddr);
 
     int sent_bytes =
         sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&linuxDestAddr), sizeof(linuxDestAddr));
 
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
-    std::cout << "DATA SENT" << std::endl;
+    std::cout << "SENDING DATA TO " << destAddr.ip << ":" << destAddr.port << std::endl;
 }
 
 ReceivedInfos LinuxSocket::receive() const
@@ -90,6 +89,7 @@ ReceivedInfos LinuxSocket::receive() const
     if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client"); }
 
     infos.address = linuxAddressToAddress(address);
+    std::cout << "RECEIVED DATA FROM " << infos.address.ip << ":" << infos.address.port << std::endl;
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);
     return infos;
 }

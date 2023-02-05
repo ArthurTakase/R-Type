@@ -16,8 +16,8 @@
  * @param height The height of the hitbox.
  */
 HitboxComponent::HitboxComponent(size_t width, size_t height)
-    : _width(width)
-    , _height(height)
+    : width_(width)
+    , height_(height)
 {
 }
 
@@ -28,7 +28,7 @@ HitboxComponent::HitboxComponent(size_t width, size_t height)
  */
 size_t HitboxComponent::getWidth() const noexcept
 {
-    return _width;
+    return width_;
 }
 
 /**
@@ -38,7 +38,7 @@ size_t HitboxComponent::getWidth() const noexcept
  */
 size_t HitboxComponent::getHeight() const noexcept
 {
-    return _height;
+    return height_;
 }
 
 /**
@@ -48,7 +48,7 @@ size_t HitboxComponent::getHeight() const noexcept
  */
 void HitboxComponent::setWidth(size_t width) noexcept
 {
-    _width = width;
+    width_ = width;
 }
 
 /**
@@ -58,7 +58,7 @@ void HitboxComponent::setWidth(size_t width) noexcept
  */
 void HitboxComponent::setHeight(size_t height) noexcept
 {
-    _height = height;
+    height_ = height;
 }
 
 /**
@@ -69,16 +69,16 @@ void HitboxComponent::setHeight(size_t height) noexcept
  */
 void HitboxComponent::setSize(size_t width, size_t height) noexcept
 {
-    _width  = width;
-    _height = height;
+    width_  = width;
+    height_ = height;
 }
 
 void HitboxComponent::setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept
 {
-    _onCollision = onCollision;
+    onCollision_ = onCollision;
 }
 
 void HitboxComponent::onCollision(std::unique_ptr<Entity>& entity) const noexcept
 {
-    _onCollision(entity);
+    onCollision_(entity);
 }
