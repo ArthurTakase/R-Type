@@ -38,7 +38,7 @@ class WindowsFdSet
 class WindowsSocketSelector : public SocketSelector
 {
   public:
-    WindowsSocketSelector(int socketFd) noexcept;
+    WindowsSocketSelector() noexcept;
     WindowsSocketSelector(const WindowsSocketSelector& other) noexcept = delete;
     WindowsSocketSelector(WindowsSocketSelector&& other) noexcept      = default;
     ~WindowsSocketSelector() noexcept                                  = default;
@@ -46,9 +46,9 @@ class WindowsSocketSelector : public SocketSelector
     WindowsSocketSelector& operator=(const WindowsSocketSelector& rhs) noexcept = delete;
     WindowsSocketSelector& operator=(WindowsSocketSelector&& rhs) noexcept      = default;
 
-    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    bool isSet(ISocket& socket, Operation type) const noexcept final;
+    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    bool isSet(ISocket& socket, Operation type) const final;
     void select(bool isRead, bool isWrite, bool isExcept) final;
     void clear(bool isRead, bool isWrite, bool isExcept) noexcept final;
 

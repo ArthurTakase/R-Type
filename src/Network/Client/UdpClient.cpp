@@ -19,7 +19,7 @@
 [[nodiscard]] UdpClient::UdpClient(Address serverAddress, Address::Port clientPort)
     : serverAddress_(serverAddress)
     , socket_(SocketFactory::createSocket(clientPort))
-    , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
+    , selector_(SocketSelectorFactory::createSocketSelector())
     , deserializer_(std::make_unique<Deserializer>())
 {
     selector_->add(*socket_, true, true, false);

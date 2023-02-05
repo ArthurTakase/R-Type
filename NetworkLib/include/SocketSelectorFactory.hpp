@@ -21,7 +21,7 @@ class SocketSelectorFactory
     SocketSelectorFactory& operator=(const SocketSelectorFactory& rhs) noexcept = delete;
     SocketSelectorFactory& operator=(SocketSelectorFactory&& rhs) noexcept      = delete;
 
-    static std::unique_ptr<SocketSelector> createSocketSelector(int socketFd);
+    static std::unique_ptr<SocketSelector> createSocketSelector();
 
   protected:
   private:

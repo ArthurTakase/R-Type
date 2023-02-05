@@ -16,7 +16,7 @@
 
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
-    , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
+    , selector_(SocketSelectorFactory::createSocketSelector())
 {
     selector_->add(*socket_, true, true, false);
 

@@ -23,11 +23,11 @@ class SocketSelector
     SocketSelector& operator=(const SocketSelector& rhs) noexcept = default;
     SocketSelector& operator=(SocketSelector&& rhs) noexcept      = default;
 
-    virtual void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept    = 0;
-    virtual void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept = 0;
-    virtual bool isSet(ISocket& socket, Operation type) const noexcept                      = 0;
-    virtual void select(bool isRead, bool isWrite, bool isExcept)                           = 0;
-    virtual void clear(bool isRead, bool isWrite, bool isExcept) noexcept                   = 0;
+    virtual void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept)    = 0;
+    virtual void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) = 0;
+    virtual bool isSet(ISocket& socket, Operation type) const                      = 0;
+    virtual void select(bool isRead, bool isWrite, bool isExcept)                  = 0;
+    virtual void clear(bool isRead, bool isWrite, bool isExcept) noexcept          = 0;
 
   protected:
   private:

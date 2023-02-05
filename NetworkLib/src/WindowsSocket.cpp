@@ -8,8 +8,6 @@
 #ifdef WIN32
 #include "WindowsSocket.hpp"
 
-#include <iostream> // TODO A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-
 #include "Error.hpp"
 
 WindowsSocket::WindowsSocket(Address::Port port)
@@ -38,7 +36,7 @@ WindowsSocket::~WindowsSocket() noexcept
     closesocket(socketFd_);
 }
 
-ISocket::Fd WindowsSocket::getSocketFd() const noexcept
+ISocket::Fd WindowsSocket::getSocketFd() noexcept
 {
     return socketFd_;
 }
@@ -78,7 +76,7 @@ void WindowsSocket::send(const void* data, int data_size, Address destAddr) cons
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
 }
 
-ReceivedInfos WindowsSocket::receive() const
+ReceivedInfos WindowsSocket::receive()
 {
     SOCKADDR_IN   address = { 0 };
     socklen_t     addrLen = sizeof(address);
@@ -95,10 +93,6 @@ ReceivedInfos WindowsSocket::receive() const
 
     infos.address = winAddressToAddress(address);
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);
-
-    // TODO : quand on va récupérer la data sous forme de bitset, il faut qu'un emplacement (toujours le même) soit
-    // réservé pour l'ID du client,
-    //  comme ça on pourra le repérer facilement dans mon vecteur de clients stocké dans mon serveur
     return infos;
 }
 

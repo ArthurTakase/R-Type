@@ -10,7 +10,6 @@
 
 #include "Error.hpp"
 
-// fd_set handler for windows :
 WindowsFdSet::WindowsFdSet() noexcept
 {
     FD_ZERO(&fdSet_);
@@ -41,23 +40,29 @@ void WindowsFdSet::clear() noexcept
     FD_ZERO(&fdSet_);
 }
 
-// wrapper for all fd_set :
 WindowsSocketSelector::WindowsSocketSelector(int socketFd) noexcept
     : nfds_(socketFd)
 {
 }
-void WindowsSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept
+void WindowsSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
-    if (isRead) readFds_.add(socket.getSocketFd());
-    if (isWrite) writeFds_.add(socket.getSocketFd());
-    if (isExcept) exceptFds_.add(socket.getSocketFd());
+    auto windowsSocket = dynamic_cast<windowsSocket*>(&socket);
+    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+
+    if (isRead) readFds_.add(windowsSocket.getSocketFd());
+    if (isWrite) writeFds_.add(windowsSocket.getSocketFd());
+    if (isExcept) exceptFds_.add(windowsSocket.getSocketFd());
+    if (nfds_ < windowsSocket.getSocketFd() + 1) nfds_ = windowsSocket.getSocketFd() + 1;
 }
 
-void WindowsSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept
+void WindowsSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
-    if (isRead) readFds_.remove(socket.getSocketFd());
-    if (isWrite) writeFds_.remove(socket.getSocketFd());
-    if (isExcept) exceptFds_.remove(socket.getSocketFd());
+    auto windowsSocket = dynamic_cast<windowsSocket*>(&socket);
+    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+
+    if (isRead) readFds_.remove(windowsSocket.getSocketFd());
+    if (isWrite) writeFds_.remove(windowsSocket.getSocketFd());
+    if (isExcept) exceptFds_.remove(windowsSocket.getSocketFd());
 }
 
 bool WindowsSocketSelector::isSet(ISocket& socket, Operation type) const noexcept

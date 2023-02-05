@@ -9,8 +9,6 @@
 
 #include "LinuxSocket.hpp"
 
-#include <iostream> // TODO A SUPPRIMER QUAND LE CODE SERA FONCTIONNEL
-
 #include "Error.hpp"
 
 LinuxSocket::LinuxSocket(Address::Port port)
@@ -18,7 +16,6 @@ LinuxSocket::LinuxSocket(Address::Port port)
     socketFd_ = socket(AF_INET, SOCK_DGRAM, 0);
 
     if (socketFd_ < 1) { throw InitError("Socket initialization failed."); }
-    std::cout << "Socket created" << std::endl;
 
     // make the socket listen to a port passed in parameter
     address_.sin_port        = htons(port);
@@ -72,7 +69,7 @@ void LinuxSocket::send(const void* data, int data_size, Address destAddr) const
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
 }
 
-ReceivedInfos LinuxSocket::receive() const
+ReceivedInfos LinuxSocket::receive()
 {
     sockaddr_in   address = { 0 };
     socklen_t     addrLen = sizeof(address);

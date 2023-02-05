@@ -10,7 +10,6 @@
 
 #include "Error.hpp"
 
-// fd_set handler for linux :
 LinuxFdSet::LinuxFdSet() noexcept
 {
     FD_ZERO(&fdSet_);
@@ -41,31 +40,48 @@ void LinuxFdSet::clear() noexcept
     FD_ZERO(&fdSet_);
 }
 
-// wrapper for all fd_set :
-LinuxSocketSelector::LinuxSocketSelector(int socketFd) noexcept
-    : nfds_(socketFd)
+void LinuxSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
+    auto linuxSocket = dynamic_cast<LinuxSocket*>(&socket);
+    if (linuxSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+
+    if (isRead) readFds_.add(linuxSocket->getSocketFd());
+    if (isWrite) writeFds_.add(linuxSocket->getSocketFd());
+    if (isExcept) exceptFds_.add(linuxSocket->getSocketFd());
+
+    sockets_.push_back(*linuxSocket);
+    if (nfds_ < linuxSocket->getSocketFd() + 1) nfds_ = linuxSocket->getSocketFd() + 1;
 }
 
-void LinuxSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept
+void LinuxSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
-    if (isRead) readFds_.add(socket.getSocketFd());
-    if (isWrite) writeFds_.add(socket.getSocketFd());
-    if (isExcept) exceptFds_.add(socket.getSocketFd());
+    auto linuxSocket = dynamic_cast<LinuxSocket*>(&socket);
+    if (linuxSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+
+    if (isRead) readFds_.remove(linuxSocket->getSocketFd());
+    if (isWrite) writeFds_.remove(linuxSocket->getSocketFd());
+    if (isExcept) exceptFds_.remove(linuxSocket->getSocketFd());
+
+    auto it = std::find_if(sockets_.begin(), sockets_.end(), [&linuxSocket](auto& socket) {
+        return (socket.get().getSocketFd() == linuxSocket->getSocketFd());
+    });
+    if (it != sockets_.end()) {
+        sockets_.erase(it);
+        it = std::max_element(sockets_.begin(), sockets_.end(), [](auto& socket1, auto& socket2) {
+            return (socket1.get().getSocketFd() < socket2.get().getSocketFd());
+        });
+        if (it != sockets_.end()) nfds_ = it->get().getSocketFd() + 1;
+    }
 }
 
-void LinuxSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept
+bool LinuxSocketSelector::isSet(ISocket& socket, Operation type) const
 {
-    if (isRead) readFds_.remove(socket.getSocketFd());
-    if (isWrite) writeFds_.remove(socket.getSocketFd());
-    if (isExcept) exceptFds_.remove(socket.getSocketFd());
-}
+    auto linuxSocket = dynamic_cast<LinuxSocket*>(&socket);
+    if (linuxSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
 
-bool LinuxSocketSelector::isSet(ISocket& socket, Operation type) const noexcept
-{
-    if (type == Operation::READ) return (readyReadFds_.isSet(socket.getSocketFd()));
-    if (type == Operation::WRITE) return (readyWriteFds_.isSet(socket.getSocketFd()));
-    if (type == Operation::EXCEPTION) return (readyExceptFds_.isSet(socket.getSocketFd()));
+    if (type == Operation::READ) return (readyReadFds_.isSet(linuxSocket->getSocketFd()));
+    if (type == Operation::WRITE) return (readyWriteFds_.isSet(linuxSocket->getSocketFd()));
+    if (type == Operation::EXCEPTION) return (readyExceptFds_.isSet(linuxSocket->getSocketFd()));
     return (false);
 }
 

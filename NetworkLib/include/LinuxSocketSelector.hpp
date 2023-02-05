@@ -12,6 +12,10 @@
 #ifdef __linux__
 #include <sys/select.h>
 
+#include <functional>
+
+#include "LinuxSocket.hpp"
+
 class LinuxFdSet
 {
   public:
@@ -38,7 +42,7 @@ class LinuxFdSet
 class LinuxSocketSelector : public SocketSelector
 {
   public:
-    LinuxSocketSelector(int socketFd) noexcept;
+    LinuxSocketSelector() noexcept                                 = default;
     LinuxSocketSelector(const LinuxSocketSelector& other) noexcept = delete;
     LinuxSocketSelector(LinuxSocketSelector&& other) noexcept      = default;
     ~LinuxSocketSelector() noexcept                                = default;
@@ -46,20 +50,22 @@ class LinuxSocketSelector : public SocketSelector
     LinuxSocketSelector& operator=(const LinuxSocketSelector& rhs) noexcept = delete;
     LinuxSocketSelector& operator=(LinuxSocketSelector&& rhs) noexcept      = default;
 
-    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    bool isSet(ISocket& socket, Operation type) const noexcept final;
+    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    bool isSet(ISocket& socket, Operation type) const final;
     void select(bool isRead, bool isWrite, bool isExcept) final;
     void clear(bool isRead, bool isWrite, bool isExcept) noexcept final;
 
   protected:
   private:
-    int        nfds_;
+    int        nfds_ = 0;
     LinuxFdSet readFds_;
     LinuxFdSet writeFds_;
     LinuxFdSet exceptFds_;
     LinuxFdSet readyReadFds_;
     LinuxFdSet readyWriteFds_;
     LinuxFdSet readyExceptFds_;
+
+    std::vector<std::reference_wrapper<LinuxSocket>> sockets_;
 };
 #endif
