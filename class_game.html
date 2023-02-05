@@ -153,6 +153,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p ><a class="el" href="class_game.html#ac1fb764a9810c1c93753dfbe1bddbe3d">Game::Game(std::queue&lt;GamePacket&gt;&amp; packets, std::mutex&amp; mutex)</a> : dataReceived_(packets) , mutexForPacket_(mutex) { manager_ = std::make_unique&lt;EntityManager&gt;(); lib_ = std::make_unique&lt;Lib&gt;(); }</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="struct_game_packet.html" title="This struct is used to process the data received from the server.">GamePacket</a></td><td>This is a struct that contains the data that is sent from the server to the client. </td></tr>
+    <tr><td class="paramname">mutex</td><td>This is a mutex that is used to lock the queue of packets. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -273,6 +281,15 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Add a sprite to the game.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to the image file. </td></tr>
+    <tr><td class="paramname">x</td><td>The x position of the sprite </td></tr>
+    <tr><td class="paramname">y</td><td>The y coordinate of the sprite. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -298,6 +315,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Return a pointer to the last sprite in the game.</p>
+<dl class="section return"><dt>Returns</dt><dd>A pointer to the last sprite in the vector. </dd></dl>
 
 </div>
 </div>
@@ -323,6 +342,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >This function returns a reference to the <a class="el" href="class_lib.html" title="This class is used to create a library.">Lib</a> object that is stored in the <a class="el" href="class_game.html" title="This class is used to create a game instance in the client.">Game</a> object.</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the lib_ object. </dd></dl>
 
 </div>
 </div>
@@ -400,6 +421,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It clears the window, deserializes the packets received, and draws the entities </p>
 
 </div>
 </div>
