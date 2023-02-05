@@ -22,6 +22,8 @@
     , selector_(SocketSelectorFactory::createSocketSelector())
 {
     selector_->add(*socket_, true, true, false);
+    end_   = std::chrono::system_clock::now();
+    start_ = std::chrono::high_resolution_clock::now();
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -61,24 +63,16 @@ void Server::gameLoop() noexcept
 {
     gameInstance_.getManager().createBackground(0);
     gameInstance_.getManager().createBackground(255);
-    gameInstance_.getManager().createPlayer();
-    // gameInstance_.getManager().createEnemy();
-    // gameInstance_.getManager().createEnemy();
-    // gameInstance_.getManager().createEnemy();
-
-    auto                                           end   = std::chrono::system_clock::now();
-    std::chrono::high_resolution_clock::time_point start = { std::chrono::high_resolution_clock::now() };
 
     while (looping_) {
-        end = std::chrono::system_clock::now();
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() >= tickrate_) {
-            start = { std::chrono::high_resolution_clock::now() };
+        end_ = std::chrono::system_clock::now();
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(end_ - start_).count() >= tickrate_) {
+            start_ = { std::chrono::high_resolution_clock::now() };
 
             if (clients_.size() == 0 && gameInstance_.getManager().getEntities().size() == 0) {
                 stop();
             } else {
-                auto& entities = gameInstance_.getManager().getEntities();
-                std::cout << (int)entities.size() << std::endl;
+                auto&   entities = gameInstance_.getManager().getEntities();
                 RawData dataToSend;
                 dataToSend.reserve(entities.size() * 12);
                 for (auto& entity : entities) {
@@ -132,8 +126,8 @@ void Server::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
-            std::cout << "new client" << std::endl;
             addClient(infoReceived.address);
+            gameInstance_.getManager().createPlayer();
         }
         handleData(infoReceived);
     } catch (const NetworkExecError& e) {

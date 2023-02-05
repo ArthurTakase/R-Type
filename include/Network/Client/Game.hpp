@@ -38,10 +38,10 @@ class Game
     Game& operator=(const Game& rhs) noexcept = delete;
     Game& operator=(Game&& rhs) noexcept      = delete;
 
-    void           run() noexcept;
-    Lib&           getLib() noexcept;
-    void           addSprite(std::string path, int x, int y) noexcept;
-    Sprite*        getLastSprite() noexcept;
+    void    run() noexcept;
+    Lib&    getLib() noexcept;
+    void    addSprite(std::string path, int x, int y) noexcept;
+    Sprite* getLastSprite() noexcept;
 
   private:
     std::unique_ptr<EntityManager>       manager_;
