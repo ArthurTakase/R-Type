@@ -143,20 +143,17 @@ void UdpClient::deserializeEntity(int x,
     int                               offsetY,
     int                               id) noexcept
 {
-    std::cout << "Deserialize entity" << std::endl;
     auto& manager  = game_.getManager();
     auto  m_entity = manager->getEntity(id);
 
     if (m_entity == nullptr) {
-        std::cout << "Create entity" << std::endl;
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager->createId());
 
         auto transform = TransformComponent(x, y);
         transform.setScale(scaleX, scaleY);
 
         auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
-        std::cout << "idSprite = " << idSprite << std::endl;
-        game_.addSprite("assets/r-typesheet" + std::to_string(idSprite) + ".gif", x, y);
+        game_.addSprite("assets/r-typesheet" + std::to_string(1) + ".gif", x, y);
         drawable.setSprite(game_.getLastSprite());
 
         entity->addComponent(transform);
@@ -164,7 +161,6 @@ void UdpClient::deserializeEntity(int x,
 
         manager->addEntity(entity);
     } else {
-        std::cout << "Update entity" << std::endl;
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 

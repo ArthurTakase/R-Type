@@ -49,10 +49,7 @@ void Server::communicate() noexcept
         } catch (const NetworkExecError& message) {
             std::cerr << message.what() << std::endl;
         }
-        if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) {
-            std::cout << "receive" << std::endl;
-            receive();
-        }
+        if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
     }
 }
@@ -122,7 +119,6 @@ void Server::addClient(Address address) noexcept
 
 void Server::receive()
 {
-    std::cout << "receive" << std::endl;
     try {
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {

@@ -76,7 +76,6 @@ void WindowsSocket::send(const void* data, int data_size, Address destAddr) cons
         sizeof(winDestAddr));
 
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
-    std::cout << "SENDING DATA" << std::endl;
 }
 
 ReceivedInfos WindowsSocket::receive() const

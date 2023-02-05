@@ -25,8 +25,6 @@ void Game::run() const noexcept
     for (auto& entity : manager_->getEntities()) {
         if (!entity->hasComponent<TransformComponent>() || !entity->hasComponent<DrawableComponent>()) { continue; }
 
-        std::cout << "Entity has both components" << std::endl;
-
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
 

@@ -88,7 +88,6 @@ ReceivedInfos LinuxSocket::receive() const
     if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client"); }
 
     infos.address = linuxAddressToAddress(address);
-    std::cout << "RECEIVED DATA FROM " << infos.address.ip << ":" << infos.address.port << std::endl;
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);
     return infos;
 }
