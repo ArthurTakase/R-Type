@@ -37,16 +37,10 @@ void Game::run() noexcept
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
 
-        if (drawable->getSprite() == nullptr) {
-            std::cout << "Sprite is null" << std::endl;
-            continue;
-        }
+        if (drawable->getSprite() == nullptr) { continue; }
 
         drawable->getSprite()->setX(transform->getX());
         drawable->getSprite()->setY(transform->getY());
-
-        // std::cout << (int)transform->getX() << " " << (int)transform->getY() << std::endl;
-
         lib_->getWindow().draw(drawable->getSprite());
     }
     lib_->getWindow().refresh();
@@ -91,9 +85,8 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 
-        std::cout << "id :" << m_entity->getId() << std::endl;
-        std::cout << "xpositive = " << packet.xpositive << std::endl;
-        std::cout << "x = " << packet.x << std::endl;
+        std::cout << "id :" << m_entity->getId() << " xpositive = " << packet.xpositive << " x = " << packet.x
+                  << std::endl;
         transform->setX(packet.xpositive ? packet.x : -(packet.x));
         transform->setY(packet.ypositive ? packet.y : -(packet.y));
         transform->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
@@ -101,6 +94,6 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
-        // drawable->setTextureId(packet.idSprite);
+        drawable->setTextureId(packet.idSprite);
     }
 }

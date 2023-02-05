@@ -114,12 +114,9 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() < 2) return;
 
-    std::cout << (int)infos.data[0] << " " << (int)infos.data[1] << " " << (int)infos.data[2] << " "
-              << (int)infos.data[3] << " " << std::endl;
-    std::cout << (int)infos.data.size() << std::endl;
-
     if (infos.data.size() % 12 == 0) {
-        for (int i = 0; i < infos.data.size(); i += 10) {
+        for (int i = 0; i < infos.data.size(); i += 12) {
+            std::cout << "packet " << i << std::endl;
             GamePacket packet;
             packet.x         = infos.data[i];
             packet.xpositive = infos.data[i + 1];

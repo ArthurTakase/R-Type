@@ -78,7 +78,6 @@ void Server::gameLoop() noexcept
                 // window est fermée
                 stop();
             } else {
-
                 auto& entities = gameInstance_.getManager().getEntities();
                 std::cout << (int)entities.size() << std::endl;
                 RawData dataToSend;
