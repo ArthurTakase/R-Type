@@ -16,8 +16,12 @@
 
 #include "ISocket.hpp"
 
+class WindowsSocketSelector;
+
 class WindowsSocket : public ISocket
 {
+    friend class WindowsSocketSelector;
+
   public:
     explicit WindowsSocket(Address::Port port);
 
@@ -33,17 +37,17 @@ class WindowsSocket : public ISocket
     [[nodiscard]] ReceivedInfos receive() final;
 
   protected:
+    Fd getSocketFd() const noexcept;
+
   private:
-    // attributes
     SOCKET            socketFd_;
     SOCKADDR_IN       address_;
     std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 
-    // methods
     static Address     winAddressToAddress(SOCKADDR_IN address) noexcept;
     static SOCKADDR_IN addressToWinAddress(Address address) noexcept;
-    friend Fd          getSocketFd() noexcept;
 };
+
 #endif

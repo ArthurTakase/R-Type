@@ -40,36 +40,48 @@ void WindowsFdSet::clear() noexcept
     FD_ZERO(&fdSet_);
 }
 
-WindowsSocketSelector::WindowsSocketSelector(int socketFd) noexcept
-    : nfds_(socketFd)
-{
-}
 void WindowsSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
-    auto windowsSocket = dynamic_cast<windowsSocket*>(&socket);
+    auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
     if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
 
-    if (isRead) readFds_.add(windowsSocket.getSocketFd());
-    if (isWrite) writeFds_.add(windowsSocket.getSocketFd());
-    if (isExcept) exceptFds_.add(windowsSocket.getSocketFd());
-    if (nfds_ < windowsSocket.getSocketFd() + 1) nfds_ = windowsSocket.getSocketFd() + 1;
+    if (isRead) readFds_.add(windowsSocket->getSocketFd());
+    if (isWrite) writeFds_.add(windowsSocket->getSocketFd());
+    if (isExcept) exceptFds_.add(windowsSocket->getSocketFd());
+
+    sockets_.push_back(*windowsSocket);
+    if (nfds_ < windowsSocket->getSocketFd() + 1) nfds_ = windowsSocket->getSocketFd() + 1;
 }
 
 void WindowsSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
-    auto windowsSocket = dynamic_cast<windowsSocket*>(&socket);
+    auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
     if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
 
-    if (isRead) readFds_.remove(windowsSocket.getSocketFd());
-    if (isWrite) writeFds_.remove(windowsSocket.getSocketFd());
-    if (isExcept) exceptFds_.remove(windowsSocket.getSocketFd());
+    if (isRead) readFds_.remove(windowsSocket->getSocketFd());
+    if (isWrite) writeFds_.remove(windowsSocket->getSocketFd());
+    if (isExcept) exceptFds_.remove(windowsSocket->getSocketFd());
+
+    auto it = std::find_if(sockets_.begin(), sockets_.end(), [&windowsSocket](auto& socket) {
+        return (socket.get().getSocketFd() == windowsSocket->getSocketFd());
+    });
+    if (it != sockets_.end()) {
+        sockets_.erase(it);
+        it = std::max_element(sockets_.begin(), sockets_.end(), [](auto& socket1, auto& socket2) {
+            return (socket1.get().getSocketFd() < socket2.get().getSocketFd());
+        });
+        if (it != sockets_.end()) nfds_ = it->get().getSocketFd() + 1;
+    }
 }
 
-bool WindowsSocketSelector::isSet(ISocket& socket, Operation type) const noexcept
+bool WindowsSocketSelector::isSet(ISocket& socket, Operation type) const
 {
-    if (type == Operation::READ) return (readyReadFds_.isSet(socket.getSocketFd()));
-    if (type == Operation::WRITE) return (readyWriteFds_.isSet(socket.getSocketFd()));
-    if (type == Operation::EXCEPTION) return (readyExceptFds_.isSet(socket.getSocketFd()));
+    auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
+    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+
+    if (type == Operation::READ) return (readyReadFds_.isSet(windowsSocket->getSocketFd()));
+    if (type == Operation::WRITE) return (readyWriteFds_.isSet(windowsSocket->getSocketFd()));
+    if (type == Operation::EXCEPTION) return (readyExceptFds_.isSet(windowsSocket->getSocketFd()));
     return (false);
 }
 

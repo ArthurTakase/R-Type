@@ -43,14 +43,12 @@ class LinuxSocket : public ISocket
     Fd getSocketFd() const noexcept;
 
   private:
-    // attributes
     int               socketFd_;
     sockaddr_in       address_;
     std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 
-    // methods
     static Address     linuxAddressToAddress(sockaddr_in address) noexcept;
     static sockaddr_in addressToLinuxAddress(Address address) noexcept;
 };
