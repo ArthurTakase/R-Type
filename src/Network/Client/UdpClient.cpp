@@ -153,7 +153,7 @@ void UdpClient::deserializeEntity(int x,
         transform.setScale(scaleX, scaleY);
 
         auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
-        game_.addSprite("assets/r-typesheet" + std::to_string(1) + ".gif", x, y);
+        game_.addSprite("assets/r-typesheet" + std::to_string(idSprite) + ".gif", x, y);
         drawable.setSprite(game_.getLastSprite());
 
         entity->addComponent(transform);
