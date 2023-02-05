@@ -26,8 +26,11 @@ class BehaviorSystem
     BehaviorSystem& operator=(BehaviorSystem&& rhs) noexcept      = delete;
 
     void run();
+    void setKey(int key) noexcept;
+    int  getKey() const noexcept;
 
   private:
-    EntityIterator<BehaviorComponent> _it;
-    std::unique_ptr<EntityManager>&   _manager;
+    EntityIterator<BehaviorComponent> it_;
+    std::unique_ptr<EntityManager>&   manager_;
+    int                               key_;
 };

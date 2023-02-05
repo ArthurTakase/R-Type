@@ -21,6 +21,8 @@ if(CMAKE_BUILD_TYPE MATCHES Debug)
   set(CMAKE_VERBOSE_MAKEFILE ON)
 endif()
 
+file(COPY assets/ DESTINATION assets/)
+
 # Libs
 add_subdirectory(Error)
 add_subdirectory(NetworkLib)
@@ -56,6 +58,7 @@ target_include_directories(${RTYPE_SERVER} PRIVATE include)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network/Server)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
+target_include_directories(${RTYPE_SERVER} PRIVATE include/Serializer)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Entity)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Components)
@@ -70,18 +73,20 @@ set(CLIENT_DIR src/Network/Client)
 
 set(RTYPE_CLIENT_SRC
   ${CLIENT_DIR}/UdpClient.cpp
+  ${CLIENT_DIR}/Game.cpp
 )
 
 add_executable(${RTYPE_CLIENT} ${CLIENT_DIR}/main.cpp ${RTYPE_CLIENT_SRC})
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
-# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
-# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
-# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
-# target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Tools)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Serializer)
 
-# target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
+target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/Client)
 target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
@@ -91,8 +96,8 @@ set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
 
 target_link_libraries(${RTYPE_CLIENT} Error)
 target_link_libraries(${RTYPE_CLIENT} NetworkLib)
-# target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
-# target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
+target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
+target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
 
 # ------------------------------
 # TESTS
@@ -150,6 +155,7 @@ if(DEFINED TESTS)
   target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Components)
   target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Systems)
   target_include_directories(${TEST_BUILD} PRIVATE include/Tools)
+  target_include_directories(${TEST_BUILD} PRIVATE include/Serializer)
   target_include_directories(${TEST_BUILD} PRIVATE include/Lib)
   target_include_directories(${TEST_BUILD} PRIVATE include/Network)
   target_include_directories(${TEST_BUILD} PRIVATE include/Network/Server)

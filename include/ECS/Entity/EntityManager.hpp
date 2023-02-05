@@ -10,6 +10,8 @@
 #include <memory>
 #include <vector>
 
+#include "BehaviorComponent.hpp"
+#include "DrawableComponent.hpp"
 #include "Entity.hpp"
 #include "HitboxComponent.hpp"
 #include "InstanceOf.hpp"
@@ -33,13 +35,14 @@ class EntityManager
 
     void createPlayer() noexcept;
     void createEnemy() noexcept;
+    void createBackground(int x) noexcept;
 
     size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;
     Entity*                               getEntity(size_t id) const noexcept;
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
-    void                                  addEntity(std::unique_ptr<Entity>& entity) noexcept;
+    void                                  addEntity(std::unique_ptr<Entity>&& entity) noexcept;
 
   private:
-    std::vector<std::unique_ptr<Entity>> _entities;
+    std::vector<std::unique_ptr<Entity>> entities_;
 };

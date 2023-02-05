@@ -9,12 +9,12 @@
 
 BehaviorComponent::BehaviorComponent() {}
 
-void BehaviorComponent::setOnUpdate(std::function<void()> onUpdate) noexcept
+void BehaviorComponent::setOnUpdate(std::function<void(int key, std::unique_ptr<Entity>& self)> onUpdate) noexcept
 {
-    _onUpdate = onUpdate;
+    onUpdate_ = onUpdate;
 }
 
-void BehaviorComponent::onUpdate() const noexcept
+void BehaviorComponent::onUpdate(int key, std::unique_ptr<Entity>& self) const noexcept
 {
-    _onUpdate();
+    onUpdate_(key, self);
 }

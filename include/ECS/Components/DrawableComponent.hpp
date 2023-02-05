@@ -42,10 +42,10 @@ class DrawableComponent : public IComponent
     Sprite* getSprite() const noexcept;
 
   private:
-    int     _offsetX;
-    int     _offsetY;
-    int     _width;
-    int     _height;
-    int     _textureId;
-    Sprite* _sprite;
+    int     offsetX_;
+    int     offsetY_;
+    int     width_;
+    int     height_;
+    int     textureId_;
+    Sprite* sprite_;
 };

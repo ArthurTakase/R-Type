@@ -36,7 +36,7 @@ class HitboxComponent : public IComponent
     void   onCollision(std::unique_ptr<Entity>& entity) const noexcept;
 
   private:
-    size_t                                        _width;
-    size_t                                        _height;
-    std::function<void(std::unique_ptr<Entity>&)> _onCollision;
+    size_t                                        width_;
+    size_t                                        height_;
+    std::function<void(std::unique_ptr<Entity>&)> onCollision_;
 };

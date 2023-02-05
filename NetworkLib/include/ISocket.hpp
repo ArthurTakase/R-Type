@@ -49,11 +49,9 @@ class ISocket
     ISocket& operator=(const ISocket& rhs) noexcept = delete;
     ISocket& operator=(ISocket&& rhs) noexcept      = default;
 
-    virtual Fd      getSocketFd() const noexcept = 0;
-    virtual Address getAddress() const noexcept  = 0;
-
+    virtual Address       getAddress() const noexcept                                         = 0;
     virtual void          send(const void* data, int data_size, Address client_address) const = 0;
-    virtual ReceivedInfos receive() const                                                     = 0;
+    virtual ReceivedInfos receive()                                                           = 0;
 
   protected:
   private:

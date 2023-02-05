@@ -16,8 +16,8 @@
  * @param y The y coordinate of the position.
  */
 TransformComponent::TransformComponent(int x, int y)
-    : _x(x)
-    , _y(y)
+    : x_(x)
+    , y_(y)
 {
 }
 
@@ -30,10 +30,10 @@ TransformComponent::TransformComponent(int x, int y)
  * @param scaleY The scale of the object on the Y axis.
  */
 TransformComponent::TransformComponent(int x, int y, float scaleX, float scaleY)
-    : _x(x)
-    , _y(y)
-    , _scaleX(scaleX)
-    , _scaleY(scaleY)
+    : x_(x)
+    , y_(y)
+    , scaleX_(scaleX)
+    , scaleY_(scaleY)
 {
 }
 
@@ -49,7 +49,7 @@ TransformComponent::~TransformComponent() noexcept {}
  */
 int TransformComponent::getX() const noexcept
 {
-    return _x;
+    return x_;
 }
 
 /**
@@ -59,7 +59,7 @@ int TransformComponent::getX() const noexcept
  */
 int TransformComponent::getY() const noexcept
 {
-    return _y;
+    return y_;
 }
 
 /**
@@ -69,7 +69,7 @@ int TransformComponent::getY() const noexcept
  */
 void TransformComponent::setX(int x) noexcept
 {
-    _x = x;
+    x_ = x;
 }
 
 /**
@@ -79,7 +79,7 @@ void TransformComponent::setX(int x) noexcept
  */
 void TransformComponent::setY(int y) noexcept
 {
-    _y = y;
+    y_ = y;
 }
 
 /**
@@ -90,8 +90,8 @@ void TransformComponent::setY(int y) noexcept
  */
 void TransformComponent::setPos(int x, int y) noexcept
 {
-    _x = x;
-    _y = y;
+    x_ = x;
+    y_ = y;
 }
 
 /**
@@ -101,7 +101,7 @@ void TransformComponent::setPos(int x, int y) noexcept
  */
 float TransformComponent::getScaleX() const noexcept
 {
-    return _scaleX;
+    return scaleX_;
 }
 
 /**
@@ -111,7 +111,7 @@ float TransformComponent::getScaleX() const noexcept
  */
 float TransformComponent::getScaleY() const noexcept
 {
-    return _scaleY;
+    return scaleY_;
 }
 
 /**
@@ -121,7 +121,7 @@ float TransformComponent::getScaleY() const noexcept
  */
 void TransformComponent::setScaleX(float x) noexcept
 {
-    _scaleX = x;
+    scaleX_ = x;
 }
 
 /**
@@ -131,7 +131,7 @@ void TransformComponent::setScaleX(float x) noexcept
  */
 void TransformComponent::setScaleY(float y) noexcept
 {
-    _scaleY = y;
+    scaleY_ = y;
 }
 
 /**
@@ -142,6 +142,6 @@ void TransformComponent::setScaleY(float y) noexcept
  */
 void TransformComponent::setScale(float x, float y) noexcept
 {
-    _scaleX = x;
-    _scaleY = y;
+    scaleX_ = x;
+    scaleY_ = y;
 }

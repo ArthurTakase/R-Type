@@ -15,7 +15,7 @@
  * @param id The id of the entity.
  */
 Entity::Entity(size_t id)
-    : _id(id)
+    : id_(id)
 {
 }
 
@@ -31,7 +31,7 @@ Entity::~Entity() noexcept {}
  */
 size_t Entity::getId() const noexcept
 {
-    return _id;
+    return id_;
 }
 
 /**
@@ -41,5 +41,5 @@ size_t Entity::getId() const noexcept
  */
 std::vector<std::unique_ptr<IComponent>>& Entity::getComponents() noexcept
 {
-    return (_components);
+    return (components_);
 };

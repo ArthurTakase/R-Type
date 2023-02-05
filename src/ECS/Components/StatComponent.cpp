@@ -16,8 +16,8 @@
  * @param damage The damage of the entity.
  */
 StatComponent::StatComponent(int life, int damage)
-    : _life(life)
-    , _damage(damage)
+    : life_(life)
+    , damage_(damage)
 {
 }
 
@@ -33,7 +33,7 @@ StatComponent::~StatComponent() noexcept {}
  */
 int StatComponent::getLife() const noexcept
 {
-    return _life;
+    return life_;
 }
 
 /**
@@ -43,7 +43,7 @@ int StatComponent::getLife() const noexcept
  */
 int StatComponent::getDamage() const noexcept
 {
-    return _damage;
+    return damage_;
 }
 
 /**
@@ -53,7 +53,7 @@ int StatComponent::getDamage() const noexcept
  */
 void StatComponent::setLife(int life) noexcept
 {
-    _life = life;
+    life_ = life;
 }
 
 /**
@@ -63,5 +63,5 @@ void StatComponent::setLife(int life) noexcept
  */
 void StatComponent::setDamage(int damage) noexcept
 {
-    _damage = damage;
+    damage_ = damage;
 }

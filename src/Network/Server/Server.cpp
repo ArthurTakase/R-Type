@@ -8,17 +8,22 @@
 #include "Server.hpp"
 
 #include <algorithm>
+#include <ctime>
 #include <iostream>
+#include <locale>
 
 #include "Error.hpp"
+#include "ISocket.hpp"
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
-    , selector_(SocketSelectorFactory::createSocketSelector(socket_->getSocketFd() + 1))
+    , selector_(SocketSelectorFactory::createSocketSelector())
 {
     selector_->add(*socket_, true, true, false);
+    end_   = std::chrono::system_clock::now();
+    start_ = std::chrono::high_resolution_clock::now();
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -56,19 +61,45 @@ void Server::communicate() noexcept
 
 void Server::gameLoop() noexcept
 {
-    // TODO : insert game loop
+    gameInstance_.getManager().createBackground(0);
+    gameInstance_.getManager().createBackground(255);
+
     while (looping_) {
-        if (looping_ == false && clients_.size() == 0) {
-            // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
-            // window est fermée
-            stop();
-        } else {
-            gameInstance_.run();
+        end_ = std::chrono::system_clock::now();
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(end_ - start_).count() >= tickrate_) {
+            start_ = { std::chrono::high_resolution_clock::now() };
+
+            if (clients_.size() == 0 && gameInstance_.getManager().getEntities().size() == 0) {
+                stop();
+            } else {
+                auto&   entities = gameInstance_.getManager().getEntities();
+                RawData dataToSend;
+                dataToSend.reserve(entities.size() * 12);
+                for (auto& entity : entities) {
+                    if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
+
+                    auto drawable  = entity->getComponent<DrawableComponent>();
+                    auto transform = entity->getComponent<TransformComponent>();
+                    dataToSend.emplace_back(transform->getX() > 0 ? transform->getX() : -transform->getX());
+                    dataToSend.emplace_back(transform->getX() > 0 ? 1 : 0);
+                    dataToSend.emplace_back(transform->getY() > 0 ? transform->getY() : -transform->getY());
+                    dataToSend.emplace_back(transform->getY() > 0 ? 1 : 0);
+                    dataToSend.emplace_back(drawable->getTextureId());
+                    dataToSend.emplace_back(drawable->getWidth());
+                    dataToSend.emplace_back(drawable->getHeight());
+                    dataToSend.emplace_back(transform->getScaleX() * 10);
+                    dataToSend.emplace_back(transform->getScaleY() * 10);
+                    dataToSend.emplace_back(drawable->getOffsetX());
+                    dataToSend.emplace_back(drawable->getOffsetY());
+                    dataToSend.emplace_back(entity->getId());
+                }
+
+                if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
+                for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
+                gameInstance_.run();
+            }
         }
-        // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset le
-        // jeu)
     }
-    std::cout << "game loop end" << std::endl;
 }
 
 bool Server::isKnownClient(Address address) const
@@ -88,7 +119,10 @@ void Server::receive()
 {
     try {
         ReceivedInfos infoReceived = socket_->receive();
-        if (!isKnownClient(infoReceived.address)) { addClient(infoReceived.address); }
+        if (!isKnownClient(infoReceived.address)) {
+            addClient(infoReceived.address);
+            gameInstance_.getManager().createPlayer();
+        }
         handleData(infoReceived);
     } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
@@ -119,8 +153,22 @@ RawData Server::getDataFromQueue(Client& client) noexcept
     return (blob);
 }
 
-void Server::handleData(ReceivedInfos infos) const noexcept
+void Server::handleData(ReceivedInfos infos) noexcept
 {
-    std::cout << "PREPARING DATA" << std::endl;
-    // TODO: traiter les données reçues pour notre logique de jeu
+    if (infos.data.size() == 0) { return; }
+
+    if (infos.data[0] == CLOSE_VALUE) {
+        auto iterator = std::find_if(clients_.begin(), clients_.end(), [&infos](const Client& client) {
+            return (infos.address == client.address);
+        });
+        if (iterator != clients_.end()) {
+            clients_.erase(iterator);
+            // TODO: remove player entity in game instance
+            //  gameInstance_.getManager().removePlayer();
+        }
+    }
+
+    auto& behavior = gameInstance_.getBehaviorSystem();
+    behavior.setKey(infos.data[0]);
+    infos.data.clear();
 }

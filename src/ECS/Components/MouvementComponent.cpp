@@ -17,9 +17,9 @@
  * @param speed the speed of the entity
  */
 MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)
-    : _dirX(dirX)
-    , _dirY(dirY)
-    , _speed(speed)
+    : dirX_(dirX)
+    , dirY_(dirY)
+    , speed_(speed)
 {
 }
 
@@ -35,7 +35,7 @@ MouvementComponent::~MouvementComponent() noexcept {}
  */
 float MouvementComponent::getDirX() const noexcept
 {
-    return _dirX;
+    return dirX_;
 }
 
 /**
@@ -45,7 +45,7 @@ float MouvementComponent::getDirX() const noexcept
  */
 float MouvementComponent::getDirY() const noexcept
 {
-    return _dirY;
+    return dirY_;
 }
 
 /**
@@ -55,7 +55,7 @@ float MouvementComponent::getDirY() const noexcept
  */
 float MouvementComponent::getSpeed() const noexcept
 {
-    return _speed;
+    return speed_;
 }
 
 /**
@@ -65,7 +65,7 @@ float MouvementComponent::getSpeed() const noexcept
  */
 void MouvementComponent::setDirX(int x) noexcept
 {
-    _dirX = x;
+    dirX_ = x;
 }
 
 /**
@@ -75,7 +75,7 @@ void MouvementComponent::setDirX(int x) noexcept
  */
 void MouvementComponent::setDirY(int y) noexcept
 {
-    _dirY = y;
+    dirY_ = y;
 }
 
 /**
@@ -85,5 +85,5 @@ void MouvementComponent::setDirY(int y) noexcept
  */
 void MouvementComponent::setSpeed(float speed) noexcept
 {
-    _speed = speed;
+    speed_ = speed;
 }

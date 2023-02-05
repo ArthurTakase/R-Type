@@ -7,10 +7,14 @@
 
 #pragma once
 
+#include <functional>
+
 #include "SocketSelector.hpp"
 
 #ifdef WIN32
 #include <winsock2.h>
+
+#include "WindowsSocket.hpp"
 
 class WindowsFdSet
 {
@@ -38,7 +42,7 @@ class WindowsFdSet
 class WindowsSocketSelector : public SocketSelector
 {
   public:
-    WindowsSocketSelector(int socketFd) noexcept;
+    WindowsSocketSelector() noexcept                                   = default;
     WindowsSocketSelector(const WindowsSocketSelector& other) noexcept = delete;
     WindowsSocketSelector(WindowsSocketSelector&& other) noexcept      = default;
     ~WindowsSocketSelector() noexcept                                  = default;
@@ -46,21 +50,23 @@ class WindowsSocketSelector : public SocketSelector
     WindowsSocketSelector& operator=(const WindowsSocketSelector& rhs) noexcept = delete;
     WindowsSocketSelector& operator=(WindowsSocketSelector&& rhs) noexcept      = default;
 
-    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) noexcept final;
-    bool isSet(ISocket& socket, Operation type) const noexcept final;
+    void add(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    void remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept) final;
+    bool isSet(ISocket& socket, Operation type) const final;
     void select(bool isRead, bool isWrite, bool isExcept) final;
     void clear(bool isRead, bool isWrite, bool isExcept) noexcept final;
 
   protected:
   private:
-    int          nfds_;
+    int          nfds_ = 0;
     WindowsFdSet readFds_;
     WindowsFdSet writeFds_;
     WindowsFdSet exceptFds_;
     WindowsFdSet readyReadFds_;
     WindowsFdSet readyWriteFds_;
     WindowsFdSet readyExceptFds_;
+
+    std::vector<std::reference_wrapper<WindowsSocket>> sockets_;
 };
 
 #endif

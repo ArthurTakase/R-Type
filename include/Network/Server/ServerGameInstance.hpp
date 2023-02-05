@@ -9,8 +9,11 @@
 
 #include <memory>
 
+#include "BehaviorSystem.hpp"
 #include "EntityManager.hpp"
 #include "HitboxSystem.hpp"
+#include "MouvementComponent.hpp"
+#include "MouvementSystem.hpp"
 #include "SerializerSystem.hpp"
 
 class RType
@@ -24,13 +27,19 @@ class RType
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = default;
 
-    void run() const noexcept;
-    void reset() noexcept;
-    void stop() noexcept;
+    void              run() const noexcept;
+    void              reset() noexcept;
+    void              stop() noexcept;
+    EntityManager&    getManager() noexcept;
+    HitboxSystem&     getHitboxSystem() noexcept;
+    SerializerSystem& getSerializerSystem() noexcept;
+    BehaviorSystem&   getBehaviorSystem() noexcept;
 
   private:
     bool                              looping_ = true;
     std::unique_ptr<EntityManager>    entityManager_;
     std::unique_ptr<HitboxSystem>     hitboxSystem_;
     std::unique_ptr<SerializerSystem> serializerSystem_;
+    std::unique_ptr<BehaviorSystem>   behaviorSystem_;
+    std::unique_ptr<MouvementSystem>  mouvementSystem_;
 };

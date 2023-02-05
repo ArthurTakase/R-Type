@@ -32,7 +32,7 @@ class MouvementComponent : public IComponent
     void  setSpeed(float speed) noexcept;
 
   private:
-    int   _dirX;
-    int   _dirY;
-    float _speed;
+    int   dirX_;
+    int   dirY_;
+    float speed_;
 };

@@ -19,11 +19,11 @@
  * @param textureId The id of the texture to use.
  */
 DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId)
-    : _offsetX(offsetX)
-    , _offsetY(offsetY)
-    , _width(width)
-    , _height(height)
-    , _textureId(textureId)
+    : offsetX_(offsetX)
+    , offsetY_(offsetY)
+    , width_(width)
+    , height_(height)
+    , textureId_(textureId)
 {
 }
 
@@ -34,7 +34,7 @@ DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int he
  */
 int DrawableComponent::getOffsetX() const noexcept
 {
-    return _offsetX;
+    return offsetX_;
 }
 
 /**
@@ -44,7 +44,7 @@ int DrawableComponent::getOffsetX() const noexcept
  */
 int DrawableComponent::getOffsetY() const noexcept
 {
-    return _offsetY;
+    return offsetY_;
 }
 
 /**
@@ -54,7 +54,7 @@ int DrawableComponent::getOffsetY() const noexcept
  */
 int DrawableComponent::getWidth() const noexcept
 {
-    return _width;
+    return width_;
 }
 
 /**
@@ -64,7 +64,7 @@ int DrawableComponent::getWidth() const noexcept
  */
 int DrawableComponent::getHeight() const noexcept
 {
-    return _height;
+    return height_;
 }
 
 /**
@@ -74,7 +74,7 @@ int DrawableComponent::getHeight() const noexcept
  */
 int DrawableComponent::getTextureId() const noexcept
 {
-    return _textureId;
+    return textureId_;
 }
 
 /**
@@ -84,7 +84,7 @@ int DrawableComponent::getTextureId() const noexcept
  */
 void DrawableComponent::setOffsetX(int offsetX) noexcept
 {
-    _offsetX = offsetX;
+    offsetX_ = offsetX;
 }
 
 /**
@@ -94,7 +94,7 @@ void DrawableComponent::setOffsetX(int offsetX) noexcept
  */
 void DrawableComponent::setOffsetY(int offsetY) noexcept
 {
-    _offsetY = offsetY;
+    offsetY_ = offsetY;
 }
 
 /**
@@ -104,7 +104,7 @@ void DrawableComponent::setOffsetY(int offsetY) noexcept
  */
 void DrawableComponent::setWidth(int width) noexcept
 {
-    _width = width;
+    width_ = width;
 }
 
 /**
@@ -114,7 +114,7 @@ void DrawableComponent::setWidth(int width) noexcept
  */
 void DrawableComponent::setHeight(int height) noexcept
 {
-    _height = height;
+    height_ = height;
 }
 
 /**
@@ -124,7 +124,7 @@ void DrawableComponent::setHeight(int height) noexcept
  */
 void DrawableComponent::setTextureId(int textureId) noexcept
 {
-    _textureId = textureId;
+    textureId_ = textureId;
 }
 
 /**
@@ -134,7 +134,7 @@ void DrawableComponent::setTextureId(int textureId) noexcept
  */
 void DrawableComponent::setSprite(Sprite* sprite) noexcept
 {
-    _sprite = sprite;
+    sprite_ = sprite;
 }
 
 /**
@@ -144,5 +144,5 @@ void DrawableComponent::setSprite(Sprite* sprite) noexcept
  */
 Sprite* DrawableComponent::getSprite() const noexcept
 {
-    return _sprite;
+    return sprite_;
 }

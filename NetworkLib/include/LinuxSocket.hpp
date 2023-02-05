@@ -19,8 +19,12 @@
 
 #include "ISocket.hpp"
 
+class LinuxSocketSelector;
+
 class LinuxSocket : public ISocket
 {
+    friend class LinuxSocketSelector;
+
   public:
     explicit LinuxSocket(Address::Port port);
 
@@ -31,24 +35,22 @@ class LinuxSocket : public ISocket
     LinuxSocket& operator=(const LinuxSocket& rhs) noexcept = delete;
     LinuxSocket& operator=(LinuxSocket&& rhs) noexcept      = default;
 
-    // getters
-    [[nodiscard]] Fd      getSocketFd() const noexcept final;
-    [[nodiscard]] Address getAddress() const noexcept final;
-
+    [[nodiscard]] Address       getAddress() const noexcept final;
     void                        send(const void* data, int data_size, Address client_address) const final;
-    [[nodiscard]] ReceivedInfos receive() const final;
+    [[nodiscard]] ReceivedInfos receive() final;
 
   protected:
+    Fd getSocketFd() const noexcept;
+
   private:
-    // attributes
-    int                       socketFd_;
-    sockaddr_in               address_;
-    mutable std::vector<char> receivedBuffer_;
+    int               socketFd_;
+    sockaddr_in       address_;
+    std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 
-    // methods
     static Address     linuxAddressToAddress(sockaddr_in address) noexcept;
     static sockaddr_in addressToLinuxAddress(Address address) noexcept;
 };
+
 #endif

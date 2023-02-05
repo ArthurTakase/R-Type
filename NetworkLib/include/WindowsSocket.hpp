@@ -16,8 +16,12 @@
 
 #include "ISocket.hpp"
 
+class WindowsSocketSelector;
+
 class WindowsSocket : public ISocket
 {
+    friend class WindowsSocketSelector;
+
   public:
     explicit WindowsSocket(Address::Port port);
 
@@ -28,24 +32,22 @@ class WindowsSocket : public ISocket
     WindowsSocket& operator=(const WindowsSocket& rhs) noexcept = delete;
     WindowsSocket& operator=(WindowsSocket&& rhs) noexcept      = default;
 
-    // getters
-    [[nodiscard]] Fd      getSocketFd() const noexcept final;
-    [[nodiscard]] Address getAddress() const noexcept final;
-
+    [[nodiscard]] Address       getAddress() const noexcept final;
     void                        send(const void* data, int data_size, Address client_address) const final;
-    [[nodiscard]] ReceivedInfos receive() const final;
+    [[nodiscard]] ReceivedInfos receive() final;
 
   protected:
+    Fd getSocketFd() const noexcept;
+
   private:
-    // attributes
-    SOCKET                    socketFd_;
-    SOCKADDR_IN               address_;
-    mutable std::vector<char> receivedBuffer_;
+    SOCKET            socketFd_;
+    SOCKADDR_IN       address_;
+    std::vector<char> receivedBuffer_;
 
     static constexpr std::size_t MAX_RECEIVED_BUFFER_SIZE = 1024;
 
-    // methods
     static Address     winAddressToAddress(SOCKADDR_IN address) noexcept;
     static SOCKADDR_IN addressToWinAddress(Address address) noexcept;
 };
+
 #endif
