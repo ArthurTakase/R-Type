@@ -116,12 +116,8 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() < 2) return;
 
-    std::cout << (int)infos.data[0] << " " << (int)infos.data[1] << " " << (int)infos.data[2] << " "
-              << (int)infos.data[3] << " " << std::endl;
-    std::cout << (int)infos.data.size() << std::endl;
-
     if (infos.data.size() % 12 == 0) {
-        for (int i = 0; i < infos.data.size(); i += 10) {
+        for (int i = 0; i < infos.data.size(); i += 12) {
             deserializeEntity(infos.data[i],
                 infos.data[i + 1],
                 infos.data[i + 2],
@@ -173,10 +169,10 @@ void UdpClient::deserializeEntity(int x,
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 
-        std::cout << "xpositive = " << xpositive << std::endl;
-        std::cout << "x = " << x << std::endl;
+        std::cout << m_entity->getId() << " | x : " << x << " y : " << y;
         transform->setX(xpositive ? x : -x);
         transform->setY(ypositive ? y : -y);
+        std::cout << " | x : " << transform->getX() << " y : " << transform->getY() << std::endl;
         transform->setScale((float)scaleX / 10, (float)scaleY / 10);
         drawable->setOffsetX(offsetX);
         drawable->setOffsetY(offsetY);

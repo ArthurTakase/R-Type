@@ -36,11 +36,13 @@ void Game::run() const noexcept
         drawable->getSprite()->setX(transform->getX());
         drawable->getSprite()->setY(transform->getY());
 
-        std::cout << (int)transform->getX() << " " << (int)transform->getY() << std::endl;
-
-        lib_->getWindow().draw(drawable->getSprite());
-        lib_->getWindow().refresh();
+        lib_->getWindow().draw(drawable->getSprite(),
+            drawable->getOffsetX(),
+            drawable->getOffsetY(),
+            drawable->getWidth(),
+            drawable->getHeight());
     }
+    lib_->getWindow().refresh();
 }
 
 std::unique_ptr<EntityManager>& Game::getManager() noexcept
