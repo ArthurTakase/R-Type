@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['rtype_0',['RType',['../class_r_type.html',1,'']]]
+  ['game_0',['Game',['../class_game.html',1,'']]],
+  ['gamepacket_1',['GamePacket',['../struct_game_packet.html',1,'']]]
 ];

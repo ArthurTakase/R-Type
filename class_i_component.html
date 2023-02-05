@@ -107,8 +107,12 @@ Inheritance diagram for IComponent:</div>
  <div class="center">
   <img src="class_i_component.png" usemap="#IComponent_map" alt=""/>
   <map id="IComponent_map" name="IComponent_map">
-<area href="class_hitbox_component.html" title="Component for the hitbox of an entity. Contain the width and the height of the box." alt="HitboxComponent" shape="rect" coords="0,56,119,80"/>
-<area href="class_position_component.html" title="Component used to store the position of an entity." alt="PositionComponent" shape="rect" coords="129,56,248,80"/>
+<area href="class_behavior_component.html" title="Component for the behavior of an entity." alt="BehaviorComponent" shape="rect" coords="0,56,140,80"/>
+<area href="class_drawable_component.html" title="Component assigned to drawable entities." alt="DrawableComponent" shape="rect" coords="150,56,290,80"/>
+<area href="class_hitbox_component.html" title="Component for the hitbox of an entity. Contain the width and the height of the box." alt="HitboxComponent" shape="rect" coords="300,56,440,80"/>
+<area href="class_mouvement_component.html" title="Component used to set the direction and speed of the movement of an entity." alt="MouvementComponent" shape="rect" coords="450,56,590,80"/>
+<area href="class_stat_component.html" title="Component used to store the stats of an entity." alt="StatComponent" shape="rect" coords="600,56,740,80"/>
+<area href="class_transform_component.html" title="Component used to store the position of an entity." alt="TransformComponent" shape="rect" coords="750,56,890,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -118,12 +122,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a85a0409ada95ca65a29239e2174f956c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17624fd3b8897b7372590256dc0f3d5c"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a17624fd3b8897b7372590256dc0f3d5c">~IComponent</a> () noexcept=default</td></tr>
 <tr class="separator:a17624fd3b8897b7372590256dc0f3d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0374efede06b56b823d4711f04f9508b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a0374efede06b56b823d4711f04f9508b">IComponent</a> (const <a class="el" href="class_i_component.html">IComponent</a> &amp;other) noexcept=default</td></tr>
+<tr class="separator:a0374efede06b56b823d4711f04f9508b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cdf3cad14aa80497458333a4a952544"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a4cdf3cad14aa80497458333a4a952544">IComponent</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;other) noexcept=delete</td></tr>
+<tr class="separator:a4cdf3cad14aa80497458333a4a952544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c49cf8694f602d1e048f844de8097f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a7c49cf8694f602d1e048f844de8097f6">operator=</a> (const <a class="el" href="class_i_component.html">IComponent</a> &amp;rhs) noexcept=default</td></tr>
+<tr class="separator:a7c49cf8694f602d1e048f844de8097f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5403a9fd83857575fcb696f082acbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a5a5403a9fd83857575fcb696f082acbf">operator=</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;rhs) noexcept=delete</td></tr>
+<tr class="separator:a5a5403a9fd83857575fcb696f082acbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Interface for all components. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a85a0409ada95ca65a29239e2174f956c" name="a85a0409ada95ca65a29239e2174f956c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a85a0409ada95ca65a29239e2174f956c">&#9670;&#160;</a></span>IComponent()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a85a0409ada95ca65a29239e2174f956c">&#9670;&#160;</a></span>IComponent() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -166,6 +178,111 @@ Public Member Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0374efede06b56b823d4711f04f9508b" name="a0374efede06b56b823d4711f04f9508b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0374efede06b56b823d4711f04f9508b">&#9670;&#160;</a></span>IComponent() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IComponent::IComponent </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4cdf3cad14aa80497458333a4a952544" name="a4cdf3cad14aa80497458333a4a952544"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cdf3cad14aa80497458333a4a952544">&#9670;&#160;</a></span>IComponent() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IComponent::IComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7c49cf8694f602d1e048f844de8097f6" name="a7c49cf8694f602d1e048f844de8097f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c49cf8694f602d1e048f844de8097f6">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_component.html">IComponent</a> &amp; IComponent::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5a5403a9fd83857575fcb696f082acbf" name="a5a5403a9fd83857575fcb696f082acbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a5403a9fd83857575fcb696f082acbf">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_i_component.html">IComponent</a> &amp; IComponent::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>rhs</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

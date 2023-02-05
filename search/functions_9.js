@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['removecomponent_0',['removeComponent',['../class_entity.html#ac7cb1c2da048ae269f40bc8cd945396b',1,'Entity']]],
-  ['removeentity_1',['removeEntity',['../class_entity_manager.html#a1f03d2106223b18548115bed12a8888c',1,'EntityManager']]],
-  ['rtype_2',['RType',['../class_r_type.html#a5bd13f83697bbdaf51034018e6aa1cfa',1,'RType::RType()'],['../class_r_type.html#a91bb46538f68705a2e7f4c1037269a66',1,'RType::RType(const RType &amp;other) noexcept=delete'],['../class_r_type.html#a9c749e253b9f20f9e03a01cfafae53d8',1,'RType::RType(RType &amp;&amp;other) noexcept=delete']]],
-  ['run_3',['run',['../class_a_system.html#ac6cc0b38242a2a8d5b50df22d124080f',1,'ASystem::run()'],['../class_hitbox_system.html#a00a2e267b3db6964c13fa9062e0295fb',1,'HitboxSystem::run()']]]
+  ['main_0',['main',['../_client_2main_8cpp.html#af5e94063ba644cdcadf0663d627432de',1,'main(int ac, const char *const av[]):&#160;main.cpp'],['../_server_2main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp']]],
+  ['mouvementcomponent_1',['MouvementComponent',['../class_mouvement_component.html#a2681a3f9f296812f4619a17de0c06e19',1,'MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)'],['../class_mouvement_component.html#a5b5070b02135370bb2d21f91969b649e',1,'MouvementComponent::MouvementComponent(const MouvementComponent &amp;other) noexcept=default'],['../class_mouvement_component.html#af7ca99ec331a933f53fc750360ddd054',1,'MouvementComponent::MouvementComponent(MouvementComponent &amp;&amp;other) noexcept=delete']]],
+  ['mouvementsystem_2',['MouvementSystem',['../class_mouvement_system.html#a4ac0fb2e6329afb36971960235d701e5',1,'MouvementSystem::MouvementSystem(std::unique_ptr&lt; EntityManager &gt; &amp;manager) noexcept'],['../class_mouvement_system.html#aebd8bcc867270ec39718f5b9f6a4313a',1,'MouvementSystem::MouvementSystem(const MouvementSystem &amp;other) noexcept=delete'],['../class_mouvement_system.html#ac6519003e171834a2c06cf42aa141598',1,'MouvementSystem::MouvementSystem(MouvementSystem &amp;&amp;other) noexcept=delete']]]
 ];

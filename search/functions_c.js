@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['_7easystem_0',['~ASystem',['../class_a_system.html#a007b87eb5333d9fc7ffde6356108981d',1,'ASystem']]],
-  ['_7eentity_1',['~Entity',['../class_entity.html#a3787180835364a80712e64af85019b2d',1,'Entity']]],
-  ['_7eentitymanager_2',['~EntityManager',['../class_entity_manager.html#afeecede1be624b26f88eea654a4ac589',1,'EntityManager']]],
-  ['_7ehitboxcomponent_3',['~HitboxComponent',['../class_hitbox_component.html#aaaa8d9767b159b7f5bc11e89881f2bd0',1,'HitboxComponent']]],
-  ['_7ehitboxsystem_4',['~HitboxSystem',['../class_hitbox_system.html#a737cdaf85f482b74a7566b0269bbf729',1,'HitboxSystem']]],
-  ['_7eicomponent_5',['~IComponent',['../class_i_component.html#a17624fd3b8897b7372590256dc0f3d5c',1,'IComponent']]],
-  ['_7epositioncomponent_6',['~PositionComponent',['../class_position_component.html#a6686fbd2230704471345916b7bfb4ffd',1,'PositionComponent']]],
-  ['_7ertype_7',['~RType',['../class_r_type.html#a1ac07ee355537e6d4be8fa357ff1baed',1,'RType']]]
+  ['receive_0',['receive',['../class_i_socket.html#a47b24701fcb9a25ddbdfc370550225f2',1,'ISocket']]],
+  ['refresh_1',['refresh',['../class_window.html#ad1a027c3630d4e1a6395bcf1f761e5d8',1,'Window']]],
+  ['remove_2',['remove',['../class_socket_selector.html#af0f66ef147ba34919f3f79d023debed3',1,'SocketSelector']]],
+  ['removecomponent_3',['removeComponent',['../class_entity.html#ac7cb1c2da048ae269f40bc8cd945396b',1,'Entity']]],
+  ['removeentity_4',['removeEntity',['../class_entity_manager.html#a1f03d2106223b18548115bed12a8888c',1,'EntityManager']]],
+  ['reset_5',['reset',['../class_udp_client.html#a2d1d4b890ed1913de8085694fa9506f5',1,'UdpClient::reset()'],['../class_server.html#a042dd954f0d4cd3abb45b9be98018e9b',1,'Server::reset()'],['../class_r_type.html#ac68a1ebb24945de77fe235b1a63d186e',1,'RType::reset()'],['../class_entity_iterator.html#a6de167310ffd2f5328897ebc2fa515e4',1,'EntityIterator::reset()']]],
+  ['rtype_6',['RType',['../class_r_type.html#a91bb46538f68705a2e7f4c1037269a66',1,'RType::RType(const RType &amp;other) noexcept=delete'],['../class_r_type.html#a5a0e7f602a0eff72344990229d39032e',1,'RType::RType(RType &amp;&amp;other) noexcept=default'],['../class_r_type.html#a5bd13f83697bbdaf51034018e6aa1cfa',1,'RType::RType()']]],
+  ['run_7',['run',['../class_behavior_system.html#aed4cea77ae6aeacd0e263c584b52723e',1,'BehaviorSystem::run()'],['../class_hitbox_system.html#a00a2e267b3db6964c13fa9062e0295fb',1,'HitboxSystem::run()'],['../class_mouvement_system.html#ae00de2086a6e628ca3ac06bb3b117cfc',1,'MouvementSystem::run()'],['../class_serializer_system.html#a95025082f3599884ff3c0b43416ab088',1,'SerializerSystem::run()'],['../class_game.html#a7a1b5c9c721eea524ad0c61d7f060b39',1,'Game::run()'],['../class_udp_client.html#abd9d70a570baefdc638bce5a0d5efa7b',1,'UdpClient::run()'],['../class_server.html#abb27d30b40a94326e3fd629d3b30b7d5',1,'Server::run()'],['../class_r_type.html#a0170c5fa1ecfed17adedeb7cabccc0bf',1,'RType::run()']]]
 ];

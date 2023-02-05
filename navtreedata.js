@@ -26,14 +26,17 @@ var NAVTREE =
 [
   [ "R-Type", "index.html", [
     [ "R-TYPE", "md__r_e_a_d_m_e.html", [
-      [ "Informations générales", "md__r_e_a_d_m_e.html#autotoc_md1", [
-        [ "Team", "md__r_e_a_d_m_e.html#autotoc_md2", null ]
+      [ "Team", "md__r_e_a_d_m_e.html#autotoc_md1", null ],
+      [ "Usage", "md__r_e_a_d_m_e.html#autotoc_md2", [
+        [ "Linux", "md__r_e_a_d_m_e.html#autotoc_md3", null ],
+        [ "Window", "md__r_e_a_d_m_e.html#autotoc_md4", null ]
       ] ],
-      [ "Informations de developpement", "md__r_e_a_d_m_e.html#autotoc_md3", [
-        [ "Norme des Commits", "md__r_e_a_d_m_e.html#autotoc_md4", null ],
-        [ "CI/CD", "md__r_e_a_d_m_e.html#autotoc_md5", null ],
-        [ "Doxygen", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
-        [ "Google Test", "md__r_e_a_d_m_e.html#autotoc_md7", null ]
+      [ "Dev Infos", "md__r_e_a_d_m_e.html#autotoc_md5", [
+        [ "ECS", "md__r_e_a_d_m_e.html#autotoc_md6", null ],
+        [ "Commit norm", "md__r_e_a_d_m_e.html#autotoc_md7", null ],
+        [ "CI/CD", "md__r_e_a_d_m_e.html#autotoc_md8", null ],
+        [ "Doxygen", "md__r_e_a_d_m_e.html#autotoc_md9", null ],
+        [ "Google Test", "md__r_e_a_d_m_e.html#autotoc_md10", null ]
       ] ]
     ] ],
     [ "Namespaces", "namespaces.html", [
@@ -48,16 +51,22 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
-        [ "Functions", "functions_func.html", null ],
-        [ "Variables", "functions_vars.html", null ]
+        [ "All", "functions.html", "functions_dup" ],
+        [ "Functions", "functions_func.html", "functions_func" ],
+        [ "Variables", "functions_vars.html", null ],
+        [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],
       [ "File Members", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions", "globals_func.html", null ],
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Enumerations", "globals_enum.html", null ],
+        [ "Enumerator", "globals_eval.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]
@@ -65,7 +74,9 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_a_system_8hpp.html"
+"_behavior_component_8cpp.html",
+"class_entity.html#a5763e37f387ef3155d27aa1aabd58cf4",
+"class_stat_component.html#a1c936a7875477b0b3d5fb8bed9eaa58c"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

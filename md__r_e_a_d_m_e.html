@@ -93,11 +93,9 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
   <div class="headertitle"><div class="title">R-TYPE </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md1"></a>
-Informations générales</h1>
-<p >Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
-Team</h2>
+<div class="textblock"><p >Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.</p>
+<h1><a class="anchor" id="autotoc_md1"></a>
+Team</h1>
 <ul>
 <li>Arthur Decaen (<a href="#" onclick="location.href='mai'+'lto:'+'art'+'hu'+'r.d'+'ec'+'aen'+'@e'+'pit'+'ec'+'h.e'+'u'; return false;">arthu<span class="obfuscator">.nosp@m.</span>r.de<span class="obfuscator">.nosp@m.</span>caen@<span class="obfuscator">.nosp@m.</span>epit<span class="obfuscator">.nosp@m.</span>ech.e<span class="obfuscator">.nosp@m.</span>u</a>)</li>
 <li>Corentin Roy (<a href="#" onclick="location.href='mai'+'lto:'+'cor'+'en'+'tin'+'.r'+'oy@'+'ep'+'ite'+'ch'+'.eu'; return false;">coren<span class="obfuscator">.nosp@m.</span>tin.<span class="obfuscator">.nosp@m.</span>roy@e<span class="obfuscator">.nosp@m.</span>pite<span class="obfuscator">.nosp@m.</span>ch.eu</a>)</li>
@@ -105,10 +103,35 @@ Team</h2>
 <li>Guillaume Vernizeau (<a href="#" onclick="location.href='mai'+'lto:'+'gui'+'ll'+'aum'+'e.'+'ver'+'ni'+'zea'+'u@'+'epi'+'te'+'ch.'+'eu'; return false;">guill<span class="obfuscator">.nosp@m.</span>aume<span class="obfuscator">.nosp@m.</span>.vern<span class="obfuscator">.nosp@m.</span>izea<span class="obfuscator">.nosp@m.</span>u@epi<span class="obfuscator">.nosp@m.</span>tech<span class="obfuscator">.nosp@m.</span>.eu</a>)</li>
 <li>Geoffrey Labruyère (<a href="#" onclick="location.href='mai'+'lto:'+'geo'+'ff'+'rey'+'.l'+'abr'+'uy'+'ere'+'@e'+'pit'+'ec'+'h.e'+'u'; return false;">geoff<span class="obfuscator">.nosp@m.</span>rey.<span class="obfuscator">.nosp@m.</span>labru<span class="obfuscator">.nosp@m.</span>yere<span class="obfuscator">.nosp@m.</span>@epit<span class="obfuscator">.nosp@m.</span>ech.<span class="obfuscator">.nosp@m.</span>eu</a>)</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Informations de developpement</h1>
+<h1><a class="anchor" id="autotoc_md2"></a>
+Usage</h1>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Linux</h2>
+<ul>
+<li><p class="startli">Build</p>
+<div class="fragment"><div class="line">mkdir -p build &amp;&amp; cd build &amp;&amp; cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja &amp;&amp; ninja &amp;&amp; cd ..</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Launch <a class="el" href="struct_client.html" title="Encapsulate a client address and the data to send.">Client</a></p>
+<div class="fragment"><div class="line">cd build &amp;&amp; ./r-type_client [server port] [server ip] [client port]</div>
+</div><!-- fragment --></li>
+<li><p class="startli">Launch <a class="el" href="class_server.html" title="Server class using UDP protocol.">Server</a></p>
+<div class="fragment"><div class="line">cd build &amp;&amp; ./r-type_server</div>
+</div><!-- fragment --></li>
+</ul>
 <h2><a class="anchor" id="autotoc_md4"></a>
-Norme des Commits</h2>
+Window</h2>
+<ul>
+<li>Compile with Cmake GUI</li>
+<li>Use Visual Studio</li>
+<li>Launch .exe (r-type_client.exe and r-type_server.exe)</li>
+</ul>
+<h1><a class="anchor" id="autotoc_md5"></a>
+Dev Infos</h1>
+<h2><a class="anchor" id="autotoc_md6"></a>
+ECS</h2>
+<p ><img src="docs/ECS.png" alt="ECS" class="inline"/></p>
+<h2><a class="anchor" id="autotoc_md7"></a>
+Commit norm</h2>
 <p >Exemples :</p>
 <ul>
 <li><b>ADD:</b> good ECS</li>
@@ -127,22 +150,22 @@ Norme des Commits</h2>
 <tr class="markdownTableRowEven">
 <td class="markdownTableBodyNone">UP   </td><td class="markdownTableBodyNone">If you change something without adding any features or content   </td></tr>
 </table>
-<h2><a class="anchor" id="autotoc_md5"></a>
+<h2><a class="anchor" id="autotoc_md8"></a>
 CI/CD</h2>
 <ul>
-<li>Build automatique sur les branches <b>main</b> et <b>dev</b>.</li>
-<li>Execution des tests unitaires Google Test sur les branches <b>main</b> et <b>dev</b>.</li>
-<li>Génération d'un coverage sur les branches <b>main</b> et <b>dev</b>.</li>
-<li>Génération automatique d'une documentation Doxygen sur les branches <b>main</b> et <b>dev</b> accessible <a href="arthurtakase.github.io/R-Type/">ici</a>.</li>
-<li>Envoi d'un message discord lors d'un push/merge sur toutes les branches.</li>
+<li>Automatic build on main and dev branches.</li>
+<li>Running Google Test unit tests on main and dev branches.</li>
+<li>Generating coverage on main and dev branches.</li>
+<li>Automatic generation of Doxygen documentation on main and dev branches accessible here.</li>
+<li>Sending a discord message on push/merge on all branches.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md6"></a>
+<h2><a class="anchor" id="autotoc_md9"></a>
 Doxygen</h2>
-<p >Pour une bonne génération de la documentation, veuillez à mettre des commentaires au dessus de vos fonctions selon le modèle suivante.</p>
+<p >For proper documentation generation, please put comments above your functions using the following format.</p>
 <div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
 Google Test</h2>
-<p >Toute fonciton doit posséder au minimum d'un test unitaire. Les tests fonctionnenent avec Google Test, la documentation est <a href="https://google.github.io/googletest/reference/testing.html">ici</a>. </p>
+<p >Every function must have at least one unit test. The tests work with Google Test, documentation is here. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

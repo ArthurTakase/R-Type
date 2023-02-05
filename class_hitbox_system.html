@@ -104,8 +104,8 @@ $(document).ready(function(){initNavTree('class_hitbox_system.html',''); initRes
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a51804c90b593e6eb3f56e64e21aaba64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#a51804c90b593e6eb3f56e64e21aaba64">HitboxSystem</a> (<a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; <a class="el" href="class_position_component.html">PositionComponent</a>, <a class="el" href="class_hitbox_component.html">HitboxComponent</a> &gt; it)</td></tr>
-<tr class="separator:a51804c90b593e6eb3f56e64e21aaba64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab06108db2f9e1c9b49ef4083994b57d4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#ab06108db2f9e1c9b49ef4083994b57d4">HitboxSystem</a> (std::unique_ptr&lt; <a class="el" href="class_entity_manager.html">EntityManager</a> &gt; &amp;manager) noexcept</td></tr>
+<tr class="separator:ab06108db2f9e1c9b49ef4083994b57d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a737cdaf85f482b74a7566b0269bbf729"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#a737cdaf85f482b74a7566b0269bbf729">~HitboxSystem</a> () noexcept=default</td></tr>
 <tr class="separator:a737cdaf85f482b74a7566b0269bbf729"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a954f100d1d7797f264c265432ced3ea4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#a954f100d1d7797f264c265432ced3ea4">HitboxSystem</a> (const <a class="el" href="class_hitbox_system.html">HitboxSystem</a> &amp;other) noexcept=default</td></tr>
@@ -118,26 +118,34 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a93be0ffea94d1ebb14adc92881cab4f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a00a2e267b3db6964c13fa9062e0295fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#a00a2e267b3db6964c13fa9062e0295fb">run</a> ()</td></tr>
 <tr class="separator:a00a2e267b3db6964c13fa9062e0295fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a11cb75a601a96147f5625cc066d34c0e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#a11cb75a601a96147f5625cc066d34c0e">checkCollision</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;entity) const</td></tr>
-<tr class="separator:a11cb75a601a96147f5625cc066d34c0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afcba240fe06670f3fe119707dd868f1b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_hitbox_system.html#afcba240fe06670f3fe119707dd868f1b">checkCollision</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;entity) const</td></tr>
+<tr class="separator:afcba240fe06670f3fe119707dd868f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >System used to check if an entity is colliding with another. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a51804c90b593e6eb3f56e64e21aaba64" name="a51804c90b593e6eb3f56e64e21aaba64"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a51804c90b593e6eb3f56e64e21aaba64">&#9670;&#160;</a></span>HitboxSystem() <span class="overload">[1/3]</span></h2>
+<a id="ab06108db2f9e1c9b49ef4083994b57d4" name="ab06108db2f9e1c9b49ef4083994b57d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab06108db2f9e1c9b49ef4083994b57d4">&#9670;&#160;</a></span>HitboxSystem() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">HitboxSystem::HitboxSystem </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; <a class="el" href="class_position_component.html">PositionComponent</a>, <a class="el" href="class_hitbox_component.html">HitboxComponent</a> &gt;&#160;</td>
-          <td class="paramname"><em>it</em></td><td>)</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_entity_manager.html">EntityManager</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>manager</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >It takes an iterator of entities with a position and hitbox component, and stores it in a private member variable</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -227,14 +235,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a11cb75a601a96147f5625cc066d34c0e" name="a11cb75a601a96147f5625cc066d34c0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a11cb75a601a96147f5625cc066d34c0e">&#9670;&#160;</a></span>checkCollision()</h2>
+<a id="afcba240fe06670f3fe119707dd868f1b" name="afcba240fe06670f3fe119707dd868f1b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afcba240fe06670f3fe119707dd868f1b">&#9670;&#160;</a></span>checkCollision()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">int HitboxSystem::checkCollision </td>
+          <td class="memname">void HitboxSystem::checkCollision </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>

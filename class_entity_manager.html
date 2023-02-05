@@ -120,12 +120,18 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:afc630329663a14fc4127f0572b1a30e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af09fcb5dcc574fb2dba2a487d4e8558f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#af09fcb5dcc574fb2dba2a487d4e8558f">createEnemy</a> () noexcept</td></tr>
 <tr class="separator:af09fcb5dcc574fb2dba2a487d4e8558f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1480d852f3b486ecbc8bf3847db8311a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#a1480d852f3b486ecbc8bf3847db8311a">createBackground</a> (int x) noexcept</td></tr>
+<tr class="separator:a1480d852f3b486ecbc8bf3847db8311a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf6c853a97b1d187be425060d9d134e6"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#adf6c853a97b1d187be425060d9d134e6">createId</a> () const noexcept</td></tr>
+<tr class="separator:adf6c853a97b1d187be425060d9d134e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1f03d2106223b18548115bed12a8888c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#a1f03d2106223b18548115bed12a8888c">removeEntity</a> (size_t id) noexcept</td></tr>
 <tr class="separator:a1f03d2106223b18548115bed12a8888c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a586c5bd3a48900a3abc989908e6e0af8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#a586c5bd3a48900a3abc989908e6e0af8">getEntity</a> (size_t id) const noexcept</td></tr>
 <tr class="separator:a586c5bd3a48900a3abc989908e6e0af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa53fe785a865f3f66c2f5b018f815052"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#aa53fe785a865f3f66c2f5b018f815052">getEntities</a> () noexcept</td></tr>
 <tr class="separator:aa53fe785a865f3f66c2f5b018f815052"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac242500933c018d171e4a7da90abf080"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_manager.html#ac242500933c018d171e4a7da90abf080">addEntity</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;&amp;entity) noexcept</td></tr>
+<tr class="separator:ac242500933c018d171e4a7da90abf080"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Object used to create the different entities of the software. </p>
@@ -226,6 +232,66 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac242500933c018d171e4a7da90abf080" name="ac242500933c018d171e4a7da90abf080"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac242500933c018d171e4a7da90abf080">&#9670;&#160;</a></span>addEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EntityManager::addEntity </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Add an entity to the entities list</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>The entity you wish to add </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1480d852f3b486ecbc8bf3847db8311a" name="a1480d852f3b486ecbc8bf3847db8311a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1480d852f3b486ecbc8bf3847db8311a">&#9670;&#160;</a></span>createBackground()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EntityManager::createBackground </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates an entity, adds a position component to it, and then adds it to the entity manager </p>
+
+</div>
+</div>
 <a id="af09fcb5dcc574fb2dba2a487d4e8558f" name="af09fcb5dcc574fb2dba2a487d4e8558f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af09fcb5dcc574fb2dba2a487d4e8558f">&#9670;&#160;</a></span>createEnemy()</h2>
 
@@ -249,6 +315,33 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p >It creates an entity, adds a position component to it, and then adds it to the entity manager </p>
+
+</div>
+</div>
+<a id="adf6c853a97b1d187be425060d9d134e6" name="adf6c853a97b1d187be425060d9d134e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf6c853a97b1d187be425060d9d134e6">&#9670;&#160;</a></span>createId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t EntityManager::createId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >If the entity list is empty, return 0, otherwise return the last entity's ID plus one</p>
+<dl class="section return"><dt>Returns</dt><dd>The id of the last entity in the vector plus one. </dd></dl>
 
 </div>
 </div>

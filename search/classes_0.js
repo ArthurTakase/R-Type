@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['asystem_0',['ASystem',['../class_a_system.html',1,'']]]
+  ['address_0',['Address',['../struct_address.html',1,'']]]
 ];

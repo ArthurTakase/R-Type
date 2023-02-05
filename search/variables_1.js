@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['idx_0',['idx',['../class_entity_iterator.html#aa574aad48a411bd10a12ddc6895a9522',1,'EntityIterator']]],
-  ['it_1',['it',['../class_entity_iterator.html#a344bcfde47e93240700472b9877a50e6',1,'EntityIterator']]]
+  ['data_0',['data',['../struct_received_infos.html#ad48953faa8d3a19176f167d640bc1d0e',1,'ReceivedInfos']]],
+  ['datatosend_1',['dataToSend',['../struct_client.html#a0e96656d59130faaf23b381938ef4362',1,'Client']]]
 ];

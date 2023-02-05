@@ -1,13 +1,8 @@
 var searchData=
 [
-  ['get_0',['get',['../class_entity_iterator.html#af34cfa117819fa2d8cc78d75ac7d9c7e',1,'EntityIterator']]],
-  ['getcomponent_1',['getComponent',['../class_entity.html#a581c44fee015724f57366fca3c85c164',1,'Entity']]],
-  ['getcomponents_2',['getComponents',['../class_entity.html#acb1dc847fddaad6617d9826a566b1813',1,'Entity']]],
-  ['getentities_3',['getEntities',['../class_entity_manager.html#aa53fe785a865f3f66c2f5b018f815052',1,'EntityManager']]],
-  ['getentity_4',['getEntity',['../class_entity_manager.html#a586c5bd3a48900a3abc989908e6e0af8',1,'EntityManager']]],
-  ['getheight_5',['getHeight',['../class_hitbox_component.html#a7aab1c432d30408269b014365edb19cf',1,'HitboxComponent']]],
-  ['getid_6',['getId',['../class_entity.html#a1b07798d5ba9be2b36b0c3c52bea27de',1,'Entity']]],
-  ['getwidth_7',['getWidth',['../class_hitbox_component.html#afd579865740f74f9089c480c6d4854db',1,'HitboxComponent']]],
-  ['getx_8',['getX',['../class_position_component.html#aa35733496247a12aae4aa9b81ff6a670',1,'PositionComponent']]],
-  ['gety_9',['getY',['../class_position_component.html#a5716fcecbff8c095da53c840647e82d0',1,'PositionComponent']]]
+  ['deserialize_0',['DeSerialize',['../class_serializer_system.html#a05302ced01fdb20aa6d1d8e41259d6e5',1,'SerializerSystem::DeSerialize(std::bitset&lt; ENTITYSIZE &gt; data) const'],['../class_serializer_system.html#a37ef0dee4871d939c466dd531674e83b',1,'SerializerSystem::DeSerialize(std::bitset&lt; INPUTSIZE &gt; input) const']]],
+  ['deserialize_1',['Deserialize',['../class_deserializer.html#a9aaf18046a3814eb1f782bb9a42cfd81',1,'Deserializer::Deserialize(std::bitset&lt; ENTITYSIZE &gt; data) const'],['../class_deserializer.html#a6e3a194d3ed7b4eb0331c7f1ebabc283',1,'Deserializer::Deserialize(std::bitset&lt; INPUTSIZE &gt;) const'],['../class_i_deserializer.html#a8cdf0df5ae51d9c1ee9e2b067b938130',1,'IDeserializer::Deserialize(std::bitset&lt; ENTITYSIZE &gt; data) const =0'],['../class_i_deserializer.html#a932493c2458cd5172667afe9f99da3d7',1,'IDeserializer::Deserialize(std::bitset&lt; INPUTSIZE &gt;) const =0']]],
+  ['deserializer_2',['Deserializer',['../class_deserializer.html#a1f86f4765cc14541e3aa6a52ea2d353d',1,'Deserializer::Deserializer()=default'],['../class_deserializer.html#ac3f2b12c3638a5131de32bfb50a35bc5',1,'Deserializer::Deserializer(const Deserializer &amp;other)=delete'],['../class_deserializer.html#aba2d60afd6baccb3ab40d25ce47e5bad',1,'Deserializer::Deserializer(Deserializer &amp;&amp;other) noexcept=delete']]],
+  ['draw_3',['draw',['../class_window.html#a9accf3024eb3a8acf62dcd69f9e7a10a',1,'Window']]],
+  ['drawablecomponent_4',['DrawableComponent',['../class_drawable_component.html#a21145156aeb905e164d2f053dc1292af',1,'DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId)'],['../class_drawable_component.html#ab7f447a6ca324e8e38dd4a7ad9fd7157',1,'DrawableComponent::DrawableComponent(const DrawableComponent &amp;other) noexcept=default'],['../class_drawable_component.html#a5004c42138c7c1fea8aed01a693496bf',1,'DrawableComponent::DrawableComponent(DrawableComponent &amp;&amp;other) noexcept=delete']]]
 ];
