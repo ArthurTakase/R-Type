@@ -21,11 +21,11 @@ class UdpClient
     explicit UdpClient(Address serverAddress, Address::Port clientPort);
 
     UdpClient(const UdpClient& other) noexcept = delete;
-    UdpClient(UdpClient&& other) noexcept      = default;
+    UdpClient(UdpClient&& other) noexcept      = delete;
     ~UdpClient() noexcept                      = default;
 
     UdpClient& operator=(const UdpClient& rhs) noexcept = delete;
-    UdpClient& operator=(UdpClient&& rhs) noexcept      = default;
+    UdpClient& operator=(UdpClient&& rhs) noexcept      = delete;
 
     void run();
     void stop() noexcept;

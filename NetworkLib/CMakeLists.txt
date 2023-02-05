@@ -1,13 +1,14 @@
 # CmakeLists to create the network library
 
 add_library(
-    NetworkLib
-    src/LinuxSocketSelector.cpp
-    src/LinuxSocket.cpp
-    src/SocketFactory.cpp
-    src/SocketSelectorFactory.cpp
-    src/WindowsSocket.cpp
-    src/WindowsSocketSelector.cpp
+  NetworkLib
+  src/LinuxSocketSelector.cpp
+  src/LinuxSocket.cpp
+  src/SocketFactory.cpp
+  src/SocketSelectorFactory.cpp
+  src/WindowsSocket.cpp
+  src/WindowsSocketSelector.cpp
+  src/HostHandler.cpp
 )
 
 if(WIN32)

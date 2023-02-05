@@ -51,7 +51,10 @@ void Server::communicate() noexcept
         } catch (const NetworkExecError& message) {
             std::cerr << message.what() << std::endl;
         }
-        if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
+        if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) {
+            std::cout << "receive" << std::endl;
+            receive();
+        }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
     }
 }
@@ -79,10 +82,10 @@ void Server::gameLoop() noexcept
 
                 auto drawable  = entity->getComponent<DrawableComponent>();
                 auto transform = entity->getComponent<TransformComponent>();
-
                 dataToSend.emplace_back(transform->getX());
                 dataToSend.emplace_back(transform->getY());
                 dataToSend.emplace_back(drawable->getTextureId());
+                std::cout << drawable->getTextureId() << std::endl;
                 dataToSend.emplace_back(drawable->getWidth());
                 dataToSend.emplace_back(drawable->getHeight());
                 dataToSend.emplace_back(transform->getScaleX() * 10);
@@ -120,9 +123,13 @@ void Server::addClient(Address address) noexcept
 
 void Server::receive()
 {
+    std::cout << "receive" << std::endl;
     try {
         ReceivedInfos infoReceived = socket_->receive();
-        if (!isKnownClient(infoReceived.address)) { addClient(infoReceived.address); }
+        if (!isKnownClient(infoReceived.address)) {
+            std::cout << "new client" << std::endl;
+            addClient(infoReceived.address);
+        }
         handleData(infoReceived);
     } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;

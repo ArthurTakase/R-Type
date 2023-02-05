@@ -65,12 +65,12 @@ Address LinuxSocket::getAddress() const noexcept
 void LinuxSocket::send(const void* data, int data_size, Address destAddr) const
 {
     sockaddr_in linuxDestAddr = addressToLinuxAddress(destAddr);
+    Address     test          = linuxAddressToAddress(linuxDestAddr);
 
     int sent_bytes =
         sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&linuxDestAddr), sizeof(linuxDestAddr));
 
     if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
-    std::cout << "SENDING DATA TO " << destAddr.ip << ":" << destAddr.port << std::endl;
 }
 
 ReceivedInfos LinuxSocket::receive() const
