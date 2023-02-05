@@ -16,6 +16,10 @@
 #include "MouvementSystem.hpp"
 #include "SerializerSystem.hpp"
 
+/**
+ * @brief Game Instance for the server
+ *
+ */
 class RType
 {
   public:

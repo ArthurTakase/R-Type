@@ -16,6 +16,10 @@
 
 #include "LinuxSocket.hpp"
 
+/**
+ * @brief Encapsulate a fd_set for Linux and handle manipulations
+ *
+ */
 class LinuxFdSet
 {
   public:
@@ -39,6 +43,10 @@ class LinuxFdSet
     fd_set fdSet_;
 };
 
+/**
+ * @brief Encapsulate a select for Linux and handle manipulations
+ *
+ */
 class LinuxSocketSelector : public SocketSelector
 {
   public:

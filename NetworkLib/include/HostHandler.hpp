@@ -10,6 +10,10 @@
 
 #include "ISocket.hpp"
 
+/**
+ * @brief get infos about the host
+ *
+ */
 class HostHandler
 {
   public:

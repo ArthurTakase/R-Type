@@ -10,6 +10,10 @@
 #include <exception>
 #include <string>
 
+/**
+ * @brief This class is used to create an error.
+ *
+ */
 class Error : public std::exception
 {
   public:
@@ -27,6 +31,10 @@ class Error : public std::exception
     std::string message_;
 };
 
+/**
+ * @brief This class is used to create an error when the initialization of an element fails.
+ *
+ */
 class InitError : public Error
 {
   public:
@@ -42,6 +50,10 @@ class InitError : public Error
   private:
 };
 
+/**
+ * @brief This class is used to create an error when the network execution fails.
+ *
+ */
 class NetworkExecError : public Error
 {
   public:

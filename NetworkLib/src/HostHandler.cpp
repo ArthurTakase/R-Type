@@ -22,6 +22,13 @@
 
 #endif
 
+/**
+ * It gets the IP address of a hostname
+ *
+ * @param hostname the hostname to resolve
+ *
+ * @return The encapsulated ip address of the hostname
+ */
 Address::Ip HostHandler::getIp(std::string_view hostname)
 {
     struct addrinfo     hints;
@@ -49,6 +56,14 @@ Address::Ip HostHandler::getIp(std::string_view hostname)
     return (ip);
 }
 
+/**
+ * It gets the server's IP address and port from the command line arguments
+ *
+ * @param ac the number of arguments passed to the program
+ * @param av the arguments passed to the program
+ *
+ * @return an Address, which is an encapsulation of the host address.
+ */
 Address HostHandler::getHostAddress(int ac, const char* const av[])
 {
     Address serverInfos;
@@ -64,6 +79,14 @@ Address HostHandler::getHostAddress(int ac, const char* const av[])
     return (serverInfos);
 }
 
+/**
+ * It gets the client port from the command line arguments
+ *
+ * @param ac The number of arguments passed to the program.
+ * @param av The command line arguments
+ *
+ * @return The client port number encapsulated.
+ */
 Address::Port HostHandler::getClientPort(int ac, const char* const av[])
 {
     Address::Port clientPort = std::atoi(av[3]);

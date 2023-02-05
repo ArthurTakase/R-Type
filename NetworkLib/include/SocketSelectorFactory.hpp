@@ -10,6 +10,10 @@
 
 #include "SocketSelector.hpp"
 
+/**
+ * @brief Factory for SocketSelector
+ *
+ */
 class SocketSelectorFactory
 {
   public:

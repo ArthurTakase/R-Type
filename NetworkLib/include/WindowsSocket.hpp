@@ -18,6 +18,10 @@
 
 class WindowsSocketSelector;
 
+/**
+ * @brief UDP Socket for windows
+ *
+ */
 class WindowsSocket : public ISocket
 {
     friend class WindowsSocketSelector;

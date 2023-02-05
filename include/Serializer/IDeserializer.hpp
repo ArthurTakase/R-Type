@@ -5,6 +5,10 @@
 
 #include "BitSize.hpp"
 
+/**
+ * @brief Structure for EntityInfo
+ *
+ */
 struct EntityInfo {
     int x;
     int y;

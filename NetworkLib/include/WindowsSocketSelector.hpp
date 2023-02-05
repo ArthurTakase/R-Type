@@ -16,6 +16,10 @@
 
 #include "WindowsSocket.hpp"
 
+/**
+ * @brief Encapsulate a fd_set for Windows and handle manipulations
+ *
+ */
 class WindowsFdSet
 {
   public:
@@ -39,6 +43,10 @@ class WindowsFdSet
     fd_set fdSet_;
 };
 
+/**
+ * @brief Encapsulate a select for Windows and handle manipulations
+ *
+ */
 class WindowsSocketSelector : public SocketSelector
 {
   public:

@@ -18,8 +18,10 @@ class IComponent
   public:
     IComponent() noexcept          = default;
     virtual ~IComponent() noexcept = default;
-    // IComponent(const IComponent& other) noexcept = delete;
-    // IComponent(IComponent&& other) noexcept      = delete;
-    // IComponent& operator=(const IComponent& rhs) noexcept = delete;
-    // IComponent& operator=(IComponent&& rhs) noexcept      = delete;
+
+    IComponent(const IComponent& other) noexcept = default;
+    IComponent(IComponent&& other) noexcept      = delete;
+
+    IComponent& operator=(const IComponent& rhs) noexcept = default;
+    IComponent& operator=(IComponent&& rhs) noexcept      = delete;
 };

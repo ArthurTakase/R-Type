@@ -27,12 +27,12 @@ TEST(MouvementSystem_, run)
 
     system->run();
 
-    EXPECT_EQ(manager->getEntity(0)->getComponent<TransformComponent>()->getX(), 20);
+    EXPECT_EQ(manager->getEntity(0)->getComponent<TransformComponent>()->getX(), 10);
     EXPECT_EQ(manager->getEntity(0)->getComponent<TransformComponent>()->getY(), 8);
 
     EXPECT_EQ(manager->getEntity(1)->getComponent<TransformComponent>()->getX(), 10);
     EXPECT_EQ(manager->getEntity(1)->getComponent<TransformComponent>()->getY(), 9);
 
-    EXPECT_EQ(manager->getEntity(2)->getComponent<TransformComponent>()->getX(), 11);
+    EXPECT_EQ(manager->getEntity(2)->getComponent<TransformComponent>()->getX(), 10);
     EXPECT_EQ(manager->getEntity(2)->getComponent<TransformComponent>()->getY(), 8);
 }

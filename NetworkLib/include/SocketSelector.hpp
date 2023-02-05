@@ -9,6 +9,10 @@
 
 #include "ISocket.hpp"
 
+/**
+ * @brief Interface for SocketSelector
+ *
+ */
 class SocketSelector
 {
   public:

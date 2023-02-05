@@ -10,6 +10,10 @@
 #include <memory>
 #include <queue>
 
+/**
+ * @brief Encapsulate an address
+ *
+ */
 struct Address {
     using Port = std::uint16_t;
     using Ip   = std::uint32_t;
@@ -18,6 +22,14 @@ struct Address {
     Ip   ip;
 };
 
+/**
+ * @brief Compare two Address
+ *
+ * @param lhs
+ * @param rhs
+ * @return true
+ * @return false
+ */
 inline bool operator==(const Address& lhs, const Address& rhs) noexcept
 {
     return (lhs.port == rhs.port && lhs.ip == rhs.ip);
@@ -25,16 +37,28 @@ inline bool operator==(const Address& lhs, const Address& rhs) noexcept
 
 using RawData = std::vector<std::uint8_t>;
 
+/**
+ * @brief Encapsulate a received data and the address of the sender
+ *
+ */
 struct ReceivedInfos {
     RawData data;
     Address address;
 };
 
+/**
+ * @brief Encapsulate a client address and the data to send
+ *
+ */
 struct Client {
     Address             address;
     std::queue<RawData> dataToSend = {};
 };
 
+/**
+ * @brief Interface for an UDP socket
+ *
+ */
 class ISocket
 {
   public:

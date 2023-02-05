@@ -21,6 +21,10 @@
 
 class LinuxSocketSelector;
 
+/**
+ * @brief Encapsulate an UDP socket for Linux
+ *
+ */
 class LinuxSocket : public ISocket
 {
     friend class LinuxSocketSelector;

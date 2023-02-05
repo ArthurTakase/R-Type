@@ -15,6 +15,10 @@
 #include "ISocket.hpp"
 #include "SocketSelector.hpp"
 
+/**
+ * @brief Client class using UDP protocol
+ *
+ */
 class UdpClient
 {
   public:

@@ -8,6 +8,10 @@
 #pragma once
 #include "ISocket.hpp"
 
+/**
+ * @brief Factory for socket
+ *
+ */
 class SocketFactory
 {
   public:

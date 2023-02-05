@@ -15,6 +15,10 @@
 #include "ServerGameInstance.hpp"
 #include "SocketSelector.hpp"
 
+/**
+ * @brief Server class using UDP protocol
+ *
+ */
 class Server
 {
   public:

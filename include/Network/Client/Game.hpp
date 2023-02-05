@@ -12,6 +12,10 @@
 #include "EntityManager.hpp"
 #include "Lib.hpp"
 
+/**
+ * @brief This struct is used to process the data received from the server.
+ *
+ */
 struct GamePacket {
     int x;
     int xpositive;
@@ -27,6 +31,10 @@ struct GamePacket {
     int id;
 };
 
+/**
+ * @brief This class is used to create a game instance in the client.
+ *
+ */
 class Game
 {
   public:
