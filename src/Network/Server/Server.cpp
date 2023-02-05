@@ -95,17 +95,11 @@ void Server::gameLoop() noexcept
                 }
 
                 if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
-                std::cout << "";
-
                 for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
-
                 gameInstance_.run();
             }
-            // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset
-            // le jeu)
         }
     }
-    std::cout << "game loop end" << std::endl;
 }
 
 bool Server::isKnownClient(Address address) const
@@ -161,12 +155,18 @@ RawData Server::getDataFromQueue(Client& client) noexcept
 
 void Server::handleData(ReceivedInfos infos) noexcept
 {
-    for (auto& data : infos.data) { std::cout << (int)data << " "; }
-    std::cout << std::endl;
-
     if (infos.data.size() == 0) { return; }
 
-    if (infos.data[0] == CLOSE_VALUE) { std::cout << "CLIENT DISCONNECT" << std::endl; }
+    if (infos.data[0] == CLOSE_VALUE) {
+        auto iterator = std::find_if(clients_.begin(), clients_.end(), [&infos](const Client& client) {
+            return (infos.address == client.address);
+        });
+        if (iterator != clients_.end()) {
+            clients_.erase(iterator);
+            // TODO: remove player entity in game instance
+            //  gameInstance_.getManager().removePlayer();
+        }
+    }
 
     auto& behavior = gameInstance_.getBehaviorSystem();
     behavior.setKey(infos.data[0]);
