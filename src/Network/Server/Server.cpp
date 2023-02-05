@@ -60,8 +60,8 @@ void Server::communicate() noexcept
 void Server::gameLoop() noexcept
 {
     gameInstance_.getManager().createBackground(0);
-    // gameInstance_.getManager().createBackground(255);
-    // gameInstance_.getManager().createPlayer();
+    gameInstance_.getManager().createBackground(255);
+    gameInstance_.getManager().createPlayer();
     // gameInstance_.getManager().createEnemy();
     // gameInstance_.getManager().createEnemy();
     // gameInstance_.getManager().createEnemy();
@@ -73,9 +73,8 @@ void Server::gameLoop() noexcept
         end = std::chrono::system_clock::now();
         if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() >= tickrate_) {
             start = { std::chrono::high_resolution_clock::now() };
-            if (looping_ == false && clients_.size() == 0) {
-                // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
-                // window est fermée
+
+            if (clients_.size() == 0 && gameInstance_.getManager().getEntities().size() == 0) {
                 stop();
             } else {
                 auto& entities = gameInstance_.getManager().getEntities();

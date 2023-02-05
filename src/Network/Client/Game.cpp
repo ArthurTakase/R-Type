@@ -41,7 +41,11 @@ void Game::run() noexcept
 
         drawable->getSprite()->setX(transform->getX());
         drawable->getSprite()->setY(transform->getY());
-        lib_->getWindow().draw(drawable->getSprite());
+        lib_->getWindow().draw(drawable->getSprite(),
+            drawable->getOffsetX(),
+            drawable->getOffsetY(),
+            drawable->getWidth(),
+            drawable->getHeight());
     }
     lib_->getWindow().refresh();
 }
@@ -66,7 +70,6 @@ void Game::deserializeEntity(GamePacket packet) noexcept
     auto m_entity = manager_->getEntity(packet.id);
 
     if (m_entity == nullptr) {
-        std::cout << "CREATING ENTITY ......................................." << std::endl;
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_->createId());
 
         auto transform =
@@ -85,8 +88,6 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 
-        std::cout << "id :" << m_entity->getId() << " xpositive = " << packet.xpositive << " x = " << packet.x
-                  << std::endl;
         transform->setX(packet.xpositive ? packet.x : -(packet.x));
         transform->setY(packet.ypositive ? packet.y : -(packet.y));
         transform->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));

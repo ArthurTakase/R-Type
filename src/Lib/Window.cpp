@@ -17,6 +17,7 @@ Window::Window() noexcept {}
 void Window::open(int width, int height, const std::string& title)
 {
     window.create(sf::VideoMode(width, height), title);
+    window.setFramerateLimit(60);
 }
 
 /**
@@ -73,14 +74,13 @@ int Window::getKeyPressed()
  *
  * @param sprite The sprite to draw.
  */
-void Window::draw(Sprite* sprite)
+void Window::draw(Sprite* sprite, int xtexture, int ytexture, int width, int height)
 {
     sf::Texture texture;
     sf::Sprite  tempSprite;
 
-    texture.loadFromFile(sprite->getSpritePath());
+    texture.loadFromFile(sprite->getSpritePath(), sf::IntRect(xtexture, ytexture, width, height));
     tempSprite.setTexture(texture);
     tempSprite.setPosition(sprite->getX(), sprite->getY());
-
     window.draw(tempSprite);
 }
