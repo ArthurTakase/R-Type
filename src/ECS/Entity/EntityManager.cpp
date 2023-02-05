@@ -58,7 +58,7 @@ void EntityManager::createBackground(int x) noexcept
         std::function<void(int key, std::unique_ptr<Entity>& entity)>{ [](int key, std::unique_ptr<Entity>& entity) {
             auto transform = entity->getComponent<TransformComponent>();
 
-            if (transform->getX() <= -600) { transform->setX(600); }
+            if (transform->getX() <= -255) { transform->setX(255); }
         } });
 
     background->addComponent(TransformComponent(x, 0));

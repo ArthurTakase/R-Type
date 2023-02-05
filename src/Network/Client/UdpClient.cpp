@@ -114,8 +114,13 @@ RawData UdpClient::getDataFromQueue() noexcept
 
 void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
-    if (infos.data.size() == 0) return;
-    if (infos.data.size() % 10 == 0) {
+    if (infos.data.size() < 2) return;
+
+    std::cout << (int)infos.data[0] << " " << (int)infos.data[1] << " " << (int)infos.data[2] << " "
+              << (int)infos.data[3] << " " << std::endl;
+    std::cout << (int)infos.data.size() << std::endl;
+
+    if (infos.data.size() % 12 == 0) {
         for (int i = 0; i < infos.data.size(); i += 10) {
             deserializeEntity(infos.data[i],
                 infos.data[i + 1],
@@ -126,14 +131,18 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 infos.data[i + 6],
                 infos.data[i + 7],
                 infos.data[i + 8],
-                infos.data[i + 9]);
+                infos.data[i + 9],
+                infos.data[i + 10],
+                infos.data[i + 11]);
         }
     }
     infos.data.clear();
 }
 
 void UdpClient::deserializeEntity(int x,
+    int                               xpositive,
     int                               y,
+    int                               ypositive,
     int                               idSprite,
     int                               width,
     int                               height,
@@ -149,7 +158,7 @@ void UdpClient::deserializeEntity(int x,
     if (m_entity == nullptr) {
         std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager->createId());
 
-        auto transform = TransformComponent(x, y);
+        auto transform = TransformComponent(xpositive ? x : -x, ypositive ? y : -y);
         transform.setScale(scaleX, scaleY);
 
         auto drawable = DrawableComponent(offsetX, offsetY, width, height, idSprite);
@@ -164,8 +173,10 @@ void UdpClient::deserializeEntity(int x,
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
 
-        transform->setX(x);
-        transform->setY(y);
+        std::cout << "xpositive = " << xpositive << std::endl;
+        std::cout << "x = " << x << std::endl;
+        transform->setX(xpositive ? x : -x);
+        transform->setY(ypositive ? y : -y);
         transform->setScale((float)scaleX / 10, (float)scaleY / 10);
         drawable->setOffsetX(offsetX);
         drawable->setOffsetY(offsetY);

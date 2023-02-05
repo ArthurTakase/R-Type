@@ -37,6 +37,7 @@ class UdpClient
     // attributes
     bool                            looping_ = true;
     Address                         serverAddress_;
+    int                             tickrate_ = 60;
     std::unique_ptr<ISocket>        socket_;
     std::unique_ptr<IDeserializer>  deserializer_;
     std::unique_ptr<SocketSelector> selector_;
@@ -58,7 +59,9 @@ class UdpClient
 
     // Game
     void deserializeEntity(int x,
+        int                    xpositive,
         int                    y,
+        int                    ypositive,
         int                    idSprite,
         int                    width,
         int                    height,

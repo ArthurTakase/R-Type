@@ -8,9 +8,12 @@
 #include "Server.hpp"
 
 #include <algorithm>
+#include <ctime>
 #include <iostream>
+#include <locale>
 
 #include "Error.hpp"
+#include "ISocket.hpp"
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
 
@@ -60,47 +63,73 @@ void Server::gameLoop() noexcept
     std::cout << "game loop start" << std::endl;
 
     gameInstance_.getManager()->createBackground(0);
-    gameInstance_.getManager()->createBackground(600);
+    // gameInstance_.getManager()->createBackground(255);
     // gameInstance_.getManager()->createPlayer();
     // gameInstance_.getManager()->createEnemy();
     // gameInstance_.getManager()->createEnemy();
     // gameInstance_.getManager()->createEnemy();
 
+    auto                                           end   = std::chrono::system_clock::now();
+    std::chrono::high_resolution_clock::time_point start = { std::chrono::high_resolution_clock::now() };
+
     while (looping_) {
-        if (looping_ == false && clients_.size() == 0) {
-            // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
-            // window est fermée
-            stop();
-        } else {
-            auto&   entities = gameInstance_.getManager()->getEntities();
-            RawData dataToSend;
-            dataToSend.reserve(entities.size() * 10);
-            for (auto& entity : entities) {
-                if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
+        end = std::chrono::system_clock::now();
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() >= tickrate_) {
+            start = { std::chrono::high_resolution_clock::now() };
+            if (looping_ == false && clients_.size() == 0) {
+                // TODO: changer la condition pour qu'une instruction envoyée par le client ou le jeu me dise quand la
+                // window est fermée
+                stop();
+            } else {
+                // RawData lolilol = {
+                //     1,
+                //     1,
+                //     3,
+                //     1,
+                //     5,
+                //     4,
+                //     4,
+                //     1,
+                //     1,
+                //     4,
+                //     4,
+                //     4,
+                // };
+                // for (auto& client : clients_) { client.dataToSend.push(lolilol); }
 
-                auto drawable  = entity->getComponent<DrawableComponent>();
-                auto transform = entity->getComponent<TransformComponent>();
-                dataToSend.emplace_back(transform->getX());
-                dataToSend.emplace_back(transform->getY());
-                dataToSend.emplace_back(drawable->getTextureId());
-                dataToSend.emplace_back(drawable->getWidth());
-                dataToSend.emplace_back(drawable->getHeight());
-                dataToSend.emplace_back(transform->getScaleX() * 10);
-                dataToSend.emplace_back(transform->getScaleY() * 10);
-                dataToSend.emplace_back(drawable->getOffsetX());
-                dataToSend.emplace_back(drawable->getOffsetY());
-                dataToSend.emplace_back(entity->getId());
+                auto& entities = gameInstance_.getManager()->getEntities();
+                std::cout << (int)entities.size() << std::endl;
+                RawData dataToSend;
+                dataToSend.reserve(entities.size() * 12);
+                for (auto& entity : entities) {
+                    if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
+
+                    auto drawable  = entity->getComponent<DrawableComponent>();
+                    auto transform = entity->getComponent<TransformComponent>();
+                    dataToSend.emplace_back(transform->getX() > 0 ? transform->getX() : -transform->getX());
+                    dataToSend.emplace_back(transform->getX() > 0 ? 1 : 0);
+                    dataToSend.emplace_back(transform->getY() > 0 ? transform->getY() : -transform->getY());
+                    dataToSend.emplace_back(transform->getY() > 0 ? 1 : 0);
+                    dataToSend.emplace_back(drawable->getTextureId());
+                    dataToSend.emplace_back(drawable->getWidth());
+                    dataToSend.emplace_back(drawable->getHeight());
+                    dataToSend.emplace_back(transform->getScaleX() * 10);
+                    dataToSend.emplace_back(transform->getScaleY() * 10);
+                    dataToSend.emplace_back(drawable->getOffsetX());
+                    dataToSend.emplace_back(drawable->getOffsetY());
+                    dataToSend.emplace_back(entity->getId());
+                }
+
+                if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
+                std::cout << "";
+
+                for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
+
+                gameInstance_.run();
             }
-
-            if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
-            std::cout << "";
-
-            for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
-
-            gameInstance_.run();
+            // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset
+            // le jeu)
         }
-        // TODO: reset de l'instance de jeu dans le cas ou on veut juste recommencer une partie // une partie (reset le
-        // jeu)
     }
     std::cout << "game loop end" << std::endl;
 }
