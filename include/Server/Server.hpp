@@ -7,12 +7,12 @@
 
 #pragma once
 
+#include <Server/ServerGameInstance.hpp>
 #include <memory>
 #include <thread>
 #include <vector>
 
 #include "ISocket.hpp"
-#include "ServerGameInstance.hpp"
 #include "SocketSelector.hpp"
 
 /**

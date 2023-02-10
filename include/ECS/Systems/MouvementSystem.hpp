@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "Components/MouvementComponent.hpp"
-#include "Components/TransformComponent.hpp"
-#include "Entity/EntityManager.hpp"
-#include "Tools/EntityIterator.hpp"
+#include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <Tools/EntityIterator.hpp>
 
 /**
  * @brief A system that will update the position of the entities that have a TransformComponent and a

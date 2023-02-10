@@ -5,12 +5,12 @@
 ** main_client
 */
 
+#include <Client/UdpClient.hpp>
 #include <cstdlib>
 #include <iostream>
 
 #include "Error.hpp"
 #include "HostHandler.hpp"
-#include "UdpClient.hpp"
 
 int main(int ac, const char* const av[])
 {

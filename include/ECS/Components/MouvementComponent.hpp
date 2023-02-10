@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Components/IComponent.hpp"
+#include <ECS/Components/IComponent.hpp>
 
 /**
  * @brief Component used to set the direction and speed of the movement of an entity

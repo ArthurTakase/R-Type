@@ -7,12 +7,11 @@
 
 #pragma once
 
+#include <ECS/Components/IComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
+#include <Lib/Sprite.hpp>
 #include <functional>
 #include <memory>
-
-#include "Components/IComponent.hpp"
-#include "Entity/Entity.hpp"
-#include "Lib/Sprite.hpp"
 
 /**
  * @brief Component assigned to drawable entities.

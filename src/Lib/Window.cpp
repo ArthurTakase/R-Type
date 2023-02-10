@@ -5,8 +5,7 @@
 ** Window.cpp
 */
 
-#include "Window.hpp"
-
+#include <Lib/Window.hpp>
 #include <iostream>
 
 Window::Window() noexcept {}

@@ -5,8 +5,7 @@
 ** Lib.cpp
 */
 
-#include "Lib.hpp"
-
+#include <Lib/Lib.hpp>
 #include <iostream>
 
 /**

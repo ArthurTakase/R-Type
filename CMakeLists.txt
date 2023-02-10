@@ -57,11 +57,6 @@ set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
 target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
 
 target_include_directories(${RTYPE_SERVER} PRIVATE include)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/Network)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/Network/Server)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/Lib)
 
 # find_path(CHAISCRIPT_INCLUDE_DIRS "chaiscript/chaiscript.hpp")
 # target_include_directories(${RTYPE_SERVER} PRIVATE ${CHAISCRIPT_INCLUDE_DIRS})
@@ -88,12 +83,7 @@ target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Tools)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/Client)
-target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
+# target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
 
 # ------------------------------
 # TESTS
@@ -147,12 +137,6 @@ if(DEFINED TESTS)
   
   # Includes
   target_include_directories(${TEST_BUILD} PRIVATE include)
-  target_include_directories(${TEST_BUILD} PRIVATE include/ECS)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Tools)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Lib)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Network)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Network/Server)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Network/Client)
   target_include_directories(${TEST_BUILD} PRIVATE NetworkLib/include)
   target_include_directories(${TEST_BUILD} PRIVATE Error)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googletest/include)

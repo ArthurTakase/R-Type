@@ -7,9 +7,9 @@
 
 #include <gtest/gtest.h>
 
-#include <Components/HitboxComponent.hpp>
-#include <Components/TransformComponent.hpp>
-#include <Entity/Entity.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
 
 TEST(Entity_, getId)
 {

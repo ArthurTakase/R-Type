@@ -5,10 +5,9 @@
 ** Game.cpp
 */
 
-#include "Game.hpp"
-
-#include <Components/DrawableComponent.hpp>
-#include <Components/TransformComponent.hpp>
+#include <Client/Game.hpp>
+#include <ECS/Components/DrawableComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
 #include <iostream>
 
 /**

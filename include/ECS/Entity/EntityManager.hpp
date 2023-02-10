@@ -7,17 +7,16 @@
 
 #pragma once
 
+#include <ECS/Components/BehaviorComponent.hpp>
+#include <ECS/Components/DrawableComponent.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/StatComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
+#include <Tools/InstanceOf.hpp>
 #include <memory>
 #include <vector>
-
-#include "Components/BehaviorComponent.hpp"
-#include "Components/DrawableComponent.hpp"
-#include "Components/HitboxComponent.hpp"
-#include "Components/MouvementComponent.hpp"
-#include "Components/StatComponent.hpp"
-#include "Components/TransformComponent.hpp"
-#include "Entity/Entity.hpp"
-#include "Tools/InstanceOf.hpp"
 
 /**
  * @brief Object used to create the different entities of the software

@@ -5,7 +5,7 @@
 ** RType.cpp
 */
 
-#include "ServerGameInstance.hpp"
+#include <Server/ServerGameInstance.hpp>
 
 RType::RType()
     : hitboxSystem_(&entityManager_)

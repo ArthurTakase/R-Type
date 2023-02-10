@@ -7,11 +7,11 @@
 
 #pragma once
 
-#include <Components/MouvementComponent.hpp>
-#include <Entity/EntityManager.hpp>
-#include <Systems/BehaviorSystem.hpp>
-#include <Systems/HitboxSystem.hpp>
-#include <Systems/MouvementSystem.hpp>
+#include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/BehaviorSystem.hpp>
+#include <ECS/Systems/HitboxSystem.hpp>
+#include <ECS/Systems/MouvementSystem.hpp>
 #include <memory>
 
 /**

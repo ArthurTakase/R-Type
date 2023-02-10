@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Components/IComponent.hpp"
+#include <ECS/Components/IComponent.hpp>
 
 /**
  * @brief Component used to store the position of an entity

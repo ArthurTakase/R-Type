@@ -7,9 +7,8 @@
 
 #pragma once
 
+#include <ECS/Entity/Entity.hpp>
 #include <vector>
-
-#include "Entity/Entity.hpp"
 
 /**
  * @brief A template class that is used to iterate over entities that have a certain set of components.

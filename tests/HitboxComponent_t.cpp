@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include <Components/HitboxComponent.hpp>
-#include <Entity/Entity.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
 
 TEST(HitboxComponent_, getWidth)
 {

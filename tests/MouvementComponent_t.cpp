@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include <Components/MouvementComponent.hpp>
+#include <ECS/Components/MouvementComponent.hpp>
 
 TEST(MouvementComponent_, getDirX)
 {

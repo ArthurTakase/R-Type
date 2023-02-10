@@ -7,10 +7,10 @@
 
 #include <gtest/gtest.h>
 
-#include <Components/HitboxComponent.hpp>
-#include <Components/TransformComponent.hpp>
-#include <Entity/EntityManager.hpp>
-#include <Systems/HitboxSystem.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/HitboxSystem.hpp>
 #include <Tools/EntityIterator.hpp>
 
 TEST(HitboxSystem_, run)

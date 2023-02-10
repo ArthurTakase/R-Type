@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include <Entity/EntityManager.hpp>
+#include <ECS/Entity/EntityManager.hpp>
 #include <Lib/Lib.hpp>
 #include <queue>
 

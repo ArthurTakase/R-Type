@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include <Entity/EntityManager.hpp>
+#include <ECS/Entity/EntityManager.hpp>
 
 TEST(EntityManager_, createPlayer)
 {

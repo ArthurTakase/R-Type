@@ -7,11 +7,10 @@
 
 #pragma once
 
+#include <ECS/Components/IComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
 #include <functional>
 #include <memory>
-
-#include "Components/IComponent.hpp"
-#include "Entity/Entity.hpp"
 
 /**
  * @brief Component for the behavior of an entity.

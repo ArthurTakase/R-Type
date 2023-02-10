@@ -7,13 +7,12 @@
 
 #pragma once
 
+#include <Lib/Sprite.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <bitset>
-
-#include "Sprite.hpp"
 
 enum WINDOW_KEY { QUIT = 255 };
 

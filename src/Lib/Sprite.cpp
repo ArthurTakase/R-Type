@@ -5,7 +5,7 @@
 ** Sprite.cpp
 */
 
-#include "Sprite.hpp"
+#include <Lib/Sprite.hpp>
 
 /**
  * Sprite is a class that takes a string, an int, and an int and sets the spritePath, x, and y

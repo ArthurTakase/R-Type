@@ -5,9 +5,7 @@
 ** UdpClient
 */
 
-#include "UdpClient.hpp"
-
-#include <Components/DrawableComponent.hpp>
+#include <Client/UdpClient.hpp>
 #include <iostream>
 #include <memory>
 

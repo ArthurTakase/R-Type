@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "Components/HitboxComponent.hpp"
-#include "Components/TransformComponent.hpp"
-#include "Entity/EntityManager.hpp"
-#include "Tools/EntityIterator.hpp"
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <Tools/EntityIterator.hpp>
 
 /**
  * @brief System used to check if an entity is colliding with another

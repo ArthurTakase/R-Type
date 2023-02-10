@@ -7,10 +7,10 @@
 
 #pragma once
 
+#include <Client/Game.hpp>
 #include <memory>
 #include <thread>
 
-#include "Game.hpp"
 #include "ISocket.hpp"
 #include "SocketSelector.hpp"
 

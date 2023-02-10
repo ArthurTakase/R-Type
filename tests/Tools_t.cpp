@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include <Components/HitboxComponent.hpp>
-#include <Components/TransformComponent.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
 #include <Tools/InstanceOf.hpp>
 #include <memory>
 

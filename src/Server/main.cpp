@@ -5,10 +5,10 @@
 ** main_network
 */
 
+#include <Server/Server.hpp>
 #include <iostream>
 
 #include "Error.hpp"
-#include "Server.hpp"
 
 int main()
 {

@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include <Entity/EntityManager.hpp>
-#include <Systems/MouvementSystem.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/MouvementSystem.hpp>
 
 TEST(MouvementSystem_, run)
 {

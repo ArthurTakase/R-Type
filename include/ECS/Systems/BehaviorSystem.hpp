@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include "Components/BehaviorComponent.hpp"
-#include "Entity/EntityManager.hpp"
-#include "Tools/EntityIterator.hpp"
+#include <ECS/Components/BehaviorComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <Tools/EntityIterator.hpp>
 
 /**
  * @brief System used to check if an entity is colliding with another

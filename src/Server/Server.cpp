@@ -5,8 +5,7 @@
 ** Server
 */
 
-#include "Server.hpp"
-
+#include <Server/Server.hpp>
 #include <algorithm>
 #include <ctime>
 #include <iostream>
