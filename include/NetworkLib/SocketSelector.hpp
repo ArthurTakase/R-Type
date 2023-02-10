@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "ISocket.hpp"
+#include <NetworkLib/ISocket.hpp>
 
 /**
  * @brief Interface for SocketSelector

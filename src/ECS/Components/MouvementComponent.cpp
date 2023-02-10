@@ -5,8 +5,7 @@
 ** TransformComponent.cpp
 */
 
-#include "Components/MouvementComponent.hpp"
-
+#include <ECS/Components/MouvementComponent.hpp>
 #include <iostream>
 
 /**

@@ -8,11 +8,10 @@
 #pragma once
 
 #include <Client/Game.hpp>
+#include <NetworkLib/ISocket.hpp>
+#include <NetworkLib/SocketSelector.hpp>
 #include <memory>
 #include <thread>
-
-#include "ISocket.hpp"
-#include "SocketSelector.hpp"
 
 /**
  * @brief Client class using UDP protocol

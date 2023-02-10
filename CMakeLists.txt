@@ -27,7 +27,7 @@ file(COPY assets/ DESTINATION assets/)
 
 # Libs
 add_subdirectory(Error)
-add_subdirectory(NetworkLib)
+add_subdirectory(src/NetworkLib)
 add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
 
@@ -83,7 +83,6 @@ target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
-# target_include_directories(${RTYPE_CLIENT} PRIVATE NetworkLib/include)
 
 # ------------------------------
 # TESTS
@@ -137,7 +136,6 @@ if(DEFINED TESTS)
   
   # Includes
   target_include_directories(${TEST_BUILD} PRIVATE include)
-  target_include_directories(${TEST_BUILD} PRIVATE NetworkLib/include)
   target_include_directories(${TEST_BUILD} PRIVATE Error)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)

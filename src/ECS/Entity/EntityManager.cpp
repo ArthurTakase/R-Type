@@ -5,7 +5,7 @@
 ** EntityManager.cpp
 */
 
-#include <Entity/EntityManager.hpp>
+#include <ECS/Entity/EntityManager.hpp>
 #include <Lib/Sprite.hpp>
 #include <iostream>
 

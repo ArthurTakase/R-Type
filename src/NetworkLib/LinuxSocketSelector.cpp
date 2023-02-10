@@ -6,7 +6,7 @@
 */
 
 #ifdef __linux__
-#include "LinuxSocketSelector.hpp"
+#include <NetworkLib/LinuxSocketSelector.hpp>
 
 #include "Error.hpp"
 

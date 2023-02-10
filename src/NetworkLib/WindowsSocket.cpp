@@ -6,7 +6,7 @@
 */
 
 #ifdef WIN32
-#include "WindowsSocket.hpp"
+#include <NetworkLib/WindowsSocket.hpp>
 
 #include "Error.hpp"
 

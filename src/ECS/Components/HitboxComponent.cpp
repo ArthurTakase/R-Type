@@ -5,8 +5,7 @@
 ** HitboxComponent.cpp
 */
 
-#include "Components/HitboxComponent.hpp"
-
+#include <ECS/Components/HitboxComponent.hpp>
 #include <iostream>
 
 /**

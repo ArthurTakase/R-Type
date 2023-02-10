@@ -5,8 +5,7 @@
 ** HostHandler
 */
 
-#include "HostHandler.hpp"
-
+#include <NetworkLib/HostHandler.hpp>
 #include <cstring>
 
 #include "Error.hpp"

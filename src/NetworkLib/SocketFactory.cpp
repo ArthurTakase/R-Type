@@ -5,10 +5,9 @@
 ** ISocket
 */
 
-#include "SocketFactory.hpp"
-
-#include "LinuxSocket.hpp"
-#include "WindowsSocket.hpp"
+#include <NetworkLib/LinuxSocket.hpp>
+#include <NetworkLib/SocketFactory.hpp>
+#include <NetworkLib/WindowsSocket.hpp>
 
 /**
  * If the OS is Windows, create a WindowsSocket, otherwise create a LinuxSocket.

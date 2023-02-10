@@ -7,14 +7,13 @@
 
 #pragma once
 
-#include "SocketSelector.hpp"
+#include <NetworkLib/SocketSelector.hpp>
 
 #ifdef __linux__
 #include <sys/select.h>
 
+#include <NetworkLib/LinuxSocket.hpp>
 #include <functional>
-
-#include "LinuxSocket.hpp"
 
 /**
  * @brief Encapsulate a fd_set for Linux and handle manipulations

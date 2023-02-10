@@ -6,9 +6,8 @@
 */
 
 #pragma once
+#include <NetworkLib/ISocket.hpp>
 #include <string_view>
-
-#include "ISocket.hpp"
 
 /**
  * @brief get infos about the host

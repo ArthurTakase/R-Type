@@ -6,9 +6,8 @@
 */
 
 #pragma once
+#include <NetworkLib/SocketSelector.hpp>
 #include <memory>
-
-#include "SocketSelector.hpp"
 
 /**
  * @brief Factory for SocketSelector

@@ -6,7 +6,7 @@
 */
 
 #pragma once
-#include "ISocket.hpp"
+#include <NetworkLib/ISocket.hpp>
 
 /**
  * @brief Factory for socket

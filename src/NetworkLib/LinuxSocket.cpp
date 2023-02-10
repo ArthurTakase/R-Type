@@ -7,7 +7,7 @@
 
 #ifdef __linux__
 
-#include "LinuxSocket.hpp"
+#include <NetworkLib/LinuxSocket.hpp>
 
 #include "Error.hpp"
 

@@ -14,10 +14,9 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
+#include <NetworkLib/ISocket.hpp>
 #include <memory>
 #include <queue>
-
-#include "ISocket.hpp"
 
 class LinuxSocketSelector;
 

@@ -7,14 +7,13 @@
 
 #pragma once
 
+#include <NetworkLib/SocketSelector.hpp>
 #include <functional>
-
-#include "SocketSelector.hpp"
 
 #ifdef WIN32
 #include <winsock2.h>
 
-#include "WindowsSocket.hpp"
+#include <NetworkLib/WindowsSocket.hpp>
 
 /**
  * @brief Encapsulate a fd_set for Windows and handle manipulations

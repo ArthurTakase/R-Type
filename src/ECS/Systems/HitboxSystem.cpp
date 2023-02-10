@@ -5,13 +5,11 @@
 ** HitboxSystem.cpp
 */
 
-#include "Systems/HitboxSystem.hpp"
-
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Systems/HitboxSystem.hpp>
 #include <cassert>
 #include <iostream>
-
-#include "Components/HitboxComponent.hpp"
-#include "Components/TransformComponent.hpp"
 
 /**
  * It takes an iterator of entities with a position and hitbox component, and stores it in a private

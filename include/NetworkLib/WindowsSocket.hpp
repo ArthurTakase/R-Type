@@ -12,9 +12,8 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
+#include <NetworkLib/ISocket.hpp>
 #include <string_view>
-
-#include "ISocket.hpp"
 
 class WindowsSocketSelector;
 

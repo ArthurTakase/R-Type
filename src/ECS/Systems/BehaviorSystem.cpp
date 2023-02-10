@@ -5,8 +5,7 @@
 ** HitboxSystem.cpp
 */
 
-#include "Systems/BehaviorSystem.hpp"
-
+#include <ECS/Systems/BehaviorSystem.hpp>
 #include <cassert>
 #include <iostream>
 #include <memory>

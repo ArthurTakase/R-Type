@@ -5,10 +5,9 @@
 ** SocketSelectorFactory
 */
 
-#include "SocketSelectorFactory.hpp"
-
-#include "LinuxSocketSelector.hpp"
-#include "WindowsSocketSelector.hpp"
+#include <NetworkLib/LinuxSocketSelector.hpp>
+#include <NetworkLib/SocketSelectorFactory.hpp>
+#include <NetworkLib/WindowsSocketSelector.hpp>
 
 /**
  * If the OS is Windows, return a WindowsSocketSelector, otherwise return a

@@ -7,13 +7,12 @@
 
 #pragma once
 
+#include <NetworkLib/ISocket.hpp>
+#include <NetworkLib/SocketSelector.hpp>
 #include <Server/ServerGameInstance.hpp>
 #include <memory>
 #include <thread>
 #include <vector>
-
-#include "ISocket.hpp"
-#include "SocketSelector.hpp"
 
 /**
  * @brief Server class using UDP protocol

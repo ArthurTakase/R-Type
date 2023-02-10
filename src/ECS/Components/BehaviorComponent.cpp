@@ -5,7 +5,7 @@
 ** BehaviorComponent
 */
 
-#include "Components/BehaviorComponent.hpp"
+#include <ECS/Components/BehaviorComponent.hpp>
 
 BehaviorComponent::BehaviorComponent() {}
 

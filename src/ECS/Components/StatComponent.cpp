@@ -5,7 +5,7 @@
 ** StatComponent.cpp
 */
 
-#include <Components/StatComponent.hpp>
+#include <ECS/Components/StatComponent.hpp>
 #include <iostream>
 
 /**
