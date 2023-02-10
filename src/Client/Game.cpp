@@ -50,10 +50,8 @@ void Game::run() noexcept
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
 
-        if (drawable->getSprite() == nullptr) { continue; }
-
-        drawable->getSprite()->setX(transform->getX());
-        drawable->getSprite()->setY(transform->getY());
+        drawable->getSprite().setX(transform->getX());
+        drawable->getSprite().setY(transform->getY());
         window.draw(drawable->getSprite(),
             drawable->getOffsetX(),
             drawable->getOffsetY(),
@@ -75,28 +73,6 @@ Lib& Game::getLib() noexcept
 }
 
 /**
- * Add a sprite to the game.
- *
- * @param path The path to the image file.
- * @param x The x position of the sprite
- * @param y The y coordinate of the sprite.
- */
-void Game::addSprite(std::string path, int x, int y) noexcept
-{
-    sprites_.emplace_back(std::make_unique<Sprite>(path, x, y));
-}
-
-/**
- * Return a pointer to the last sprite in the game.
- *
- * @return A pointer to the last sprite in the vector.
- */
-Sprite* Game::getLastSprite() noexcept
-{
-    return sprites_.back().get();
-}
-
-/**
  * It deserializes a packet and creates an entity if it doesn't exist, or updates
  * it if it does
  *
@@ -114,8 +90,9 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         transform.setScale(packet.scaleX, packet.scaleY);
 
         auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
-        addSprite("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif", packet.x, packet.y);
-        drawable.setSprite(getLastSprite());
+        drawable.getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
+        drawable.getSprite().setX(packet.x);
+        drawable.getSprite().setY(packet.y);
 
         entity->addComponent(transform);
         entity->addComponent(drawable);

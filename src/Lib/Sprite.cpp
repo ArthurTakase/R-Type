@@ -8,6 +8,13 @@
 #include <Lib/Sprite.hpp>
 #include <iostream>
 
+Sprite::Sprite()
+    : spritePath("")
+    , x(0)
+    , y(0)
+{
+}
+
 /**
  * Sprite is a class that takes a string, an int, and an int and sets the spritePath, x, and y
  * variables to the values of the string, int, and int.
@@ -21,6 +28,8 @@ Sprite::Sprite(std::string path, int x, int y)
     , x(x)
     , y(y)
 {
+    if (path == "") { return; }
+
     if (!texture.loadFromFile(spritePath)) {
         std::cerr << "Error: Could not load sprite from file: " << spritePath << std::endl;
     }
@@ -72,6 +81,7 @@ std::bitset<8> Sprite::serialize() const
 void Sprite::setX(int x)
 {
     this->x = x;
+    sprite.setPosition(x, y);
 }
 
 /**
@@ -82,6 +92,7 @@ void Sprite::setX(int x)
 void Sprite::setY(int y)
 {
     this->y = y;
+    sprite.setPosition(x, y);
 }
 
 /**

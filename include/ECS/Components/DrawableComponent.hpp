@@ -20,9 +20,9 @@ class DrawableComponent : public IComponent
 {
   public:
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId);
-    ~DrawableComponent() noexcept                              = default;
-    DrawableComponent(const DrawableComponent& other) noexcept = default;
-    DrawableComponent(DrawableComponent&& other) noexcept      = delete;
+    ~DrawableComponent() noexcept = default;
+    DrawableComponent(const DrawableComponent& other) noexcept;
+    DrawableComponent(DrawableComponent&& other) noexcept = delete;
 
     DrawableComponent& operator=(const DrawableComponent& rhs) noexcept = delete;
     DrawableComponent& operator=(DrawableComponent&& rhs) noexcept      = delete;
@@ -37,14 +37,13 @@ class DrawableComponent : public IComponent
     void    setWidth(int width) noexcept;
     void    setHeight(int height) noexcept;
     void    setTextureId(int textureId) noexcept;
-    void    setSprite(Sprite* sprite) noexcept;
-    Sprite* getSprite() const noexcept;
+    Sprite& getSprite() noexcept;
 
   private:
-    int     offsetX_;
-    int     offsetY_;
-    int     width_;
-    int     height_;
-    int     textureId_;
-    Sprite* sprite_;
+    int    offsetX_;
+    int    offsetY_;
+    int    width_;
+    int    height_;
+    int    textureId_;
+    Sprite sprite_;
 };

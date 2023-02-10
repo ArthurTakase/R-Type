@@ -26,6 +26,16 @@ DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int he
 {
 }
 
+DrawableComponent::DrawableComponent(const DrawableComponent& other) noexcept
+    : offsetX_(other.offsetX_)
+    , offsetY_(other.offsetY_)
+    , width_(other.width_)
+    , height_(other.height_)
+    , textureId_(other.textureId_)
+    , sprite_(other.sprite_.getSpritePath(), other.sprite_.getX(), other.sprite_.getY())
+{
+}
+
 /**
  * It returns the value of the private member variable _offsetX
  *
@@ -127,21 +137,11 @@ void DrawableComponent::setTextureId(int textureId) noexcept
 }
 
 /**
- * It sets the sprite of the drawable component
- *
- * @param sprite The sprite to use.
- */
-void DrawableComponent::setSprite(Sprite* sprite) noexcept
-{
-    sprite_ = sprite;
-}
-
-/**
  * It returns the sprite of the drawable component
  *
  * @return The sprite of the drawable component.
  */
-Sprite* DrawableComponent::getSprite() const noexcept
+Sprite& DrawableComponent::getSprite() noexcept
 {
     return sprite_;
 }

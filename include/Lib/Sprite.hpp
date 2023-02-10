@@ -23,6 +23,7 @@ namespace SpriteIds
 class Sprite
 {
   public:
+    Sprite();
     Sprite(std::string path, int x, int y);
     ~Sprite() noexcept                   = default;
     Sprite(const Sprite& other) noexcept = delete;

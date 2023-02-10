@@ -45,17 +45,14 @@ class Game
     Game& operator=(const Game& rhs) noexcept = delete;
     Game& operator=(Game&& rhs) noexcept      = delete;
 
-    void    run() noexcept;
-    Lib&    getLib() noexcept;
-    void    addSprite(std::string path, int x, int y) noexcept;
-    Sprite* getLastSprite() noexcept;
+    void run() noexcept;
+    Lib& getLib() noexcept;
 
   private:
-    EntityManager                        manager_;
-    Lib                                  lib_;
-    std::vector<std::unique_ptr<Sprite>> sprites_ = {};
-    std::queue<GamePacket>&              dataReceived_;
-    std::mutex&                          mutexForPacket_;
+    EntityManager           manager_;
+    Lib                     lib_;
+    std::queue<GamePacket>& dataReceived_;
+    std::mutex&             mutexForPacket_;
 
     void deserializeEntity(GamePacket packet) noexcept;
 };
