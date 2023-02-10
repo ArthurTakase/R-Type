@@ -9,6 +9,7 @@
 
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/AnimationSystem.hpp>
 #include <ECS/Systems/BehaviorSystem.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
@@ -42,4 +43,5 @@ class RType
     HitboxSystem    hitboxSystem_;
     BehaviorSystem  behaviorSystem_;
     MouvementSystem mouvementSystem_;
+    AnimationSystem animationSystem_;
 };

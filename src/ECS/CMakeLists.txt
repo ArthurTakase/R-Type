@@ -18,6 +18,7 @@ set(
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp
+  Systems/AnimationSystem.cpp
 )
 
 # Merge

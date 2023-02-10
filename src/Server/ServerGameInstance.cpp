@@ -11,6 +11,7 @@ RType::RType()
     : hitboxSystem_(&entityManager_)
     , behaviorSystem_(&entityManager_)
     , mouvementSystem_(&entityManager_)
+    , animationSystem_(&entityManager_)
 {
 }
 
@@ -29,6 +30,7 @@ void RType::run() noexcept
     hitboxSystem_.run();
     behaviorSystem_.run();
     mouvementSystem_.run();
+    animationSystem_.run();
 }
 
 RType::~RType() noexcept {}

@@ -7,6 +7,7 @@
 
 #include <ECS/Entity/EntityManager.hpp>
 #include <Lib/Sprite.hpp>
+#include <Lib/Timer.hpp>
 #include <iostream>
 
 /**
@@ -27,9 +28,19 @@ void EntityManager::createPlayer() noexcept
     player->addComponent(HitboxComponent(15, 21));
     player->addComponent(StatComponent(100, 5));
     player->addComponent(MouvementComponent(0, 0, 1.0));
-    player->getComponent<HitboxComponent>()->setOnCollision(
+
+    auto hitbox = player->getComponent<HitboxComponent>();
+    hitbox->setOnCollision(
         std::function<void(Entity * entity)>{[](Entity* entity) { std::cout << "Collision" << std::endl; }});
-    player->addComponent(DrawableComponent(0, 0, 36, 36, 5));
+    player->addComponent(DrawableComponent(0, 0, 36, 40, 5));
+
+    auto  drawable = player->getComponent<DrawableComponent>();
+    auto& timer    = drawable->getTimer();
+    timer.setLimit(0.1);
+    timer.start();
+    auto& sprite = drawable->getSprite();
+    sprite.setLimit(533);
+
     entities_.emplace_back(std::move(player));
 }
 
