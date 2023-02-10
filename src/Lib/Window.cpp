@@ -75,11 +75,10 @@ int Window::getKeyPressed()
  */
 void Window::draw(Sprite* sprite, int xtexture, int ytexture, int width, int height)
 {
-    sf::Texture texture;
-    sf::Sprite  tempSprite;
+    sprite->setTextureRect(xtexture, ytexture, width, height);
+    sprite->updatePosition();
 
-    texture.loadFromFile(sprite->getSpritePath(), sf::IntRect(xtexture, ytexture, width, height));
-    tempSprite.setTexture(texture);
-    tempSprite.setPosition(sprite->getX(), sprite->getY());
-    window.draw(tempSprite);
+    sf::Sprite* tempSprite = static_cast<sf::Sprite*>(sprite->getSprite());
+
+    window.draw(*tempSprite);
 }

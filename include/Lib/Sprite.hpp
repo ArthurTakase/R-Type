@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include <bitset>
 #include <string>
 
@@ -37,9 +38,15 @@ class Sprite
     void               setY(int y);
     int                getX() const;
     int                getY() const;
+    void*              getSprite();
+    void*              getTexture();
+    void               setTextureRect(int xtexture, int ytexture, int width, int height);
+    void               updatePosition();
 
   private:
     std::string spritePath;
     int         x;
     int         y;
+    sf::Sprite  sprite;
+    sf::Texture texture;
 };
