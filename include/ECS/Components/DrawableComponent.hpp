@@ -10,6 +10,7 @@
 #include <ECS/Components/IComponent.hpp>
 #include <ECS/Entity/Entity.hpp>
 #include <Lib/Sprite.hpp>
+#include <Lib/Timer.hpp>
 #include <functional>
 #include <memory>
 
@@ -38,6 +39,7 @@ class DrawableComponent : public IComponent
     void    setHeight(int height) noexcept;
     void    setTextureId(int textureId) noexcept;
     Sprite& getSprite() noexcept;
+    Timer&  getTimer() noexcept;
 
   private:
     int    offsetX_;
@@ -46,4 +48,5 @@ class DrawableComponent : public IComponent
     int    height_;
     int    textureId_;
     Sprite sprite_;
+    Timer  timer_;
 };

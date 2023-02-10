@@ -145,3 +145,13 @@ Sprite& DrawableComponent::getSprite() noexcept
 {
     return sprite_;
 }
+
+/**
+ * It returns the timer of the drawable component
+ *
+ * @return The timer of the drawable component.
+ */
+Timer& DrawableComponent::getTimer() noexcept
+{
+    return timer_;
+}

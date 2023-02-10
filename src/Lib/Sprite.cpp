@@ -155,3 +155,23 @@ void Sprite::updatePosition()
 {
     sprite.setPosition(x, y);
 }
+
+/**
+ * This function sets the limit of the sprite.
+ *
+ * @param limit The limit of the sprite.
+ */
+void Sprite::setLimit(int limit)
+{
+    this->limit = limit;
+}
+
+/**
+ * This function returns the limit of the sprite.
+ *
+ * @return The limit of the sprite.
+ */
+int Sprite::getLimit() const
+{
+    return limit;
+}
