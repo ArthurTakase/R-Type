@@ -117,7 +117,7 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         transform.setScale(packet.scaleX, packet.scaleY);
 
         auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
-        addSprite("assets/r-typesheet" + std::to_string(packet.idSprite) + ".gif", packet.x, packet.y);
+        addSprite("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif", packet.x, packet.y);
         drawable.setSprite(getLastSprite());
 
         entity->addComponent(transform);
