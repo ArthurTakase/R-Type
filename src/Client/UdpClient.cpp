@@ -7,11 +7,10 @@
 
 #include "UdpClient.hpp"
 
+#include <Components/DrawableComponent.hpp>
 #include <iostream>
 #include <memory>
 
-#include "Deserializer.hpp"
-#include "DrawableComponent.hpp"
 #include "Error.hpp"
 #include "SocketFactory.hpp"
 #include "SocketSelectorFactory.hpp"
@@ -27,7 +26,6 @@
     : serverAddress_(serverAddress)
     , socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
-    , deserializer_(std::make_unique<Deserializer>())
     , game_(dataReceived_, mutexForPacket_)
 {
     selector_->add(*socket_, true, true, false);

@@ -7,11 +7,10 @@
 
 #include <gtest/gtest.h>
 
+#include <Components/HitboxComponent.hpp>
+#include <Components/TransformComponent.hpp>
+#include <Tools/InstanceOf.hpp>
 #include <memory>
-
-#include "HitboxComponent.hpp"
-#include "InstanceOf.hpp"
-#include "TransformComponent.hpp"
 
 TEST(Tools_, instanceOf)
 {

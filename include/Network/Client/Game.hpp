@@ -7,10 +7,9 @@
 
 #pragma once
 
+#include <Entity/EntityManager.hpp>
+#include <Lib/Lib.hpp>
 #include <queue>
-
-#include "EntityManager.hpp"
-#include "Lib.hpp"
 
 /**
  * @brief This struct is used to process the data received from the server.
@@ -52,8 +51,8 @@ class Game
     Sprite* getLastSprite() noexcept;
 
   private:
-    std::unique_ptr<EntityManager>       manager_;
-    std::unique_ptr<Lib>                 lib_;
+    EntityManager                        manager_;
+    Lib                                  lib_;
     std::vector<std::unique_ptr<Sprite>> sprites_ = {};
     std::queue<GamePacket>&              dataReceived_;
     std::mutex&                          mutexForPacket_;

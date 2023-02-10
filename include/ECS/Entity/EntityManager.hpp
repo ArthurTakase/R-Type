@@ -10,14 +10,14 @@
 #include <memory>
 #include <vector>
 
-#include "BehaviorComponent.hpp"
-#include "DrawableComponent.hpp"
-#include "Entity.hpp"
-#include "HitboxComponent.hpp"
-#include "InstanceOf.hpp"
-#include "MouvementComponent.hpp"
-#include "StatComponent.hpp"
-#include "TransformComponent.hpp"
+#include "Components/BehaviorComponent.hpp"
+#include "Components/DrawableComponent.hpp"
+#include "Components/HitboxComponent.hpp"
+#include "Components/MouvementComponent.hpp"
+#include "Components/StatComponent.hpp"
+#include "Components/TransformComponent.hpp"
+#include "Entity/Entity.hpp"
+#include "Tools/InstanceOf.hpp"
 
 /**
  * @brief Object used to create the different entities of the software

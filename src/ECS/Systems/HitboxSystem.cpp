@@ -5,13 +5,13 @@
 ** HitboxSystem.cpp
 */
 
-#include "HitboxSystem.hpp"
+#include "Systems/HitboxSystem.hpp"
 
 #include <cassert>
 #include <iostream>
 
-#include "HitboxComponent.hpp"
-#include "TransformComponent.hpp"
+#include "Components/HitboxComponent.hpp"
+#include "Components/TransformComponent.hpp"
 
 /**
  * It takes an iterator of entities with a position and hitbox component, and stores it in a private
@@ -19,7 +19,7 @@
  *
  * @param it The iterator to use for the system.
  */
-HitboxSystem::HitboxSystem(std::unique_ptr<EntityManager>& manager) noexcept
+HitboxSystem::HitboxSystem(EntityManager* manager) noexcept
     : manager_(manager)
     , it_(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
 {
@@ -52,7 +52,7 @@ void HitboxSystem::run()
  *
  * @return The id of the entity that is colliding with the entity passed in.
  */
-void HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
+void HitboxSystem::checkCollision(Entity* entity) const
 {
     for (auto other = EntityIterator<TransformComponent, HitboxComponent>(it_.it); !other.isEnd(); ++other) {
         if (other.get() == entity) { continue; }

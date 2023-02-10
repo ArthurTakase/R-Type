@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include "BehaviorComponent.hpp"
-#include "EntityIterator.hpp"
-#include "EntityManager.hpp"
+#include "Components/BehaviorComponent.hpp"
+#include "Entity/EntityManager.hpp"
+#include "Tools/EntityIterator.hpp"
 
 /**
  * @brief System used to check if an entity is colliding with another
@@ -17,7 +17,7 @@
 class BehaviorSystem
 {
   public:
-    BehaviorSystem(std::unique_ptr<EntityManager>& manager) noexcept;
+    BehaviorSystem(EntityManager* manager) noexcept;
     ~BehaviorSystem() noexcept                           = default;
     BehaviorSystem(const BehaviorSystem& other) noexcept = default;
     BehaviorSystem(BehaviorSystem&& other) noexcept      = delete;
@@ -31,6 +31,6 @@ class BehaviorSystem
 
   private:
     EntityIterator<BehaviorComponent> it_;
-    std::unique_ptr<EntityManager>&   manager_;
+    EntityManager*                    manager_;
     int                               key_;
 };

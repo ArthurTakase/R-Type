@@ -9,7 +9,7 @@
 
 #include <vector>
 
-#include "Entity.hpp"
+#include "Entity/Entity.hpp"
 
 /**
  * @brief A template class that is used to iterate over entities that have a certain set of components.
@@ -33,7 +33,7 @@ class EntityIterator
         return *this;
     };
 
-    std::unique_ptr<Entity>& get() { return it[idx]; }
+    Entity* get() { return it[idx].get(); }
 
     int                                   idx = 0;
     std::vector<std::unique_ptr<Entity>>& it;

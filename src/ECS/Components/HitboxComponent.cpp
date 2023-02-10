@@ -5,7 +5,7 @@
 ** HitboxComponent.cpp
 */
 
-#include "HitboxComponent.hpp"
+#include "Components/HitboxComponent.hpp"
 
 #include <iostream>
 
@@ -73,12 +73,12 @@ void HitboxComponent::setSize(size_t width, size_t height) noexcept
     height_ = height;
 }
 
-void HitboxComponent::setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept
+void HitboxComponent::setOnCollision(std::function<void(Entity*)> onCollision) noexcept
 {
     onCollision_ = onCollision;
 }
 
-void HitboxComponent::onCollision(std::unique_ptr<Entity>& entity) const noexcept
+void HitboxComponent::onCollision(Entity* entity) const noexcept
 {
     onCollision_(entity);
 }

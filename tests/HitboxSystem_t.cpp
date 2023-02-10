@@ -7,11 +7,11 @@
 
 #include <gtest/gtest.h>
 
-#include "EntityIterator.hpp"
-#include "EntityManager.hpp"
-#include "HitboxComponent.hpp"
-#include "HitboxSystem.hpp"
-#include "TransformComponent.hpp"
+#include <Components/HitboxComponent.hpp>
+#include <Components/TransformComponent.hpp>
+#include <Entity/EntityManager.hpp>
+#include <Systems/HitboxSystem.hpp>
+#include <Tools/EntityIterator.hpp>
 
 TEST(HitboxSystem_, run)
 {
@@ -23,7 +23,7 @@ TEST(HitboxSystem_, run)
     manager->createPlayer();
     manager->getEntity(0)->getComponent<TransformComponent>()->setPos(100, 100);
 
-    auto system = std::make_unique<HitboxSystem>(manager);
+    auto system = std::make_unique<HitboxSystem>(manager.get());
 
     testing::internal::CaptureStdout();
     system->run();

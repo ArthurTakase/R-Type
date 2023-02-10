@@ -7,8 +7,8 @@
 
 #include <gtest/gtest.h>
 
-#include "EntityManager.hpp"
-#include "MouvementSystem.hpp"
+#include <Entity/EntityManager.hpp>
+#include <Systems/MouvementSystem.hpp>
 
 TEST(MouvementSystem_, run)
 {
@@ -23,7 +23,7 @@ TEST(MouvementSystem_, run)
     manager->getEntity(1)->getComponent<MouvementComponent>()->setDirY(1);
     manager->getEntity(1)->getComponent<MouvementComponent>()->setDirX(0);
 
-    auto system = std::make_unique<MouvementSystem>(manager);
+    auto system = std::make_unique<MouvementSystem>(manager.get());
 
     system->run();
 

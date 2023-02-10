@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include "TransformComponent.hpp"
+#include <Components/TransformComponent.hpp>
 
 TEST(TransformComponent_, getX)
 {

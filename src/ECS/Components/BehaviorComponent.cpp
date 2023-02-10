@@ -5,16 +5,16 @@
 ** BehaviorComponent
 */
 
-#include "BehaviorComponent.hpp"
+#include "Components/BehaviorComponent.hpp"
 
 BehaviorComponent::BehaviorComponent() {}
 
-void BehaviorComponent::setOnUpdate(std::function<void(int key, std::unique_ptr<Entity>& self)> onUpdate) noexcept
+void BehaviorComponent::setOnUpdate(std::function<void(int key, Entity* self)> onUpdate) noexcept
 {
     onUpdate_ = onUpdate;
 }
 
-void BehaviorComponent::onUpdate(int key, std::unique_ptr<Entity>& self) const noexcept
+void BehaviorComponent::onUpdate(int key, Entity* self) const noexcept
 {
     onUpdate_(key, self);
 }

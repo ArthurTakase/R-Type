@@ -60,13 +60,8 @@ target_include_directories(${RTYPE_SERVER} PRIVATE include)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Network/Server)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Tools)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/Serializer)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Entity)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Components)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/ECS/Systems)
 target_include_directories(${RTYPE_SERVER} PRIVATE include/Lib)
-target_include_directories(${RTYPE_SERVER} PRIVATE include/chaiscript)
 
 # find_path(CHAISCRIPT_INCLUDE_DIRS "chaiscript/chaiscript.hpp")
 # target_include_directories(${RTYPE_SERVER} PRIVATE ${CHAISCRIPT_INCLUDE_DIRS})
@@ -94,11 +89,7 @@ set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
 
 target_include_directories(${RTYPE_CLIENT} PRIVATE include)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Entity)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Components)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/ECS/Systems)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Tools)
-target_include_directories(${RTYPE_CLIENT} PRIVATE include/Serializer)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Lib)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/)
 target_include_directories(${RTYPE_CLIENT} PRIVATE include/Network/Client)
@@ -142,14 +133,14 @@ if(DEFINED TESTS)
     tests/MouvementSystem_t.cpp
     tests/DrawableComponent_t.cpp
     tests/Sprite_t.cpp
-    )
-    
-    # Merge
-    add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SERVER_SRC} ${RTYPE_CLIENT_SRC})
-    
-    # Options
-    target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
-    target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
+  )
+  
+  # Merge
+  add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SERVER_SRC} ${RTYPE_CLIENT_SRC})
+  
+  # Options
+  target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
+  target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
   target_link_libraries(${TEST_BUILD} ECSEncapsulation)
   target_link_libraries(${TEST_BUILD} Error)
   target_link_libraries(${TEST_BUILD} NetworkLib)
@@ -157,11 +148,7 @@ if(DEFINED TESTS)
   # Includes
   target_include_directories(${TEST_BUILD} PRIVATE include)
   target_include_directories(${TEST_BUILD} PRIVATE include/ECS)
-  target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Entity)
-  target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Components)
-  target_include_directories(${TEST_BUILD} PRIVATE include/ECS/Systems)
   target_include_directories(${TEST_BUILD} PRIVATE include/Tools)
-  target_include_directories(${TEST_BUILD} PRIVATE include/Serializer)
   target_include_directories(${TEST_BUILD} PRIVATE include/Lib)
   target_include_directories(${TEST_BUILD} PRIVATE include/Network)
   target_include_directories(${TEST_BUILD} PRIVATE include/Network/Server)

@@ -28,5 +28,3 @@ target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-syst
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)
-include_directories(${CMAKE_BINARY_DIR}/../../include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)

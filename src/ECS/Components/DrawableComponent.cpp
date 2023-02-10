@@ -5,8 +5,7 @@
 ** HitboxComponent.cpp
 */
 
-#include "DrawableComponent.hpp"
-
+#include <Components/DrawableComponent.hpp>
 #include <iostream>
 
 /**

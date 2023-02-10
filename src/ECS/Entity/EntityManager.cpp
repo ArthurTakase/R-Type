@@ -5,11 +5,9 @@
 ** EntityManager.cpp
 */
 
-#include "EntityManager.hpp"
-
+#include <Entity/EntityManager.hpp>
+#include <Lib/Sprite.hpp>
 #include <iostream>
-
-#include "Sprite.hpp"
 
 /**
  * `EntityManager::EntityManager()` is the constructor for the `EntityManager` class
@@ -29,8 +27,8 @@ void EntityManager::createPlayer() noexcept
     player->addComponent(HitboxComponent(15, 21));
     player->addComponent(StatComponent(100, 5));
     player->addComponent(MouvementComponent(0, 0, 1.0));
-    player->getComponent<HitboxComponent>()->setOnCollision(std::function<void(std::unique_ptr<Entity> & entity)>{
-        [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; }});
+    player->getComponent<HitboxComponent>()->setOnCollision(
+        std::function<void(Entity * entity)>{[](Entity* entity) { std::cout << "Collision" << std::endl; }});
     player->addComponent(DrawableComponent(0, 0, 36, 36, 5));
     entities_.emplace_back(std::move(player));
 }
@@ -54,12 +52,11 @@ void EntityManager::createBackground(int x) noexcept
 {
     std::unique_ptr<Entity> background        = std::make_unique<Entity>(createId());
     auto                    behaviorComponent = BehaviorComponent();
-    behaviorComponent.setOnUpdate(
-        std::function<void(int key, std::unique_ptr<Entity>& entity)>{[](int key, std::unique_ptr<Entity>& entity) {
-            auto transform = entity->getComponent<TransformComponent>();
+    behaviorComponent.setOnUpdate(std::function<void(int key, Entity* entity)>{[](int key, Entity* entity) {
+        auto transform = entity->getComponent<TransformComponent>();
 
-            if (transform->getX() <= -255) { transform->setX(255); }
-        }});
+        if (transform->getX() <= -255) { transform->setX(255); }
+    }});
 
     background->addComponent(TransformComponent(x, 0));
     background->addComponent(DrawableComponent(0, 0, 255, 255, BACKGROUND_ID));

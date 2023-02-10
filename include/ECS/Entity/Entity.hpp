@@ -12,8 +12,8 @@
 #include <type_traits>
 #include <vector>
 
-#include "IComponent.hpp"
-#include "InstanceOf.hpp"
+#include "Components/IComponent.hpp"
+#include "Tools/InstanceOf.hpp"
 
 /**
  * @brief Entity part of the ECS. It can be linked to many components to add attributes to it. No variable must be

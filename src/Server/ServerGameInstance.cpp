@@ -8,16 +8,10 @@
 #include "ServerGameInstance.hpp"
 
 RType::RType()
-    : entityManager_(std::make_unique<EntityManager>())
-    , hitboxSystem_(nullptr)
-    , serializerSystem_(nullptr)
-    , behaviorSystem_(nullptr)
-    , mouvementSystem_(nullptr)
+    : hitboxSystem_(&entityManager_)
+    , behaviorSystem_(&entityManager_)
+    , mouvementSystem_(&entityManager_)
 {
-    hitboxSystem_     = std::make_unique<HitboxSystem>(entityManager_);
-    serializerSystem_ = std::make_unique<SerializerSystem>(entityManager_);
-    behaviorSystem_   = std::make_unique<BehaviorSystem>(entityManager_);
-    mouvementSystem_  = std::make_unique<MouvementSystem>(entityManager_);
 }
 
 void RType::stop() noexcept
@@ -30,32 +24,26 @@ void RType::reset() noexcept
     looping_ = true;
 }
 
-void RType::run() const noexcept
+void RType::run() noexcept
 {
-    hitboxSystem_->run();
-    // serializerSystem_->run();
-    behaviorSystem_->run();
-    mouvementSystem_->run();
+    hitboxSystem_.run();
+    behaviorSystem_.run();
+    mouvementSystem_.run();
 }
 
 RType::~RType() noexcept {}
 
 EntityManager& RType::getManager() noexcept
 {
-    return *entityManager_;
+    return entityManager_;
 }
 
 HitboxSystem& RType::getHitboxSystem() noexcept
 {
-    return *hitboxSystem_;
-}
-
-SerializerSystem& RType::getSerializerSystem() noexcept
-{
-    return *serializerSystem_;
+    return hitboxSystem_;
 }
 
 BehaviorSystem& RType::getBehaviorSystem() noexcept
 {
-    return *behaviorSystem_;
+    return behaviorSystem_;
 }

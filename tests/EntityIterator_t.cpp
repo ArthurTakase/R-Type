@@ -7,11 +7,11 @@
 
 #include <gtest/gtest.h>
 
-#include "Entity.hpp"
-#include "EntityIterator.hpp"
-#include "EntityManager.hpp"
-#include "HitboxComponent.hpp"
-#include "TransformComponent.hpp"
+#include <Components/HitboxComponent.hpp>
+#include <Components/TransformComponent.hpp>
+#include <Entity/Entity.hpp>
+#include <Entity/EntityManager.hpp>
+#include <Tools/EntityIterator.hpp>
 
 TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 {

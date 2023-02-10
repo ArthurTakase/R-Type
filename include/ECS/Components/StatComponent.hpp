@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "IComponent.hpp"
+#include "Components/IComponent.hpp"
 
 /**
  * @brief Component used to store the stats of an entity

@@ -7,9 +7,8 @@
 
 #include <gtest/gtest.h>
 
+#include <Lib/Sprite.hpp>
 #include <memory>
-
-#include "Sprite.hpp"
 
 TEST(Sprite_, setSpritePath)
 {

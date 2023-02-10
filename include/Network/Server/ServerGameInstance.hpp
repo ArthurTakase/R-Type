@@ -7,14 +7,12 @@
 
 #pragma once
 
+#include <Components/MouvementComponent.hpp>
+#include <Entity/EntityManager.hpp>
+#include <Systems/BehaviorSystem.hpp>
+#include <Systems/HitboxSystem.hpp>
+#include <Systems/MouvementSystem.hpp>
 #include <memory>
-
-#include "BehaviorSystem.hpp"
-#include "EntityManager.hpp"
-#include "HitboxSystem.hpp"
-#include "MouvementComponent.hpp"
-#include "MouvementSystem.hpp"
-#include "SerializerSystem.hpp"
 
 /**
  * @brief Game Instance for the server
@@ -31,19 +29,17 @@ class RType
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = default;
 
-    void              run() const noexcept;
-    void              reset() noexcept;
-    void              stop() noexcept;
-    EntityManager&    getManager() noexcept;
-    HitboxSystem&     getHitboxSystem() noexcept;
-    SerializerSystem& getSerializerSystem() noexcept;
-    BehaviorSystem&   getBehaviorSystem() noexcept;
+    void            run() noexcept;
+    void            reset() noexcept;
+    void            stop() noexcept;
+    EntityManager&  getManager() noexcept;
+    HitboxSystem&   getHitboxSystem() noexcept;
+    BehaviorSystem& getBehaviorSystem() noexcept;
 
   private:
-    bool                              looping_ = true;
-    std::unique_ptr<EntityManager>    entityManager_;
-    std::unique_ptr<HitboxSystem>     hitboxSystem_;
-    std::unique_ptr<SerializerSystem> serializerSystem_;
-    std::unique_ptr<BehaviorSystem>   behaviorSystem_;
-    std::unique_ptr<MouvementSystem>  mouvementSystem_;
+    bool            looping_ = true;
+    EntityManager   entityManager_;
+    HitboxSystem    hitboxSystem_;
+    BehaviorSystem  behaviorSystem_;
+    MouvementSystem mouvementSystem_;
 };

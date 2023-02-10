@@ -5,8 +5,7 @@
 ** TransformComponent.cpp
 */
 
-#include "TransformComponent.hpp"
-
+#include <Components/TransformComponent.hpp>
 #include <iostream>
 
 /**

@@ -5,26 +5,10 @@
 ** main_network
 */
 
-#include <chaiscript/chaiscript.hpp>
 #include <iostream>
 
 #include "Error.hpp"
 #include "Server.hpp"
-
-// double function(int i, double j)
-// {
-//     return i * j;
-// }
-
-// int main()
-// {
-//     chaiscript::ChaiScript chai;
-//     chai.add(chaiscript::fun(&function), "function");
-
-//     double d = chai.eval<double>("function(3, 4.75);");
-
-//     std::cout << d << std::endl;
-// }
 
 int main()
 {

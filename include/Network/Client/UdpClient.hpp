@@ -10,7 +10,6 @@
 #include <memory>
 #include <thread>
 
-#include "Deserializer.hpp"
 #include "Game.hpp"
 #include "ISocket.hpp"
 #include "SocketSelector.hpp"
@@ -43,7 +42,6 @@ class UdpClient
     Address                         serverAddress_;
     int                             tickrate_ = 60;
     std::unique_ptr<ISocket>        socket_;
-    std::unique_ptr<IDeserializer>  deserializer_;
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;
     std::thread                     networkThread_;

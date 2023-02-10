@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include "DrawableComponent.hpp"
+#include <Components/DrawableComponent.hpp>
 
 TEST(DrawableComponent_, getOffsetX)
 {

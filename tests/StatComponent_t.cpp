@@ -7,7 +7,7 @@
 
 #include <gtest/gtest.h>
 
-#include "StatComponent.hpp"
+#include <Components/StatComponent.hpp>
 
 TEST(StatComponent_, getLife)
 {

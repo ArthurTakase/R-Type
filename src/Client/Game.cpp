@@ -7,10 +7,9 @@
 
 #include "Game.hpp"
 
+#include <Components/DrawableComponent.hpp>
+#include <Components/TransformComponent.hpp>
 #include <iostream>
-
-#include "DrawableComponent.hpp"
-#include "TransformComponent.hpp"
 
 /**
  * Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
@@ -29,8 +28,6 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     : dataReceived_(packets)
     , mutexForPacket_(mutex)
 {
-    manager_ = std::make_unique<EntityManager>();
-    lib_     = std::make_unique<Lib>();
 }
 
 /**
@@ -38,7 +35,8 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
  */
 void Game::run() noexcept
 {
-    lib_->getWindow().clear();
+    auto& window = lib_.getWindow();
+    window.clear();
     {
         std::lock_guard<std::mutex> lock(mutexForPacket_);
         while (!dataReceived_.empty()) {
@@ -47,7 +45,7 @@ void Game::run() noexcept
             dataReceived_.pop();
         }
     }
-    for (auto& entity : manager_->getEntities()) {
+    for (auto& entity : manager_.getEntities()) {
         if (!entity->hasComponent<TransformComponent>() || !entity->hasComponent<DrawableComponent>()) { continue; }
 
         auto transform = entity->getComponent<TransformComponent>();
@@ -57,13 +55,13 @@ void Game::run() noexcept
 
         drawable->getSprite()->setX(transform->getX());
         drawable->getSprite()->setY(transform->getY());
-        lib_->getWindow().draw(drawable->getSprite(),
+        window.draw(drawable->getSprite(),
             drawable->getOffsetX(),
             drawable->getOffsetY(),
             drawable->getWidth(),
             drawable->getHeight());
     }
-    lib_->getWindow().refresh();
+    window.refresh();
 }
 
 /**
@@ -74,7 +72,7 @@ void Game::run() noexcept
  */
 Lib& Game::getLib() noexcept
 {
-    return *lib_;
+    return lib_;
 }
 
 /**
@@ -107,10 +105,10 @@ Sprite* Game::getLastSprite() noexcept
  */
 void Game::deserializeEntity(GamePacket packet) noexcept
 {
-    auto m_entity = manager_->getEntity(packet.id);
+    auto m_entity = manager_.getEntity(packet.id);
 
     if (m_entity == nullptr) {
-        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_->createId());
+        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_.createId());
 
         auto transform =
             TransformComponent(packet.xpositive ? packet.x : -(packet.x), packet.ypositive ? packet.y : -(packet.y));
@@ -123,7 +121,7 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         entity->addComponent(transform);
         entity->addComponent(drawable);
 
-        manager_->addEntity(std::move(entity));
+        manager_.addEntity(std::move(entity));
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();

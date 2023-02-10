@@ -10,9 +10,9 @@
 #include <functional>
 #include <memory>
 
-#include "Entity.hpp"
-#include "IComponent.hpp"
-#include "Sprite.hpp"
+#include "Components/IComponent.hpp"
+#include "Entity/Entity.hpp"
+#include "Lib/Sprite.hpp"
 
 /**
  * @brief Component assigned to drawable entities.

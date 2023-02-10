@@ -5,7 +5,7 @@
 ** Entity.cpp
 */
 
-#include "Entity.hpp"
+#include "Entity/Entity.hpp"
 
 #include <iostream>
 
