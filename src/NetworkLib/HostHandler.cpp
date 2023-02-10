@@ -5,10 +5,9 @@
 ** HostHandler
 */
 
+#include <Error/Error.hpp>
 #include <NetworkLib/HostHandler.hpp>
 #include <cstring>
-
-#include "Error.hpp"
 
 #ifdef WIN32
 #include <winsock2.h>

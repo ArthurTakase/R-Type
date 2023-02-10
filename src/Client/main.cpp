@@ -6,11 +6,10 @@
 */
 
 #include <Client/UdpClient.hpp>
+#include <Error/Error.hpp>
 #include <NetworkLib/HostHandler.hpp>
 #include <cstdlib>
 #include <iostream>
-
-#include "Error.hpp"
 
 int main(int ac, const char* const av[])
 {

@@ -26,7 +26,7 @@ endif()
 file(COPY assets/ DESTINATION assets/)
 
 # Libs
-add_subdirectory(Error)
+add_subdirectory(src/Error)
 add_subdirectory(src/NetworkLib)
 add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
@@ -128,15 +128,14 @@ if(DEFINED TESTS)
   add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SERVER_SRC} ${RTYPE_CLIENT_SRC})
   
   # Options
-  target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
-  target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
-  target_link_libraries(${TEST_BUILD} ECSEncapsulation)
   target_link_libraries(${TEST_BUILD} Error)
   target_link_libraries(${TEST_BUILD} NetworkLib)
+  target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
+  target_link_libraries(${TEST_BUILD} ECSEncapsulation)
+  target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
   
   # Includes
   target_include_directories(${TEST_BUILD} PRIVATE include)
-  target_include_directories(${TEST_BUILD} PRIVATE Error)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)
 endif()

@@ -5,6 +5,7 @@
 ** Server
 */
 
+#include <Error/Error.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketFactory.hpp>
 #include <NetworkLib/SocketSelectorFactory.hpp>
@@ -13,8 +14,6 @@
 #include <ctime>
 #include <iostream>
 #include <locale>
-
-#include "Error.hpp"
 
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))

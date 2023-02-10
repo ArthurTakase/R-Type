@@ -6,9 +6,8 @@
 */
 
 #ifdef __linux__
+#include <Error/Error.hpp>
 #include <NetworkLib/LinuxSocketSelector.hpp>
-
-#include "Error.hpp"
 
 /**
  * Initialize the fd_set to contain no file descriptors.

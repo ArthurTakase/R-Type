@@ -6,12 +6,11 @@
 */
 
 #include <Client/UdpClient.hpp>
+#include <Error/Error.hpp>
 #include <NetworkLib/SocketFactory.hpp>
 #include <NetworkLib/SocketSelectorFactory.hpp>
 #include <iostream>
 #include <memory>
-
-#include "Error.hpp"
 
 /**
  * It creates a socket, a selector, a deserializer, a game, and two threads.

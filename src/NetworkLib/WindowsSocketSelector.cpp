@@ -6,9 +6,8 @@
 */
 
 #ifdef WIN32
+#include <Error/Error.hpp>
 #include <NetworkLib/WindowsSocketSelector.hpp>
-
-#include "Error.hpp"
 
 /**
  * Initialize the windows fd_set structure to contain no file descriptors.

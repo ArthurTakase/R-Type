@@ -6,9 +6,8 @@
 */
 
 #ifdef WIN32
+#include <Error/Error.hpp>
 #include <NetworkLib/WindowsSocket.hpp>
-
-#include "Error.hpp"
 
 /**
  * It initializes an UDP socket compatible with Windows, binds it to the port, and reserves memory for the

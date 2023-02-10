@@ -5,7 +5,7 @@
 ** Error
 */
 
-#include "Error.hpp"
+#include <Error/Error.hpp>
 
 /**
  * Construct an Error object with a message.
