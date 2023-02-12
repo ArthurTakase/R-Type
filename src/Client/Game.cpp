@@ -11,22 +11,17 @@
 #include <iostream>
 
 /**
- * Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
- *     : dataReceived_(packets)
- *     , mutexForPacket_(mutex)
- * {
- *     manager_ = std::make_unique<EntityManager>();
- *     lib_     = std::make_unique<Lib>();
- * }
+ * It's a constructor for the Game class
  *
- * @param GamePacket This is a struct that contains the data that is sent from the
- * server to the client.
- * @param mutex This is a mutex that is used to lock the queue of packets.
+ * @param packets The queue of packets received
+ * @param mutex The mutex used to protect the queue of packets
  */
 Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     : dataReceived_(packets)
     , mutexForPacket_(mutex)
+    , drawableSystem_(&manager_)
 {
+    drawableSystem_.setWindow(&lib_.getWindow());
 }
 
 /**
@@ -34,8 +29,6 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
  */
 void Game::run() noexcept
 {
-    auto& window = lib_.getWindow();
-    window.clear();
     {
         std::lock_guard<std::mutex> lock(mutexForPacket_);
         while (!dataReceived_.empty()) {
@@ -44,21 +37,7 @@ void Game::run() noexcept
             dataReceived_.pop();
         }
     }
-    for (auto& entity : manager_.getEntities()) {
-        if (!entity->hasComponent<TransformComponent>() || !entity->hasComponent<DrawableComponent>()) { continue; }
-
-        auto transform = entity->getComponent<TransformComponent>();
-        auto drawable  = entity->getComponent<DrawableComponent>();
-
-        drawable->getSprite().setX(transform->getX());
-        drawable->getSprite().setY(transform->getY());
-        window.draw(drawable->getSprite(),
-            drawable->getOffsetX(),
-            drawable->getOffsetY(),
-            drawable->getWidth(),
-            drawable->getHeight());
-    }
-    window.refresh();
+    drawableSystem_.run();
 }
 
 /**

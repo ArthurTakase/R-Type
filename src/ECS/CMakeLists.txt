@@ -19,6 +19,7 @@ set(
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp
   Systems/AnimationSystem.cpp
+  Systems/DrawableSystem.cpp
 )
 
 # Merge

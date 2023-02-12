@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/DrawableSystem.hpp>
 #include <Lib/Lib.hpp>
 #include <queue>
 
@@ -53,6 +54,7 @@ class Game
     Lib                     lib_;
     std::queue<GamePacket>& dataReceived_;
     std::mutex&             mutexForPacket_;
+    DrawableSystem          drawableSystem_;
 
     void deserializeEntity(GamePacket packet) noexcept;
 };

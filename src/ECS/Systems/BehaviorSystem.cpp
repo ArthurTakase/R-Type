@@ -19,7 +19,7 @@
  */
 BehaviorSystem::BehaviorSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<BehaviorComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 

@@ -19,7 +19,7 @@
  */
 HitboxSystem::HitboxSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 

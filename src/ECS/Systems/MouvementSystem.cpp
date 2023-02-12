@@ -17,7 +17,7 @@
  */
 MouvementSystem::MouvementSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<TransformComponent, MouvementComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 
