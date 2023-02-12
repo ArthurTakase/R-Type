@@ -14,7 +14,6 @@
 
 /**
  * @brief This struct is used to process the data received from the server.
- *
  */
 struct GamePacket {
     int x;
@@ -33,7 +32,6 @@ struct GamePacket {
 
 /**
  * @brief This class is used to create a game instance in the client.
- *
  */
 class Game
 {

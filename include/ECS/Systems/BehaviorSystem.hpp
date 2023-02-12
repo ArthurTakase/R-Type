@@ -26,11 +26,8 @@ class BehaviorSystem
     BehaviorSystem& operator=(BehaviorSystem&& rhs) noexcept      = delete;
 
     void run();
-    void setKey(int key) noexcept;
-    int  getKey() const noexcept;
 
   private:
     EntityIterator<BehaviorComponent> it_;
     EntityManager*                    manager_;
-    int                               key_;
 };

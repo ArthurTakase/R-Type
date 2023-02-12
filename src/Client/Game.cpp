@@ -62,10 +62,11 @@ void Game::deserializeEntity(GamePacket packet) noexcept
     auto m_entity = manager_.getEntity(packet.id);
 
     if (m_entity == nullptr) {
-        std::unique_ptr<Entity> entity = std::make_unique<Entity>(manager_.createId());
+        auto entity = manager_.newEntity();
 
-        auto transform =
-            TransformComponent(packet.xpositive ? packet.x : -(packet.x), packet.ypositive ? packet.y : -(packet.y));
+        int  x         = packet.xpositive ? packet.x : -(packet.x);
+        int  y         = packet.ypositive ? packet.y : -(packet.y);
+        auto transform = TransformComponent(x, y);
         transform.setScale(packet.scaleX, packet.scaleY);
 
         auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
@@ -75,8 +76,6 @@ void Game::deserializeEntity(GamePacket packet) noexcept
 
         entity->addComponent(transform);
         entity->addComponent(drawable);
-
-        manager_.addEntity(std::move(entity));
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();

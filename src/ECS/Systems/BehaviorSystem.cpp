@@ -33,18 +33,9 @@ void BehaviorSystem::run()
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
-        assert((entity->hasComponents<BehaviorComponent>()));
-        entity->getComponent<BehaviorComponent>()->onUpdate(key_, entity);
+        if (!entity->hasComponents<BehaviorComponent>()) { continue; }
+
+        entity->getComponent<BehaviorComponent>()->onUpdate(entity);
     }
     it_.reset();
-}
-
-void BehaviorSystem::setKey(int key) noexcept
-{
-    key_ = key;
-}
-
-int BehaviorSystem::getKey() const noexcept
-{
-    return key_;
 }

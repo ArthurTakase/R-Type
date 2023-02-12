@@ -6,6 +6,7 @@
 */
 
 #include <Lib/Timer.hpp>
+#include <iostream>
 
 Timer::Timer() noexcept
     : limit(0)
@@ -15,6 +16,7 @@ Timer::Timer() noexcept
 
 Timer::Timer(float limit) noexcept
     : limit(limit)
+    , active(true)
 {
 }
 
@@ -35,7 +37,7 @@ void Timer::reset()
 
 bool Timer::isOver()
 {
-    if (!active) return false;
+    if (!active) { return false; }
 
     if (getElapsedTime() >= limit) {
         clock.restart();

@@ -34,12 +34,17 @@ class EntityIterator
 
     Entity* get() { return it[idx].get(); }
 
-    int                                   idx = 0;
-    std::vector<std::unique_ptr<Entity>>& it;
-
     bool isEnd() { return idx >= it.size(); }
 
-    void reset() { idx = 0; }
+    void reset()
+    {
+        idx = 0;
+        skip();
+    }
+
+  public:
+    int                                   idx = 0;
+    std::vector<std::unique_ptr<Entity>>& it;
 
   private:
     void skip()

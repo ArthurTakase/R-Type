@@ -35,7 +35,7 @@ void DrawableSystem::run()
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
-        assert((entity->hasComponents<DrawableComponent, TransformComponent>()));
+        if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
 
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();

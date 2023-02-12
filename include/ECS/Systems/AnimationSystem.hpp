@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <ECS/Components/AnimationComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
 #include <Tools/EntityIterator.hpp>
@@ -28,7 +29,7 @@ class AnimationSystem
     void run();
 
   private:
-    EntityIterator<DrawableComponent> it_;
-    EntityManager*                    manager_;
-    int                               key_;
+    EntityIterator<DrawableComponent, AnimationComponent> it_;
+    EntityManager*                                        manager_;
+    int                                                   key_;
 };

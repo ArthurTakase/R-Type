@@ -59,8 +59,7 @@ void Server::communicate() noexcept
 
 void Server::gameLoop() noexcept
 {
-    gameInstance_.getManager().createBackground(0);
-    gameInstance_.getManager().createBackground(255);
+    gameInstance_.init();
 
     while (looping_) {
         end_ = std::chrono::system_clock::now();
@@ -94,6 +93,7 @@ void Server::gameLoop() noexcept
 
                 if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
                 for (auto& client : clients_) { client.dataToSend.push(dataToSend); }
+
                 gameInstance_.run();
             }
         }
@@ -119,7 +119,7 @@ void Server::receive()
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
             addClient(infoReceived.address);
-            gameInstance_.getManager().createPlayer();
+            gameInstance_.createPlayer(20, 50);
         }
         handleData(infoReceived);
     } catch (const NetworkExecError& e) {
@@ -166,7 +166,7 @@ void Server::handleData(ReceivedInfos infos) noexcept
         }
     }
 
-    auto& behavior = gameInstance_.getBehaviorSystem();
-    behavior.setKey(infos.data[0]);
+    std::cout << "Received data: " << (int)infos.data[0] << std::endl;
+
     infos.data.clear();
 }

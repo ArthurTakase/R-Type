@@ -9,7 +9,7 @@
 
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
-#include <Server/ServerGameInstance.hpp>
+#include <Server/Game.hpp>
 #include <memory>
 #include <thread>
 #include <vector>

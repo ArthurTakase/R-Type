@@ -18,7 +18,7 @@ class Timer
     Timer() noexcept;
     Timer(float limit) noexcept;
     ~Timer() noexcept                  = default;
-    Timer(const Timer& other) noexcept = delete;
+    Timer(const Timer& other) noexcept = default;
     Timer(Timer&& other) noexcept      = delete;
 
     Timer& operator=(const Timer& rhs) noexcept = delete;
@@ -35,5 +35,5 @@ class Timer
   private:
     sf::Clock clock;
     float     limit;
-    bool      active = true;
+    bool      active;
 };

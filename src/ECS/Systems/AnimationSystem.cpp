@@ -31,15 +31,17 @@ void AnimationSystem::run()
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
-        assert((entity->hasComponents<DrawableComponent>()));
+        if (!entity->hasComponents<DrawableComponent, AnimationComponent>()) { continue; }
+
         auto  draw   = entity->getComponent<DrawableComponent>();
-        auto& timer  = draw->getTimer();
+        auto  anime  = entity->getComponent<AnimationComponent>();
+        auto& timer  = anime->getTimer();
         auto& sprite = draw->getSprite();
 
         if (timer.isOver()) {
             auto offsetX = draw->getOffsetX();
             draw->setOffsetX(offsetX + draw->getWidth());
-            if (draw->getOffsetX() >= sprite.getLimit()) { draw->setOffsetX(0); }
+            if (draw->getOffsetX() >= anime->getLimit()) { draw->setOffsetX(0); }
         }
     }
     it_.reset();

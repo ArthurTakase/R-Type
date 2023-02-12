@@ -39,7 +39,7 @@ set(SERVER_DIR src/Server)
 
 set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/Server.cpp
-  ${SERVER_DIR}/ServerGameInstance.cpp
+  ${SERVER_DIR}/Game.cpp
 )
 
 add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})

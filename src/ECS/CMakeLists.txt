@@ -15,6 +15,7 @@ set(
   Components/StatComponent.cpp
   Components/DrawableComponent.cpp
   Components/BehaviorComponent.cpp
+  Components/AnimationComponent.cpp
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp

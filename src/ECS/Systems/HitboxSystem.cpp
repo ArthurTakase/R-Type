@@ -31,7 +31,6 @@ void HitboxSystem::run()
     size_t other;
 
     for (; !it_.isEnd(); ++it_) {
-        // assert((it_.get()->hasComponents<HitboxComponent, TransformComponent>()));
         if (!(it_.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
         try {
@@ -55,7 +54,7 @@ void HitboxSystem::checkCollision(Entity* entity) const
     for (auto other = EntityIterator<TransformComponent, HitboxComponent>(it_.it); !other.isEnd(); ++other) {
         if (other.get() == entity) { continue; }
 
-        assert((other.get()->hasComponents<HitboxComponent, TransformComponent>()));
+        if (!(other.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
         auto hitbox      = entity->getComponent<HitboxComponent>();
         auto pos         = entity->getComponent<TransformComponent>();
