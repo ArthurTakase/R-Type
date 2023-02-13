@@ -68,37 +68,21 @@ int RType::createPlayer(int x, int y) noexcept
         std::function<void(Entity * entity)>{[](Entity* entity) { std::cout << "Collision" << std::endl; }});
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         auto input = entity->getComponent<InputComponent>();
         auto mouv  = entity->getComponent<MouvementComponent>();
+        auto trans = entity->getComponent<TransformComponent>();
         int  lastInput;
 
         while ((lastInput = input->getInput()) != -1) {
             std::cout << "Entity " << entity->getId() << " Input " << lastInput << std::endl;
             switch (lastInput) {
-                case 71: // LEFT ARROW
-                    mouv->setDirY(0);
-                    mouv->setDirX(-1);
-                    break;
-                case 72: // RIGHT ARROW
-                    mouv->setDirY(0);
-                    mouv->setDirX(1);
-                    break;
-                case 73: // UP ARROW
-                    mouv->setDirX(0);
-                    mouv->setDirY(-1);
-                    break;
-                case 74: // DOWN ARROW
-                    mouv->setDirX(0);
-                    mouv->setDirY(1);
-                    break;
-                case 57: // SPACE
-                    std::cout << "PIOU PIOU !" << std::endl;
-                    break;
-                case 38: // SHIFT
-                    mouv->setDirX(0);
-                    mouv->setDirY(0);
-                    break;
+                case Input::LeftArrow: mouv->setDir(-1, 0); break;
+                case Input::RightArrow: mouv->setDir(1, 0); break;
+                case Input::UpArrow: mouv->setDir(0, -1); break;
+                case Input::DownArrow: mouv->setDir(0, 1); break;
+                case Input::Space: createPlayerBullet(trans->getX(), trans->getY()); break;
+                case Input::Shift: mouv->setDir(0, 0); break;
             }
         }
     }});
@@ -113,6 +97,17 @@ int RType::createPlayer(int x, int y) noexcept
     player->addComponent(InputComponent());
 
     return player->getId();
+}
+
+int RType::createPlayerBullet(int x, int y) noexcept
+{
+    auto bullet = entityManager_.newEntity();
+
+    bullet->addComponent(TransformComponent(x, y));
+    bullet->addComponent(MouvementComponent(1, 0, 2.0));
+    bullet->addComponent(DrawableComponent(0, 0, 36, 40, 5));
+
+    return 0;
 }
 
 int RType::createEnemy(int x, int y) noexcept

@@ -29,6 +29,7 @@ class MouvementComponent : public IComponent
     float getSpeed() const noexcept;
     void  setDirX(int x) noexcept;
     void  setDirY(int y) noexcept;
+    void  setDir(int x, int y) noexcept;
     void  setSpeed(float speed) noexcept;
 
   private:

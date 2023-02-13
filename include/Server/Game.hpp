@@ -15,6 +15,8 @@
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <memory>
 
+typedef enum Input { LeftArrow = 71, RightArrow = 72, UpArrow = 73, DownArrow = 74, Space = 57, Shift = 38 } Input;
+
 /**
  * @brief Game Instance for the server
  *
@@ -36,10 +38,12 @@ class RType
     EntityManager&  getManager() noexcept;
     HitboxSystem&   getHitboxSystem() noexcept;
     BehaviorSystem& getBehaviorSystem() noexcept;
-    int             createPlayer(int x, int y) noexcept;
-    int             createEnemy(int x, int y) noexcept;
-    int             createBackground(int x) noexcept;
     void            init() noexcept;
+
+    int createPlayer(int x, int y) noexcept;
+    int createEnemy(int x, int y) noexcept;
+    int createBackground(int x) noexcept;
+    int createPlayerBullet(int x, int y) noexcept;
 
   private:
     bool            looping_ = true;

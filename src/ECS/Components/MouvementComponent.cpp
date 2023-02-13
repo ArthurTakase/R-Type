@@ -86,3 +86,9 @@ void MouvementComponent::setSpeed(float speed) noexcept
 {
     speed_ = speed;
 }
+
+void MouvementComponent::setDir(int x, int y) noexcept
+{
+    dirX_ = x;
+    dirY_ = y;
+}
