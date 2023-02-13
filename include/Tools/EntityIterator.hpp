@@ -32,6 +32,13 @@ class EntityIterator
         return *this;
     };
 
+    EntityIterator& operator--()
+    {
+        --idx;
+        skip();
+        return *this;
+    };
+
     Entity* get() { return it[idx].get(); }
 
     bool isEnd() { return idx >= it.size(); }

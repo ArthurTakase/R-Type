@@ -17,11 +17,13 @@ set(
   Components/BehaviorComponent.cpp
   Components/AnimationComponent.cpp
   Components/InputComponent.cpp
+  Components/DestroyableComponent.cpp
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp
   Systems/AnimationSystem.cpp
   Systems/DrawableSystem.cpp
+  Systems/DestroyableSystem.cpp
 )
 
 # Merge

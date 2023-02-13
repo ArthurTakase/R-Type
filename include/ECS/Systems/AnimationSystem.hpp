@@ -31,5 +31,4 @@ class AnimationSystem
   private:
     EntityIterator<DrawableComponent, AnimationComponent> it_;
     EntityManager*                                        manager_;
-    int                                                   key_;
 };

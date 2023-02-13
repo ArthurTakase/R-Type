@@ -33,6 +33,5 @@ class DrawableSystem
   private:
     EntityIterator<DrawableComponent, TransformComponent> it_;
     EntityManager*                                        manager_;
-    int                                                   key_;
     Window*                                               window_ = nullptr;
 };

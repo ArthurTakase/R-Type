@@ -11,6 +11,7 @@
 #include <ECS/Entity/EntityManager.hpp>
 #include <ECS/Systems/AnimationSystem.hpp>
 #include <ECS/Systems/BehaviorSystem.hpp>
+#include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <memory>
@@ -46,10 +47,11 @@ class RType
     int createPlayerBullet(int x, int y) noexcept;
 
   private:
-    bool            looping_ = true;
-    EntityManager   entityManager_;
-    HitboxSystem    hitboxSystem_;
-    BehaviorSystem  behaviorSystem_;
-    MouvementSystem mouvementSystem_;
-    AnimationSystem animationSystem_;
+    bool              looping_ = true;
+    EntityManager     entityManager_;
+    HitboxSystem      hitboxSystem_;
+    BehaviorSystem    behaviorSystem_;
+    MouvementSystem   mouvementSystem_;
+    AnimationSystem   animationSystem_;
+    DestroyableSystem destroyableSystem_;
 };
