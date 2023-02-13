@@ -9,6 +9,7 @@
 #include <ECS/Components/BehaviorComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
 #include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
@@ -72,6 +73,7 @@ void RType::createPlayer(int x, int y) noexcept
     player->addComponent(TransformComponent(x, y));
     player->addComponent(StatComponent(100, 5));
     player->addComponent(MouvementComponent(0, 0, 1.0));
+    player->addComponent(InputComponent());
 }
 
 void RType::createEnemy(int x, int y) noexcept
