@@ -67,7 +67,16 @@ void RType::createPlayer(int x, int y) noexcept
     hitbox.setOnCollision(
         std::function<void(Entity * entity)>{[](Entity* entity) { std::cout << "Collision" << std::endl; }});
 
+    auto behavior = BehaviorComponent();
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
+        auto input = entity->getComponent<InputComponent>();
+        int  lastInput;
+
+        while ((lastInput = input->getInput()) != -1) { std::cout << "Input: " << lastInput << std::endl; }
+    }});
+
     player->addComponent(hitbox);
+    player->addComponent(behavior);
     player->addComponent(DrawableComponent(0, 0, 36, 40, 5));
     player->addComponent(AnimationComponent(533, 0.1));
     player->addComponent(TransformComponent(x, y));
