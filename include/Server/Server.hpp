@@ -56,6 +56,7 @@ class Server
     std::vector<Player>                            players_;
 
     static constexpr int CLOSE_VALUE = 255;
+    static constexpr int PACKET_SIZE = 13;
 
     // methods
     void                  receive();

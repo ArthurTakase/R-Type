@@ -21,6 +21,7 @@ class DestroyableComponent : public IComponent
 {
   public:
     DestroyableComponent() noexcept;
+    DestroyableComponent(int destroy) noexcept;
     ~DestroyableComponent() noexcept                                 = default;
     DestroyableComponent(const DestroyableComponent& other) noexcept = default;
     DestroyableComponent(DestroyableComponent&& other) noexcept      = delete;

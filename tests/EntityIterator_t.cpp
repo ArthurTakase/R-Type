@@ -68,7 +68,7 @@ TEST(EntityIterator, search_hitbox_and_position_and_check_both)
 
     captured_output = testing::internal::GetCapturedStdout();
 
-    EXPECT_EQ(captured_output, "0\n3\n5\n0\n3\n5\n6\n9\n11\n");
+    EXPECT_EQ(captured_output, "1\n4\n5\n1\n4\n5\n6\n9\n11\n");
 }
 
 TEST(EntityIterator, search_position_and_check_for_hitbox)

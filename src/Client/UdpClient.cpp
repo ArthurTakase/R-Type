@@ -152,8 +152,8 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() < 2) return;
 
-    if (infos.data.size() % 12 == 0) {
-        for (int i = 0; i < infos.data.size(); i += 12) {
+    if (infos.data.size() % PACKET_SIZE == 0) {
+        for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
             GamePacket packet;
             packet.x         = infos.data[i];
             packet.xpositive = infos.data[i + 1];
@@ -167,6 +167,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
             packet.offsetX   = infos.data[i + 9];
             packet.offsetY   = infos.data[i + 10];
             packet.id        = infos.data[i + 11];
+            packet.destroy   = infos.data[i + 12];
             {
                 std::lock_guard<std::mutex> lock(mutexForPacket_);
                 dataReceived_.push(packet);

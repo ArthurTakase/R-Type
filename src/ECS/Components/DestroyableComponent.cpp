@@ -9,6 +9,11 @@
 
 DestroyableComponent::DestroyableComponent() noexcept {}
 
+DestroyableComponent::DestroyableComponent(int destroy) noexcept
+{
+    destroyed = (bool)destroy;
+}
+
 bool DestroyableComponent::getDestroyed() const noexcept
 {
     return destroyed;

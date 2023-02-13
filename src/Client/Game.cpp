@@ -6,6 +6,7 @@
 */
 
 #include <Client/Game.hpp>
+#include <ECS/Components/DestroyableComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <iostream>
@@ -20,6 +21,7 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     : dataReceived_(packets)
     , mutexForPacket_(mutex)
     , drawableSystem_(&manager_)
+    , destroyableSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
 }
@@ -37,6 +39,7 @@ void Game::run() noexcept
             dataReceived_.pop();
         }
     }
+    destroyableSystem_.run();
     drawableSystem_.run();
 }
 
@@ -76,9 +79,11 @@ void Game::deserializeEntity(GamePacket packet) noexcept
 
         entity->addComponent(transform);
         entity->addComponent(drawable);
+        entity->addComponent(DestroyableComponent(packet.destroy));
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
+        auto destroy   = m_entity->getComponent<DestroyableComponent>();
 
         transform->setX(packet.xpositive ? packet.x : -(packet.x));
         transform->setY(packet.ypositive ? packet.y : -(packet.y));
@@ -88,5 +93,6 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
         drawable->setTextureId(packet.idSprite);
+        if (packet.destroy) destroy->destroy();
     }
 }

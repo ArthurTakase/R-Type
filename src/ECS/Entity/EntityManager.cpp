@@ -26,6 +26,7 @@ bool EntityManager::removeEntity(size_t id) noexcept
 {
     for (auto it = entities_.begin(); it != entities_.end(); it++) {
         if ((*it)->getId() == id) {
+            std::cout << "REMOVED ENTITY " << id << std::endl;
             entities_.erase(it);
             return true;
         }

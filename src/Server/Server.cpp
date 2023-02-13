@@ -72,12 +72,13 @@ void Server::gameLoop() noexcept
             } else {
                 auto&   entities = gameInstance_.getManager().getEntities();
                 RawData dataToSend;
-                dataToSend.reserve(entities.size() * 12);
+                dataToSend.reserve(entities.size() * PACKET_SIZE);
                 for (auto& entity : entities) {
                     if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
 
-                    auto drawable  = entity->getComponent<DrawableComponent>();
-                    auto transform = entity->getComponent<TransformComponent>();
+                    auto drawable    = entity->getComponent<DrawableComponent>();
+                    auto transform   = entity->getComponent<TransformComponent>();
+                    auto destroyable = entity->getComponent<DestroyableComponent>();
                     dataToSend.emplace_back(transform->getX() > 0 ? transform->getX() : -transform->getX());
                     dataToSend.emplace_back(transform->getX() > 0 ? 1 : 0);
                     dataToSend.emplace_back(transform->getY() > 0 ? transform->getY() : -transform->getY());
@@ -90,6 +91,7 @@ void Server::gameLoop() noexcept
                     dataToSend.emplace_back(drawable->getOffsetX());
                     dataToSend.emplace_back(drawable->getOffsetY());
                     dataToSend.emplace_back(entity->getId());
+                    destroyable ? dataToSend.emplace_back(destroyable->getDestroyed()) : dataToSend.emplace_back(0);
                 }
 
                 if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }
@@ -163,8 +165,14 @@ void Server::handleData(ReceivedInfos infos) noexcept
         });
         if (iterator != clients_.end()) {
             clients_.erase(iterator);
-            // TODO: remove player entity in game instance
-            //  gameInstance_.getManager().removePlayer();
+            for (auto& player : players_) {
+                if (player.address != infos.address) continue;
+                for (auto& ent : player.entities_id) {
+                    auto entity = gameInstance_.getManager().getEntity(ent);
+                    if (!entity->hasComponent<DestroyableComponent>()) continue;
+                    entity->getComponent<DestroyableComponent>()->destroy();
+                }
+            }
         }
     }
 

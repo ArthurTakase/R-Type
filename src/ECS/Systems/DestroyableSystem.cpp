@@ -36,7 +36,6 @@ void DestroyableSystem::run()
         auto dest = entity->getComponent<DestroyableComponent>();
 
         if (dest->getDestroyed()) {
-            std::cout << "DESTROY ENTITY" << std::endl;
             manager_->removeEntity(entity->getId());
             --it_;
         }

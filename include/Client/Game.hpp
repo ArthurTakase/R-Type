@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <Lib/Lib.hpp>
 #include <queue>
@@ -28,6 +29,7 @@ struct GamePacket {
     int offsetX;
     int offsetY;
     int id;
+    int destroy;
 };
 
 /**
@@ -53,6 +55,7 @@ class Game
     std::queue<GamePacket>& dataReceived_;
     std::mutex&             mutexForPacket_;
     DrawableSystem          drawableSystem_;
+    DestroyableSystem       destroyableSystem_;
 
     void deserializeEntity(GamePacket packet) noexcept;
 };

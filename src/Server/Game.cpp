@@ -38,11 +38,11 @@ void RType::reset() noexcept
 
 void RType::run() noexcept
 {
+    destroyableSystem_.run();
     hitboxSystem_.run();
     behaviorSystem_.run();
     mouvementSystem_.run();
     animationSystem_.run();
-    destroyableSystem_.run();
 }
 
 RType::~RType() noexcept {}
@@ -66,12 +66,12 @@ int RType::createPlayer(int x, int y) noexcept
 {
     auto player = entityManager_.newEntity();
 
-    auto hitbox = HitboxComponent(15, 21);
+    auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(std::function<void(Entity * entity)>{[](Entity* entity) { return; }});
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
-        static Timer timer(0.5);
+        static Timer timer(0.1);
         auto         input = entity->getComponent<InputComponent>();
         auto         mouv  = entity->getComponent<MouvementComponent>();
         auto         trans = entity->getComponent<TransformComponent>();
@@ -93,11 +93,11 @@ int RType::createPlayer(int x, int y) noexcept
 
     player->addComponent(hitbox);
     player->addComponent(behavior);
-    player->addComponent(DrawableComponent(0, 0, 36, 40, 5));
-    player->addComponent(AnimationComponent(533, 0.1));
+    player->addComponent(DrawableComponent(0, 0, 16, 16, 1));
+    player->addComponent(AnimationComponent(128, 0.1));
     player->addComponent(TransformComponent(x, y));
     player->addComponent(StatComponent(100, 5));
-    player->addComponent(MouvementComponent(0, 0, 5.0));
+    player->addComponent(MouvementComponent(0, 0, 3.0));
     player->addComponent(InputComponent());
     player->addComponent(DestroyableComponent());
 
@@ -108,20 +108,29 @@ int RType::createPlayerBullet(int x, int y) noexcept
 {
     auto bullet = entityManager_.newEntity();
 
-    auto hitbox = HitboxComponent(15, 21);
+    auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(std::function<void(Entity * entity)>{[&](Entity* entity) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent>()
             && !entity->hasComponents<InputComponent>()) {
             auto dest = entity->getComponent<DestroyableComponent>();
-            std::cout << dest->getDestroyed() << std::endl;
             dest->destroy();
         }
     }});
 
+    auto behavior = BehaviorComponent();
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
+        auto trans = entity->getComponent<TransformComponent>();
+        auto dest  = entity->getComponent<DestroyableComponent>();
+
+        if (trans->getX() >= 255) { dest->destroy(); }
+    }});
+
     bullet->addComponent(hitbox);
+    bullet->addComponent(behavior);
     bullet->addComponent(TransformComponent(x, y));
-    bullet->addComponent(MouvementComponent(1, 0, 2.0));
-    bullet->addComponent(DrawableComponent(0, 0, 36, 40, 5));
+    bullet->addComponent(MouvementComponent(1, 0, 10.0));
+    bullet->addComponent(DrawableComponent(0, 0, 16, 16, 3));
+    bullet->addComponent(AnimationComponent(32, 0.1));
     bullet->addComponent(DestroyableComponent());
     bullet->addComponent(StatComponent(1, 150));
 
@@ -132,11 +141,11 @@ int RType::createEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
 
-    auto hitbox = HitboxComponent(15, 21);
+    auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(std::function<void(Entity * entity)>{[](Entity* entity) { return; }});
 
-    enemy->addComponent(DrawableComponent(0, 0, 18, 18, 3));
-    enemy->addComponent(AnimationComponent(205, 0.1));
+    enemy->addComponent(DrawableComponent(0, 0, 16, 16, 2));
+    enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
     enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent(150, 8));
@@ -157,9 +166,9 @@ int RType::createBackground(int x) noexcept
     }});
 
     background->addComponent(TransformComponent(x, 0));
-    background->addComponent(DrawableComponent(0, 0, 255, 255, BACKGROUND_ID));
+    background->addComponent(DrawableComponent(0, 0, 255, 255, 0));
     background->addComponent(behaviorComponent);
-    background->addComponent(MouvementComponent(-1, 0, 1.0));
+    background->addComponent(MouvementComponent(-1, 0, 2.0));
     background->addComponent(DestroyableComponent());
 
     return background->getId();

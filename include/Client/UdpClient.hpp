@@ -50,6 +50,7 @@ class UdpClient
     Game                            game_;
 
     static constexpr int CLOSE_VALUE = 255;
+    static constexpr int PACKET_SIZE = 13;
 
     // methods
     void    receive();
