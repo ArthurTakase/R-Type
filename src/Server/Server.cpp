@@ -5,6 +5,7 @@
 ** Server
 */
 
+#include <ECS/Components/InputComponent.hpp>
 #include <Error/Error.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketFactory.hpp>
@@ -119,7 +120,8 @@ void Server::receive()
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
             addClient(infoReceived.address);
-            gameInstance_.createPlayer(20, 50);
+            Player player = {.address = infoReceived.address, .entities_id = {gameInstance_.createPlayer(20, 50)}};
+            players_.emplace_back(player);
         }
         handleData(infoReceived);
     } catch (const NetworkExecError& e) {
@@ -166,7 +168,15 @@ void Server::handleData(ReceivedInfos infos) noexcept
         }
     }
 
-    std::cout << "Received data: " << (int)infos.data[0] << std::endl;
+    for (auto& player : players_) {
+        if (player.address != infos.address) continue;
+        for (auto& ent : player.entities_id) {
+            auto entity = gameInstance_.getManager().getEntity(ent);
+            if (!entity->hasComponent<InputComponent>()) continue;
+            auto input = entity->getComponent<InputComponent>();
+            input->addInput(infos.data[0]);
+        }
+    }
 
     infos.data.clear();
 }

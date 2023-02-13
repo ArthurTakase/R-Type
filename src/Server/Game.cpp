@@ -59,7 +59,7 @@ EntityManager& RType::getManager() noexcept
     return entityManager_;
 }
 
-void RType::createPlayer(int x, int y) noexcept
+int RType::createPlayer(int x, int y) noexcept
 {
     auto player = entityManager_.newEntity();
 
@@ -70,9 +70,37 @@ void RType::createPlayer(int x, int y) noexcept
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
         auto input = entity->getComponent<InputComponent>();
+        auto mouv  = entity->getComponent<MouvementComponent>();
         int  lastInput;
 
-        while ((lastInput = input->getInput()) != -1) { std::cout << "Input: " << lastInput << std::endl; }
+        while ((lastInput = input->getInput()) != -1) {
+            std::cout << "Entity " << entity->getId() << " Input " << lastInput << std::endl;
+            switch (lastInput) {
+                case 71: // LEFT ARROW
+                    mouv->setDirY(0);
+                    mouv->setDirX(-1);
+                    break;
+                case 72: // RIGHT ARROW
+                    mouv->setDirY(0);
+                    mouv->setDirX(1);
+                    break;
+                case 73: // UP ARROW
+                    mouv->setDirX(0);
+                    mouv->setDirY(-1);
+                    break;
+                case 74: // DOWN ARROW
+                    mouv->setDirX(0);
+                    mouv->setDirY(1);
+                    break;
+                case 57: // SPACE
+                    std::cout << "PIOU PIOU !" << std::endl;
+                    break;
+                case 38: // SHIFT
+                    mouv->setDirX(0);
+                    mouv->setDirY(0);
+                    break;
+            }
+        }
     }});
 
     player->addComponent(hitbox);
@@ -81,20 +109,24 @@ void RType::createPlayer(int x, int y) noexcept
     player->addComponent(AnimationComponent(533, 0.1));
     player->addComponent(TransformComponent(x, y));
     player->addComponent(StatComponent(100, 5));
-    player->addComponent(MouvementComponent(0, 0, 1.0));
+    player->addComponent(MouvementComponent(0, 0, 5.0));
     player->addComponent(InputComponent());
+
+    return player->getId();
 }
 
-void RType::createEnemy(int x, int y) noexcept
+int RType::createEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
 
     enemy->addComponent(DrawableComponent(0, 0, 18, 18, 3));
     enemy->addComponent(AnimationComponent(205, 0.1));
     enemy->addComponent(TransformComponent(x, y));
+
+    return enemy->getId();
 }
 
-void RType::createBackground(int x) noexcept
+int RType::createBackground(int x) noexcept
 {
     auto background = entityManager_.newEntity();
 
@@ -109,6 +141,8 @@ void RType::createBackground(int x) noexcept
     background->addComponent(DrawableComponent(0, 0, 255, 255, BACKGROUND_ID));
     background->addComponent(behaviorComponent);
     background->addComponent(MouvementComponent(-1, 0, 1.0));
+
+    return background->getId();
 }
 
 void RType::init() noexcept

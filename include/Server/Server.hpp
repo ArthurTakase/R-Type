@@ -14,6 +14,11 @@
 #include <thread>
 #include <vector>
 
+typedef struct Player {
+    Address          address;
+    std::vector<int> entities_id;
+} Player;
+
 /**
  * @brief Server class using UDP protocol
  *
@@ -48,6 +53,7 @@ class Server
     RType                                          gameInstance_;
     std::chrono::system_clock::time_point          end_;
     std::chrono::high_resolution_clock::time_point start_;
+    std::vector<Player>                            players_;
 
     static constexpr int CLOSE_VALUE = 255;
 
@@ -59,7 +65,6 @@ class Server
     void                  addClient(Address address) noexcept;
     void                  handleData(ReceivedInfos infos) noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
-    void                  checkData() noexcept;
 
     // thread methods
     void communicate() noexcept;

@@ -36,9 +36,9 @@ class RType
     EntityManager&  getManager() noexcept;
     HitboxSystem&   getHitboxSystem() noexcept;
     BehaviorSystem& getBehaviorSystem() noexcept;
-    void            createPlayer(int x, int y) noexcept;
-    void            createEnemy(int x, int y) noexcept;
-    void            createBackground(int x) noexcept;
+    int             createPlayer(int x, int y) noexcept;
+    int             createEnemy(int x, int y) noexcept;
+    int             createBackground(int x) noexcept;
     void            init() noexcept;
 
   private:
