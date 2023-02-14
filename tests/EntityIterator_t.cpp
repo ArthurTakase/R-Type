@@ -18,8 +18,8 @@ void createPlayer_it(int x, int y, EntityManager* manager)
     auto player = manager->newEntity();
 
     auto hitbox = HitboxComponent(15, 21);
-    hitbox.setOnCollision(
-        std::function<void(Entity * entity)>{[](Entity* entity) { std::cout << "Collision" << std::endl; }});
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{
+        [](Entity* entity, Entity* me) { std::cout << "Collision" << std::endl; }});
 
     player->addComponent(hitbox);
     player->addComponent(TransformComponent(x, y));
