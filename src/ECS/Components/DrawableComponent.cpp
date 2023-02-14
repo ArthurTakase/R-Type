@@ -23,7 +23,22 @@ DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int he
     , width_(width)
     , height_(height)
     , textureId_(textureId)
+    , scaleX_(1)
+    , scaleY_(1)
 {
+}
+
+DrawableComponent::DrawableComponent(
+    int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY)
+    : offsetX_(offsetX)
+    , offsetY_(offsetY)
+    , width_(width)
+    , height_(height)
+    , textureId_(textureId)
+    , scaleX_(scaleX)
+    , scaleY_(scaleY)
+{
+    sprite_.setScale(scaleX, scaleY);
 }
 
 DrawableComponent::DrawableComponent(const DrawableComponent& other) noexcept
@@ -33,6 +48,8 @@ DrawableComponent::DrawableComponent(const DrawableComponent& other) noexcept
     , height_(other.height_)
     , textureId_(other.textureId_)
     , sprite_(other.sprite_.getSpritePath(), other.sprite_.getX(), other.sprite_.getY())
+    , scaleX_(other.scaleX_)
+    , scaleY_(other.scaleY_)
 {
 }
 
@@ -154,4 +171,21 @@ Sprite& DrawableComponent::getSprite() noexcept
 Timer& DrawableComponent::getTimer() noexcept
 {
     return timer_;
+}
+
+void DrawableComponent::setScale(float x, float y) noexcept
+{
+    scaleX_ = x;
+    scaleY_ = y;
+    sprite_.setScale(x, y);
+}
+
+float DrawableComponent::getScaleX() const noexcept
+{
+    return scaleX_;
+}
+
+float DrawableComponent::getScaleY() const noexcept
+{
+    return scaleY_;
 }

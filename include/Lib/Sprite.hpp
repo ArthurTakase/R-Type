@@ -43,8 +43,7 @@ class Sprite
     void*              getTexture();
     void               setTextureRect(int xtexture, int ytexture, int width, int height);
     void               updatePosition();
-    void               setLimit(int limit);
-    int                getLimit() const;
+    void               setScale(float x, float y) noexcept;
 
   private:
     std::string spritePath;
@@ -52,5 +51,4 @@ class Sprite
     int         y;
     sf::Sprite  sprite;
     sf::Texture texture;
-    int         limit;
 };

@@ -86,8 +86,8 @@ void Server::gameLoop() noexcept
                     dataToSend.emplace_back(drawable->getTextureId());
                     dataToSend.emplace_back(drawable->getWidth());
                     dataToSend.emplace_back(drawable->getHeight());
-                    dataToSend.emplace_back(transform->getScaleX() * 10);
-                    dataToSend.emplace_back(transform->getScaleY() * 10);
+                    dataToSend.emplace_back(drawable->getScaleX() * 10);
+                    dataToSend.emplace_back(drawable->getScaleY() * 10);
                     dataToSend.emplace_back(drawable->getOffsetX());
                     dataToSend.emplace_back(drawable->getOffsetY());
                     dataToSend.emplace_back(entity->getId());
@@ -182,7 +182,7 @@ void Server::handleData(ReceivedInfos infos) noexcept
             auto entity = gameInstance_.getManager().getEntity(ent);
             if (!entity->hasComponent<InputComponent>()) continue;
             auto input = entity->getComponent<InputComponent>();
-            input->addInput(infos.data[0]);
+            for (auto& i : infos.data) { input->addInput((int)i); }
         }
     }
 

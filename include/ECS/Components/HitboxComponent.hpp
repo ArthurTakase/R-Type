@@ -31,11 +31,12 @@ class HitboxComponent : public IComponent
     void   setWidth(size_t width) noexcept;
     void   setHeight(size_t height) noexcept;
     void   setSize(size_t width, size_t height) noexcept;
-    void   setOnCollision(std::function<void(Entity*)> onCollision) noexcept;
-    void   onCollision(Entity* entity) const noexcept;
+    void   setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept;
+    void   onCollision(Entity* entity, Entity* me) const noexcept;
+    void   setSCale(float x, float y) noexcept;
 
   private:
-    size_t                       width_;
-    size_t                       height_;
-    std::function<void(Entity*)> onCollision_;
+    size_t                                width_;
+    size_t                                height_;
+    std::function<void(Entity*, Entity*)> onCollision_;
 };

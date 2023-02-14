@@ -45,6 +45,7 @@ class RType
     int createEnemy(int x, int y) noexcept;
     int createBackground(int x) noexcept;
     int createPlayerBullet(int x, int y) noexcept;
+    int createAsteroid(int x) noexcept;
 
   private:
     bool              looping_ = true;

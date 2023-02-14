@@ -70,9 +70,9 @@ void Game::deserializeEntity(GamePacket packet) noexcept
         int  x         = packet.xpositive ? packet.x : -(packet.x);
         int  y         = packet.ypositive ? packet.y : -(packet.y);
         auto transform = TransformComponent(x, y);
-        transform.setScale(packet.scaleX, packet.scaleY);
 
         auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
+        drawable.setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
         drawable.getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
         drawable.getSprite().setX(packet.x);
         drawable.getSprite().setY(packet.y);
@@ -87,7 +87,7 @@ void Game::deserializeEntity(GamePacket packet) noexcept
 
         transform->setX(packet.xpositive ? packet.x : -(packet.x));
         transform->setY(packet.ypositive ? packet.y : -(packet.y));
-        transform->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
+        drawable->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
         drawable->setOffsetX(packet.offsetX);
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);

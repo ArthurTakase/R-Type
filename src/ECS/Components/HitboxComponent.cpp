@@ -72,12 +72,18 @@ void HitboxComponent::setSize(size_t width, size_t height) noexcept
     height_ = height;
 }
 
-void HitboxComponent::setOnCollision(std::function<void(Entity*)> onCollision) noexcept
+void HitboxComponent::setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept
 {
     onCollision_ = onCollision;
 }
 
-void HitboxComponent::onCollision(Entity* entity) const noexcept
+void HitboxComponent::onCollision(Entity* entity, Entity* me) const noexcept
 {
-    onCollision_(entity);
+    onCollision_(entity, me);
+}
+
+void HitboxComponent::setSCale(float x, float y) noexcept
+{
+    width_  = width_ * x;
+    height_ = height_ * y;
 }

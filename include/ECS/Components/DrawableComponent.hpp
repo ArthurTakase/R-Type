@@ -21,6 +21,7 @@ class DrawableComponent : public IComponent
 {
   public:
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId);
+    DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY);
     ~DrawableComponent() noexcept = default;
     DrawableComponent(const DrawableComponent& other) noexcept;
     DrawableComponent(DrawableComponent&& other) noexcept = delete;
@@ -37,6 +38,9 @@ class DrawableComponent : public IComponent
     void    setOffsetY(int offsetY) noexcept;
     void    setWidth(int width) noexcept;
     void    setHeight(int height) noexcept;
+    void    setScale(float x, float y) noexcept;
+    float   getScaleX() const noexcept;
+    float   getScaleY() const noexcept;
     void    setTextureId(int textureId) noexcept;
     Sprite& getSprite() noexcept;
     Timer&  getTimer() noexcept;
@@ -47,6 +51,8 @@ class DrawableComponent : public IComponent
     int    width_;
     int    height_;
     int    textureId_;
+    float  scaleX_;
+    float  scaleY_;
     Sprite sprite_;
     Timer  timer_;
 };
