@@ -29,5 +29,7 @@ set(
 # Merge
 add_library(${PROJECT_NAME} ${ECS_SRC})
 
+target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
+
 # Ajouter ici les dossiers contenants les .hpp de l'exec de l'ECS
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

@@ -39,7 +39,11 @@ set(SERVER_DIR src/Server)
 
 set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/Server.cpp
-  ${SERVER_DIR}/Game.cpp
+  ${SERVER_DIR}/RType.cpp
+  ${SERVER_DIR}/RType/Asteroid.cpp
+  ${SERVER_DIR}/RType/Enemy_1.cpp
+  ${SERVER_DIR}/RType/Misc.cpp
+  ${SERVER_DIR}/RType/Player.cpp
 )
 
 add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})
