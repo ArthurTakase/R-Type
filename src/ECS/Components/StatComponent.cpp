@@ -14,9 +14,8 @@
  * @param life The life of the entity.
  * @param damage The damage of the entity.
  */
-StatComponent::StatComponent(int life, int damage)
-    : life_(life)
-    , damage_(damage)
+StatComponent::StatComponent(std::vector<float> stats)
+    : stats(stats)
 {
 }
 
@@ -25,42 +24,14 @@ StatComponent::StatComponent(int life, int damage)
  */
 StatComponent::~StatComponent() noexcept {}
 
-/**
- * It returns the value of the private member _life
- *
- * @return The life of the entity.
- */
-int StatComponent::getLife() const noexcept
+float StatComponent::getStat(int index) const noexcept
 {
-    return life_;
+    if (index >= stats.size()) { return NO_INDEX; }
+    return stats[index];
 }
 
-/**
- * It returns the value of the private attribute _damage
- *
- * @return The damage of the entity.
- */
-int StatComponent::getDamage() const noexcept
+void StatComponent::setStat(int index, float value) noexcept
 {
-    return damage_;
-}
-
-/**
- * It sets the value of the private member _life
- *
- * @param life The life of the entity.
- */
-void StatComponent::setLife(int life) noexcept
-{
-    life_ = life;
-}
-
-/**
- * It sets the value of the private attribute _damage
- *
- * @param damage The damage of the entity.
- */
-void StatComponent::setDamage(int damage) noexcept
-{
-    damage_ = damage;
+    while (index >= stats.size()) { stats.push_back(0); }
+    stats[index] = value;
 }

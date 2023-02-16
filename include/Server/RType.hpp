@@ -18,6 +18,8 @@
 
 typedef enum Input { LeftArrow = 71, RightArrow = 72, UpArrow = 73, DownArrow = 74, Space = 57, Shift = 38 } Input;
 
+typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
+
 /**
  * @brief Game Instance for the server
  *
@@ -44,9 +46,9 @@ class RType
     int createPlayer(int x, int y) noexcept;
     int createEnemy(int x, int y) noexcept;
     int createBackground(int x) noexcept;
-    int createPlayerBullet(int x, int y, int damage, float speed, float size) noexcept;
+    int createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
     int createAsteroid(int x) noexcept;
-    int createEnemyBullet(int x, int y, int damage, float speed, float size, bool type) noexcept;
+    int createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
 
     int curve(int center, int amplitude, int period, int x) noexcept;
 

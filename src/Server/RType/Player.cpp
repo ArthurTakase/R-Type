@@ -51,7 +51,7 @@ int RType::createPlayer(int x, int y) noexcept
     player->addComponent(DrawableComponent(0, 0, 16, 16, 1));
     player->addComponent(AnimationComponent(128, 0.1));
     player->addComponent(TransformComponent(x, y));
-    player->addComponent(StatComponent(100, 5));
+    player->addComponent(StatComponent({100, 5}));
     player->addComponent(MouvementComponent(0, 0, 3.0));
     player->addComponent(InputComponent());
     player->addComponent(DestroyableComponent());
@@ -59,7 +59,7 @@ int RType::createPlayer(int x, int y) noexcept
     return player->getId();
 }
 
-int RType::createPlayerBullet(int x, int y, int damage, float speed, float size) noexcept
+int RType::createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept
 {
     auto bullet = entityManager_.newEntity();
 
@@ -71,7 +71,9 @@ int RType::createPlayerBullet(int x, int y, int damage, float speed, float size)
             auto statMe = me->getComponent<StatComponent>();
             auto destMe = me->getComponent<DestroyableComponent>();
 
-            stat->setLife(stat->getLife() - statMe->getDamage());
+            auto life = stat->getStat(RTypeStats::Life);
+            auto dmg  = statMe->getStat(RTypeStats::Damage);
+            stat->setStat(RTypeStats::Life, life - dmg);
             destMe->destroy();
         }
     }});
@@ -91,7 +93,7 @@ int RType::createPlayerBullet(int x, int y, int damage, float speed, float size)
     bullet->addComponent(DrawableComponent(0, 0, 16, 16, 3, size, size));
     bullet->addComponent(AnimationComponent(32, 0.1));
     bullet->addComponent(DestroyableComponent());
-    bullet->addComponent(StatComponent(1, damage));
+    bullet->addComponent(StatComponent({1, damage}));
 
     return bullet->getId();
 }

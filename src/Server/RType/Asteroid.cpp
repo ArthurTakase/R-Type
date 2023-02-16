@@ -24,14 +24,14 @@ int RType::createAsteroid(int x) noexcept
         auto mouv  = entity->getComponent<MouvementComponent>();
         auto draw  = entity->getComponent<DrawableComponent>();
 
-        if (trans->getX() <= -16 || stat->getLife() <= 0) {
+        if (trans->getX() <= -16 || stat->getStat(RTypeStats::Life) <= 0) {
             scale = (float)(rand() % 20) / 10 + 1;
             speed = (float)(rand() % 25) / 10 + 5;
 
             mouv->setSpeed(speed);
             trans->setX(255);
             trans->setY((rand() % 239));
-            stat->setLife(25 * scale);
+            stat->setStat(RTypeStats::Life, 25 * scale);
             draw->setScale(scale, scale);
         }
     }});
@@ -46,7 +46,9 @@ int RType::createAsteroid(int x) noexcept
             auto meMouv    = me->getComponent<MouvementComponent>();
             auto meDraw    = me->getComponent<DrawableComponent>();
 
-            otherStat->setLife(otherStat->getLife() - meStat->getDamage());
+            auto life   = otherStat->getStat(RTypeStats::Life);
+            auto damage = meStat->getStat(RTypeStats::Damage);
+            otherStat->setStat(RTypeStats::Life, life - damage);
 
             scale = (float)(rand() % 20) / 10 + 1;
             speed = (float)(rand() % 25) / 10 + 5;
@@ -54,7 +56,7 @@ int RType::createAsteroid(int x) noexcept
             meMouv->setSpeed(speed);
             meTrans->setX(255);
             meTrans->setY((rand() % 239));
-            meStat->setLife(25 * scale);
+            meStat->setStat(RTypeStats::Life, 25 * scale);
             meDraw->setScale(scale, scale);
         }
     }});
@@ -69,7 +71,7 @@ int RType::createAsteroid(int x) noexcept
     asteroid->addComponent(AnimationComponent(128, 0.1));
     asteroid->addComponent(MouvementComponent(-1, 0, speed));
     asteroid->addComponent(DestroyableComponent());
-    asteroid->addComponent(StatComponent(25 * scale, 2));
+    asteroid->addComponent(StatComponent({25 * scale, 2}));
 
     return asteroid->getId();
 }

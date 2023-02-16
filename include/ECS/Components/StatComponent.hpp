@@ -8,6 +8,9 @@
 #pragma once
 
 #include <ECS/Components/IComponent.hpp>
+#include <vector>
+
+#define NO_INDEX -10000
 
 /**
  * @brief Component used to store the stats of an entity
@@ -15,7 +18,7 @@
 class StatComponent : public IComponent
 {
   public:
-    StatComponent(int life, int damage);
+    StatComponent(std::vector<float> stats);
     ~StatComponent() noexcept;
     StatComponent(const StatComponent& other) noexcept = default;
     StatComponent(StatComponent&& other) noexcept      = delete;
@@ -23,12 +26,9 @@ class StatComponent : public IComponent
     StatComponent& operator=(const StatComponent& rhs) noexcept = delete;
     StatComponent& operator=(StatComponent&& rhs) noexcept      = delete;
 
-    int  getLife() const noexcept;
-    int  getDamage() const noexcept;
-    void setLife(int life) noexcept;
-    void setDamage(int damage) noexcept;
+    float getStat(int index) const noexcept;
+    void  setStat(int index, float value) noexcept;
 
   private:
-    int life_;
-    int damage_;
+    std::vector<float> stats;
 };
