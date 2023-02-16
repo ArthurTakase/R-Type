@@ -6,6 +6,7 @@
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
+#include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 

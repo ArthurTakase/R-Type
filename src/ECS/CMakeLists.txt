@@ -18,6 +18,7 @@ set(
   Components/AnimationComponent.cpp
   Components/InputComponent.cpp
   Components/DestroyableComponent.cpp
+  Components/TimerComponent.cpp
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp

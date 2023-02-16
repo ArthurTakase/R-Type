@@ -6,6 +6,7 @@
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
+#include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Curve.hpp>
@@ -13,8 +14,7 @@
 
 int RType::createEnemy(int x, int y) noexcept
 {
-    auto  enemy = entityManager_.newEntity();
-    Timer timer(0.5);
+    auto enemy = entityManager_.newEntity();
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(
@@ -22,18 +22,22 @@ int RType::createEnemy(int x, int y) noexcept
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, y](Entity* entity) {
-        auto dest  = entity->getComponent<DestroyableComponent>();
-        auto stat  = entity->getComponent<StatComponent>();
-        auto trans = entity->getComponent<TransformComponent>();
+        auto  dest  = entity->getComponent<DestroyableComponent>();
+        auto  stat  = entity->getComponent<StatComponent>();
+        auto  trans = entity->getComponent<TransformComponent>();
+        auto& timer = entity->getComponent<TimerComponent>()->getTimer();
 
         trans->setY(y - (Tools::curve(20, 0.05, trans->getX())));
         // bulletSpeed += 0.01;
 
         // std::cout << (int)timer.getElapsedTime() << " " << bulletSpeed << std::endl;
 
-        // if (timer.isOver()) {
-        // createEnemyBullet(trans->getX(), trans->getY(), bulletDamage, bulletSpeed, bulletSize, rand() % 2 == 0);
-        // }
+        if (timer.isOver()) {
+            auto bDamage = stat->getStat(RTypeStats::Damage);
+            auto bSpeed  = stat->getStat(RTypeStats::Speed);
+            auto bSize   = stat->getStat(RTypeStats::Size);
+            createEnemyBullet(trans->getX(), trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
+        }
         if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
         if (trans->getX() <= -16) { trans->setX(255); }
     }});
@@ -44,6 +48,7 @@ int RType::createEnemy(int x, int y) noexcept
     enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent({30, 2, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
+    enemy->addComponent(TimerComponent(0.5));
     enemy->addComponent(hitbox);
     enemy->addComponent(behavior);
 
