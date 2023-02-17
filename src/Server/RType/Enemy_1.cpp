@@ -27,19 +27,17 @@ int RType::createEnemy(int x, int y) noexcept
         auto  trans = entity->getComponent<TransformComponent>();
         auto& timer = entity->getComponent<TimerComponent>()->getTimer();
 
-        trans->setY(y - (Tools::curve(20, 0.05, trans->getX())));
-        // bulletSpeed += 0.01;
-
-        // std::cout << (int)timer.getElapsedTime() << " " << bulletSpeed << std::endl;
+        auto x = trans->getX();
+        trans->setY(y - (Tools::curve(20, 0.05, x)));
 
         if (timer.isOver()) {
             auto bDamage = stat->getStat(RTypeStats::Damage);
             auto bSpeed  = stat->getStat(RTypeStats::Speed);
             auto bSize   = stat->getStat(RTypeStats::Size);
-            createEnemyBullet(trans->getX(), trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
+            createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
         if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
-        if (trans->getX() <= -16) { trans->setX(255); }
+        if (x <= -16) { trans->setX(255); }
     }});
 
     enemy->addComponent(DrawableComponent(0, 0, 16, 16, 2));
@@ -48,7 +46,7 @@ int RType::createEnemy(int x, int y) noexcept
     enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent({30, 2, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
-    enemy->addComponent(TimerComponent(0.5));
+    enemy->addComponent(TimerComponent(0.8));
     enemy->addComponent(hitbox);
     enemy->addComponent(behavior);
 

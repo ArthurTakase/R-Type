@@ -61,10 +61,13 @@ void HitboxSystem::checkCollision(Entity* entity) const
         auto otherHitbox = other.get()->getComponent<HitboxComponent>();
         auto otherPos    = other.get()->getComponent<TransformComponent>();
 
-        if (pos->getX() + hitbox->getWidth() >= otherPos->getX()
-            && pos->getX() <= otherPos->getX() + otherHitbox->getWidth()
-            && pos->getY() + hitbox->getHeight() >= otherPos->getY()
-            && pos->getY() <= otherPos->getY() + otherHitbox->getHeight()) {
+        auto x      = pos->getX();
+        auto y      = pos->getY();
+        auto otherX = otherPos->getX();
+        auto otherY = otherPos->getY();
+
+        if (x + hitbox->getWidth() >= otherX && x <= otherX + otherHitbox->getWidth()
+            && y + hitbox->getHeight() >= otherY && y <= otherY + otherHitbox->getHeight()) {
             entity->getComponent<HitboxComponent>()->onCollision(other.get(), entity);
         }
     }

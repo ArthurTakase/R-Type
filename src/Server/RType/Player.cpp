@@ -27,6 +27,8 @@ int RType::createPlayer(int x, int y) noexcept
         auto  stat  = entity->getComponent<StatComponent>();
         auto& timer = entity->getComponent<TimerComponent>()->getTimer();
         int   lastInput;
+        auto  x = trans->getX();
+        auto  y = trans->getY();
 
         while ((lastInput = input->getInput()) != -1) {
             if (lastInput == Input::LeftArrow) { mouv->setDir(-1, 0); }
@@ -40,10 +42,15 @@ int RType::createPlayer(int x, int y) noexcept
                     auto bulletDamage = stat->getStat(RTypeStats::Damage);
                     auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
                     auto bulletSize   = stat->getStat(RTypeStats::Size);
-                    createPlayerBullet(trans->getX(), trans->getY(), bulletDamage, bulletSpeed * dir, bulletSize);
+                    createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
                 }
             }
         }
+
+        auto next_x = x + mouv->getDirX() * mouv->getSpeed();
+        auto next_y = y + mouv->getDirY() * mouv->getSpeed();
+        if (next_x >= 239 || next_x <= 0) mouv->setDirX(0);
+        if (next_y >= 239 || next_y <= 0) mouv->setDirY(0);
     }});
 
     player->addComponent(hitbox);
@@ -84,7 +91,8 @@ int RType::createPlayerBullet(int x, int y, float damage, float speed, float siz
         auto trans = entity->getComponent<TransformComponent>();
         auto dest  = entity->getComponent<DestroyableComponent>();
 
-        if (trans->getX() >= 255 || trans->getX() <= -16) { dest->destroy(); }
+        auto x = trans->getX();
+        if (x >= 255 || x <= -16) { dest->destroy(); }
     }});
 
     bullet->addComponent(hitbox);
