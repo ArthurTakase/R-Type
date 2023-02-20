@@ -158,7 +158,12 @@ void Server::handleData(ReceivedInfos infos) noexcept
                     if (!entity->hasComponent<DestroyableComponent>()) continue;
                     entity->getComponent<DestroyableComponent>()->destroy();
                 }
+                player.entities_id.clear();
             }
+            players_.erase(std::remove_if(players_.begin(),
+                               players_.end(),
+                               [&infos](const Player& player) { return (infos.address == player.address); }),
+                players_.end());
         }
     }
 

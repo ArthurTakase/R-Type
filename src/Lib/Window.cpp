@@ -16,7 +16,7 @@ Window::Window() noexcept {}
 void Window::open(int width, int height, const std::string& title)
 {
     window.create(sf::VideoMode(width, height), title);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
 }
 
 /**
