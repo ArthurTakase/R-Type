@@ -76,22 +76,8 @@ void Server::gameLoop() noexcept
                 for (auto& entity : entities) {
                     if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
 
-                    auto drawable    = entity->getComponent<DrawableComponent>();
-                    auto transform   = entity->getComponent<TransformComponent>();
-                    auto destroyable = entity->getComponent<DestroyableComponent>();
-                    dataToSend.emplace_back(transform->getX() > 0 ? transform->getX() : -transform->getX());
-                    dataToSend.emplace_back(transform->getX() > 0 ? 1 : 0);
-                    dataToSend.emplace_back(transform->getY() > 0 ? transform->getY() : -transform->getY());
-                    dataToSend.emplace_back(transform->getY() > 0 ? 1 : 0);
-                    dataToSend.emplace_back(drawable->getTextureId());
-                    dataToSend.emplace_back(drawable->getWidth());
-                    dataToSend.emplace_back(drawable->getHeight());
-                    dataToSend.emplace_back(drawable->getScaleX() * 10);
-                    dataToSend.emplace_back(drawable->getScaleY() * 10);
-                    dataToSend.emplace_back(drawable->getOffsetX());
-                    dataToSend.emplace_back(drawable->getOffsetY());
-                    dataToSend.emplace_back(entity->getId());
-                    destroyable ? dataToSend.emplace_back(destroyable->getDestroyed()) : dataToSend.emplace_back(0);
+                    RawData serializedData = Serializer::serialize(entity);
+                    dataToSend.insert(dataToSend.end(), serializedData.begin(), serializedData.end());
                 }
 
                 if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }

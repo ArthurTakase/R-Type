@@ -9,6 +9,7 @@
 
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
+#include <Serializer/Serializer.hpp>
 #include <Server/RType.hpp>
 #include <memory>
 #include <thread>

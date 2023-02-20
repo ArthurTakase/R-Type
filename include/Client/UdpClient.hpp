@@ -10,6 +10,7 @@
 #include <Client/Game.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
+#include <Serializer/Deserializer.hpp>
 #include <memory>
 #include <thread>
 
@@ -50,7 +51,7 @@ class UdpClient
     Game                            game_;
 
     static constexpr int CLOSE_VALUE = 255;
-    static constexpr int PACKET_SIZE = 13;
+    static constexpr int PACKET_SIZE = 15;
 
     // methods
     void    receive();

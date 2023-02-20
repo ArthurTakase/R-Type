@@ -30,6 +30,7 @@ add_subdirectory(src/Error)
 add_subdirectory(src/NetworkLib)
 add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
+add_subdirectory(src/Serializer)
 
 # ------------------------------
 # Server
@@ -56,6 +57,7 @@ target_link_libraries(${RTYPE_SERVER} Error)
 target_link_libraries(${RTYPE_SERVER} NetworkLib)
 target_link_libraries(${RTYPE_SERVER} ECSEncapsulation)
 target_link_libraries(${RTYPE_SERVER} CMakeSFMLProject)
+target_link_libraries(${RTYPE_SERVER} Serializer)
 
 set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
 target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
@@ -82,6 +84,7 @@ target_link_libraries(${RTYPE_CLIENT} Error)
 target_link_libraries(${RTYPE_CLIENT} NetworkLib)
 target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
 target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
+target_link_libraries(${RTYPE_SERVER} Serializer)
 
 target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
@@ -140,4 +143,3 @@ if(DEFINED TESTS)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googletest/include)
   target_include_directories(${TEST_BUILD} PRIVATE ${CMAKE_BINARY_DIR}/googletest-src/googlemock/include)
 endif()
-  

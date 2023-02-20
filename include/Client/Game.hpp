@@ -11,26 +11,8 @@
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <Lib/Lib.hpp>
+#include <Serializer/BitSize.hpp>
 #include <queue>
-
-/**
- * @brief This struct is used to process the data received from the server.
- */
-struct GamePacket {
-    int x;
-    int xpositive;
-    int y;
-    int ypositive;
-    int idSprite;
-    int width;
-    int height;
-    int scaleX;
-    int scaleY;
-    int offsetX;
-    int offsetY;
-    int id;
-    int destroy;
-};
 
 /**
  * @brief This class is used to create a game instance in the client.
@@ -57,5 +39,5 @@ class Game
     DrawableSystem          drawableSystem_;
     DestroyableSystem       destroyableSystem_;
 
-    void deserializeEntity(GamePacket packet) noexcept;
+    void updateOrCreateEntity(GamePacket packet) noexcept;
 };

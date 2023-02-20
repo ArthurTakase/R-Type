@@ -14,9 +14,8 @@
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
+#include <Serializer/BitSize.hpp>
 #include <memory>
-
-typedef enum Input { LeftArrow = 71, RightArrow = 72, UpArrow = 73, DownArrow = 74, Space = 57, Shift = 38 } Input;
 
 typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
 
@@ -30,10 +29,10 @@ class RType
     RType();
     ~RType() noexcept;
     RType(const RType& other) noexcept = delete;
-    RType(RType&& other) noexcept      = default;
+    RType(RType&& other) noexcept      = delete;
 
     RType& operator=(const RType& rhs) noexcept = delete;
-    RType& operator=(RType&& rhs) noexcept      = default;
+    RType& operator=(RType&& rhs) noexcept      = delete;
 
     void            run() noexcept;
     void            reset() noexcept;

@@ -35,7 +35,7 @@ void Game::run() noexcept
         std::lock_guard<std::mutex> lock(mutexForPacket_);
         while (!dataReceived_.empty()) {
             auto& packet = dataReceived_.front();
-            deserializeEntity(packet);
+            updateOrCreateEntity(packet);
             dataReceived_.pop();
         }
     }
@@ -60,39 +60,37 @@ Lib& Game::getLib() noexcept
  *
  * @param packet the packet received from the server
  */
-void Game::deserializeEntity(GamePacket packet) noexcept
+void Game::updateOrCreateEntity(GamePacket packet) noexcept
 {
     auto m_entity = manager_.getEntity(packet.id);
 
     if (m_entity == nullptr) {
         auto entity = manager_.newEntity();
 
-        int  x         = packet.xpositive ? packet.x : -(packet.x);
-        int  y         = packet.ypositive ? packet.y : -(packet.y);
-        auto transform = TransformComponent(x, y);
+        auto transform = TransformComponent(packet.x, packet.y);
 
         auto drawable = DrawableComponent(packet.offsetX, packet.offsetY, packet.width, packet.height, packet.idSprite);
-        drawable.setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
+        drawable.setScale(packet.scaleX, packet.scaleY);
         drawable.getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
         drawable.getSprite().setX(packet.x);
         drawable.getSprite().setY(packet.y);
 
         entity->addComponent(transform);
         entity->addComponent(drawable);
-        entity->addComponent(DestroyableComponent(packet.destroy));
+        entity->addComponent(DestroyableComponent(packet.destroyed));
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
         auto destroy   = m_entity->getComponent<DestroyableComponent>();
 
-        transform->setX(packet.xpositive ? packet.x : -(packet.x));
-        transform->setY(packet.ypositive ? packet.y : -(packet.y));
-        drawable->setScale(static_cast<float>(packet.scaleX / 10), static_cast<float>(packet.scaleY / 10));
+        transform->setX(packet.x);
+        transform->setY(packet.y);
+        drawable->setScale(packet.scaleX, packet.scaleY);
         drawable->setOffsetX(packet.offsetX);
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
         drawable->setTextureId(packet.idSprite);
-        if (packet.destroy) destroy->destroy();
+        if (packet.destroyed) destroy->destroy();
     }
 }
