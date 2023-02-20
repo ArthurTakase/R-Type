@@ -136,6 +136,7 @@ if(DEFINED TESTS)
   target_link_libraries(${TEST_BUILD} NetworkLib)
   target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
   target_link_libraries(${TEST_BUILD} ECSEncapsulation)
+  target_link_libraries(${TEST_BUILD} Serializer)
   target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
   
   # Includes
