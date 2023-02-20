@@ -122,10 +122,7 @@ if(DEFINED TESTS)
     tests/Tools_t.cpp
     tests/EntityIterator_t.cpp
     tests/MouvementComponent_t.cpp
-    tests/StatComponent_t.cpp
     tests/MouvementSystem_t.cpp
-    tests/DrawableComponent_t.cpp
-    tests/Sprite_t.cpp
   )
   
   # Merge

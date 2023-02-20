@@ -57,9 +57,9 @@ void RType::init() noexcept
 {
     createBackground(0);
     createBackground(255);
-    // createAsteroid(255);
-    // createAsteroid(300);
-    // createAsteroid(200);
+    createAsteroid(255);
+    createAsteroid(300);
+    createAsteroid(200);
     createEnemy(255, 120);
     createEnemy(300, 200);
     createEnemy(200, 50);
