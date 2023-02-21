@@ -31,11 +31,11 @@ class Server
     explicit Server(Address::Port port);
 
     Server(const Server& other) noexcept = delete;
-    Server(Server&& other) noexcept      = default;
+    Server(Server&& other) noexcept      = delete;
     ~Server() noexcept                   = default;
 
     Server& operator=(const Server& rhs) noexcept = delete;
-    Server& operator=(Server&& rhs) noexcept      = default;
+    Server& operator=(Server&& rhs) noexcept      = delete;
 
     void run();
     void stop() noexcept;
