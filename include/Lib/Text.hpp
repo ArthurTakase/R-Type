@@ -15,7 +15,7 @@ class Text
     Text();
     Text(const std::string& text, const std::string& fontPath, int fontSize, int x, int y);
     ~Text() noexcept                 = default;
-    Text(const Text& other) noexcept = delete;
+    Text(const Text& other) noexcept = default;
     Text(Text&& other) noexcept      = delete;
 
     Text& operator=(const Text& rhs) noexcept = delete;
