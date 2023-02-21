@@ -15,7 +15,11 @@ TextComponent::TextComponent(const std::string& text, const std::string& fontPat
 }
 
 TextComponent::TextComponent(const TextComponent& other) noexcept
-    : text_(other.text_)
+    : text_(other.text_.getTextString(),
+        other.text_.getFontPath(),
+        other.text_.getFontSize(),
+        other.text_.getX(),
+        other.text_.getY())
 {
 }
 

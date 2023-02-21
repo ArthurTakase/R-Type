@@ -76,6 +76,7 @@ set(CLIENT_DIR src/Client)
 set(RTYPE_CLIENT_SRC
   ${CLIENT_DIR}/UdpClient.cpp
   ${CLIENT_DIR}/Game.cpp
+  ${CLIENT_DIR}/Menu.cpp
 )
 
 add_executable(${RTYPE_CLIENT} ${CLIENT_DIR}/main.cpp ${RTYPE_CLIENT_SRC})

@@ -8,6 +8,7 @@
 #pragma once
 
 #include <Lib/Sprite.hpp>
+#include <Lib/Text.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -38,6 +39,7 @@ class Window
     bool isOpen();
     int  getKeyPressed();
     void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height);
+    void draw(Text& text);
 
   private:
     sf::RenderWindow window;
