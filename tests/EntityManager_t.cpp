@@ -7,12 +7,30 @@
 
 #include <gtest/gtest.h>
 
-#include "EntityManager.hpp"
+#include <ECS/Entity/EntityManager.hpp>
+
+void createPlayer_m(int x, int y, EntityManager* manager)
+{
+    auto player = manager->newEntity();
+
+    auto hitbox = HitboxComponent(15, 21);
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{
+        [](Entity* entity, Entity* me) { std::cout << "Collision" << std::endl; }});
+
+    player->addComponent(hitbox);
+    player->addComponent(TransformComponent(x, y));
+}
+
+void createEnemy_m(int x, int y, EntityManager* manager)
+{
+    auto enemy = manager->newEntity();
+    enemy->addComponent(TransformComponent(x, y));
+}
 
 TEST(EntityManager_, createPlayer)
 {
     auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
+    createPlayer_m(100, 100, manager.get());
     auto player = manager->getEntity(0);
     EXPECT_TRUE(player->getComponent<TransformComponent>());
     EXPECT_TRUE(player->getComponent<HitboxComponent>());
@@ -21,7 +39,7 @@ TEST(EntityManager_, createPlayer)
 TEST(EntityManager_, createEnemy)
 {
     auto manager = std::make_unique<EntityManager>();
-    manager->createEnemy();
+    createEnemy_m(100, 100, manager.get());
     auto enemy = manager->getEntity(0);
     EXPECT_TRUE(enemy->getComponent<TransformComponent>());
     EXPECT_FALSE(enemy->getComponent<HitboxComponent>());
@@ -30,14 +48,14 @@ TEST(EntityManager_, createEnemy)
 TEST(EntityManager_, removeEntity)
 {
     auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
     EXPECT_EQ(manager->getEntities().size(), 8);
     manager->removeEntity(0);
     manager->removeEntity(2);
@@ -51,14 +69,14 @@ TEST(EntityManager_, removeEntity)
 TEST(EntityManager_, getEntity)
 {
     auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
     EXPECT_EQ(manager->getEntity(0)->getId(), 0);
     EXPECT_EQ(manager->getEntity(1)->getId(), 1);
     EXPECT_FALSE(manager->getEntity(20));
@@ -68,13 +86,13 @@ TEST(EntityManager_, getEntity)
 TEST(EntityManager_, getEntities)
 {
     auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
-    manager->createPlayer();
-    manager->createEnemy();
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
+    createPlayer_m(100, 100, manager.get());
+    createEnemy_m(100, 100, manager.get());
     EXPECT_EQ(manager->getEntities().size(), 8);
 }

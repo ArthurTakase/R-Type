@@ -6,14 +6,14 @@
 */
 
 #pragma once
+
+#include <ECS/Components/IComponent.hpp>
+#include <Tools/InstanceOf.hpp>
 #include <cstddef>
 #include <memory>
 #include <optional>
 #include <type_traits>
 #include <vector>
-
-#include "IComponent.hpp"
-#include "InstanceOf.hpp"
 
 /**
  * @brief Entity part of the ECS. It can be linked to many components to add attributes to it. No variable must be
@@ -60,7 +60,7 @@ class Entity
     T* getComponent() noexcept
     {
         for (auto& i : components_) {
-            if (Type::instanceOf<T>(i.get())) { return dynamic_cast<T*>(i.get()); }
+            if (Tools::instanceOf<T>(i.get())) { return dynamic_cast<T*>(i.get()); }
         }
         return nullptr;
     };
@@ -76,7 +76,7 @@ class Entity
     bool removeComponent() noexcept
     {
         for (size_t i = 0; i < components_.size(); i++) {
-            if (Type::instanceOf<T>(components_[i].get())) {
+            if (Tools::instanceOf<T>(components_[i].get())) {
                 components_.erase(components_.begin() + i);
                 return true;
             }
@@ -95,7 +95,7 @@ class Entity
     bool hasComponent() noexcept
     {
         for (auto& i : components_)
-            if (Type::instanceOf<T>(i.get())) { return true; }
+            if (Tools::instanceOf<T>(i.get())) { return true; }
         return false;
     };
 

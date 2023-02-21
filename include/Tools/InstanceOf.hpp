@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace Type
+namespace Tools
 {
 
 /**

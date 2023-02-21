@@ -5,8 +5,7 @@
 ** Entity.cpp
 */
 
-#include "Entity.hpp"
-
+#include <ECS/Entity/Entity.hpp>
 #include <iostream>
 
 /**

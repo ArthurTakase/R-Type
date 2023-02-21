@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Window.hpp"
+#include <Lib/Window.hpp>
 
 /**
  * @brief This class is used to create a library.

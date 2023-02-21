@@ -1,23 +1,27 @@
 #pragma once
 
-#include "IDeserializer.hpp"
-
 /**
  * @brief Object used to deserialize objects for network
  */
-class Deserializer : public IDeserializer
+
+#include <NetworkLib/ISocket.hpp>
+#include <Serializer/BitSize.hpp>
+#include <bitset>
+#include <memory>
+
+class Deserializer
 {
   public:
-    Deserializer()                   = default;
-    virtual ~Deserializer() noexcept = default;
+    Deserializer() noexcept                          = delete;
+    Deserializer(const Deserializer& other) noexcept = delete;
+    Deserializer(Deserializer&& other) noexcept      = delete;
+    ~Deserializer() noexcept                         = delete;
 
-    Deserializer(const Deserializer& other)                = delete;
-    Deserializer(Deserializer&& other) noexcept            = delete;
-    Deserializer& operator=(const Deserializer& other)     = delete;
-    Deserializer& operator=(Deserializer&& other) noexcept = delete;
+    Deserializer& operator=(const Deserializer& rhs) noexcept = delete;
+    Deserializer& operator=(Deserializer&& rhs) noexcept      = delete;
 
-    EntityInfo Deserialize(std::bitset<ENTITYSIZE> data) const;
-    int        Deserialize(std::bitset<INPUTSIZE>) const;
+    static GamePacket deserialize(std::vector<unsigned char, std::allocator<unsigned char>>& data);
+    static int        deserializeSingleValue(std::vector<unsigned char, std::allocator<unsigned char>>& data);
 
   protected:
   private:

@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include "EntityIterator.hpp"
-#include "EntityManager.hpp"
-#include "MouvementComponent.hpp"
-#include "TransformComponent.hpp"
+#include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <Tools/EntityIterator.hpp>
 
 /**
  * @brief A system that will update the position of the entities that have a TransformComponent and a
@@ -19,7 +19,7 @@
 class MouvementSystem
 {
   public:
-    MouvementSystem(std::unique_ptr<EntityManager>& manager) noexcept;
+    MouvementSystem(EntityManager* manager) noexcept;
     ~MouvementSystem() noexcept                            = default;
     MouvementSystem(const MouvementSystem& other) noexcept = delete;
     MouvementSystem(MouvementSystem&& other) noexcept      = delete;
@@ -31,5 +31,5 @@ class MouvementSystem
 
   private:
     EntityIterator<TransformComponent, MouvementComponent> it_;
-    std::unique_ptr<EntityManager>&                        manager_;
+    EntityManager*                                         manager_;
 };

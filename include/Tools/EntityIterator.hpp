@@ -7,9 +7,8 @@
 
 #pragma once
 
+#include <ECS/Entity/Entity.hpp>
 #include <vector>
-
-#include "Entity.hpp"
 
 /**
  * @brief A template class that is used to iterate over entities that have a certain set of components.
@@ -33,14 +32,26 @@ class EntityIterator
         return *this;
     };
 
-    std::unique_ptr<Entity>& get() { return it[idx]; }
+    EntityIterator& operator--()
+    {
+        --idx;
+        skip();
+        return *this;
+    };
 
-    int                                   idx = 0;
-    std::vector<std::unique_ptr<Entity>>& it;
+    Entity* get() { return it[idx].get(); }
 
     bool isEnd() { return idx >= it.size(); }
 
-    void reset() { idx = 0; }
+    void reset()
+    {
+        idx = 0;
+        skip();
+    }
+
+  public:
+    int                                   idx = 0;
+    std::vector<std::unique_ptr<Entity>>& it;
 
   private:
     void skip()

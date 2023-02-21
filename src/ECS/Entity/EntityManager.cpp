@@ -5,68 +5,15 @@
 ** EntityManager.cpp
 */
 
-#include "EntityManager.hpp"
-
+#include <ECS/Entity/EntityManager.hpp>
+#include <Lib/Sprite.hpp>
+#include <Lib/Timer.hpp>
 #include <iostream>
-
-#include "Sprite.hpp"
 
 /**
  * `EntityManager::EntityManager()` is the constructor for the `EntityManager` class
  */
 EntityManager::EntityManager() {}
-
-/**
- * It creates a new entity, adds a position component and a hitbox component to it, and then adds it to
- * the entity manager
- */
-void EntityManager::createPlayer() noexcept
-{
-    // TODO add components before add Entity to list
-    std::unique_ptr<Entity> player = std::make_unique<Entity>(createId());
-
-    player->addComponent(TransformComponent(10, 8));
-    player->addComponent(HitboxComponent(15, 21));
-    player->addComponent(StatComponent(100, 5));
-    player->addComponent(MouvementComponent(0, 0, 1.0));
-    player->getComponent<HitboxComponent>()->setOnCollision(std::function<void(std::unique_ptr<Entity> & entity)>{
-        [](std::unique_ptr<Entity>& entity) { std::cout << "Collision" << std::endl; }});
-    player->addComponent(DrawableComponent(0, 0, 36, 36, 5));
-    entities_.emplace_back(std::move(player));
-}
-
-/**
- * It creates an entity, adds a position component to it, and then adds it to the entity manager
- */
-void EntityManager::createEnemy() noexcept
-{
-    std::unique_ptr<Entity> ennemy = std::make_unique<Entity>(createId());
-
-    ennemy->addComponent(TransformComponent(10, 8));
-    ennemy->addComponent(DrawableComponent(0, 0, 10, 10, 5));
-    entities_.emplace_back(std::move(ennemy));
-}
-
-/**
- * It creates an entity, adds a position component to it, and then adds it to the entity manager
- */
-void EntityManager::createBackground(int x) noexcept
-{
-    std::unique_ptr<Entity> background        = std::make_unique<Entity>(createId());
-    auto                    behaviorComponent = BehaviorComponent();
-    behaviorComponent.setOnUpdate(
-        std::function<void(int key, std::unique_ptr<Entity>& entity)>{[](int key, std::unique_ptr<Entity>& entity) {
-            auto transform = entity->getComponent<TransformComponent>();
-
-            if (transform->getX() <= -255) { transform->setX(255); }
-        }});
-
-    background->addComponent(TransformComponent(x, 0));
-    background->addComponent(DrawableComponent(0, 0, 255, 255, BACKGROUND_ID));
-    background->addComponent(behaviorComponent);
-    background->addComponent(MouvementComponent(-1, 0, 1.0));
-    entities_.emplace_back(std::move(background));
-}
 
 /**
  * It removes an entity from the entity manager
@@ -130,4 +77,16 @@ size_t EntityManager::createId() const noexcept
 void EntityManager::addEntity(std::unique_ptr<Entity>&& entity) noexcept
 {
     entities_.emplace_back(std::move(entity));
+}
+
+/**
+ * It creates a new entity and adds it to the entity manager
+ *
+ * @return A pointer to the newly created entity.
+ */
+Entity* EntityManager::newEntity() noexcept
+{
+    std::unique_ptr<Entity> entity = std::make_unique<Entity>(createId());
+    entities_.emplace_back(std::move(entity));
+    return entities_[entities_.size() - 1].get();
 }

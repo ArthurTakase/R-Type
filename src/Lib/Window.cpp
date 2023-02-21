@@ -5,8 +5,7 @@
 ** Window.cpp
 */
 
-#include "Window.hpp"
-
+#include <Lib/Window.hpp>
 #include <iostream>
 
 Window::Window() noexcept {}
@@ -17,7 +16,7 @@ Window::Window() noexcept {}
 void Window::open(int width, int height, const std::string& title)
 {
     window.create(sf::VideoMode(width, height), title);
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(30);
 }
 
 /**
@@ -74,13 +73,11 @@ int Window::getKeyPressed()
  *
  * @param sprite The sprite to draw.
  */
-void Window::draw(Sprite* sprite, int xtexture, int ytexture, int width, int height)
+void Window::draw(Sprite& sprite, int xtexture, int ytexture, int width, int height)
 {
-    sf::Texture texture;
-    sf::Sprite  tempSprite;
+    sprite.setTextureRect(xtexture, ytexture, width, height);
 
-    texture.loadFromFile(sprite->getSpritePath(), sf::IntRect(xtexture, ytexture, width, height));
-    tempSprite.setTexture(texture);
-    tempSprite.setPosition(sprite->getX(), sprite->getY());
-    window.draw(tempSprite);
+    sf::Sprite* tempSprite = static_cast<sf::Sprite*>(sprite.getSprite());
+
+    window.draw(*tempSprite);
 }

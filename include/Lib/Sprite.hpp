@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <SFML/Graphics.hpp>
 #include <bitset>
 #include <string>
 
@@ -22,6 +23,7 @@ namespace SpriteIds
 class Sprite
 {
   public:
+    Sprite();
     Sprite(std::string path, int x, int y);
     ~Sprite() noexcept                   = default;
     Sprite(const Sprite& other) noexcept = delete;
@@ -32,14 +34,20 @@ class Sprite
 
     void               setSpritePath(const std::string& path);
     const std::string& getSpritePath() const;
-    std::bitset<8>     serialize() const;
     void               setX(int x);
     void               setY(int y);
     int                getX() const;
     int                getY() const;
+    void*              getSprite();
+    void*              getTexture();
+    void               setTextureRect(int xtexture, int ytexture, int width, int height);
+    void               updatePosition();
+    void               setScale(float x, float y) noexcept;
 
   private:
     std::string spritePath;
     int         x;
     int         y;
+    sf::Sprite  sprite;
+    sf::Texture texture;
 };

@@ -7,17 +7,16 @@
 
 #pragma once
 
+#include <ECS/Components/BehaviorComponent.hpp>
+#include <ECS/Components/DrawableComponent.hpp>
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/StatComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
+#include <Tools/InstanceOf.hpp>
 #include <memory>
 #include <vector>
-
-#include "BehaviorComponent.hpp"
-#include "DrawableComponent.hpp"
-#include "Entity.hpp"
-#include "HitboxComponent.hpp"
-#include "InstanceOf.hpp"
-#include "MouvementComponent.hpp"
-#include "StatComponent.hpp"
-#include "TransformComponent.hpp"
 
 /**
  * @brief Object used to create the different entities of the software
@@ -33,16 +32,13 @@ class EntityManager
     EntityManager& operator=(const EntityManager& rhs) noexcept = delete;
     EntityManager& operator=(EntityManager&& rhs) noexcept      = delete;
 
-    void createPlayer() noexcept;
-    void createEnemy() noexcept;
-    void createBackground(int x) noexcept;
-
-    size_t                                createId() const noexcept;
     bool                                  removeEntity(size_t id) noexcept;
     Entity*                               getEntity(size_t id) const noexcept;
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
     void                                  addEntity(std::unique_ptr<Entity>&& entity) noexcept;
+    Entity*                               newEntity() noexcept;
 
   private:
+    size_t                               createId() const noexcept;
     std::vector<std::unique_ptr<Entity>> entities_;
 };

@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "IComponent.hpp"
+#include <ECS/Components/IComponent.hpp>
 
 /**
  * @brief Component used to set the direction and speed of the movement of an entity
@@ -29,6 +29,7 @@ class MouvementComponent : public IComponent
     float getSpeed() const noexcept;
     void  setDirX(int x) noexcept;
     void  setDirY(int y) noexcept;
+    void  setDir(int x, int y) noexcept;
     void  setSpeed(float speed) noexcept;
 
   private:

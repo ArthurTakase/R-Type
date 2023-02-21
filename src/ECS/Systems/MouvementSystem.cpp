@@ -5,8 +5,7 @@
 ** HitboxSystem.cpp
 */
 
-#include "MouvementSystem.hpp"
-
+#include <ECS/Systems/MouvementSystem.hpp>
 #include <cassert>
 #include <iostream>
 
@@ -16,9 +15,9 @@
  *
  * @param it The iterator that will be used to iterate over the entities.
  */
-MouvementSystem::MouvementSystem(std::unique_ptr<EntityManager>& manager) noexcept
+MouvementSystem::MouvementSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<TransformComponent, MouvementComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 
@@ -31,7 +30,7 @@ void MouvementSystem::run()
     size_t other;
 
     for (; !it_.isEnd(); ++it_) {
-        assert((it_.get()->hasComponents<MouvementComponent, TransformComponent>()));
+        if (!(it_.get()->hasComponents<MouvementComponent, TransformComponent>())) { continue; }
 
         auto mouvement = it_.get()->getComponent<MouvementComponent>();
         auto transform = it_.get()->getComponent<TransformComponent>();

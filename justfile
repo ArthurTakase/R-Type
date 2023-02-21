@@ -2,6 +2,8 @@ format:
     find . -type f -name "*.cpp" -o -name "*.hpp" | xargs clang-format -i
 build:
     mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja && ninja && cd ..
+build_clang:
+    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DCLANG=ON .. -GNinja && ninja && cd ..
 debug:
     mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd ..
 compile:
