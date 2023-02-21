@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width_0',['width',['../struct_game_packet.html#a2ff1a7b0454ab98dd81421c4e2950b08',1,'GamePacket::width()'],['../struct_entity_info.html#a0a9a9d068e897ef0fc229f525fe7f678',1,'EntityInfo::width()']]]
+  ['scalex_0',['scaleX',['../struct_game_packet.html#a4574be846f830b4b4974f92399f83867',1,'GamePacket']]],
+  ['scaley_1',['scaleY',['../struct_game_packet.html#a2f190388307e28730180efb29c61f3b2',1,'GamePacket']]]
 ];

@@ -9,6 +9,7 @@ var class_mouvement_component =
     [ "getSpeed", "class_mouvement_component.html#a7dbd6420b5a1b0b02caac107557fcdb8", null ],
     [ "operator=", "class_mouvement_component.html#ae02f9f21bbbfd655e3dff66ae5fcd1c9", null ],
     [ "operator=", "class_mouvement_component.html#ae00652656ffcd9db0f7a422b5164fbf7", null ],
+    [ "setDir", "class_mouvement_component.html#a29eca694d3a084f0b9a74238076772ce", null ],
     [ "setDirX", "class_mouvement_component.html#a698fb8df21904f865fcea50b53ed0c3c", null ],
     [ "setDirY", "class_mouvement_component.html#a320da43504aa16c23223fde1d70bae36", null ],
     [ "setSpeed", "class_mouvement_component.html#a92f062d4ac2bbdcb1002f271c91baabc", null ]

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['quit_0',['QUIT',['../_window_8hpp.html#a7d2fb121903e188a81b03bd68894d3bea76bdc8adfd6c6463ab269ff4c06be9b4',1,'Window.hpp']]]
+  ['exception_0',['EXCEPTION',['../class_socket_selector.html#a47da7296086ca61ceb2f10f655bd13c6acccc265b14c17af799a1834f4fbbe7cf',1,'SocketSelector']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['entitysize_0',['ENTITYSIZE',['../_bit_size_8hpp.html#a8b48112cc3746878d38bca45bf7b65bc',1,'BitSize.hpp']]]
+  ['connect_0',['CONNECT',['../_bit_size_8hpp.html#a65528c74adc6691eac2c7a2f39328064',1,'BitSize.hpp']]]
 ];

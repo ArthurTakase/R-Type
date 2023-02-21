@@ -96,20 +96,92 @@ $(document).ready(function(){initNavTree('_entity_iterator__t_8cpp.html',''); in
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;gtest/gtest.h&gt;</code><br />
-<code>#include &quot;<a class="el" href="_entity_8hpp_source.html">Entity.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_entity_iterator_8hpp_source.html">EntityIterator.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_entity_manager_8hpp_source.html">EntityManager.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_hitbox_component_8hpp_source.html">HitboxComponent.hpp</a>&quot;</code><br />
-<code>#include &quot;<a class="el" href="_transform_component_8hpp_source.html">TransformComponent.hpp</a>&quot;</code><br />
+<code>#include &lt;<a class="el" href="_hitbox_component_8hpp_source.html">ECS/Components/HitboxComponent.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_transform_component_8hpp_source.html">ECS/Components/TransformComponent.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_entity_8hpp_source.html">ECS/Entity/Entity.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_entity_manager_8hpp_source.html">ECS/Entity/EntityManager.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_entity_iterator_8hpp_source.html">Tools/EntityIterator.hpp</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:ac9002ba98e6c901eeea58133a886ef5f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_entity_iterator__t_8cpp.html#ac9002ba98e6c901eeea58133a886ef5f">createPlayer_it</a> (int x, int y, <a class="el" href="class_entity_manager.html">EntityManager</a> *manager)</td></tr>
+<tr class="separator:ac9002ba98e6c901eeea58133a886ef5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae5c6b0e24aa7f1850815ed3677ddb8e0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_entity_iterator__t_8cpp.html#ae5c6b0e24aa7f1850815ed3677ddb8e0">createEnemy_it</a> (int x, int y, <a class="el" href="class_entity_manager.html">EntityManager</a> *manager)</td></tr>
+<tr class="separator:ae5c6b0e24aa7f1850815ed3677ddb8e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab3845660c6c809e00ff686183a188ecf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_entity_iterator__t_8cpp.html#ab3845660c6c809e00ff686183a188ecf">TEST</a> (<a class="el" href="class_entity_iterator.html">EntityIterator</a>, search_hitbox_and_position_and_check_both)</td></tr>
 <tr class="separator:ab3845660c6c809e00ff686183a188ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a441ac71fa8ad02045df23a571a0888cb"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_entity_iterator__t_8cpp.html#a441ac71fa8ad02045df23a571a0888cb">TEST</a> (<a class="el" href="class_entity_iterator.html">EntityIterator</a>, search_position_and_check_for_hitbox)</td></tr>
 <tr class="separator:a441ac71fa8ad02045df23a571a0888cb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ae5c6b0e24aa7f1850815ed3677ddb8e0" name="ae5c6b0e24aa7f1850815ed3677ddb8e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae5c6b0e24aa7f1850815ed3677ddb8e0">&#9670;&#160;</a></span>createEnemy_it()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void createEnemy_it </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_entity_manager.html">EntityManager</a> *&#160;</td>
+          <td class="paramname"><em>manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9002ba98e6c901eeea58133a886ef5f" name="ac9002ba98e6c901eeea58133a886ef5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9002ba98e6c901eeea58133a886ef5f">&#9670;&#160;</a></span>createPlayer_it()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void createPlayer_it </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_entity_manager.html">EntityManager</a> *&#160;</td>
+          <td class="paramname"><em>manager</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ab3845660c6c809e00ff686183a188ecf" name="ab3845660c6c809e00ff686183a188ecf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab3845660c6c809e00ff686183a188ecf">&#9670;&#160;</a></span>TEST() <span class="overload">[1/2]</span></h2>
 

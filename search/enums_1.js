@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['window_5fkey_0',['WINDOW_KEY',['../_window_8hpp.html#a7d2fb121903e188a81b03bd68894d3be',1,'Window.hpp']]]
+  ['operation_0',['Operation',['../class_socket_selector.html#a47da7296086ca61ceb2f10f655bd13c6',1,'SocketSelector']]]
 ];

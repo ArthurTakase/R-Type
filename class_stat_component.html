@@ -113,8 +113,8 @@ Inheritance diagram for StatComponent:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a64adcd9458a3d7f9ecd1c9c5b708d1f1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a64adcd9458a3d7f9ecd1c9c5b708d1f1">StatComponent</a> (int life, int damage)</td></tr>
-<tr class="separator:a64adcd9458a3d7f9ecd1c9c5b708d1f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64b09497ca6167ffbec1224b6f5ebe8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#ad64b09497ca6167ffbec1224b6f5ebe8">StatComponent</a> (std::vector&lt; float &gt; stats)</td></tr>
+<tr class="separator:ad64b09497ca6167ffbec1224b6f5ebe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac95b47190cb4ce791471349ec8894bf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#ac95b47190cb4ce791471349ec8894bf1">~StatComponent</a> () noexcept</td></tr>
 <tr class="separator:ac95b47190cb4ce791471349ec8894bf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac3db4bde3b573fc432a54b181684d2db"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#ac3db4bde3b573fc432a54b181684d2db">StatComponent</a> (const <a class="el" href="class_stat_component.html">StatComponent</a> &amp;other) noexcept=default</td></tr>
@@ -125,14 +125,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad41c8ca16e43f519dc1fb324d24504a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8df20656a9ddb76f7b877fca07880d00"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_stat_component.html">StatComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a8df20656a9ddb76f7b877fca07880d00">operator=</a> (<a class="el" href="class_stat_component.html">StatComponent</a> &amp;&amp;rhs) noexcept=delete</td></tr>
 <tr class="separator:a8df20656a9ddb76f7b877fca07880d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6d69db18c09020a7b034af2560c0a62"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#ac6d69db18c09020a7b034af2560c0a62">getLife</a> () const noexcept</td></tr>
-<tr class="separator:ac6d69db18c09020a7b034af2560c0a62"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5dc8f04e700291b3e8b9e5fc06cbb7b2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a5dc8f04e700291b3e8b9e5fc06cbb7b2">getDamage</a> () const noexcept</td></tr>
-<tr class="separator:a5dc8f04e700291b3e8b9e5fc06cbb7b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a069a8710aaaaec9f0776acf89b4036"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a3a069a8710aaaaec9f0776acf89b4036">setLife</a> (int life) noexcept</td></tr>
-<tr class="separator:a3a069a8710aaaaec9f0776acf89b4036"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1c936a7875477b0b3d5fb8bed9eaa58c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a1c936a7875477b0b3d5fb8bed9eaa58c">setDamage</a> (int damage) noexcept</td></tr>
-<tr class="separator:a1c936a7875477b0b3d5fb8bed9eaa58c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a357822be19cd866aad00013b03594a99"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a357822be19cd866aad00013b03594a99">getStat</a> (int index) const noexcept</td></tr>
+<tr class="separator:a357822be19cd866aad00013b03594a99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a84f2a0d5fc3edcecaa35ad93aa5f280d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_stat_component.html#a84f2a0d5fc3edcecaa35ad93aa5f280d">setStat</a> (int index, float value) noexcept</td></tr>
+<tr class="separator:a84f2a0d5fc3edcecaa35ad93aa5f280d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_i_component"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_i_component')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_i_component.html">IComponent</a></td></tr>
 <tr class="memitem:a85a0409ada95ca65a29239e2174f956c inherit pub_methods_class_i_component"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a85a0409ada95ca65a29239e2174f956c">IComponent</a> () noexcept=default</td></tr>
 <tr class="separator:a85a0409ada95ca65a29239e2174f956c inherit pub_methods_class_i_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -150,8 +146,8 @@ Public Member Functions</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Component used to store the stats of an entity. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a64adcd9458a3d7f9ecd1c9c5b708d1f1" name="a64adcd9458a3d7f9ecd1c9c5b708d1f1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64adcd9458a3d7f9ecd1c9c5b708d1f1">&#9670;&#160;</a></span>StatComponent() <span class="overload">[1/3]</span></h2>
+<a id="ad64b09497ca6167ffbec1224b6f5ebe8" name="ad64b09497ca6167ffbec1224b6f5ebe8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64b09497ca6167ffbec1224b6f5ebe8">&#9670;&#160;</a></span>StatComponent() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -159,19 +155,9 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">StatComponent::StatComponent </td>
           <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>life</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramtype">std::vector&lt; float &gt;&#160;</td>
+          <td class="paramname"><em>stats</em></td><td>)</td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>damage</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -265,8 +251,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a5dc8f04e700291b3e8b9e5fc06cbb7b2" name="a5dc8f04e700291b3e8b9e5fc06cbb7b2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5dc8f04e700291b3e8b9e5fc06cbb7b2">&#9670;&#160;</a></span>getDamage()</h2>
+<a id="a357822be19cd866aad00013b03594a99" name="a357822be19cd866aad00013b03594a99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a357822be19cd866aad00013b03594a99">&#9670;&#160;</a></span>getStat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -275,9 +261,10 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int StatComponent::getDamage </td>
+          <td class="memname">float StatComponent::getStat </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
           <td> const</td>
         </tr>
       </table>
@@ -287,35 +274,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >It returns the value of the private attribute _damage</p>
-<dl class="section return"><dt>Returns</dt><dd>The damage of the entity. </dd></dl>
-
-</div>
-</div>
-<a id="ac6d69db18c09020a7b034af2560c0a62" name="ac6d69db18c09020a7b034af2560c0a62"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac6d69db18c09020a7b034af2560c0a62">&#9670;&#160;</a></span>getLife()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">int StatComponent::getLife </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >It returns the value of the private member _life</p>
-<dl class="section return"><dt>Returns</dt><dd>The life of the entity. </dd></dl>
 
 </div>
 </div>
@@ -371,8 +329,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a1c936a7875477b0b3d5fb8bed9eaa58c" name="a1c936a7875477b0b3d5fb8bed9eaa58c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1c936a7875477b0b3d5fb8bed9eaa58c">&#9670;&#160;</a></span>setDamage()</h2>
+<a id="a84f2a0d5fc3edcecaa35ad93aa5f280d" name="a84f2a0d5fc3edcecaa35ad93aa5f280d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a84f2a0d5fc3edcecaa35ad93aa5f280d">&#9670;&#160;</a></span>setStat()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -381,44 +339,21 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void StatComponent::setDamage </td>
+          <td class="memname">void StatComponent::setStat </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>damage</em></td><td>)</td>
-          <td></td>
+          <td class="paramname"><em>index</em>, </td>
         </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p >It sets the value of the private attribute _damage</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">damage</td><td>The damage of the entity. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="a3a069a8710aaaaec9f0776acf89b4036" name="a3a069a8710aaaaec9f0776acf89b4036"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a069a8710aaaaec9f0776acf89b4036">&#9670;&#160;</a></span>setLife()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
         <tr>
-          <td class="memname">void StatComponent::setLife </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>life</em></td><td>)</td>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
   </td>
@@ -427,13 +362,6 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >It sets the value of the private member _life</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">life</td><td>The life of the entity. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

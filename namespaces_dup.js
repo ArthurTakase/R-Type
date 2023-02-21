@@ -1,8 +1,8 @@
 var namespaces_dup =
 [
-    [ "SerializerItemSize", "namespace_serializer_item_size.html", null ],
     [ "SpriteIds", "namespace_sprite_ids.html", null ],
-    [ "Type", "namespace_type.html", [
-      [ "instanceOf", "namespace_type.html#ae4034555b93d56b54deb5265900a965a", null ]
+    [ "Tools", "namespace_tools.html", [
+      [ "curve", "namespace_tools.html#aef4c4bf5b8f63aa5021bf05f24e207d9", null ],
+      [ "instanceOf", "namespace_tools.html#af2de32e82754966efceb8e685df3a2f7", null ]
     ] ]
 ];

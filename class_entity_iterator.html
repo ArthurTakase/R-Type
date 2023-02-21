@@ -109,8 +109,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a9846ffd587b70372a07939b4c5496bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a76bd25979f7debc60567a2627dd90b29"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity_iterator.html">EntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#a76bd25979f7debc60567a2627dd90b29">operator++</a> ()</td></tr>
 <tr class="separator:a76bd25979f7debc60567a2627dd90b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af34cfa117819fa2d8cc78d75ac7d9c7e"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#af34cfa117819fa2d8cc78d75ac7d9c7e">get</a> ()</td></tr>
-<tr class="separator:af34cfa117819fa2d8cc78d75ac7d9c7e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ab03c9ad25947abf172b00002555820"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity_iterator.html">EntityIterator</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#a9ab03c9ad25947abf172b00002555820">operator--</a> ()</td></tr>
+<tr class="separator:a9ab03c9ad25947abf172b00002555820"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1b6450458eb4fb6cc395ff03fdb7492"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_entity.html">Entity</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#aa1b6450458eb4fb6cc395ff03fdb7492">get</a> ()</td></tr>
+<tr class="separator:aa1b6450458eb4fb6cc395ff03fdb7492"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8db55bcac10aa9dae50ea790d0668122"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#a8db55bcac10aa9dae50ea790d0668122">isEnd</a> ()</td></tr>
 <tr class="separator:a8db55bcac10aa9dae50ea790d0668122"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6de167310ffd2f5328897ebc2fa515e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_iterator.html#a6de167310ffd2f5328897ebc2fa515e4">reset</a> ()</td></tr>
@@ -162,8 +164,8 @@ template&lt;typename... Args&gt; </div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af34cfa117819fa2d8cc78d75ac7d9c7e" name="af34cfa117819fa2d8cc78d75ac7d9c7e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af34cfa117819fa2d8cc78d75ac7d9c7e">&#9670;&#160;</a></span>get()</h2>
+<a id="aa1b6450458eb4fb6cc395ff03fdb7492" name="aa1b6450458eb4fb6cc395ff03fdb7492"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1b6450458eb4fb6cc395ff03fdb7492">&#9670;&#160;</a></span>get()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -174,7 +176,7 @@ template&lt;typename... Args&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &amp; <a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; Args &gt;::get </td>
+          <td class="memname"><a class="el" href="class_entity.html">Entity</a> * <a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; Args &gt;::get </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -229,6 +231,33 @@ template&lt;typename... Args&gt; </div>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="class_entity_iterator.html">EntityIterator</a> &amp; <a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; Args &gt;::operator++ </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9ab03c9ad25947abf172b00002555820" name="a9ab03c9ad25947abf172b00002555820"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ab03c9ad25947abf172b00002555820">&#9670;&#160;</a></span>operator--()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_entity_iterator.html">EntityIterator</a> &amp; <a class="el" href="class_entity_iterator.html">EntityIterator</a>&lt; Args &gt;::operator-- </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>

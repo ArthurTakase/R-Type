@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['operation_0',['Operation',['../class_socket_selector.html#a47da7296086ca61ceb2f10f655bd13c6',1,'SocketSelector']]]
+  ['input_0',['Input',['../_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090',1,'BitSize.hpp']]]
 ];

@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('class_serializer.html',''); initResiza
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_serializer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Serializer Class Reference</div></div>
 </div><!--header-->
@@ -101,22 +102,13 @@ $(document).ready(function(){initNavTree('class_serializer.html',''); initResiza
  <a href="class_serializer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_serializer_8hpp_source.html">Serializer.hpp</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Serializer:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="class_serializer.png" usemap="#Serializer_map" alt=""/>
-  <map id="Serializer_map" name="Serializer_map">
-<area href="class_i_serializer.html" title="Interface for Serializer." alt="ISerializer" shape="rect" coords="0,0,69,24"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac45ad36ee8eb7f723bfbe58ee344ac47"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#ac45ad36ee8eb7f723bfbe58ee344ac47">Serializer</a> ()=default</td></tr>
-<tr class="separator:ac45ad36ee8eb7f723bfbe58ee344ac47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adc9964984fa3bf98bb1d331b04eadfcc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#adc9964984fa3bf98bb1d331b04eadfcc">~Serializer</a> () noexcept=default</td></tr>
-<tr class="separator:adc9964984fa3bf98bb1d331b04eadfcc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43467fe9129c4afbdbcdf22a12233805"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a43467fe9129c4afbdbcdf22a12233805">Serializer</a> ()=delete</td></tr>
+<tr class="separator:a43467fe9129c4afbdbcdf22a12233805"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56a691a520f8d5974d97c57b4dceea43"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a56a691a520f8d5974d97c57b4dceea43">~Serializer</a> () noexcept=delete</td></tr>
+<tr class="separator:a56a691a520f8d5974d97c57b4dceea43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad7ade8a1b34ba05eda4df5e5771bb545"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#ad7ade8a1b34ba05eda4df5e5771bb545">Serializer</a> (const <a class="el" href="class_serializer.html">Serializer</a> &amp;other)=delete</td></tr>
 <tr class="separator:ad7ade8a1b34ba05eda4df5e5771bb545"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf18b53913d53f1896e210271ded51ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#aaf18b53913d53f1896e210271ded51ef">Serializer</a> (<a class="el" href="class_serializer.html">Serializer</a> &amp;&amp;other) noexcept=delete</td></tr>
@@ -125,33 +117,19 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1644555c8f072e00f152f27b24356d0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfba4e3e851cfc3a2546ec31be715bad"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_serializer.html">Serializer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#acfba4e3e851cfc3a2546ec31be715bad">operator=</a> (<a class="el" href="class_serializer.html">Serializer</a> &amp;&amp;other) noexcept=delete</td></tr>
 <tr class="separator:acfba4e3e851cfc3a2546ec31be715bad"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a135858530ed56137c73eeb72583730e2"><td class="memItemLeft" align="right" valign="top">std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a8b48112cc3746878d38bca45bf7b65bc">ENTITYSIZE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a135858530ed56137c73eeb72583730e2">Serialize</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;entity) const noexcept</td></tr>
-<tr class="separator:a135858530ed56137c73eeb72583730e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a314e448a1d4501415ff4f8c7b91d62c1"><td class="memItemLeft" align="right" valign="top">std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a4ec7d0d02fd172d7c1bbf8ce7d8389e9">INPUTSIZE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a314e448a1d4501415ff4f8c7b91d62c1">Serialize</a> (int &amp;keyCode) const noexcept</td></tr>
-<tr class="separator:a314e448a1d4501415ff4f8c7b91d62c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="inherit_header pub_methods_class_i_serializer"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_i_serializer')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_i_serializer.html">ISerializer</a></td></tr>
-<tr class="memitem:a3f71150a380378cf4d742705154e4c35 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a3f71150a380378cf4d742705154e4c35">ISerializer</a> ()=default</td></tr>
-<tr class="separator:a3f71150a380378cf4d742705154e4c35 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a375b1b9ef4f42ecbb28cb131c2452a29 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a375b1b9ef4f42ecbb28cb131c2452a29">~ISerializer</a> () noexcept=default</td></tr>
-<tr class="separator:a375b1b9ef4f42ecbb28cb131c2452a29 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44987e3d0e1201c05661c56a4dbde2c8 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a44987e3d0e1201c05661c56a4dbde2c8">ISerializer</a> (const <a class="el" href="class_i_serializer.html">ISerializer</a> &amp;other)=delete</td></tr>
-<tr class="separator:a44987e3d0e1201c05661c56a4dbde2c8 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99f4e3ae0dcad4220a4a0bc28c80fd7d inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a99f4e3ae0dcad4220a4a0bc28c80fd7d">ISerializer</a> (<a class="el" href="class_i_serializer.html">ISerializer</a> &amp;&amp;other) noexcept=delete</td></tr>
-<tr class="separator:a99f4e3ae0dcad4220a4a0bc28c80fd7d inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a00ab2215331fc2922c6780f6c7451b7a inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_serializer.html">ISerializer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a00ab2215331fc2922c6780f6c7451b7a">operator=</a> (const <a class="el" href="class_i_serializer.html">ISerializer</a> &amp;other)=delete</td></tr>
-<tr class="separator:a00ab2215331fc2922c6780f6c7451b7a inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b873aa0a9b5a5cab6aad184bee9d298 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_serializer.html">ISerializer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#a2b873aa0a9b5a5cab6aad184bee9d298">operator=</a> (<a class="el" href="class_i_serializer.html">ISerializer</a> &amp;&amp;other) noexcept=delete</td></tr>
-<tr class="separator:a2b873aa0a9b5a5cab6aad184bee9d298 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd19dd8ab4625f73d903ef2b851fe302 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">virtual std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a8b48112cc3746878d38bca45bf7b65bc">ENTITYSIZE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#abd19dd8ab4625f73d903ef2b851fe302">Serialize</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;entity) const noexcept=0</td></tr>
-<tr class="separator:abd19dd8ab4625f73d903ef2b851fe302 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd27d35dc377fc262884bedfdd2bfa41 inherit pub_methods_class_i_serializer"><td class="memItemLeft" align="right" valign="top">virtual std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a4ec7d0d02fd172d7c1bbf8ce7d8389e9">INPUTSIZE</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_serializer.html#abd27d35dc377fc262884bedfdd2bfa41">Serialize</a> (int &amp;keyCode) const noexcept=0</td></tr>
-<tr class="separator:abd27d35dc377fc262884bedfdd2bfa41 inherit pub_methods_class_i_serializer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aff63019bd71949d11aa23971aed67bbd"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#aff63019bd71949d11aa23971aed67bbd">serialize</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;entity) noexcept</td></tr>
+<tr class="separator:aff63019bd71949d11aa23971aed67bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6d81caa364ef0003bbd06dac3644b950"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a6d81caa364ef0003bbd06dac3644b950">serialize</a> (int keyCode)</td></tr>
+<tr class="separator:a6d81caa364ef0003bbd06dac3644b950"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Object used to serialize objects for network. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac45ad36ee8eb7f723bfbe58ee344ac47" name="ac45ad36ee8eb7f723bfbe58ee344ac47"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac45ad36ee8eb7f723bfbe58ee344ac47">&#9670;&#160;</a></span>Serializer() <span class="overload">[1/3]</span></h2>
+<a id="a43467fe9129c4afbdbcdf22a12233805" name="a43467fe9129c4afbdbcdf22a12233805"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43467fe9129c4afbdbcdf22a12233805">&#9670;&#160;</a></span>Serializer() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -168,15 +146,15 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="adc9964984fa3bf98bb1d331b04eadfcc" name="adc9964984fa3bf98bb1d331b04eadfcc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adc9964984fa3bf98bb1d331b04eadfcc">&#9670;&#160;</a></span>~Serializer()</h2>
+<a id="a56a691a520f8d5974d97c57b4dceea43" name="a56a691a520f8d5974d97c57b4dceea43"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56a691a520f8d5974d97c57b4dceea43">&#9670;&#160;</a></span>~Serializer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -193,7 +171,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -305,8 +283,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a314e448a1d4501415ff4f8c7b91d62c1" name="a314e448a1d4501415ff4f8c7b91d62c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a314e448a1d4501415ff4f8c7b91d62c1">&#9670;&#160;</a></span>Serialize() <span class="overload">[1/2]</span></h2>
+<a id="a6d81caa364ef0003bbd06dac3644b950" name="a6d81caa364ef0003bbd06dac3644b950"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6d81caa364ef0003bbd06dac3644b950">&#9670;&#160;</a></span>serialize() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -315,34 +293,24 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a4ec7d0d02fd172d7c1bbf8ce7d8389e9">INPUTSIZE</a> &gt; Serializer::Serialize </td>
+          <td class="memname"><a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a> Serializer::serialize </td>
           <td>(</td>
-          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>keyCode</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Serialize a key code</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">The</td><td>keycode you want to serialize</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A bitset of the keycode </dd></dl>
-
-<p>Implements <a class="el" href="class_i_serializer.html#abd27d35dc377fc262884bedfdd2bfa41">ISerializer</a>.</p>
 
 </div>
 </div>
-<a id="a135858530ed56137c73eeb72583730e2" name="a135858530ed56137c73eeb72583730e2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a135858530ed56137c73eeb72583730e2">&#9670;&#160;</a></span>Serialize() <span class="overload">[2/2]</span></h2>
+<a id="aff63019bd71949d11aa23971aed67bbd" name="aff63019bd71949d11aa23971aed67bbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff63019bd71949d11aa23971aed67bbd">&#9670;&#160;</a></span>serialize() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -351,29 +319,27 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::bitset&lt; <a class="el" href="_bit_size_8hpp.html#a8b48112cc3746878d38bca45bf7b65bc">ENTITYSIZE</a> &gt; Serializer::Serialize </td>
+          <td class="memname"><a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a> Serializer::serialize </td>
           <td>(</td>
           <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;&#160;</td>
           <td class="paramname"><em>entity</em></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >Serialize an <a class="el" href="class_entity.html" title="Entity part of the ECS. It can be linked to many components to add attributes to it....">Entity</a></p>
+<p >It takes an entity, gets its position and drawable components, and serializes them into a vector of bytes</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">The</td><td><a class="el" href="class_entity.html" title="Entity part of the ECS. It can be linked to many components to add attributes to it....">Entity</a> you want to serialise</td></tr>
+    <tr><td class="paramname">entity</td><td>The entity to serialize</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A bitset of the entity's information needed </dd></dl>
-
-<p>Implements <a class="el" href="class_i_serializer.html#abd19dd8ab4625f73d903ef2b851fe302">ISerializer</a>.</p>
+<dl class="section return"><dt>Returns</dt><dd>A vector of uint8_t </dd></dl>
 
 </div>
 </div>

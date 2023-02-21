@@ -104,6 +104,8 @@ $(document).ready(function(){initNavTree('class_sprite.html',''); initResizable(
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a12cba3ac1868418add3c4d95ce87e615"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a12cba3ac1868418add3c4d95ce87e615">Sprite</a> ()</td></tr>
+<tr class="separator:a12cba3ac1868418add3c4d95ce87e615"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a948bd182c155eae769d013997ed4a7d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a948bd182c155eae769d013997ed4a7d3">Sprite</a> (std::string path, int x, int y)</td></tr>
 <tr class="separator:a948bd182c155eae769d013997ed4a7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22961a9289b1d7e973180b8c4df5f9b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a22961a9289b1d7e973180b8c4df5f9b1">~Sprite</a> () noexcept=default</td></tr>
@@ -120,8 +122,6 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aad8066d0af0d52013969e91f231439d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2eeb7617b19fbc2a816c5e4065fa0cae"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a2eeb7617b19fbc2a816c5e4065fa0cae">getSpritePath</a> () const</td></tr>
 <tr class="separator:a2eeb7617b19fbc2a816c5e4065fa0cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34c3be9860a4b3a270a693c102f6fda4"><td class="memItemLeft" align="right" valign="top">std::bitset&lt; 8 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a34c3be9860a4b3a270a693c102f6fda4">serialize</a> () const</td></tr>
-<tr class="separator:a34c3be9860a4b3a270a693c102f6fda4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae21322c28b8719af996990fafa920762"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ae21322c28b8719af996990fafa920762">setX</a> (int x)</td></tr>
 <tr class="separator:ae21322c28b8719af996990fafa920762"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afe7d6d636fc460358c40a403af259d0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#afe7d6d636fc460358c40a403af259d0e">setY</a> (int y)</td></tr>
@@ -130,12 +130,39 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a5d2c390d02a3b001e7ca82ec98e5eaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5ebf0db842c2067df8c14e04c9f0fa25"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a5ebf0db842c2067df8c14e04c9f0fa25">getY</a> () const</td></tr>
 <tr class="separator:a5ebf0db842c2067df8c14e04c9f0fa25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acee444c53d46a8ed28898d89bbc9b445"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#acee444c53d46a8ed28898d89bbc9b445">getSprite</a> ()</td></tr>
+<tr class="separator:acee444c53d46a8ed28898d89bbc9b445"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6b8f866371ab56142aca49410f60cfb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ab6b8f866371ab56142aca49410f60cfb">getTexture</a> ()</td></tr>
+<tr class="separator:ab6b8f866371ab56142aca49410f60cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87534205e09b432f4d74c46617b651ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a87534205e09b432f4d74c46617b651ec">setTextureRect</a> (int xtexture, int ytexture, int width, int height)</td></tr>
+<tr class="separator:a87534205e09b432f4d74c46617b651ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ab26528e126bf96408bda756ead304f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a7ab26528e126bf96408bda756ead304f">updatePosition</a> ()</td></tr>
+<tr class="separator:a7ab26528e126bf96408bda756ead304f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6aab56e1c4d2c7b288f8a24e587ec305"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a6aab56e1c4d2c7b288f8a24e587ec305">setScale</a> (float x, float y) noexcept</td></tr>
+<tr class="separator:a6aab56e1c4d2c7b288f8a24e587ec305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >This class is used to create a sprite. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a12cba3ac1868418add3c4d95ce87e615" name="a12cba3ac1868418add3c4d95ce87e615"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a12cba3ac1868418add3c4d95ce87e615">&#9670;&#160;</a></span>Sprite() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a948bd182c155eae769d013997ed4a7d3" name="a948bd182c155eae769d013997ed4a7d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a948bd182c155eae769d013997ed4a7d3">&#9670;&#160;</a></span>Sprite() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a948bd182c155eae769d013997ed4a7d3">&#9670;&#160;</a></span>Sprite() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -203,7 +230,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a569c59a0e65d7a8454bd8d5bae65dbae" name="a569c59a0e65d7a8454bd8d5bae65dbae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a569c59a0e65d7a8454bd8d5bae65dbae">&#9670;&#160;</a></span>Sprite() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a569c59a0e65d7a8454bd8d5bae65dbae">&#9670;&#160;</a></span>Sprite() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -229,7 +256,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a1e2d5f335ef19d55a6b2915b1555ac77" name="a1e2d5f335ef19d55a6b2915b1555ac77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e2d5f335ef19d55a6b2915b1555ac77">&#9670;&#160;</a></span>Sprite() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e2d5f335ef19d55a6b2915b1555ac77">&#9670;&#160;</a></span>Sprite() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -255,6 +282,25 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="acee444c53d46a8ed28898d89bbc9b445" name="acee444c53d46a8ed28898d89bbc9b445"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acee444c53d46a8ed28898d89bbc9b445">&#9670;&#160;</a></span>getSprite()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * Sprite::getSprite </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function returns the sprite.</p>
+<dl class="section return"><dt>Returns</dt><dd>The sprite. </dd></dl>
+
+</div>
+</div>
 <a id="a2eeb7617b19fbc2a816c5e4065fa0cae" name="a2eeb7617b19fbc2a816c5e4065fa0cae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2eeb7617b19fbc2a816c5e4065fa0cae">&#9670;&#160;</a></span>getSpritePath()</h2>
 
@@ -271,6 +317,25 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 <p >Returns the path to the sprite's image file.</p>
 <dl class="section return"><dt>Returns</dt><dd>The spritePath variable is being returned. </dd></dl>
+
+</div>
+</div>
+<a id="ab6b8f866371ab56142aca49410f60cfb" name="ab6b8f866371ab56142aca49410f60cfb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6b8f866371ab56142aca49410f60cfb">&#9670;&#160;</a></span>getTexture()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * Sprite::getTexture </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function returns the texture.</p>
+<dl class="section return"><dt>Returns</dt><dd>The texture. </dd></dl>
 
 </div>
 </div>
@@ -364,22 +429,39 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a34c3be9860a4b3a270a693c102f6fda4" name="a34c3be9860a4b3a270a693c102f6fda4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34c3be9860a4b3a270a693c102f6fda4">&#9670;&#160;</a></span>serialize()</h2>
+<a id="a6aab56e1c4d2c7b288f8a24e587ec305" name="a6aab56e1c4d2c7b288f8a24e587ec305"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6aab56e1c4d2c7b288f8a24e587ec305">&#9670;&#160;</a></span>setScale()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::bitset&lt; 8 &gt; Sprite::serialize </td>
+          <td class="memname">void Sprite::setScale </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
-<p >Return a bitset of 8 bits that represents the sprite.</p>
-<dl class="section return"><dt>Returns</dt><dd>A bitset of 8 bits. </dd></dl>
 
 </div>
 </div>
@@ -402,6 +484,56 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>The path to the sprite sheet. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a87534205e09b432f4d74c46617b651ec" name="a87534205e09b432f4d74c46617b651ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87534205e09b432f4d74c46617b651ec">&#9670;&#160;</a></span>setTextureRect()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::setTextureRect </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xtexture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ytexture</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>width</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>height</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function sets the texture rectangle of the sprite.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">xtexture</td><td>The x coordinate of the texture. </td></tr>
+    <tr><td class="paramname">ytexture</td><td>The y coordinate of the texture. </td></tr>
+    <tr><td class="paramname">width</td><td>The width of the texture. </td></tr>
+    <tr><td class="paramname">height</td><td>The height of the texture. </td></tr>
   </table>
   </dd>
 </dl>
@@ -455,6 +587,24 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a7ab26528e126bf96408bda756ead304f" name="a7ab26528e126bf96408bda756ead304f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ab26528e126bf96408bda756ead304f">&#9670;&#160;</a></span>updatePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Sprite::updatePosition </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >This function updates the position of the sprite. </p>
 
 </div>
 </div>
