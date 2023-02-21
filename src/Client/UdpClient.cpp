@@ -62,7 +62,7 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
-    RawData data = {12};
+    RawData data = {CONNECT};
     dataToSend_.push(data);
 
     while (looping_) {
@@ -159,6 +159,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 auto& lib = game_.getLib();
                 lib.getWindow().close();
             }
+            if (value == CONNECT) { dataToSend_.push({CONNECT}); }
         } else {
             if (infos.data.size() % PACKET_SIZE == 0) {
                 for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {

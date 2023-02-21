@@ -1,9 +1,12 @@
 #pragma once
 #include <cstdint>
 
-#define ESCAPE 120
-#define WINDOW_CLOSE 36
-#define CONNECT 12
+static constexpr unsigned int ESCAPE       = 120;
+static constexpr unsigned int WINDOW_CLOSE = 36;
+static constexpr unsigned int CLOSE_VALUE  = 255;
+static constexpr unsigned int PACKET_SIZE  = 13;
+static constexpr unsigned int MAX_TIMEOFF  = 5;
+static constexpr unsigned int CONNECT      = 1;
 
 typedef enum PacketName {
     X1        = 0,
