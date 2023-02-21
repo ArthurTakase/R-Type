@@ -7,11 +7,10 @@
 
 #pragma once
 
+#include <ECS/Components/IComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
 #include <functional>
 #include <memory>
-
-#include "Entity.hpp"
-#include "IComponent.hpp"
 
 /**
  * @brief Component for the hitbox of an entity. Contain the width and the height of the box.
@@ -32,11 +31,12 @@ class HitboxComponent : public IComponent
     void   setWidth(size_t width) noexcept;
     void   setHeight(size_t height) noexcept;
     void   setSize(size_t width, size_t height) noexcept;
-    void   setOnCollision(std::function<void(std::unique_ptr<Entity>&)> onCollision) noexcept;
-    void   onCollision(std::unique_ptr<Entity>& entity) const noexcept;
+    void   setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept;
+    void   onCollision(Entity* entity, Entity* me) const noexcept;
+    void   setSCale(float x, float y) noexcept;
 
   private:
-    size_t                                        width_;
-    size_t                                        height_;
-    std::function<void(std::unique_ptr<Entity>&)> onCollision_;
+    size_t                                width_;
+    size_t                                height_;
+    std::function<void(Entity*, Entity*)> onCollision_;
 };

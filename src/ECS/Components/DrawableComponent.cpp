@@ -5,8 +5,7 @@
 ** HitboxComponent.cpp
 */
 
-#include "DrawableComponent.hpp"
-
+#include <ECS/Components/DrawableComponent.hpp>
 #include <iostream>
 
 /**
@@ -24,6 +23,33 @@ DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int he
     , width_(width)
     , height_(height)
     , textureId_(textureId)
+    , scaleX_(1)
+    , scaleY_(1)
+{
+}
+
+DrawableComponent::DrawableComponent(
+    int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY)
+    : offsetX_(offsetX)
+    , offsetY_(offsetY)
+    , width_(width)
+    , height_(height)
+    , textureId_(textureId)
+    , scaleX_(scaleX)
+    , scaleY_(scaleY)
+{
+    sprite_.setScale(scaleX, scaleY);
+}
+
+DrawableComponent::DrawableComponent(const DrawableComponent& other) noexcept
+    : offsetX_(other.offsetX_)
+    , offsetY_(other.offsetY_)
+    , width_(other.width_)
+    , height_(other.height_)
+    , textureId_(other.textureId_)
+    , sprite_(other.sprite_.getSpritePath(), other.sprite_.getX(), other.sprite_.getY())
+    , scaleX_(other.scaleX_)
+    , scaleY_(other.scaleY_)
 {
 }
 
@@ -128,21 +154,38 @@ void DrawableComponent::setTextureId(int textureId) noexcept
 }
 
 /**
- * It sets the sprite of the drawable component
- *
- * @param sprite The sprite to use.
- */
-void DrawableComponent::setSprite(Sprite* sprite) noexcept
-{
-    sprite_ = sprite;
-}
-
-/**
  * It returns the sprite of the drawable component
  *
  * @return The sprite of the drawable component.
  */
-Sprite* DrawableComponent::getSprite() const noexcept
+Sprite& DrawableComponent::getSprite() noexcept
 {
     return sprite_;
+}
+
+/**
+ * It returns the timer of the drawable component
+ *
+ * @return The timer of the drawable component.
+ */
+Timer& DrawableComponent::getTimer() noexcept
+{
+    return timer_;
+}
+
+void DrawableComponent::setScale(float x, float y) noexcept
+{
+    scaleX_ = x;
+    scaleY_ = y;
+    sprite_.setScale(x, y);
+}
+
+float DrawableComponent::getScaleX() const noexcept
+{
+    return scaleX_;
+}
+
+float DrawableComponent::getScaleY() const noexcept
+{
+    return scaleY_;
 }

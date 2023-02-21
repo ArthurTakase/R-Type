@@ -7,12 +7,12 @@
 
 #pragma once
 
+#include <ECS/Components/IComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
+#include <Lib/Sprite.hpp>
+#include <Lib/Timer.hpp>
 #include <functional>
 #include <memory>
-
-#include "Entity.hpp"
-#include "IComponent.hpp"
-#include "Sprite.hpp"
 
 /**
  * @brief Component assigned to drawable entities.
@@ -21,9 +21,10 @@ class DrawableComponent : public IComponent
 {
   public:
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId);
-    ~DrawableComponent() noexcept                              = default;
-    DrawableComponent(const DrawableComponent& other) noexcept = default;
-    DrawableComponent(DrawableComponent&& other) noexcept      = delete;
+    DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY);
+    ~DrawableComponent() noexcept = default;
+    DrawableComponent(const DrawableComponent& other) noexcept;
+    DrawableComponent(DrawableComponent&& other) noexcept = delete;
 
     DrawableComponent& operator=(const DrawableComponent& rhs) noexcept = delete;
     DrawableComponent& operator=(DrawableComponent&& rhs) noexcept      = delete;
@@ -37,15 +38,21 @@ class DrawableComponent : public IComponent
     void    setOffsetY(int offsetY) noexcept;
     void    setWidth(int width) noexcept;
     void    setHeight(int height) noexcept;
+    void    setScale(float x, float y) noexcept;
+    float   getScaleX() const noexcept;
+    float   getScaleY() const noexcept;
     void    setTextureId(int textureId) noexcept;
-    void    setSprite(Sprite* sprite) noexcept;
-    Sprite* getSprite() const noexcept;
+    Sprite& getSprite() noexcept;
+    Timer&  getTimer() noexcept;
 
   private:
-    int     offsetX_;
-    int     offsetY_;
-    int     width_;
-    int     height_;
-    int     textureId_;
-    Sprite* sprite_;
+    int    offsetX_;
+    int    offsetY_;
+    int    width_;
+    int    height_;
+    int    textureId_;
+    float  scaleX_;
+    float  scaleY_;
+    Sprite sprite_;
+    Timer  timer_;
 };

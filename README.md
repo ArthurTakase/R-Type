@@ -1,10 +1,8 @@
 # R-TYPE
 
-## Informations générales
-
 Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.
 
-### Team
+## Team
 
 * Arthur Decaen (arthur.decaen@epitech.eu)
 * Corentin Roy (corentin.roy@epitech.eu)
@@ -12,9 +10,41 @@ Implementation of a multithreaded server and a graphical client for a game calle
 * Guillaume Vernizeau (guillaume.vernizeau@epitech.eu)
 * Geoffrey Labruyère (geoffrey.labruyere@epitech.eu)
 
-## Informations de developpement
+## Usage
 
-### Norme des Commits
+### Linux
+
+* Build
+
+    ```bash
+    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja && ninja && cd ..
+    ```
+
+* Launch Client
+
+    ```bash
+    cd build && ./r-type_client [server port] [server ip] [client port]
+    ```
+
+* Launch Server
+
+    ```bash
+    cd build && ./r-type_server
+    ```
+
+### Window
+
+* Compile with Cmake GUI
+* Use Visual Studio
+* Launch .exe (r-type_client.exe and r-type_server.exe)
+
+## Dev Infos
+
+### ECS
+
+![ECS](docs/ECS.png)
+
+### Commit norm
 
 Exemples :
 
@@ -31,27 +61,27 @@ Exemples :
 
 ### CI/CD
 
-* Build automatique sur les branches **main** et **dev**.
-* Execution des tests unitaires Google Test sur les branches **main** et **dev**.
-* Génération d'un coverage sur les branches **main** et **dev**.
-* Génération automatique d'une documentation Doxygen sur les branches **main** et **dev** accessible [ici](arthurtakase.github.io/R-Type/).
-* Envoi d'un message discord lors d'un push/merge sur toutes les branches.
+* Automatic build on main and dev branches.
+* Running Google Test unit tests on main and dev branches.
+* Generating coverage on main and dev branches.
+* Automatic generation of Doxygen documentation on main and dev branches accessible here.
+* Sending a discord message on push/merge on all branches.
 
 ### Doxygen
 
-Pour une bonne génération de la documentation, veuillez à mettre des commentaires au dessus de vos fonctions selon le modèle suivante.
+For proper documentation generation, please put comments above your functions using the following format.
 
 ```cpp
 /**
- * @brief Description du comportement de la fonction
+ * @brief Description of the function's behavior
  * 
- * @param parametre1 description du parametre
- * @param parametre2 description du parametre
+ * @param parameter1 description of the parameter
+ * @param parameter2 description of the parameter
  * 
- * @return explication sur la valeur de retour
+ * @return explanation of the return value
  */
 ```
 
 ### Google Test
 
-Toute fonciton doit posséder au minimum d'un test unitaire. Les tests fonctionnenent avec Google Test, la documentation est [ici](https://google.github.io/googletest/reference/testing.html).
+Every function must have at least one unit test. The tests work with Google Test, documentation is here.

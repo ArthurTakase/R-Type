@@ -7,16 +7,15 @@
 
 #include <gtest/gtest.h>
 
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <Tools/InstanceOf.hpp>
 #include <memory>
-
-#include "HitboxComponent.hpp"
-#include "InstanceOf.hpp"
-#include "TransformComponent.hpp"
 
 TEST(Tools_, instanceOf)
 {
     auto pos = std::make_unique<TransformComponent>(10, 10);
 
-    EXPECT_TRUE(Type::instanceOf<TransformComponent>(pos.get()));
-    EXPECT_FALSE(Type::instanceOf<HitboxComponent>(pos.get()));
+    EXPECT_TRUE(Tools::instanceOf<TransformComponent>(pos.get()));
+    EXPECT_FALSE(Tools::instanceOf<HitboxComponent>(pos.get()));
 }

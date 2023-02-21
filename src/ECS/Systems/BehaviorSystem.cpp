@@ -5,8 +5,7 @@
 ** HitboxSystem.cpp
 */
 
-#include "BehaviorSystem.hpp"
-
+#include <ECS/Systems/BehaviorSystem.hpp>
 #include <cassert>
 #include <iostream>
 #include <memory>
@@ -18,9 +17,9 @@
  *
  * @param EntityManager The EntityManager that the system will use to iterate over entities.
  */
-BehaviorSystem::BehaviorSystem(std::unique_ptr<EntityManager>& manager) noexcept
+BehaviorSystem::BehaviorSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<BehaviorComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 
@@ -32,20 +31,11 @@ void BehaviorSystem::run()
     size_t other;
 
     for (; !it_.isEnd(); ++it_) {
-        std::unique_ptr<Entity>& entity = it_.get();
+        Entity* entity = it_.get();
 
-        assert((entity->hasComponents<BehaviorComponent>()));
-        entity->getComponent<BehaviorComponent>()->onUpdate(key_, entity);
+        if (!entity->hasComponents<BehaviorComponent>()) { continue; }
+
+        entity->getComponent<BehaviorComponent>()->onUpdate(entity);
     }
     it_.reset();
-}
-
-void BehaviorSystem::setKey(int key) noexcept
-{
-    key_ = key;
-}
-
-int BehaviorSystem::getKey() const noexcept
-{
-    return key_;
 }

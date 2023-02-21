@@ -1,23 +1,27 @@
 #pragma once
 
-#include "ISerializer.hpp"
+#include <ECS/Entity/Entity.hpp>
+#include <NetworkLib/ISocket.hpp>
+#include <Serializer/BitSize.hpp>
+#include <bitset>
+#include <memory>
 
 /**
  * @brief Object used to serialize objects for network
  */
-class Serializer : public ISerializer
+class Serializer
 {
   public:
-    Serializer()           = default;
-    ~Serializer() noexcept = default;
+    Serializer()           = delete;
+    ~Serializer() noexcept = delete;
 
     Serializer(const Serializer& other)                = delete;
     Serializer(Serializer&& other) noexcept            = delete;
     Serializer& operator=(const Serializer& other)     = delete;
     Serializer& operator=(Serializer&& other) noexcept = delete;
 
-    std::bitset<ENTITYSIZE> Serialize(std::unique_ptr<Entity> const& entity) const noexcept;
-    std::bitset<INPUTSIZE>  Serialize(int& keyCode) const noexcept;
+    static RawData serialize(std::unique_ptr<Entity> const& entity) noexcept;
+    static RawData serialize(int keyCode);
 
   protected:
   private:

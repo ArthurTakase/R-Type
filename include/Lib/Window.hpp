@@ -7,13 +7,12 @@
 
 #pragma once
 
+#include <Lib/Sprite.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <bitset>
-
-#include "Sprite.hpp"
 
 enum WINDOW_KEY { QUIT = 255 };
 
@@ -38,7 +37,7 @@ class Window
     void refresh();
     bool isOpen();
     int  getKeyPressed();
-    void draw(Sprite* sprite, int xtexture, int ytexture, int width, int height);
+    void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height);
 
   private:
     sf::RenderWindow window;

@@ -7,23 +7,35 @@
 
 #include <gtest/gtest.h>
 
-#include "EntityIterator.hpp"
-#include "EntityManager.hpp"
-#include "HitboxComponent.hpp"
-#include "HitboxSystem.hpp"
-#include "TransformComponent.hpp"
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Entity/EntityManager.hpp>
+#include <ECS/Systems/HitboxSystem.hpp>
+#include <Tools/EntityIterator.hpp>
+
+void createPlayer_hs(int x, int y, EntityManager* manager)
+{
+    auto player = manager->newEntity();
+
+    auto hitbox = HitboxComponent(15, 21);
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{
+        [](Entity* entity, Entity* me) { std::cout << "Collision" << std::endl; }});
+
+    player->addComponent(hitbox);
+    player->addComponent(TransformComponent(x, y));
+}
 
 TEST(HitboxSystem_, run)
 {
     std::string captured_output;
 
     auto manager = std::make_unique<EntityManager>();
-    manager->createPlayer();
-    manager->createPlayer();
-    manager->createPlayer();
-    manager->getEntity(0)->getComponent<TransformComponent>()->setPos(100, 100);
+    createPlayer_hs(100, 100, manager.get());
+    createPlayer_hs(100, 100, manager.get());
+    createPlayer_hs(100, 100, manager.get());
+    manager->getEntity(0)->getComponent<TransformComponent>()->setPos(0, 0);
 
-    auto system = std::make_unique<HitboxSystem>(manager);
+    auto system = std::make_unique<HitboxSystem>(manager.get());
 
     testing::internal::CaptureStdout();
     system->run();

@@ -22,11 +22,10 @@ add_library(
     Lib.cpp
     Window.cpp
     Sprite.cpp
+    Timer.cpp
+    Text.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
-target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)
-include_directories(${CMAKE_BINARY_DIR}/../../include)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../../include/Lib)

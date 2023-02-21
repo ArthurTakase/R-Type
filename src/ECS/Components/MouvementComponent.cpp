@@ -5,8 +5,7 @@
 ** TransformComponent.cpp
 */
 
-#include "MouvementComponent.hpp"
-
+#include <ECS/Components/MouvementComponent.hpp>
 #include <iostream>
 
 /**
@@ -86,4 +85,10 @@ void MouvementComponent::setDirY(int y) noexcept
 void MouvementComponent::setSpeed(float speed) noexcept
 {
     speed_ = speed;
+}
+
+void MouvementComponent::setDir(int x, int y) noexcept
+{
+    dirX_ = x;
+    dirY_ = y;
 }

@@ -5,13 +5,11 @@
 ** HitboxSystem.cpp
 */
 
-#include "HitboxSystem.hpp"
-
+#include <ECS/Components/HitboxComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Systems/HitboxSystem.hpp>
 #include <cassert>
 #include <iostream>
-
-#include "HitboxComponent.hpp"
-#include "TransformComponent.hpp"
 
 /**
  * It takes an iterator of entities with a position and hitbox component, and stores it in a private
@@ -19,9 +17,9 @@
  *
  * @param it The iterator to use for the system.
  */
-HitboxSystem::HitboxSystem(std::unique_ptr<EntityManager>& manager) noexcept
+HitboxSystem::HitboxSystem(EntityManager* manager) noexcept
     : manager_(manager)
-    , it_(EntityIterator<TransformComponent, HitboxComponent>(manager->getEntities()))
+    , it_(manager->getEntities())
 {
 }
 
@@ -33,7 +31,6 @@ void HitboxSystem::run()
     size_t other;
 
     for (; !it_.isEnd(); ++it_) {
-        // assert((it_.get()->hasComponents<HitboxComponent, TransformComponent>()));
         if (!(it_.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
         try {
@@ -52,23 +49,26 @@ void HitboxSystem::run()
  *
  * @return The id of the entity that is colliding with the entity passed in.
  */
-void HitboxSystem::checkCollision(std::unique_ptr<Entity>& entity) const
+void HitboxSystem::checkCollision(Entity* entity) const
 {
     for (auto other = EntityIterator<TransformComponent, HitboxComponent>(it_.it); !other.isEnd(); ++other) {
         if (other.get() == entity) { continue; }
 
-        assert((other.get()->hasComponents<HitboxComponent, TransformComponent>()));
+        if (!(other.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
         auto hitbox      = entity->getComponent<HitboxComponent>();
         auto pos         = entity->getComponent<TransformComponent>();
         auto otherHitbox = other.get()->getComponent<HitboxComponent>();
         auto otherPos    = other.get()->getComponent<TransformComponent>();
 
-        if (pos->getX() + hitbox->getWidth() >= otherPos->getX()
-            && pos->getX() <= otherPos->getX() + otherHitbox->getWidth()
-            && pos->getY() + hitbox->getHeight() >= otherPos->getY()
-            && pos->getY() <= otherPos->getY() + otherHitbox->getHeight()) {
-            entity->getComponent<HitboxComponent>()->onCollision(other.get());
+        auto x      = pos->getX();
+        auto y      = pos->getY();
+        auto otherX = otherPos->getX();
+        auto otherY = otherPos->getY();
+
+        if (x + hitbox->getWidth() >= otherX && x <= otherX + otherHitbox->getWidth()
+            && y + hitbox->getHeight() >= otherY && y <= otherY + otherHitbox->getHeight()) {
+            entity->getComponent<HitboxComponent>()->onCollision(other.get(), entity);
         }
     }
 }
