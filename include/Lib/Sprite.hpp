@@ -34,7 +34,6 @@ class Sprite
 
     void               setSpritePath(const std::string& path);
     const std::string& getSpritePath() const;
-    std::bitset<8>     serialize() const;
     void               setX(int x);
     void               setY(int y);
     int                getX() const;

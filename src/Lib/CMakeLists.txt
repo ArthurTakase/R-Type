@@ -23,6 +23,7 @@ add_library(
     Window.cpp
     Sprite.cpp
     Timer.cpp
+    Text.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)

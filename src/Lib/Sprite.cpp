@@ -63,17 +63,6 @@ const std::string& Sprite::getSpritePath() const
 }
 
 /**
- * Return a bitset of 8 bits that represents the sprite.
- *
- * @return A bitset of 8 bits.
- */
-std::bitset<8> Sprite::serialize() const
-{
-    std::bitset<8> serialized;
-    return serialized;
-}
-
-/**
  * This function sets the x coordinate of the sprite.
  *
  * @param x The x coordinate of the sprite.
