@@ -11,6 +11,7 @@
 #include <ECS/Systems/BehaviorSystem.hpp>
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
+#include <ECS/Systems/MouvementSystem.hpp>
 #include <Lib/Lib.hpp>
 
 class Menu
@@ -25,8 +26,10 @@ class Menu
     Menu& operator=(Menu&& rhs) noexcept      = delete;
 
     std::vector<std::string> run() noexcept;
-    int                      createText(int x, int y, std::string txt) noexcept;
+    int                      createText(int x, int y, int size, std::string txt) noexcept;
     int                      createIPMenu() noexcept;
+    int                      createTitleMenu() noexcept;
+    int                      createBackground(int x) noexcept;
 
   private:
     Lib               lib_;
@@ -34,6 +37,7 @@ class Menu
     DrawableSystem    drawableSystem_;
     DestroyableSystem destroyableSystem_;
     BehaviorSystem    behaviorSystem_;
+    MouvementSystem   mouvementSystem_;
 
     std::string ip_;
     std::string port_;

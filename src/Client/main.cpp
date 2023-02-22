@@ -12,11 +12,18 @@
 #include <cstdlib>
 #include <iostream>
 
+std::vector<std::string> checkArgs(int ac, const char* const av[])
+{
+    if (ac != 4) return {"", "", ""};
+    return {av[1], av[2], av[3]};
+}
+
 int main(int ac, const char* const av[])
 {
     Menu                     menu;
-    std::vector<std::string> infos = menu.run();
+    std::vector<std::string> infos = checkArgs(ac, av);
 
+    if (infos[0] == "") infos = menu.run();
     if (infos[0] == "" || infos[1] == "" || infos[2] == "") return 0;
 
     try {
