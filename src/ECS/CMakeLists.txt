@@ -19,6 +19,7 @@ set(
   Components/InputComponent.cpp
   Components/DestroyableComponent.cpp
   Components/TimerComponent.cpp
+  Components/TextComponent.cpp
   Components/SoundComponent.cpp
   Components/MusicComponent.cpp
   Systems/HitboxSystem.cpp
@@ -35,6 +36,7 @@ set(
 add_library(${PROJECT_NAME} ${ECS_SRC})
 
 target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
+target_link_libraries(${PROJECT_NAME} JSONTools)
 
 # Ajouter ici les dossiers contenants les .hpp de l'exec de l'ECS
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

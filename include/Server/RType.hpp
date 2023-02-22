@@ -14,10 +14,15 @@
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
+#include <Json/JsonTools.hpp>
 #include <Serializer/BitSize.hpp>
 #include <memory>
 
 typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
+
+#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
+#define BASIC_ENEMY_ID_SPRITE 2
+#define CURVE_ENEMY_ID_SPRITE 8
 
 /**
  * @brief Game Instance for the server
@@ -42,16 +47,21 @@ class RType
     BehaviorSystem& getBehaviorSystem() noexcept;
     void            init() noexcept;
 
-    int createPlayer(int x, int y) noexcept;
-    int createEnemy(int x, int y) noexcept;
-    int createBackground(int x) noexcept;
-    int createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
-    int createAsteroid(int x) noexcept;
-    int createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
+    int  createPlayer(int x, int y) noexcept;
+    int  createBasicEnemy(int x, int y) noexcept;
+    int  createCurveEnemy(int x, int y) noexcept;
+    int  createSpawner() noexcept;
+    int  createBackground(int x) noexcept;
+    int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
+    int  createAsteroid(int x) noexcept;
+    int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
+    void createEnemyWave(std::string type, json::array_t positions) noexcept;
     int curve(int center, int amplitude, int period, int x) noexcept;
 
   private:
-    bool              looping_ = true;
+    bool              looping_     = true;
+    int               nbEnemyAlive = 0;
+    int               playerLevel  = 1;
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;
     BehaviorSystem    behaviorSystem_;
