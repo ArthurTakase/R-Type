@@ -31,6 +31,7 @@ add_subdirectory(src/NetworkLib)
 add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
 add_subdirectory(src/Serializer)
+add_subdirectory(src/Json)
 
 # ------------------------------
 # Server

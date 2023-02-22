@@ -19,6 +19,8 @@
 
 typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
 
+#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
+
 /**
  * @brief Game Instance for the server
  *

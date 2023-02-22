@@ -1,3 +1,4 @@
+#include <Json/JsonTools.hpp>
 #include <Server/RType.hpp>
 #include <iostream>
 #include <map>
@@ -7,12 +8,12 @@
 int RType::createSpawner() noexcept
 {
     auto spawner = entityManager_.newEntity();
+    json data    = JsonTools::getPatternFromFile(PATTERN_ENEMY_GROUP_FILE_PATH);
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         static std::map<int, std::vector<std::vector<int>>> patterns = {{1, {{{255, 10}, {255, 50}}}}};
         if (nbEnemyAlive != 0) { return; }
-        std::cout << "nbEnnemyAlive == 0" << std::endl;
         try {
             auto level = patterns.at(playerLevel);
             if (level.empty()) {
@@ -26,7 +27,6 @@ int RType::createSpawner() noexcept
             std::cout << pattern[0] << " " << pattern[1] << std::endl;
             createEnemyWave(pattern[0], pattern[1]);
         } catch (const std::out_of_range& e) {
-            std::cout << "OUT OF RANGE" << std::endl;
             return;
         }
     }});
@@ -37,8 +37,5 @@ int RType::createSpawner() noexcept
 
 void RType::createEnemyWave(int x, int y) noexcept
 {
-    for (int i = 0; i < 4; i++) {
-        createEnemy(x, y);
-        x += 10;
-    }
+    for (int i = 0; i < 4; i++) { createEnemy(x += 10, y); }
 }
