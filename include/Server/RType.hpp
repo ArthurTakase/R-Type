@@ -21,6 +21,8 @@
 typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
 
 #define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
+#define BASIC_ENEMY_ID_SPRITE 2
+#define CURVE_ENEMY_ID_SPRITE 7
 
 /**
  * @brief Game Instance for the server
@@ -46,7 +48,8 @@ class RType
     void            init() noexcept;
 
     int  createPlayer(int x, int y) noexcept;
-    int  createEnemy(int x, int y) noexcept;
+    int  createBasicEnemy(int x, int y) noexcept;
+    int  createCurveEnemy(int x, int y) noexcept;
     int  createSpawner() noexcept;
     int  createBackground(int x) noexcept;
     int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
