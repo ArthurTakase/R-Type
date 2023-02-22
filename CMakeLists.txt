@@ -45,6 +45,7 @@ set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/RType/Enemy_1.cpp
   ${SERVER_DIR}/RType/Misc.cpp
   ${SERVER_DIR}/RType/Player.cpp
+  ${SERVER_DIR}/RType/Spawner.cpp
 )
 
 add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})

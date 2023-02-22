@@ -42,17 +42,21 @@ class RType
     BehaviorSystem& getBehaviorSystem() noexcept;
     void            init() noexcept;
 
-    int createPlayer(int x, int y) noexcept;
-    int createEnemy(int x, int y) noexcept;
-    int createBackground(int x) noexcept;
-    int createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
-    int createAsteroid(int x) noexcept;
-    int createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
+    int  createPlayer(int x, int y) noexcept;
+    int  createEnemy(int x, int y) noexcept;
+    int  createSpawner() noexcept;
+    int  createBackground(int x) noexcept;
+    int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
+    int  createAsteroid(int x) noexcept;
+    int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
+    void createEnemyWave(int x, int y) noexcept;
 
     int curve(int center, int amplitude, int period, int x) noexcept;
 
   private:
-    bool              looping_ = true;
+    bool              looping_     = true;
+    int               nbEnemyAlive = 0;
+    int               playerLevel  = 1;
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;
     BehaviorSystem    behaviorSystem_;
