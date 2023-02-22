@@ -25,7 +25,7 @@ Menu::Menu()
     createIPMenu();
 }
 
-void Menu::run() noexcept
+std::vector<std::string> Menu::run() noexcept
 {
     auto& window = lib_.getWindow();
     int   input;
@@ -40,6 +40,8 @@ void Menu::run() noexcept
     }
 
     window.close();
+
+    return {ip_, port_, client_port_};
 }
 
 int Menu::createText(int x, int y, std::string txt) noexcept
@@ -74,7 +76,10 @@ int Menu::createIPMenu() noexcept
         static int                       i    = 0;
         static const std::vector<int>    allX = {80, 130, 180};
 
-        if (std::find(exit.begin(), exit.end(), input) != exit.end()) open = false;
+        if (std::find(exit.begin(), exit.end(), input) != exit.end()) {
+            for (auto& t : txt) *t = "";
+            open = false;
+        }
         if (std::find(numpad.begin(), numpad.end(), input) != numpad.end()) {
             *txt[i] += std::to_string(input - 75);
             createText(txt[i]->size() * 15, allX[i], std::to_string(input - 75));
@@ -84,9 +89,12 @@ int Menu::createIPMenu() noexcept
             createText(txt[i]->size() * 15, allX[i], ".");
         }
         if (input == 58) { // return
-            std::cout << i << ": " << *txt[i] << std::endl;
-            if (i < 2) i++;
-            // TODO else tenter la connexion
+            if (i == 3) open = false;
+            else if (txt[i]->length() > 1)
+                i++;
+            else {
+                std::cout << "Invalid input" << std::endl;
+            }
         }
         if (input == 59) { // backspace
             if (txt[i]->length() > 0) {

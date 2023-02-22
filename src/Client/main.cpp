@@ -14,13 +14,16 @@
 
 int main(int ac, const char* const av[])
 {
+    Menu                     menu;
+    std::vector<std::string> infos = menu.run();
+
+    if (infos[0] == "" || infos[1] == "" || infos[2] == "") return 0;
+
     try {
-        // Address       serverAddress = HostHandler::getHostAddress(ac, av);
-        // Address::Port clientPort    = HostHandler::getClientPort(ac, av);
-        // UdpClient     client(serverAddress, clientPort);
-        // client.run();
-        Menu menu;
-        menu.run();
+        Address       serverAddress = HostHandler::getHostAddress(infos);
+        Address::Port clientPort    = HostHandler::getClientPort(infos);
+        UdpClient     client(serverAddress, clientPort);
+        client.run();
 
     } catch (Error const& error) {
         std::cerr << error.what() << std::endl;

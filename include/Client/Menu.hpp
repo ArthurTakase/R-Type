@@ -24,9 +24,9 @@ class Menu
     Menu& operator=(const Menu& rhs) noexcept = delete;
     Menu& operator=(Menu&& rhs) noexcept      = delete;
 
-    void run() noexcept;
-    int  createText(int x, int y, std::string txt) noexcept;
-    int  createIPMenu() noexcept;
+    std::vector<std::string> run() noexcept;
+    int                      createText(int x, int y, std::string txt) noexcept;
+    int                      createIPMenu() noexcept;
 
   private:
     Lib               lib_;
