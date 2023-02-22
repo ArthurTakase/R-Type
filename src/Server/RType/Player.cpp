@@ -1,13 +1,5 @@
-#include <ECS/Components/AnimationComponent.hpp>
-#include <ECS/Components/BehaviorComponent.hpp>
-#include <ECS/Components/DestroyableComponent.hpp>
-#include <ECS/Components/DrawableComponent.hpp>
-#include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/InputComponent.hpp>
-#include <ECS/Components/MouvementComponent.hpp>
-#include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TimerComponent.hpp>
-#include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <iostream>
 
