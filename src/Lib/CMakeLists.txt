@@ -8,6 +8,7 @@ option(
   "Should SFML be declared with FetchContent functions to be compatible. This doesn't not allow CPM cache to work."
   ON
 )
+
 # Download this repository
 include(FetchContent)
 FetchContent_Declare(
@@ -18,14 +19,16 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(sfml)
 
 add_library(
-    ${PROJECT_NAME}
-    Lib.cpp
-    Window.cpp
-    Sprite.cpp
-    Timer.cpp
-    Text.cpp
+  ${PROJECT_NAME}
+  Lib.cpp
+  Window.cpp
+  Sprite.cpp
+  Timer.cpp
+  Text.cpp
+  Sound.cpp
+  Music.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
 
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

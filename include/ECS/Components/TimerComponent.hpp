@@ -27,5 +27,5 @@ class TimerComponent : public IComponent
     Timer& getTimer() noexcept;
 
   private:
-    Timer timer;
+    Timer timer_;
 };

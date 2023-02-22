@@ -10,6 +10,8 @@
 #include <ECS/Entity/EntityManager.hpp>
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
+#include <ECS/Systems/MusicSystem.hpp>
+#include <ECS/Systems/SoundSystem.hpp>
 #include <Lib/Lib.hpp>
 #include <Serializer/BitSize.hpp>
 #include <queue>
@@ -34,10 +36,12 @@ class Game
   private:
     EntityManager           manager_;
     Lib                     lib_;
-    std::queue<GamePacket>& dataReceived_;
-    std::mutex&             mutexForPacket_;
     DrawableSystem          drawableSystem_;
     DestroyableSystem       destroyableSystem_;
+    SoundSystem             soundSystem_;
+    MusicSystem             musicSystem_;
+    std::queue<GamePacket>& dataReceived_;
+    std::mutex&             mutexForPacket_;
 
     void updateOrCreateEntity(GamePacket packet) noexcept;
 };

@@ -20,12 +20,16 @@ set(
   Components/DestroyableComponent.cpp
   Components/TimerComponent.cpp
   Components/TextComponent.cpp
+  Components/SoundComponent.cpp
+  Components/MusicComponent.cpp
   Systems/HitboxSystem.cpp
   Systems/MouvementSystem.cpp
   Systems/BehaviorSystem.cpp
   Systems/AnimationSystem.cpp
   Systems/DrawableSystem.cpp
   Systems/DestroyableSystem.cpp
+  Systems/SoundSystem.cpp
+  Systems/MusicSystem.cpp
 )
 
 # Merge
