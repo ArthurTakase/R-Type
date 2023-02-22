@@ -26,10 +26,6 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     , musicSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
-
-    auto        sound          = manager_.newEntity();
-    std::string path           = "./assets/audio/loading.wav";
-    sound->addComponent(MusicComponent(path));
 }
 
 /**
