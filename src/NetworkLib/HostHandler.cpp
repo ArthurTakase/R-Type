@@ -62,16 +62,16 @@ Address::Ip HostHandler::getIp(std::string_view hostname)
  *
  * @return an Address, which is an encapsulation of the host address.
  */
-Address HostHandler::getHostAddress(std::vector<std::string>& av)
+Address HostHandler::getHostAddress(int ac, const char* const av[])
 {
     Address serverInfos;
 
-    if (av.size() != 3) throw Error("Usage: ./r-type_client [server port] [server ip] [client port]");
+    if (ac != 4) throw Error("Usage: ./r-type_client [server port] [server ip] [client port]");
 
-    serverInfos.port = std::atoi(av[1].c_str());
+    serverInfos.port = std::atoi(av[1]);
     if (serverInfos.port <= 0) throw Error("Port must be a positive number");
 
-    serverInfos.ip = getIp(av[0].c_str());
+    serverInfos.ip = getIp(av[2]);
     if (serverInfos.ip <= 0) throw Error("No server found with this IP address");
 
     return (serverInfos);
@@ -85,9 +85,9 @@ Address HostHandler::getHostAddress(std::vector<std::string>& av)
  *
  * @return The client port number encapsulated.
  */
-Address::Port HostHandler::getClientPort(std::vector<std::string>& av)
+Address::Port HostHandler::getClientPort(int ac, const char* const av[])
 {
-    Address::Port clientPort = std::atoi(av[2].c_str());
+    Address::Port clientPort = std::atoi(av[3]);
     if (clientPort <= 0) throw Error("Port must be a positive number");
 
     return (clientPort);

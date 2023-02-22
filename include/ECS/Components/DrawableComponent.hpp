@@ -20,7 +20,6 @@
 class DrawableComponent : public IComponent
 {
   public:
-    DrawableComponent();
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId);
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY);
     ~DrawableComponent() noexcept = default;

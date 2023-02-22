@@ -8,8 +8,6 @@
 #include <ECS/Components/DrawableComponent.hpp>
 #include <iostream>
 
-DrawableComponent::DrawableComponent() {}
-
 /**
  * It's a constructor for the DrawableComponent class
  *
