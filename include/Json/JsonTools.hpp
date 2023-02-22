@@ -15,7 +15,7 @@ class JsonTools
     JsonTools& operator=(const JsonTools& other)     = delete;
     JsonTools& operator=(JsonTools&& other) noexcept = delete;
 
-    [[nodiscard]] static json getPatternFromFile(std::string filePath);
+    [[nodiscard]] static json getGroupFromFile(std::string filePath);
 
   protected:
   private:

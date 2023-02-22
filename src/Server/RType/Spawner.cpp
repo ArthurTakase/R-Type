@@ -1,9 +1,6 @@
-#include <Json/JsonTools.hpp>
 #include <Server/RType.hpp>
 #include <iostream>
 #include <map>
-#include <stdexcept>
-#include <vector>
 
 int RType::createSpawner() noexcept
 {
@@ -11,21 +8,20 @@ int RType::createSpawner() noexcept
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
-        static int        pattern_index = 0;
-        const static json data          = JsonTools::getPatternFromFile(PATTERN_ENEMY_GROUP_FILE_PATH);
+        static int        group_index = 0;
+        const static json data        = JsonTools::getGroupFromFile(PATTERN_ENEMY_GROUP_FILE_PATH);
 
         if (nbEnemyAlive != 0) { return; }
         try {
             auto level = data.at(std::to_string(playerLevel));
-            if (pattern_index >= level.size() || level.empty()) {
-                pattern_index = 0;
+            if (group_index >= level.size() || level.empty()) {
+                group_index = 0;
                 playerLevel += 1;
                 return;
             }
-            auto pattern = level[pattern_index];
-            std::cout << pattern[0] << " " << pattern[1] << std::endl;
-            createEnemyWave(pattern[0], pattern[1]);
-            pattern_index += 1;
+            auto group = level[group_index];
+            createEnemyWave(group["type"], group["positions"]);
+            group_index += 1;
         } catch (const json::out_of_range& e) {
             return;
         }
@@ -35,7 +31,9 @@ int RType::createSpawner() noexcept
     return spawner->getId();
 }
 
-void RType::createEnemyWave(int x, int y) noexcept
+void RType::createEnemyWave(std::string type, json::array_t positions) noexcept
 {
-    for (int i = 0; i < 4; i++) { createEnemy(x += 10, y); }
+    std::map<std::string, int (RType::*)(int, int)> creation = {
+        {"basic", &RType::createBasicEnemy}, {"curve", &RType::createCurveEnemy}};
+    for (auto& position : positions) { (this->*(creation[type]))(position[0], position[1]); }
 }

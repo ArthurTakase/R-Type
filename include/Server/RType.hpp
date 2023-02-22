@@ -14,6 +14,7 @@
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
+#include <Json/JsonTools.hpp>
 #include <Serializer/BitSize.hpp>
 #include <memory>
 
@@ -51,7 +52,7 @@ class RType
     int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-    void createEnemyWave(int x, int y) noexcept;
+    void createEnemyWave(std::string type, json::array_t positions) noexcept;
 
     int curve(int center, int amplitude, int period, int x) noexcept;
 
