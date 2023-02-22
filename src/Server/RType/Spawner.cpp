@@ -8,25 +8,25 @@
 int RType::createSpawner() noexcept
 {
     auto spawner = entityManager_.newEntity();
-    json data    = JsonTools::getPatternFromFile(PATTERN_ENEMY_GROUP_FILE_PATH);
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
-        static std::map<int, std::vector<std::vector<int>>> patterns = {{1, {{{255, 10}, {255, 50}}}}};
+        static int        pattern_index = 0;
+        const static json data          = JsonTools::getPatternFromFile(PATTERN_ENEMY_GROUP_FILE_PATH);
+
         if (nbEnemyAlive != 0) { return; }
         try {
-            auto level = patterns.at(playerLevel);
-            if (level.empty()) {
+            auto level = data.at(std::to_string(playerLevel));
+            if (pattern_index >= level.size() || level.empty()) {
+                pattern_index = 0;
                 playerLevel += 1;
                 return;
             }
-            auto pattern = level.back();
-            std::cout << "level size1 = " << level.size() << std::endl;
-            level.pop_back();
-            std::cout << "level size2 = " << level.size() << std::endl;
+            auto pattern = level[pattern_index];
             std::cout << pattern[0] << " " << pattern[1] << std::endl;
             createEnemyWave(pattern[0], pattern[1]);
-        } catch (const std::out_of_range& e) {
+            pattern_index += 1;
+        } catch (const json::out_of_range& e) {
             return;
         }
     }});
