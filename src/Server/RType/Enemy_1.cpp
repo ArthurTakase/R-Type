@@ -28,6 +28,8 @@ int RType::createBasicEnemy(int x, int y) noexcept
         auto  trans = entity->getComponent<TransformComponent>();
         auto& timer = entity->getComponent<TimerComponent>()->getTimer();
 
+        auto x = trans->getX();
+
         if (timer.isOver()) {
             auto bDamage = stat->getStat(RTypeStats::Damage);
             auto bSpeed  = stat->getStat(RTypeStats::Speed);
