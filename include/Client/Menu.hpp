@@ -8,7 +8,7 @@
 #pragma once
 
 #include <ECS/Entity/EntityManager.hpp>
-#include <ECS/Systems/AnimationSystem.hpp>
+#include <ECS/Systems/BehaviorSystem.hpp>
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <Lib/Lib.hpp>
@@ -25,12 +25,19 @@ class Menu
     Menu& operator=(Menu&& rhs) noexcept      = delete;
 
     void run() noexcept;
-    int  createInput(int x, std::string txt) noexcept;
+    int  createText(int x, int y, std::string txt) noexcept;
+    int  createIPMenu() noexcept;
 
   private:
     Lib               lib_;
     EntityManager     manager_;
     DrawableSystem    drawableSystem_;
     DestroyableSystem destroyableSystem_;
-    AnimationSystem   animationSystem_;
+    BehaviorSystem    behaviorSystem_;
+
+    std::string ip_;
+    std::string port_;
+    std::string client_port_;
+
+    bool open = true;
 };
