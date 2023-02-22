@@ -40,5 +40,6 @@ class EntityManager
 
   private:
     size_t                               createId() const noexcept;
+    size_t                               higherId() const noexcept;
     std::vector<std::unique_ptr<Entity>> entities_;
 };
