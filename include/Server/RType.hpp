@@ -48,7 +48,6 @@ class RType
     int createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
     int createAsteroid(int x) noexcept;
     int createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-
     int curve(int center, int amplitude, int period, int x) noexcept;
 
   private:
