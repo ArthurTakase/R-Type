@@ -13,7 +13,7 @@
 
 namespace SpriteIds
 {
-#define BACKGROUND_ID 45
+static constexpr unsigned int BACKGROUND_ID = 45;
 }
 
 /**
