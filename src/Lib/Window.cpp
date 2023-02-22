@@ -81,3 +81,15 @@ void Window::draw(Sprite& sprite, int xtexture, int ytexture, int width, int hei
 
     window.draw(*tempSprite);
 }
+
+/**
+ * It draws a text on the window
+ *
+ * @param text The text to draw.
+ */
+void Window::draw(Text& text)
+{
+    sf::Text* tempText = static_cast<sf::Text*>(text.getText());
+
+    window.draw(*tempText);
+}
