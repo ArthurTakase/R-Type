@@ -14,8 +14,6 @@ Text::Text()
     , fontSize_(0)
     , x_(0)
     , y_(0)
-    , color_(sf::Color::White)
-    , text_("", font_)
 {
 }
 
@@ -25,8 +23,6 @@ Text::Text(const std::string& text, const std::string& fontPath, int fontSize, i
     , fontSize_(fontSize)
     , x_(x)
     , y_(y)
-    , color_(sf::Color::White)
-    , text_(text.c_str(), font_)
 {
     if (text == "" || fontPath == "") { return; }
 
@@ -107,14 +103,4 @@ int Text::getY() const
 int Text::getFontSize() const
 {
     return fontSize_;
-}
-
-std::string Text::getTextString() const
-{
-    return textString_;
-}
-
-std::string Text::getFontPath() const
-{
-    return fontPath_;
 }

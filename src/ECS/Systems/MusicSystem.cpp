@@ -20,8 +20,7 @@ void MusicSystem::run()
 
         if (!entity->hasComponent<MusicComponent>()) { continue; }
 
-        auto music = entity->getComponent<MusicComponent>();
-        music->play();
+        entity->getComponent<MusicComponent>()->play();
     }
     it_.reset();
 }

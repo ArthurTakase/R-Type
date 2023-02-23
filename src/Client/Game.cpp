@@ -66,7 +66,7 @@ Lib& Game::getLib() noexcept
  */
 void Game::updateOrCreateEntity(GamePacket packet) noexcept
 {
-    auto m_entity = manager_.getEntity(packet.id);
+    auto m_entity = manager_.getEntity(static_cast<size_t>(packet.id));
 
     if (m_entity == nullptr) {
         auto entity = manager_.newEntity();
@@ -86,6 +86,8 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
         auto destroy   = m_entity->getComponent<DestroyableComponent>();
+
+        if (transform == nullptr || drawable == nullptr || destroy == nullptr) { return; }
 
         transform->setX(packet.x);
         transform->setY(packet.y);

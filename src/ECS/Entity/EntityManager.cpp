@@ -66,7 +66,7 @@ std::vector<std::unique_ptr<Entity>>& EntityManager::getEntities() noexcept
 size_t EntityManager::createId() const noexcept
 {
     if (entities_.empty()) { return 0; }
-    return higherId() + 1;
+    return entities_[entities_.size() - 1]->getId() + 1;
 }
 
 /**
@@ -89,19 +89,4 @@ Entity* EntityManager::newEntity() noexcept
     std::unique_ptr<Entity> entity = std::make_unique<Entity>(createId());
     entities_.emplace_back(std::move(entity));
     return entities_[entities_.size() - 1].get();
-}
-
-/**
- * Get the higher id in all entities
- *
- * @return The higher id.
- */
-size_t EntityManager::higherId() const noexcept
-{
-    size_t higher_id = 0;
-    for (auto& entity : entities_) {
-        size_t entity_id = entity->getId();
-        if (entity_id > higher_id) { higher_id = entity_id; }
-    }
-    return higher_id;
 }

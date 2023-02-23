@@ -5,12 +5,13 @@
 ** Sound
 */
 
-#include <Error/Error.hpp>
 #include <Lib/Sound.hpp>
+#include <iostream>
 
-Sound::Sound(const std::string& path) : path_(path)
+Sound::Sound(const std::string& path)
+    : path_(path)
 {
-    if (!buffer_.loadFromFile(path)) throw Error("Error: Could not load sound from file: " + path);
+    if (!buffer_.loadFromFile(path)) std::cerr << "Error: Could not load sound from file" << std::endl;
 
     sound_.setBuffer(buffer_);
 }

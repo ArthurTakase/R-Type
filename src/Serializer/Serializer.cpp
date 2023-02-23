@@ -13,6 +13,7 @@
  *
  * @return A vector of uint8_t
  */
+
 RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
 {
     // assert((entity->hasComponents<TransformComponent, DrawableComponent>()));

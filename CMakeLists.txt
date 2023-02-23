@@ -31,7 +31,6 @@ add_subdirectory(src/NetworkLib)
 add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
 add_subdirectory(src/Serializer)
-add_subdirectory(src/Json)
 
 # ------------------------------
 # Server
@@ -46,7 +45,6 @@ set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/RType/Enemy_1.cpp
   ${SERVER_DIR}/RType/Misc.cpp
   ${SERVER_DIR}/RType/Player.cpp
-  ${SERVER_DIR}/RType/Spawner.cpp
 )
 
 add_executable(${RTYPE_SERVER} ${SERVER_DIR}/main.cpp ${RTYPE_SERVER_SRC})
@@ -66,9 +64,6 @@ target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
 
 target_include_directories(${RTYPE_SERVER} PRIVATE include)
 
-# find_path(CHAISCRIPT_INCLUDE_DIRS "chaiscript/chaiscript.hpp")
-# target_include_directories(${RTYPE_SERVER} PRIVATE ${CHAISCRIPT_INCLUDE_DIRS})
-
 # ------------------------------
 # Client
 # ------------------------------
@@ -78,7 +73,6 @@ set(CLIENT_DIR src/Client)
 set(RTYPE_CLIENT_SRC
   ${CLIENT_DIR}/UdpClient.cpp
   ${CLIENT_DIR}/Game.cpp
-  ${CLIENT_DIR}/Menu.cpp
 )
 
 add_executable(${RTYPE_CLIENT} ${CLIENT_DIR}/main.cpp ${RTYPE_CLIENT_SRC})
