@@ -166,18 +166,18 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                     // TODO call the real method deserialize
                     // GamePacket entity = Deserializer::deserialize(infos.data);
                     GamePacket packet;
-                    packet.x        = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
-                    packet.y        = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
-                    packet.x        = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
-                    packet.y        = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
-                    packet.idSprite = infos.data[i + PacketName::ID_SPRITE];
-                    packet.width    = infos.data[i + PacketName::WIDTH];
-                    packet.height   = infos.data[i + PacketName::HEIGHT];
-                    packet.scaleX   = infos.data[i + PacketName::SCALE_X] / 10;
-                    packet.scaleY   = infos.data[i + PacketName::SCALE_Y] / 10;
-                    packet.offsetX  = infos.data[i + PacketName::OFFSET_X];
-                    packet.offsetY  = infos.data[i + PacketName::OFFSET_Y];
-                    packet.id       = infos.data[i + PacketName::ID];
+                    packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
+                    packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
+                    packet.x         = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
+                    packet.y         = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
+                    packet.idSprite  = infos.data[i + PacketName::ID_SPRITE];
+                    packet.width     = infos.data[i + PacketName::WIDTH];
+                    packet.height    = infos.data[i + PacketName::HEIGHT];
+                    packet.scaleX    = infos.data[i + PacketName::SCALE_X] / 10;
+                    packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
+                    packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
+                    packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
+                    packet.id        = infos.data[i + PacketName::ID];
                     packet.destroyed = infos.data[i + PacketName::DESTROYED];
                     {
                         std::lock_guard<std::mutex> lock(mutexForPacket_);
