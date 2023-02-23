@@ -12,6 +12,7 @@
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Components/TextComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
+#include <ECS/Components/MusicComponent.hpp>
 #include <iostream>
 #include <vector>
 
@@ -20,11 +21,10 @@ Menu::Menu()
     , destroyableSystem_(&manager_)
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
-    , ip_("")
-    , port_("")
-    , client_port_("")
+    , musicSystem_(&manager_)
 {
     createTitleMenu();
+    createMusic();
 }
 
 std::vector<std::string> Menu::run() noexcept
@@ -40,11 +40,19 @@ std::vector<std::string> Menu::run() noexcept
         drawableSystem_.run();
         behaviorSystem_.run();
         mouvementSystem_.run();
+        musicSystem_.run();
     }
 
     window.close();
 
     return {ip_, port_, client_port_};
+}
+
+void Menu::createMusic() noexcept
+{
+    auto music = manager_.newEntity();
+
+    music->addComponent(MusicComponent("assets/audio/loading.wav"));
 }
 
 int Menu::createText(int x, int y, int size, std::string txt) noexcept
@@ -54,7 +62,8 @@ int Menu::createText(int x, int y, int size, std::string txt) noexcept
     text->addComponent(DrawableComponent());
     text->addComponent(TransformComponent(x, y));
     text->addComponent(DestroyableComponent());
-    text->addComponent(TextComponent(txt, "assets/fonts/gameboy.ttf", size, x, y));
+    auto textComponent = TextComponent(txt, "assets/fonts/gameboy.ttf", size, x, y);
+    text->addComponent(textComponent);
 
     return text->getId();
 }
@@ -62,6 +71,10 @@ int Menu::createText(int x, int y, int size, std::string txt) noexcept
 int Menu::createBackground(int x) noexcept
 {
     auto background = manager_.newEntity();
+
+    background->addComponent(TransformComponent(x, 0));
+    background->addComponent(MouvementComponent(-1, 0, 1.0));
+    background->addComponent(DestroyableComponent());
 
     auto behaviorComponent = BehaviorComponent();
     behaviorComponent.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
@@ -74,11 +87,8 @@ int Menu::createBackground(int x) noexcept
     auto& sprite   = drawable.getSprite();
     sprite.setSpritePath("assets/img/r-typesheet0.gif");
 
-    background->addComponent(TransformComponent(x, 0));
     background->addComponent(drawable);
     background->addComponent(behaviorComponent);
-    background->addComponent(MouvementComponent(-1, 0, 1.0));
-    background->addComponent(DestroyableComponent());
 
     return background->getId();
 }
@@ -91,6 +101,10 @@ int Menu::createTitleMenu() noexcept
     int t2  = createText(75, 200, 10, "Press Enter");
 
     auto menu = manager_.newEntity();
+
+    menu->addComponent(MouvementComponent(0, 1, 1));
+    menu->addComponent(TransformComponent(20, 00));
+    menu->addComponent(DestroyableComponent());
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, bg1, bg2, t1, t2](Entity* entity) {
@@ -123,9 +137,6 @@ int Menu::createTitleMenu() noexcept
 
     menu->addComponent(behavior);
     menu->addComponent(drawable);
-    menu->addComponent(MouvementComponent(0, 1, 1));
-    menu->addComponent(TransformComponent(20, 00));
-    menu->addComponent(DestroyableComponent());
 
     return menu->getId();
 }
