@@ -8,39 +8,34 @@
 #include <Error/Error.hpp>
 #include <Lib/Music.hpp>
 
-Music::Music(const std::string& path)
+Music::Music(const std::string& path) : music_(std::make_unique<sf::Music>())
 {
-    if (!music_.openFromFile(path)) throw Error("Error: Could not load music from file: " + path);
+    if (!music_->openFromFile(path)) throw Error("Error: Could not load music from file: " + path);
 
-    music_.setLoop(true);
-}
-
-Music::~Music() noexcept
-{
-    this->stop();
+    music_->setLoop(true);
 }
 
 void Music::play() noexcept
 {
-    music_.play();
+    music_->play();
 }
 
 void Music::pause() noexcept
 {
-    music_.pause();
+    music_->pause();
 }
 
 void Music::stop() noexcept
 {
-    music_.stop();
+    music_->stop();
 }
 
 void Music::setVolume(float value) noexcept
 {
-    music_.setVolume(value);
+    music_->setVolume(value);
 }
 
 void Music::setLoop(bool value) noexcept
 {
-    music_.setLoop(value);
+    music_->setLoop(value);
 }

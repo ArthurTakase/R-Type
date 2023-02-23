@@ -14,12 +14,12 @@ class MusicComponent : public IComponent
 {
   public:
     MusicComponent(const std::string& path);
-    MusicComponent(const MusicComponent& other) noexcept;
-    MusicComponent(MusicComponent&& other) noexcept = delete;
+    MusicComponent(const MusicComponent& other) noexcept = delete;
+    MusicComponent(MusicComponent&& other) noexcept = default;
     ~MusicComponent() noexcept                      = default;
 
     MusicComponent& operator=(const MusicComponent& rhs) noexcept = delete;
-    MusicComponent& operator=(MusicComponent&& rhs) noexcept      = delete;
+    MusicComponent& operator=(MusicComponent&& rhs) noexcept      = default;
 
     bool        getIsPlayed() const noexcept;
     std::string getPath() const noexcept;

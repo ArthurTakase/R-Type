@@ -27,10 +27,10 @@ class Sprite
     Sprite(std::string path, int x, int y);
     ~Sprite() noexcept                   = default;
     Sprite(const Sprite& other) noexcept = delete;
-    Sprite(Sprite&& other) noexcept      = delete;
+    Sprite(Sprite&& other) noexcept      = default;
 
     Sprite& operator=(const Sprite& rhs) noexcept = delete;
-    Sprite& operator=(Sprite&& rhs) noexcept      = delete;
+    Sprite& operator=(Sprite&& rhs) noexcept      = default;
 
     void               setSpritePath(const std::string& path);
     const std::string& getSpritePath() const;

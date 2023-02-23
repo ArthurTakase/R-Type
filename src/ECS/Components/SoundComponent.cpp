@@ -12,12 +12,6 @@ SoundComponent::SoundComponent(const std::string& path)
 {
 }
 
-SoundComponent::SoundComponent(const SoundComponent& other) noexcept
-    : sound_(other.getSound().getPath())
-    , isPlayed_(other.getIsPlayed())
-{
-}
-
 Sound SoundComponent::getSound() const noexcept
 {
     return sound_;

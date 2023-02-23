@@ -91,6 +91,10 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         auto drawable  = m_entity->getComponent<DrawableComponent>();
         auto destroy   = m_entity->getComponent<DestroyableComponent>();
 
+        if (transform == nullptr || drawable == nullptr || destroy == nullptr) {
+            return;
+        }
+
         transform->setX(packet.x);
         transform->setY(packet.y);
         drawable->setScale(packet.scaleX, packet.scaleY);

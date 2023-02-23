@@ -24,10 +24,10 @@ class DrawableComponent : public IComponent
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY);
     ~DrawableComponent() noexcept = default;
     DrawableComponent(const DrawableComponent& other) noexcept;
-    DrawableComponent(DrawableComponent&& other) noexcept = delete;
+    DrawableComponent(DrawableComponent&& other) noexcept = default;
 
     DrawableComponent& operator=(const DrawableComponent& rhs) noexcept = delete;
-    DrawableComponent& operator=(DrawableComponent&& rhs) noexcept      = delete;
+    DrawableComponent& operator=(DrawableComponent&& rhs) noexcept      = default;
 
     int     getOffsetX() const noexcept;
     int     getOffsetY() const noexcept;

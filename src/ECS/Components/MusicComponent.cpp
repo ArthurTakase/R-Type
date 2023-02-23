@@ -13,13 +13,6 @@ MusicComponent::MusicComponent(const std::string& path)
 {
 }
 
-MusicComponent::MusicComponent(const MusicComponent& other) noexcept
-    : music_(other.getPath())
-    , isPlayed_(other.getIsPlayed())
-    , path_(other.getPath())
-{
-}
-
 bool MusicComponent::getIsPlayed() const noexcept
 {
     return isPlayed_;
