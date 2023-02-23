@@ -19,10 +19,10 @@ class MouvementComponent : public IComponent
     MouvementComponent(int dirX, int dirY, float speed);
     ~MouvementComponent() noexcept;
     MouvementComponent(const MouvementComponent& other) noexcept = default;
-    MouvementComponent(MouvementComponent&& other) noexcept      = delete;
+    MouvementComponent(MouvementComponent&& other) noexcept      = default;
 
-    MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = delete;
-    MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = delete;
+    MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = default;
+    MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = default;
 
     float getDirX() const noexcept;
     float getDirY() const noexcept;

@@ -12,61 +12,24 @@
 #include <Tools/Curve.hpp>
 #include <iostream>
 
-int RType::createBasicEnemy(int x, int y) noexcept
+int RType::createEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
-    nbEnemyAlive += 1;
 
-    auto hitbox = HitboxComponent(16, 16);
-    hitbox.setOnCollision(
-        std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
-
-    auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, y](Entity* entity) {
-        auto  dest  = entity->getComponent<DestroyableComponent>();
-        auto  stat  = entity->getComponent<StatComponent>();
-        auto  trans = entity->getComponent<TransformComponent>();
-        auto& timer = entity->getComponent<TimerComponent>()->getTimer();
-
-        auto x = trans->getX();
-
-        if (timer.isOver()) {
-            auto bDamage = stat->getStat(RTypeStats::Damage);
-            auto bSpeed  = stat->getStat(RTypeStats::Speed);
-            auto bSize   = stat->getStat(RTypeStats::Size);
-            createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
-        }
-        if (stat->getStat(RTypeStats::Life) <= 0) {
-            nbEnemyAlive -= 1;
-            dest->destroy();
-        }
-        if (x <= -16) { trans->setX(255); }
-    }});
-
-    enemy->addComponent(DrawableComponent(0, 0, 16, 16, BASIC_ENEMY_ID_SPRITE));
+    enemy->addComponent(DrawableComponent(0, 0, 16, 16, 2));
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
     enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent({30, 2, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
     enemy->addComponent(TimerComponent(0.8));
-    enemy->addComponent(hitbox);
-    enemy->addComponent(behavior);
-
-    return enemy->getId();
-}
-
-int RType::createCurveEnemy(int x, int y) noexcept
-{
-    auto enemy = entityManager_.newEntity();
-    nbEnemyAlive += 1;
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(
         std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, y](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, y](Entity* entity) {
         auto  dest  = entity->getComponent<DestroyableComponent>();
         auto  stat  = entity->getComponent<StatComponent>();
         auto  trans = entity->getComponent<TransformComponent>();
@@ -81,20 +44,10 @@ int RType::createCurveEnemy(int x, int y) noexcept
             auto bSize   = stat->getStat(RTypeStats::Size);
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) {
-            nbEnemyAlive -= 1;
-            dest->destroy();
-        }
+        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
         if (x <= -16) { trans->setX(255); }
     }});
 
-    enemy->addComponent(DrawableComponent(0, 0, 16, 16, CURVE_ENEMY_ID_SPRITE));
-    enemy->addComponent(AnimationComponent(128, 0.1));
-    enemy->addComponent(TransformComponent(x, y));
-    enemy->addComponent(DestroyableComponent());
-    enemy->addComponent(StatComponent({30, 2, 6, 1}));
-    enemy->addComponent(MouvementComponent(-1, 0, 2.0));
-    enemy->addComponent(TimerComponent(0.8));
     enemy->addComponent(hitbox);
     enemy->addComponent(behavior);
 
@@ -106,8 +59,15 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
     auto  bullet = entityManager_.newEntity();
     float life   = type ? 1.0 : 200.0;
 
+    bullet->addComponent(TransformComponent(x, y));
+    bullet->addComponent(MouvementComponent(-1, 0, speed));
+    bullet->addComponent(DrawableComponent(0, 0, 16, 16, type ? 6 : 5, size, size));
+    bullet->addComponent(AnimationComponent(32, 0.1));
+    bullet->addComponent(DestroyableComponent());
+    bullet->addComponent(StatComponent({life, damage}));
+
     auto hitbox = HitboxComponent(16, 16);
-    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[&](Entity* entity, Entity* me) {
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto stat   = entity->getComponent<StatComponent>();
             auto statMe = me->getComponent<StatComponent>();
@@ -121,7 +81,7 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
     }});
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
         auto trans = entity->getComponent<TransformComponent>();
         auto dest  = entity->getComponent<DestroyableComponent>();
         auto stat  = entity->getComponent<StatComponent>();
@@ -131,12 +91,6 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
 
     bullet->addComponent(hitbox);
     bullet->addComponent(behavior);
-    bullet->addComponent(TransformComponent(x, y));
-    bullet->addComponent(MouvementComponent(-1, 0, speed));
-    bullet->addComponent(DrawableComponent(0, 0, 16, 16, type ? 6 : 5, size, size));
-    bullet->addComponent(AnimationComponent(32, 0.1));
-    bullet->addComponent(DestroyableComponent());
-    bullet->addComponent(StatComponent({life, damage}));
 
     return bullet->getId();
 }

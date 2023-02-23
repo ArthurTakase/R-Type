@@ -66,9 +66,6 @@ target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
 
 target_include_directories(${RTYPE_SERVER} PRIVATE include)
 
-# find_path(CHAISCRIPT_INCLUDE_DIRS "chaiscript/chaiscript.hpp")
-# target_include_directories(${RTYPE_SERVER} PRIVATE ${CHAISCRIPT_INCLUDE_DIRS})
-
 # ------------------------------
 # Client
 # ------------------------------

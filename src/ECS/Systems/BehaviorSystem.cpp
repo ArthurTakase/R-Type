@@ -33,7 +33,7 @@ void BehaviorSystem::run()
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
-        if (!entity->hasComponents<BehaviorComponent>()) { continue; }
+        if (!entity->hasComponent<BehaviorComponent>()) { continue; }
 
         entity->getComponent<BehaviorComponent>()->onUpdate(entity);
     }
