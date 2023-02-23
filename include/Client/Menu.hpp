@@ -12,6 +12,7 @@
 #include <ECS/Systems/DestroyableSystem.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
+#include <ECS/Systems/MusicSystem.hpp>
 #include <Lib/Lib.hpp>
 
 class Menu
@@ -30,6 +31,7 @@ class Menu
     int                      createIPMenu() noexcept;
     int                      createTitleMenu() noexcept;
     int                      createBackground(int x) noexcept;
+    void                     createMusic() noexcept;
 
   private:
     Lib               lib_;
@@ -38,10 +40,11 @@ class Menu
     DestroyableSystem destroyableSystem_;
     BehaviorSystem    behaviorSystem_;
     MouvementSystem   mouvementSystem_;
+    MusicSystem       musicSystem_;
 
-    std::string ip_;
-    std::string port_;
-    std::string client_port_;
+    std::string ip_          = "";
+    std::string port_        = "";
+    std::string client_port_ = "";
 
     bool open = true;
 };

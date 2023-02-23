@@ -34,6 +34,6 @@ int RType::createSpawner() noexcept
 void RType::createEnemyWave(std::string type, json::array_t positions) noexcept
 {
     std::map<std::string, int (RType::*)(int, int)> creation = {
-        {"basic", &RType::createBasicEnemy}, {"curve", &RType::createCurveEnemy}};
+        {"basic", &RType::createBasicEnemy}, {"curve", &RType::createCurvedEnemy}};
     for (auto& position : positions) { (this->*(creation[type]))(position[0], position[1]); }
 }

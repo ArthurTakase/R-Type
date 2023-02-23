@@ -11,11 +11,6 @@
 #include <bitset>
 #include <string>
 
-namespace SpriteIds
-{
-static constexpr unsigned int BACKGROUND_ID = 45;
-}
-
 /**
  * @brief This class is used to create a sprite.
  *
@@ -25,11 +20,11 @@ class Sprite
   public:
     Sprite();
     Sprite(std::string path, int x, int y);
-    ~Sprite() noexcept                   = default;
-    Sprite(const Sprite& other) noexcept = delete;
+    Sprite(const Sprite& other) noexcept = default;
     Sprite(Sprite&& other) noexcept      = default;
+    ~Sprite() noexcept                   = default;
 
-    Sprite& operator=(const Sprite& rhs) noexcept = delete;
+    Sprite& operator=(const Sprite& rhs) noexcept = default;
     Sprite& operator=(Sprite&& rhs) noexcept      = default;
 
     void               setSpritePath(const std::string& path);
