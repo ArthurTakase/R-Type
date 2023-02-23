@@ -107,7 +107,7 @@ void UdpClient::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         handleData(infoReceived);
-    } catch (const NetworkExecError& e) {
+    } catch (const Error& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -121,7 +121,7 @@ void UdpClient::send()
         auto blob = getDataFromQueue();
         try {
             socket_->send(blob.data(), blob.size(), serverAddress_);
-        } catch (const NetworkExecError& e) {
+        } catch (const Error& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
         }

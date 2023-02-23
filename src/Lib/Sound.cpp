@@ -5,8 +5,8 @@
 ** Sound
 */
 
-#include <Error/Error.hpp>
 #include <Lib/Sound.hpp>
+#include <Error/Error.hpp>
 
 Sound::Sound(const std::string& path)
     : path_(path)

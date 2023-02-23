@@ -107,7 +107,7 @@ void Server::receive()
             if (client.address == infoReceived.address) { client.lastPing = endTime; }
         }
         handleData(infoReceived);
-    } catch (const NetworkExecError& e) {
+    } catch (const Error& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -123,7 +123,7 @@ void Server::sendToClient(Client& client, RawData blob) // blob : binary large o
 {
     try {
         socket_->send(blob.data(), blob.size(), client.address);
-    } catch (const NetworkExecError& e) {
+    } catch (const Error& e) {
         std::cerr << e.what() << std::endl;
     }
 }
