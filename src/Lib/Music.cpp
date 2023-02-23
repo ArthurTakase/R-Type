@@ -8,7 +8,8 @@
 #include <Error/Error.hpp>
 #include <Lib/Music.hpp>
 
-Music::Music(const std::string& path) : music_(std::make_unique<sf::Music>())
+Music::Music(const std::string& path)
+    : music_(std::make_unique<sf::Music>())
 {
     if (!music_->openFromFile(path)) throw Error("Error: Could not load music from file: " + path);
 

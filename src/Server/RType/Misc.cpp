@@ -8,11 +8,15 @@
 #include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
-#include <iostream>
 
 int RType::createBackground(int x) noexcept
 {
     auto background = entityManager_.newEntity();
+
+    background->addComponent(TransformComponent(x, 0));
+    background->addComponent(DrawableComponent(0, 0, 255, 255, 0));
+    background->addComponent(MouvementComponent(-1, 0, 2.0));
+    background->addComponent(DestroyableComponent());
 
     auto behaviorComponent = BehaviorComponent();
     behaviorComponent.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
@@ -21,11 +25,7 @@ int RType::createBackground(int x) noexcept
         if (transform->getX() <= -255) { transform->setX(255); }
     }});
 
-    background->addComponent(TransformComponent(x, 0));
-    background->addComponent(DrawableComponent(0, 0, 255, 255, 0));
     background->addComponent(behaviorComponent);
-    background->addComponent(MouvementComponent(-1, 0, 2.0));
-    background->addComponent(DestroyableComponent());
 
     return background->getId();
 }

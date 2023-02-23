@@ -7,20 +7,14 @@
 
 #include <ECS/Components/MusicComponent.hpp>
 
-MusicComponent::MusicComponent(const std::string& path)
-    : music_(path)
-    , path_(path)
+MusicComponent::MusicComponent(const std::string_view& path)
+    : music_(path.data())
 {
 }
 
 bool MusicComponent::getIsPlayed() const noexcept
 {
     return isPlayed_;
-}
-
-std::string MusicComponent::getPath() const noexcept
-{
-    return path_;
 }
 
 void MusicComponent::setPlaying(bool value) noexcept
@@ -30,7 +24,8 @@ void MusicComponent::setPlaying(bool value) noexcept
 
 void MusicComponent::play() noexcept
 {
-    if (isPlayed_) { music_.play();
-    isPlayed_ = false;
-}
+    if (isPlayed_) {
+        music_.play();
+        isPlayed_ = false;
+    }
 }

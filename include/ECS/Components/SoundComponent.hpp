@@ -14,8 +14,8 @@ class SoundComponent : public IComponent
   public:
     SoundComponent(const std::string& path);
     SoundComponent(const SoundComponent& other) noexcept = delete;
-    SoundComponent(SoundComponent&& other) noexcept = default;
-    ~SoundComponent() noexcept = default;
+    SoundComponent(SoundComponent&& other) noexcept      = default;
+    ~SoundComponent() noexcept                           = default;
 
     SoundComponent& operator=(const SoundComponent& rhs) noexcept = delete;
     SoundComponent& operator=(SoundComponent&& rhs) noexcept      = default;
