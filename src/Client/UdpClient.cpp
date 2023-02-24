@@ -106,9 +106,15 @@ void UdpClient::gameLoop() noexcept
     lib.getWindow().open(WIDTH_WINDOW, HEIGHT_WINDOW, WINDOW_NAME.data());
 
     if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
-        serverAddress_ = menu_.run(lib.getWindow());
-        cv_.notify_all();
-        reset();
+        try {
+            serverAddress_ = menu_.run(lib.getWindow());
+            cv_.notify_all();
+            reset();
+        } catch (const Error& e) {
+            std::cerr << e.what() << std::endl;
+            stop();
+            cv_.notify_all();
+        }
     }
 
     while (looping_) {

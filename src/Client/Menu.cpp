@@ -30,7 +30,7 @@ Menu::Menu()
 Address Menu::run(Window& window)
 {
     createTitleMenu(window);
-    createMusic(BG_MUSIC_PATH);
+    // createMusic(BG_MUSIC_PATH);
     drawableSystem_.setWindow(&window);
     Address serverInfos;
 

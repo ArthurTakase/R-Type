@@ -16,6 +16,11 @@ Music::Music(const std::string& path)
     music_->setLoop(true);
 }
 
+Music::~Music() noexcept
+{
+    this->stop();
+}
+
 void Music::play() noexcept
 {
     music_->play();

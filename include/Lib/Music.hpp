@@ -16,7 +16,7 @@ class Music
     explicit Music(const std::string& path);
     Music(const Music& other) noexcept = delete;
     Music(Music&& other) noexcept      = default;
-    ~Music() noexcept                  = default;
+    ~Music() noexcept;
 
     Music& operator=(const Music& rhs) noexcept = delete;
     Music& operator=(Music&& rhs) noexcept      = default;
