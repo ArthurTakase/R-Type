@@ -23,10 +23,10 @@ class AnimationComponent : public IComponent
     AnimationComponent(int limit, float timer_limit);
     ~AnimationComponent() noexcept                               = default;
     AnimationComponent(const AnimationComponent& other) noexcept = default;
-    AnimationComponent(AnimationComponent&& other) noexcept      = default;
+    AnimationComponent(AnimationComponent&& other) noexcept      = delete;
 
-    AnimationComponent& operator=(const AnimationComponent& rhs) noexcept = default;
-    AnimationComponent& operator=(AnimationComponent&& rhs) noexcept      = default;
+    AnimationComponent& operator=(const AnimationComponent& rhs) noexcept = delete;
+    AnimationComponent& operator=(AnimationComponent&& rhs) noexcept      = delete;
 
     int    getLimit() const noexcept;
     void   setLimit(int limit) noexcept;

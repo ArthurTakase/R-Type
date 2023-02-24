@@ -21,10 +21,10 @@ class StatComponent : public IComponent
     StatComponent(std::vector<float> stats);
     ~StatComponent() noexcept;
     StatComponent(const StatComponent& other) noexcept = default;
-    StatComponent(StatComponent&& other) noexcept      = default;
+    StatComponent(StatComponent&& other) noexcept      = delete;
 
-    StatComponent& operator=(const StatComponent& rhs) noexcept = default;
-    StatComponent& operator=(StatComponent&& rhs) noexcept      = default;
+    StatComponent& operator=(const StatComponent& rhs) noexcept = delete;
+    StatComponent& operator=(StatComponent&& rhs) noexcept      = delete;
 
     float getStat(int index) const noexcept;
     void  setStat(int index, float value) noexcept;

@@ -8,11 +8,11 @@
 #include <ECS/Components/TimerComponent.hpp>
 
 TimerComponent::TimerComponent(float time)
-    : timer_(time)
+    : timer(time)
 {
 }
 
 Timer& TimerComponent::getTimer() noexcept
 {
-    return timer_;
+    return timer;
 }

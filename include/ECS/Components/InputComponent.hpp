@@ -18,10 +18,10 @@ class InputComponent : public IComponent
     InputComponent() noexcept;
     ~InputComponent() noexcept                           = default;
     InputComponent(const InputComponent& other) noexcept = default;
-    InputComponent(InputComponent&& other) noexcept      = default;
+    InputComponent(InputComponent&& other) noexcept      = delete;
 
-    InputComponent& operator=(const InputComponent& rhs) noexcept = default;
-    InputComponent& operator=(InputComponent&& rhs) noexcept      = default;
+    InputComponent& operator=(const InputComponent& rhs) noexcept = delete;
+    InputComponent& operator=(InputComponent&& rhs) noexcept      = delete;
 
     int  getInput() noexcept;
     void addInput(int input) noexcept;

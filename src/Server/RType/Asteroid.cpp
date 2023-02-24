@@ -15,37 +15,31 @@ int RType::createAsteroid(int x) noexcept
     auto asteroid = entityManager_.newEntity();
 
     int   y     = (rand() % 239);
-    float speed = static_cast<float>(rand() % 25) / 10 + 5;
-    float scale = static_cast<float>(rand() % 20) / 10 + 1;
-
-    asteroid->addComponent(TransformComponent(x, y));
-    asteroid->addComponent(AnimationComponent(128, 0.1));
-    asteroid->addComponent(MouvementComponent(-1, 0, speed));
-    asteroid->addComponent(DestroyableComponent());
-    asteroid->addComponent(StatComponent({25 * scale, 2}));
+    float speed = (float)(rand() % 25) / 10 + 5;
+    float scale = (float)(rand() % 20) / 10 + 1;
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[=](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         auto trans = entity->getComponent<TransformComponent>();
         auto stat  = entity->getComponent<StatComponent>();
         auto mouv  = entity->getComponent<MouvementComponent>();
         auto draw  = entity->getComponent<DrawableComponent>();
 
         if (trans->getX() <= -16 || stat->getStat(RTypeStats::Life) <= 0) {
-            float behaviorScale = static_cast<float>(rand() % 20) / 10 + 1;
-            float behaviorSpeed = static_cast<float>(rand() % 25) / 10 + 5;
+            scale = (float)(rand() % 20) / 10 + 1;
+            speed = (float)(rand() % 25) / 10 + 5;
 
-            mouv->setSpeed(behaviorSpeed);
+            mouv->setSpeed(speed);
             trans->setX(255);
             trans->setY((rand() % 239));
-            stat->setStat(RTypeStats::Life, 25 * behaviorScale);
-            draw->setScale(behaviorScale, behaviorScale);
+            stat->setStat(RTypeStats::Life, 25 * scale);
+            draw->setScale(scale, scale);
         }
     }});
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setSCale(scale, scale);
-    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[=](Entity* entity, Entity* me) {
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[&](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto otherStat = entity->getComponent<StatComponent>();
             auto meStat    = me->getComponent<StatComponent>();
@@ -57,14 +51,14 @@ int RType::createAsteroid(int x) noexcept
             auto damage = meStat->getStat(RTypeStats::Damage);
             otherStat->setStat(RTypeStats::Life, life - damage);
 
-            float hitboxScale = static_cast<float>(rand() % 20) / 10 + 1;
-            float hitboxSpeed = static_cast<float>(rand() % 25) / 10 + 5;
+            scale = (float)(rand() % 20) / 10 + 1;
+            speed = (float)(rand() % 25) / 10 + 5;
 
-            meMouv->setSpeed(hitboxSpeed);
+            meMouv->setSpeed(speed);
             meTrans->setX(255);
             meTrans->setY((rand() % 239));
-            meStat->setStat(RTypeStats::Life, 25 * hitboxScale);
-            meDraw->setScale(hitboxScale, hitboxScale);
+            meStat->setStat(RTypeStats::Life, 25 * scale);
+            meDraw->setScale(scale, scale);
         }
     }});
 
@@ -74,6 +68,11 @@ int RType::createAsteroid(int x) noexcept
     asteroid->addComponent(behavior);
     asteroid->addComponent(draw);
     asteroid->addComponent(hitbox);
+    asteroid->addComponent(TransformComponent(x, y));
+    asteroid->addComponent(AnimationComponent(128, 0.1));
+    asteroid->addComponent(MouvementComponent(-1, 0, speed));
+    asteroid->addComponent(DestroyableComponent());
+    asteroid->addComponent(StatComponent({25 * scale, 2}));
 
     return asteroid->getId();
 }

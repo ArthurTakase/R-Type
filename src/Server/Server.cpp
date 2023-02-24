@@ -21,9 +21,8 @@
     , selector_(SocketSelectorFactory::createSocketSelector())
 {
     selector_->add(*socket_, true, true, false);
-    end_        = std::chrono::system_clock::now();
-    start_      = std::chrono::high_resolution_clock::now();
-    actualTime_ = std::chrono::high_resolution_clock::now();
+    end_   = std::chrono::system_clock::now();
+    start_ = std::chrono::high_resolution_clock::now();
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -56,8 +55,6 @@ void Server::communicate() noexcept
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
-
-        areClientsConnected();
     }
 }
 
@@ -92,22 +89,30 @@ void Server::gameLoop() noexcept
     }
 }
 
+bool Server::isKnownClient(Address address) const
+{
+    auto iterator = std::find_if(
+        clients_.begin(), clients_.end(), [&address](const Client& client) { return (address == client.address); });
+    return (iterator != clients_.end());
+}
+
+void Server::addClient(Address address) noexcept
+{
+    Client client{.address = address};
+    clients_.push_back(client);
+}
+
 void Server::receive()
 {
-    auto endTime = std::chrono::high_resolution_clock::now();
     try {
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
-            addClient(infoReceived.address, endTime);
+            addClient(infoReceived.address);
             Player player = {.address = infoReceived.address, .entities_id = {gameInstance_.createPlayer(20, 50)}};
             players_.emplace_back(player);
         }
-        // update the client lastPing
-        for (auto& client : clients_) {
-            if (client.address == infoReceived.address) { client.lastPing = endTime; }
-        }
         handleData(infoReceived);
-    } catch (const Error& e) {
+    } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -123,8 +128,9 @@ void Server::sendToClient(Client& client, RawData blob) // blob : binary large o
 {
     try {
         socket_->send(blob.data(), blob.size(), client.address);
-    } catch (const Error& e) {
+    } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
+        client.dataToSend.push(blob);
     }
 }
 
@@ -139,8 +145,27 @@ void Server::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() == 0) { return; }
 
-    if (infos.data[0] == CLOSE_VALUE) { removeClient(infos.address); }
-    if (infos.data[0] == CONNECT) { updateClientState(infos.address); }
+    if (infos.data[0] == CLOSE_VALUE) {
+        auto iterator = std::find_if(clients_.begin(), clients_.end(), [&infos](const Client& client) {
+            return (infos.address == client.address);
+        });
+        if (iterator != clients_.end()) {
+            clients_.erase(iterator);
+            for (auto& player : players_) {
+                if (player.address != infos.address) continue;
+                for (auto& ent : player.entities_id) {
+                    auto entity = gameInstance_.getManager().getEntity(ent);
+                    if (!entity->hasComponent<DestroyableComponent>()) continue;
+                    entity->getComponent<DestroyableComponent>()->destroy();
+                }
+                player.entities_id.clear();
+            }
+            players_.erase(std::remove_if(players_.begin(),
+                               players_.end(),
+                               [&infos](const Player& player) { return (infos.address == player.address); }),
+                players_.end());
+        }
+    }
 
     for (auto& player : players_) {
         if (player.address != infos.address) continue;
@@ -153,68 +178,4 @@ void Server::handleData(ReceivedInfos infos) noexcept
     }
 
     infos.data.clear();
-}
-
-bool Server::isKnownClient(Address address) const
-{
-    auto iterator = std::find_if(
-        clients_.begin(), clients_.end(), [&address](const Client& client) { return (address == client.address); });
-    return (iterator != clients_.end());
-}
-
-void Server::addClient(Address address, std::chrono::system_clock::time_point ping) noexcept
-{
-    Client client{.address = address, .lastPing = ping};
-    clients_.push_back(client);
-}
-
-void Server::removeClient(Address& clientAddress) noexcept
-{
-    auto iterator = std::find_if(clients_.begin(), clients_.end(), [&clientAddress](const Client& client) {
-        return (clientAddress == client.address);
-    });
-    if (iterator != clients_.end()) {
-        clients_.erase(iterator);
-        for (auto& player : players_) {
-            if (player.address != clientAddress) continue;
-            for (auto& ent : player.entities_id) {
-                auto entity = gameInstance_.getManager().getEntity(ent);
-                if (!entity->hasComponent<DestroyableComponent>()) continue;
-                entity->getComponent<DestroyableComponent>()->destroy();
-            }
-            player.entities_id.clear();
-        }
-        players_.erase(std::remove_if(players_.begin(),
-                           players_.end(),
-                           [&clientAddress](const Player& player) { return (clientAddress == player.address); }),
-            players_.end());
-    }
-}
-
-void Server::areClientsConnected() noexcept
-{
-    actualTime_ = std::chrono::high_resolution_clock::now();
-
-    for (auto& client : clients_) {
-        auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(actualTime_ - client.lastPing);
-        if (timelapse >= std::chrono::seconds(MAX_TIMEOFF)) {
-            if (client.isPingSent) {
-                std::cout << "client disconnected" << std::endl;
-                removeClient(client.address);
-            } else {
-                std::cout << "trying to send ping to client" << std::endl;
-                client.isPingSent = true;
-                client.lastPing   = actualTime_;
-                client.dataToSend.push({CONNECT});
-            }
-        }
-    }
-}
-
-void Server::updateClientState(Address& clientAddress) noexcept
-{
-    auto iterator = std::find_if(clients_.begin(), clients_.end(), [&clientAddress](const Client& client) {
-        return (clientAddress == client.address);
-    });
-    if (iterator != clients_.end()) { iterator->isPingSent = false; }
 }

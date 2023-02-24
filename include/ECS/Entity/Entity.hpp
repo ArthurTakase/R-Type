@@ -45,9 +45,9 @@ class Entity
      * @param component object constructor (ex: HitboxComponent(10, 10))
      */
     template <typename T>
-    void addComponent(T&& component) noexcept
+    void addComponent(const T& component) noexcept
     {
-        auto component_ptr = std::make_unique<std::remove_cvref_t<T>>(std::forward<T>(component));
+        auto component_ptr = std::make_unique<T>(component);
         components_.push_back(std::move(component_ptr));
     };
 

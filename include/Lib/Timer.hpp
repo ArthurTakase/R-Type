@@ -19,10 +19,10 @@ class Timer
     Timer(float limit) noexcept;
     ~Timer() noexcept                  = default;
     Timer(const Timer& other) noexcept = default;
-    Timer(Timer&& other) noexcept      = default;
+    Timer(Timer&& other) noexcept      = delete;
 
-    Timer& operator=(const Timer& rhs) noexcept = default;
-    Timer& operator=(Timer&& rhs) noexcept      = default;
+    Timer& operator=(const Timer& rhs) noexcept = delete;
+    Timer& operator=(Timer&& rhs) noexcept      = delete;
 
     void  start();
     void  stop();

@@ -5,6 +5,7 @@
 ** HitboxSystem.cpp
 */
 
+#include <ECS/Components/TextComponent.hpp>
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <cassert>
 #include <iostream>
@@ -40,13 +41,18 @@ void DrawableSystem::run()
         auto transform = entity->getComponent<TransformComponent>();
         auto drawable  = entity->getComponent<DrawableComponent>();
 
-        drawable->getSprite().setX(transform->getX());
-        drawable->getSprite().setY(transform->getY());
-        window_->draw(drawable->getSprite(),
-            drawable->getOffsetX(),
-            drawable->getOffsetY(),
-            drawable->getWidth(),
-            drawable->getHeight());
+        if (entity->hasComponent<TextComponent>()) {
+            auto text = entity->getComponent<TextComponent>();
+            window_->draw(text->getText());
+        } else {
+            drawable->getSprite().setX(transform->getX());
+            drawable->getSprite().setY(transform->getY());
+            window_->draw(drawable->getSprite(),
+                drawable->getOffsetX(),
+                drawable->getOffsetY(),
+                drawable->getWidth(),
+                drawable->getHeight());
+        }
     }
     it_.reset();
 

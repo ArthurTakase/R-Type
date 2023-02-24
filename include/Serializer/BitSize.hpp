@@ -1,14 +1,9 @@
 #pragma once
 #include <cstdint>
-#include <string_view>
 
-static constexpr unsigned int     ESCAPE        = 120;
-static constexpr unsigned int     WINDOW_CLOSE  = 36;
-static constexpr unsigned int     CLOSE_VALUE   = 255;
-static constexpr unsigned int     PACKET_SIZE   = 13;
-static constexpr unsigned int     MAX_TIMEOFF   = 5;
-static constexpr unsigned int     CONNECT       = 1;
-static constexpr std::string_view PATH_BG_MUSIC = "./assets/audio/loading.wav";
+#define ESCAPE 120
+#define WINDOW_CLOSE 36
+#define CONNECT 12
 
 typedef enum PacketName {
     X1        = 0,

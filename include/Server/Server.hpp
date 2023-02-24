@@ -54,18 +54,17 @@ class Server
     RType                                          gameInstance_;
     std::chrono::system_clock::time_point          end_;
     std::chrono::high_resolution_clock::time_point start_;
-    std::chrono::high_resolution_clock::time_point actualTime_;
     std::vector<Player>                            players_;
+
+    static constexpr int CLOSE_VALUE = 255;
+    static constexpr int PACKET_SIZE = 13;
 
     // methods
     void                  receive();
     void                  send() noexcept;
     void                  sendToClient(Client& client, RawData blob);
     bool                  isKnownClient(Address address) const;
-    void                  removeClient(Address& clientAddress) noexcept;
-    void                  addClient(Address address, std::chrono::system_clock::time_point ping) noexcept;
-    void                  updateClientState(Address& clientAddress) noexcept;
-    void                  areClientsConnected() noexcept;
+    void                  addClient(Address address) noexcept;
     void                  handleData(ReceivedInfos infos) noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
 

@@ -21,10 +21,10 @@ class HitboxComponent : public IComponent
     HitboxComponent(size_t width, size_t height);
     ~HitboxComponent() noexcept                            = default;
     HitboxComponent(const HitboxComponent& other) noexcept = default;
-    HitboxComponent(HitboxComponent&& other) noexcept      = default;
+    HitboxComponent(HitboxComponent&& other) noexcept      = delete;
 
-    HitboxComponent& operator=(const HitboxComponent& rhs) noexcept = default;
-    HitboxComponent& operator=(HitboxComponent&& rhs) noexcept      = default;
+    HitboxComponent& operator=(const HitboxComponent& rhs) noexcept = delete;
+    HitboxComponent& operator=(HitboxComponent&& rhs) noexcept      = delete;
 
     size_t getWidth() const noexcept;
     size_t getHeight() const noexcept;

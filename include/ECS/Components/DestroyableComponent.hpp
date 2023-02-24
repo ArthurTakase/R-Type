@@ -24,10 +24,10 @@ class DestroyableComponent : public IComponent
     DestroyableComponent(int destroy) noexcept;
     ~DestroyableComponent() noexcept                                 = default;
     DestroyableComponent(const DestroyableComponent& other) noexcept = default;
-    DestroyableComponent(DestroyableComponent&& other) noexcept      = default;
+    DestroyableComponent(DestroyableComponent&& other) noexcept      = delete;
 
-    DestroyableComponent& operator=(const DestroyableComponent& rhs) noexcept = default;
-    DestroyableComponent& operator=(DestroyableComponent&& rhs) noexcept      = default;
+    DestroyableComponent& operator=(const DestroyableComponent& rhs) noexcept = delete;
+    DestroyableComponent& operator=(DestroyableComponent&& rhs) noexcept      = delete;
 
     bool getDestroyed() const noexcept;
     void destroy() noexcept;

@@ -62,7 +62,7 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
-    RawData data = {CONNECT};
+    RawData data = {12};
     dataToSend_.push(data);
 
     while (looping_) {
@@ -107,7 +107,7 @@ void UdpClient::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         handleData(infoReceived);
-    } catch (const Error& e) {
+    } catch (const NetworkExecError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -121,7 +121,7 @@ void UdpClient::send()
         auto blob = getDataFromQueue();
         try {
             socket_->send(blob.data(), blob.size(), serverAddress_);
-        } catch (const Error& e) {
+        } catch (const NetworkExecError& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
         }
@@ -159,7 +159,6 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 auto& lib = game_.getLib();
                 lib.getWindow().close();
             }
-            if (value == CONNECT) { dataToSend_.push({CONNECT}); }
         } else {
             if (infos.data.size() % PACKET_SIZE == 0) {
                 for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
