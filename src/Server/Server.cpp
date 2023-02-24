@@ -98,8 +98,12 @@ void Server::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
+            if (players_.size() >= MAX_PLAYERS) { return; }
             addClient(infoReceived.address, endTime);
-            Player player = {.address = infoReceived.address, .entities_id = {gameInstance_.createPlayer(20, 50)}};
+            int    size = players_.size();
+            Player player;
+            player.address     = infoReceived.address;
+            player.entities_id = {gameInstance_.createPlayer(20, 70 + (30 * size), size + 1)};
             players_.emplace_back(player);
         }
         // update the client lastPing

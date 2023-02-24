@@ -9,12 +9,13 @@
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
+#include <iostream>
 
-int RType::createPlayer(int x, int y) noexcept
+int RType::createPlayer(int x, int y, int nb) noexcept
 {
     auto player = entityManager_.newEntity();
 
-    player->addComponent(DrawableComponent(0, 0, 16, 16, 1));
+    player->addComponent(DrawableComponent(0, 0, 16, 16, 10 + nb));
     player->addComponent(AnimationComponent(128, 0.1));
     player->addComponent(TransformComponent(x, y));
     player->addComponent(StatComponent({100, 10, 10.0, 1.0}));

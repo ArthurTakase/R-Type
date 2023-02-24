@@ -20,6 +20,8 @@ typedef struct Player {
     std::vector<int> entities_id;
 } Player;
 
+static constexpr unsigned int MAX_PLAYERS = 4;
+
 /**
  * @brief Server class using UDP protocol
  *
