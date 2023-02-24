@@ -8,9 +8,11 @@
 #pragma once
 
 #include <Client/Game.hpp>
+#include <Client/Menu.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
 #include <Serializer/Deserializer.hpp>
+#include <condition_variable>
 #include <memory>
 #include <thread>
 
@@ -23,6 +25,7 @@ class UdpClient
   public:
     UdpClient() noexcept = delete;
     explicit UdpClient(Address serverAddress, Address::Port clientPort);
+    explicit UdpClient(Address::Port clientPort);
 
     UdpClient(const UdpClient& other) noexcept = delete;
     UdpClient(UdpClient&& other) noexcept      = delete;
@@ -38,17 +41,22 @@ class UdpClient
   protected:
   private:
     // attributes
-    bool                            looping_ = true;
+    bool                            looping_ = false;
+    bool                            isStartingServer_;
     Address                         serverAddress_;
     int                             tickrate_ = 60;
     std::unique_ptr<ISocket>        socket_;
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;
     std::thread                     networkThread_;
-    std::queue<RawData>             dataToSend_     = {};
-    std::queue<GamePacket>          dataReceived_   = {};
-    std::mutex                      mutexForPacket_ = {};
-    Game                            game_;
+    std::queue<RawData>             dataToSend_            = {};
+    std::queue<GamePacket>          dataReceived_          = {};
+    std::mutex                      mutexForPacket_        = {};
+    std::mutex                      mutexForNetworkThread_ = {};
+    std::condition_variable         cv_;
+
+    Game game_;
+    Menu menu_;
 
     static constexpr int CLOSE_VALUE = 255;
     static constexpr int PACKET_SIZE = 15;

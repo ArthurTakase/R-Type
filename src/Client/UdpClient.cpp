@@ -24,8 +24,23 @@
     , socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , game_(dataReceived_, mutexForPacket_)
+    , isStartingServer_(true)
 {
     selector_->add(*socket_, true, true, false);
+
+    gameThread_    = std::thread([&]() { gameLoop(); });
+    networkThread_ = std::thread([&]() { communicate(); });
+}
+
+[[nodiscard]] UdpClient::UdpClient(Address::Port clientPort)
+    : socket_(SocketFactory::createSocket(clientPort))
+    , selector_(SocketSelectorFactory::createSocketSelector())
+    , game_(dataReceived_, mutexForPacket_)
+    , isStartingServer_(false)
+{
+    selector_->add(*socket_, true, true, false);
+    serverAddress_.port = 0;
+    serverAddress_.ip   = 0;
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -62,6 +77,15 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
+    while (isStartingServer_ == false) {
+        std::unique_lock<std::mutex> lock(mutexForNetworkThread_);
+        // cv_.wait(lock);
+        cv_.wait_for(lock, std::chrono::seconds(1));
+        if (menu_.getIsOpen() == false) {
+            isStartingServer_ = true;
+            cv_.notify_all();
+        }
+    }
     RawData data = {CONNECT};
     dataToSend_.push(data);
 
@@ -82,16 +106,25 @@ void UdpClient::communicate() noexcept
  */
 void UdpClient::gameLoop() noexcept
 {
+    std::cout << "in game loop " << std::endl;
+
     auto& lib = game_.getLib();
     lib.getWindow().open(256, 256, "Client RTYPE");
 
+    if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
+        serverAddress_ = menu_.run(lib.getWindow());
+        // notify ici
+        std::cout << "end menu " << std::endl;
+    }
+
+    reset();
     while (looping_) {
         auto input = lib.getWindow().getKeyPressed();
         if (input == 255 || input == 36) {
-            looping_ = false;
+            stop();
             break;
         }
-        if (input != 0) { dataToSend_.push({(uint8_t)input}); }
+        if (input != 0) { dataToSend_.push({static_cast<uint8_t>(input)}); }
         game_.run();
     }
 
