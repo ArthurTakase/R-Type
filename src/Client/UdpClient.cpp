@@ -24,7 +24,7 @@
     , socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , game_(dataReceived_, mutexForPacket_)
-    , isStartingServer_(true)
+    , looping_(true)
 {
     selector_->add(*socket_, true, true, false);
 
@@ -36,7 +36,7 @@
     : socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , game_(dataReceived_, mutexForPacket_)
-    , isStartingServer_(false)
+    , looping_(false)
 {
     selector_->add(*socket_, true, true, false);
     serverAddress_.port = 0;
@@ -67,8 +67,8 @@ void UdpClient::reset() noexcept
  */
 void UdpClient::run()
 {
-    gameThread_.join();
     networkThread_.join();
+    gameThread_.join();
 }
 
 /**
@@ -77,15 +77,11 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
-    while (isStartingServer_ == false) {
+    if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
         std::unique_lock<std::mutex> lock(mutexForNetworkThread_);
-        // cv_.wait(lock);
-        cv_.wait_for(lock, std::chrono::seconds(1));
-        if (menu_.getIsOpen() == false) {
-            isStartingServer_ = true;
-            cv_.notify_all();
-        }
+        cv_.wait(lock);
     }
+
     RawData data = {CONNECT};
     dataToSend_.push(data);
 
@@ -106,18 +102,15 @@ void UdpClient::communicate() noexcept
  */
 void UdpClient::gameLoop() noexcept
 {
-    std::cout << "in game loop " << std::endl;
-
     auto& lib = game_.getLib();
-    lib.getWindow().open(256, 256, "Client RTYPE");
+    lib.getWindow().open(WIDTH_WINDOW, HEIGHT_WINDOW, WINDOW_NAME.data());
 
     if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
         serverAddress_ = menu_.run(lib.getWindow());
-        // notify ici
-        std::cout << "end menu " << std::endl;
+        cv_.notify_all();
+        reset();
     }
 
-    reset();
     while (looping_) {
         auto input = lib.getWindow().getKeyPressed();
         if (input == 255 || input == 36) {

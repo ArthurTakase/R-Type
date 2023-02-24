@@ -41,8 +41,7 @@ class UdpClient
   protected:
   private:
     // attributes
-    bool                            looping_ = false;
-    bool                            isStartingServer_;
+    bool                            looping_;
     Address                         serverAddress_;
     int                             tickrate_ = 60;
     std::unique_ptr<ISocket>        socket_;
@@ -54,13 +53,14 @@ class UdpClient
     std::mutex                      mutexForPacket_        = {};
     std::mutex                      mutexForNetworkThread_ = {};
     std::condition_variable         cv_;
+    Game                            game_;
+    Menu                            menu_;
 
-    Game game_;
-    Menu menu_;
-
-    static constexpr int CLOSE_VALUE = 255;
-    static constexpr int PACKET_SIZE = 15;
-
+    static constexpr int              CLOSE_VALUE   = 255;
+    static constexpr int              PACKET_SIZE   = 15;
+    static constexpr int              WIDTH_WINDOW  = 256;
+    static constexpr int              HEIGHT_WINDOW = 256;
+    static constexpr std::string_view WINDOW_NAME   = "Client R-Type";
     // methods
     void    receive();
     void    send();

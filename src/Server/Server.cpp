@@ -166,6 +166,7 @@ void Server::addClient(Address address, std::chrono::system_clock::time_point pi
 {
     Client client{.address = address, .lastPing = ping};
     clients_.push_back(client);
+    std::cout << "New client connected" << std::endl;
 }
 
 void Server::removeClient(Address& clientAddress) noexcept

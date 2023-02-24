@@ -66,7 +66,8 @@ Address HostHandler::getHostAddress(std::vector<std::string>& av)
 {
     Address serverInfos;
 
-    if (av.size() != 3) throw Error("Usage: ./r-type_client [client port] [server ip] [server port]\n ./r-type_client [client port]");
+    if (av.size() != 3)
+        throw Error("Usage: ./r-type_client [client port] [server ip] [server port]\n ./r-type_client [client port]");
 
     serverInfos.port = std::atoi(av[2].c_str());
     if (serverInfos.port <= 0) throw Error("Port must be a positive number");
