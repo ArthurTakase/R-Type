@@ -37,6 +37,7 @@ class EntityManager
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
     void                                  addEntity(std::unique_ptr<Entity>&& entity) noexcept;
     Entity*                               newEntity() noexcept;
+    Entity*                               newEntity(int id) noexcept;
 
   private:
     size_t                               createId() const noexcept;

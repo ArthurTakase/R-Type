@@ -91,6 +91,13 @@ Entity* EntityManager::newEntity() noexcept
     return entities_[entities_.size() - 1].get();
 }
 
+Entity* EntityManager::newEntity(int id) noexcept
+{
+    std::unique_ptr<Entity> entity = std::make_unique<Entity>(id);
+    entities_.emplace_back(std::move(entity));
+    return entities_[entities_.size() - 1].get();
+}
+
 /**
  * Get the higher id in all entities
  *

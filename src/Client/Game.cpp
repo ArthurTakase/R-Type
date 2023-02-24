@@ -69,7 +69,7 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
     auto m_entity = manager_.getEntity(static_cast<size_t>(packet.id));
 
     if (m_entity == nullptr) {
-        auto entity = manager_.newEntity();
+        auto entity = manager_.newEntity(packet.id);
 
         auto transform = TransformComponent(packet.x, packet.y);
 
