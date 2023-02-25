@@ -53,11 +53,3 @@ void Clock::setLastPing(std::chrono::high_resolution_clock::time_point lastPing)
 {
     lastPing_ = lastPing;
 }
-
-std::chrono::duration_cast<std::chrono::seconds> Clock::calculateTimelapseInSeconds(
-    std::chrono::system_clock::time_point givenTime) noexcept
-{
-    auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(actualTime_ - givenTime);
-
-    return (timelapse);
-}
