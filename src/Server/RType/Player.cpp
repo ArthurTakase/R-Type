@@ -9,6 +9,7 @@
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 
 int RType::createPlayer(int x, int y, int nb) noexcept
@@ -22,7 +23,7 @@ int RType::createPlayer(int x, int y, int nb) noexcept
     player->addComponent(MouvementComponent(0, 0, 3.0));
     player->addComponent(InputComponent());
     player->addComponent(DestroyableComponent());
-    player->addComponent(TimerComponent(0.2));
+    player->addComponent(TimerComponent(0.1));
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(
@@ -40,29 +41,23 @@ int RType::createPlayer(int x, int y, int nb) noexcept
         auto  y = trans->getY();
 
         while ((lastInput = input->getInput()) != -1) {
-            if (lastInput == Input::LeftArrow) { mouv->setDir(-1, 0); }
-            if (lastInput == Input::RightArrow) { mouv->setDir(1, 0); }
-            if (lastInput == Input::UpArrow) { mouv->setDir(0, -1); }
-            if (lastInput == Input::DownArrow) { mouv->setDir(0, 1); }
+            if (!started && lastInput == Input::Return) {
+                started = true;
+                createAsteroid(260);
+                createAsteroid(280);
+                createAsteroid(300);
+                createSpawner();
+            }
+            if (lastInput == Input::Q) { mouv->setDir(-1, 0); }
+            if (lastInput == Input::D) { mouv->setDir(1, 0); }
+            if (lastInput == Input::Z) { mouv->setDir(0, -1); }
+            if (lastInput == Input::S) { mouv->setDir(0, 1); }
             if (lastInput == Input::Shift) { mouv->setDir(0, 0); }
-            if (lastInput == Input::Space) {
-                if (timer.isOver()) {
-                    int  dir          = mouv->getDirX() == -1 ? -1 : 1;
-                    auto bulletDamage = stat->getStat(RTypeStats::Damage);
-                    auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
-                    auto bulletSize   = stat->getStat(RTypeStats::Size);
-
-                    if (stat->getStat(RTypeStats::Level) < 5) {
-                        createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
-                    } else if (stat->getStat(RTypeStats::Level) < 10) {
-                        createPlayerBullet(x, y - 4, bulletDamage, bulletSpeed * dir, bulletSize);
-                        createPlayerBullet(x, y + 4, bulletDamage, bulletSpeed * dir, bulletSize);
-                    } else {
-                        createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
-                        createPlayerBullet(x, y - 8, bulletDamage, bulletSpeed * dir, bulletSize);
-                        createPlayerBullet(x, y + 8, bulletDamage, bulletSpeed * dir, bulletSize);
-                    }
-                }
+            if (timer.isOver()) {
+                if (lastInput == Input::Up) { playerShoot(x, y, 0, -1, stat); }
+                if (lastInput == Input::Left) { playerShoot(x, y, -1, 0, stat); }
+                if (lastInput == Input::Down) { playerShoot(x, y, 0, 1, stat); }
+                if (lastInput == Input::Right) { playerShoot(x, y, 1, 0, stat); }
             }
         }
 
@@ -78,12 +73,31 @@ int RType::createPlayer(int x, int y, int nb) noexcept
     return player->getId();
 }
 
-int RType::createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept
+void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) noexcept
+{
+    auto bulletDamage = stat->getStat(RTypeStats::Damage);
+    auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
+    auto bulletSize   = stat->getStat(RTypeStats::Size);
+    auto playerLevel  = stat->getStat(RTypeStats::Level);
+
+    if (playerLevel < 5) {
+        createPlayerBullet(x, y, bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+    } else if (playerLevel < 10) {
+        createPlayerBullet(x - (4 * dirY), y - (4 * dirX), bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+        createPlayerBullet(x + (4 * dirY), y + (4 * dirX), bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+    } else {
+        createPlayerBullet(x, y, bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+        createPlayerBullet(x - (8 * dirY), y - (8 * dirX), bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+        createPlayerBullet(x + (8 * dirY), y + (8 * dirX), bulletDamage, bulletSpeed, dirX, dirY, bulletSize);
+    }
+}
+
+int RType::createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept
 {
     auto bullet = entityManager_.newEntity();
 
     bullet->addComponent(TransformComponent(x, y));
-    bullet->addComponent(MouvementComponent(1, 0, speed));
+    bullet->addComponent(MouvementComponent(dirX, dirY, speed));
     bullet->addComponent(DrawableComponent(0, 0, 16, 16, 3, size, size));
     bullet->addComponent(AnimationComponent(32, 0.1));
     bullet->addComponent(DestroyableComponent());
