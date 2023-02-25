@@ -11,6 +11,7 @@
 #include <NetworkLib/SocketSelector.hpp>
 #include <Serializer/Serializer.hpp>
 #include <Server/RType.hpp>
+#include <Time/Clock.hpp>
 #include <memory>
 #include <thread>
 #include <vector>
@@ -46,19 +47,16 @@ class Server
   protected:
   private:
     // attributes
-    bool                                           looping_  = true;
-    int                                            tickrate_ = 60;
-    std::vector<Client>                            clients_  = {};
-    std::unique_ptr<ISocket>                       socket_;
-    std::unique_ptr<SocketSelector>                selector_;
-    std::thread                                    gameThread_;
-    std::thread                                    networkThread_;
-    RType                                          gameInstance_;
-    std::chrono::system_clock::time_point          end_;
-    std::chrono::high_resolution_clock::time_point start_;
-    std::chrono::high_resolution_clock::time_point actualTime_;
-    std::vector<Player>                            players_;
-
+    bool                            looping_  = true;
+    int                             tickrate_ = 60;
+    std::vector<Client>             clients_  = {};
+    std::unique_ptr<ISocket>        socket_;
+    std::unique_ptr<SocketSelector> selector_;
+    std::thread                     gameThread_;
+    std::thread                     networkThread_;
+    RType                           gameInstance_;
+    std::vector<Player>             players_;
+    Clock                           clock_;
     // methods
     void                  receive();
     void                  send() noexcept;
