@@ -25,7 +25,7 @@ int main(int ac, const char* const av[])
     try {
         std::vector<std::string> infos = checkArgs(ac, av);
         if (infos.size() == 0) {
-            UdpClient client((Address::Port(Menu::DEFAULT)));
+            UdpClient client((Address::Port(0)));
             client.run();
         } else {
             Address::Port clientPort    = HostHandler::getClientPort(infos);

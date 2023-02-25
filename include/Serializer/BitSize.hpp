@@ -44,5 +44,3 @@ struct GamePacket {
     std::uint8_t id;
     std::uint8_t destroyed;
 };
-
-typedef enum Input { LeftArrow = 71, RightArrow = 72, UpArrow = 73, DownArrow = 74, Space = 57, Shift = 38 } Input;
