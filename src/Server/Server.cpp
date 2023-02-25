@@ -98,10 +98,6 @@ void Server::receive()
         if (!isKnownClient(infoReceived.address)) {
             if (players_.size() >= MAX_PLAYERS) { return; }
             addClient(infoReceived.address, clock_.getLastPing());
-            int    size   = players_.size();
-            Player player = {.address = infoReceived.address,
-                .entities_id          = {gameInstance_.createPlayer(20, 70 + (30 * size), size + 1)}};
-            players_.emplace_back(player);
         }
         // update the client lastPing
         for (auto& client : clients_) {
@@ -141,15 +137,15 @@ void Server::handleData(ReceivedInfos infos) noexcept
     if (infos.data.size() == 0) { return; }
 
     if (infos.data[0] == CLOSE_VALUE) { removeClient(infos.address); }
-    if (infos.data[0] == CONNECT) { updateClientState(infos.address); }
-
+    if (infos.data[0] == PING) { updateClientState(infos.address, true); }
+    if (infos.data[0] == PONG) { updateClientState(infos.address, false); }
     for (auto& player : players_) {
         if (player.address != infos.address) continue;
         for (auto& ent : player.entities_id) {
             auto entity = gameInstance_.getManager().getEntity(ent);
             if (!entity->hasComponent<InputComponent>()) continue;
             auto input = entity->getComponent<InputComponent>();
-            for (auto& i : infos.data) { input->addInput((int)i); }
+            for (auto& i : infos.data) { input->addInput(static_cast<int>(i)); }
         }
     }
 
@@ -167,6 +163,11 @@ void Server::addClient(Address address, std::chrono::system_clock::time_point pi
 {
     Client client{.address = address, .lastPing = ping};
     clients_.push_back(client);
+
+    int    size   = players_.size();
+    Player player = {.address = address, .entities_id = {gameInstance_.createPlayer(20, 70 + (30 * size), size + 1)}};
+    players_.emplace_back(player);
+
     std::cout << "New client connected" << std::endl;
 }
 
@@ -201,22 +202,23 @@ void Server::areClientsConnected() noexcept
         auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(clock_.getActualTime() - client.lastPing);
         if (timelapse >= std::chrono::seconds(MAX_TIMEOFF)) {
             if (client.isPingSent) {
-                std::cout << "client disconnected" << std::endl;
+                std::cout << "Client disconnected" << std::endl;
                 removeClient(client.address);
             } else {
-                std::cout << "trying to send ping to client" << std::endl;
+                std::cout << "Trying to send ping to client" << std::endl;
                 client.isPingSent = true;
                 client.lastPing   = clock_.getActualTime();
-                client.dataToSend.push({CONNECT});
+                client.dataToSend.push({PING});
             }
         }
     }
 }
 
-void Server::updateClientState(Address& clientAddress) noexcept
+void Server::updateClientState(Address& clientAddress, bool isPing) noexcept
 {
     auto iterator = std::find_if(clients_.begin(), clients_.end(), [&clientAddress](const Client& client) {
         return (clientAddress == client.address);
     });
     if (iterator != clients_.end()) { iterator->isPingSent = false; }
+    if (isPing) { iterator->dataToSend.push({PONG}); }
 }

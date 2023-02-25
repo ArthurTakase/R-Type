@@ -21,13 +21,13 @@
  * server.
  */
 [[nodiscard]] UdpClient::UdpClient(Address serverAddress, Address::Port clientPort)
-    : serverAddress_(serverAddress)
-    , socket_(SocketFactory::createSocket(clientPort))
+    : socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , game_(dataReceived_, mutexForPacket_)
     , looping_(true)
 {
     selector_->add(*socket_, true, true, false);
+    serverInfos_.address = serverAddress;
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -40,8 +40,8 @@
     , looping_(false)
 {
     selector_->add(*socket_, true, true, false);
-    serverAddress_.port = 0;
-    serverAddress_.ip   = 0;
+    serverInfos_.address.port = 0;
+    serverInfos_.address.ip   = 0;
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -78,14 +78,12 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
-    if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
+    if (serverInfos_.address.ip == 0 || serverInfos_.address.port == 0) {
         std::unique_lock<std::mutex> lock(mutexForNetworkThread_);
         cv_.wait(lock);
     }
 
-    RawData data = {CONNECT};
-    dataToSend_.push(data);
-
+    dataToSend_.push({PING});
     while (looping_) {
         try {
             selector_->select(true, true, false);
@@ -94,6 +92,8 @@ void UdpClient::communicate() noexcept
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
+
+        checkServerConnection();
     }
 }
 
@@ -106,16 +106,21 @@ void UdpClient::gameLoop() noexcept
     auto& lib = game_.getLib();
     lib.getWindow().open(WIDTH_WINDOW, HEIGHT_WINDOW, WINDOW_NAME.data());
 
-    if (serverAddress_.ip == 0 || serverAddress_.port == 0) {
+    if (serverInfos_.address.ip == 0 || serverInfos_.address.port == 0) {
         try {
-            serverAddress_ = menu_.run(lib.getWindow());
-            cv_.notify_all();
+            serverInfos_.address = menu_.run(lib.getWindow());
             reset();
+            cv_.notify_all();
         } catch (const Error& e) {
             std::cerr << e.what() << std::endl;
             stop();
             cv_.notify_all();
         }
+    }
+
+    while (isFirstConnection_) {
+        std::unique_lock<std::mutex> lock(mutexForGameThread_);
+        cvGame_.wait(lock);
     }
 
     while (looping_) {
@@ -153,7 +158,7 @@ void UdpClient::send()
     if (dataToSend_.size() != 0) {
         auto blob = getDataFromQueue();
         try {
-            socket_->send(blob.data(), blob.size(), serverAddress_);
+            socket_->send(blob.data(), blob.size(), serverInfos_.address);
         } catch (const NetworkExecError& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
@@ -183,41 +188,70 @@ RawData UdpClient::getDataFromQueue() noexcept
  */
 void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
-    {
-        if (infos.data.size() == 0) { return; }
-        if (infos.data.size() == 1) {
-            int value = infos.data[0];
-            if (value == Input::Exit) {
-                stop();
-                auto& lib = game_.getLib();
-                lib.getWindow().close();
+    serverInfos_.lastPing = clock_.getActualTime();
+
+    if (infos.data.size() == 0) { return; }
+    if (infos.data.size() == 1) {
+        int value = infos.data[0];
+        if (value == Input::Exit) {
+            stop();
+            auto& lib = game_.getLib();
+            lib.getWindow().close();
+        }
+        if (value == PING) { dataToSend_.push({PONG}); }
+        if (value == PONG) {
+            if (isFirstConnection_) {
+                cvGame_.notify_all();
+                isFirstConnection_ = false;
+                std::cout << "Connected to server" << std::endl;
             }
-            if (value == CONNECT) { dataToSend_.push({CONNECT}); }
-        } else {
-            if (infos.data.size() % PACKET_SIZE == 0) {
-                for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
-                    // TODO call the real method deserialize
-                    // GamePacket entity = Deserializer::deserialize(infos.data);
-                    GamePacket packet;
-                    packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
-                    packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
-                    packet.x         = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
-                    packet.y         = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
-                    packet.idSprite  = infos.data[i + PacketName::ID_SPRITE];
-                    packet.width     = infos.data[i + PacketName::WIDTH];
-                    packet.height    = infos.data[i + PacketName::HEIGHT];
-                    packet.scaleX    = infos.data[i + PacketName::SCALE_X] / 10;
-                    packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
-                    packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
-                    packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
-                    packet.id        = infos.data[i + PacketName::ID];
-                    packet.destroyed = infos.data[i + PacketName::DESTROYED];
-                    {
-                        std::lock_guard<std::mutex> lock(mutexForPacket_);
-                        dataReceived_.push(packet);
-                    }
+            serverInfos_.isPingSent = false;
+        }
+
+    } else {
+        if (infos.data.size() % PACKET_SIZE == 0) {
+            for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
+                // TODO call the real method deserialize
+                // GamePacket entity = Deserializer::deserialize(infos.data);
+                GamePacket packet;
+                packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
+                packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
+                packet.x         = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
+                packet.y         = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
+                packet.idSprite  = infos.data[i + PacketName::ID_SPRITE];
+                packet.width     = infos.data[i + PacketName::WIDTH];
+                packet.height    = infos.data[i + PacketName::HEIGHT];
+                packet.scaleX    = infos.data[i + PacketName::SCALE_X] / 10;
+                packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
+                packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
+                packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
+                packet.id        = infos.data[i + PacketName::ID];
+                packet.destroyed = infos.data[i + PacketName::DESTROYED];
+                {
+                    std::lock_guard<std::mutex> lock(mutexForPacket_);
+                    dataReceived_.push(packet);
                 }
             }
+        }
+    }
+}
+
+void UdpClient::checkServerConnection() noexcept
+{
+    clock_.setActualTime(std::chrono::high_resolution_clock::now());
+
+    auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(clock_.getActualTime() - serverInfos_.lastPing);
+    if (timelapse >= std::chrono::seconds(MAX_TIMEOFF)) {
+        if (serverInfos_.isPingSent) {
+            std::cout << "Connection to the server failed" << std::endl;
+            cvGame_.notify_all();
+            stop();
+            isFirstConnection_ = false;
+        } else {
+            std::cout << "Trying to connect to the server" << std::endl;
+            serverInfos_.isPingSent = true;
+            serverInfos_.lastPing   = clock_.getActualTime();
+            dataToSend_.push({PING});
         }
     }
 }

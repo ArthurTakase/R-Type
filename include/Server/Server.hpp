@@ -9,6 +9,7 @@
 
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
+#include <Serializer/BitSize.hpp>
 #include <Serializer/Serializer.hpp>
 #include <Server/RType.hpp>
 #include <Time/Clock.hpp>
@@ -20,8 +21,6 @@ typedef struct Player {
     Address          address;
     std::vector<int> entities_id;
 } Player;
-
-static constexpr unsigned int MAX_PLAYERS = 4;
 
 /**
  * @brief Server class using UDP protocol
@@ -64,7 +63,7 @@ class Server
     bool                  isKnownClient(Address address) const;
     void                  removeClient(Address& clientAddress) noexcept;
     void                  addClient(Address address, std::chrono::system_clock::time_point ping) noexcept;
-    void                  updateClientState(Address& clientAddress) noexcept;
+    void                  updateClientState(Address& clientAddress, bool isPing) noexcept;
     void                  areClientsConnected() noexcept;
     void                  handleData(ReceivedInfos infos) noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
