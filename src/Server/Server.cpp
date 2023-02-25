@@ -21,9 +21,6 @@
     , selector_(SocketSelectorFactory::createSocketSelector())
 {
     selector_->add(*socket_, true, true, false);
-    end_        = std::chrono::system_clock::now();
-    start_      = std::chrono::high_resolution_clock::now();
-    actualTime_ = std::chrono::high_resolution_clock::now();
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -66,9 +63,10 @@ void Server::gameLoop() noexcept
     gameInstance_.init();
 
     while (looping_) {
-        end_ = std::chrono::system_clock::now();
-        if (std::chrono::duration_cast<std::chrono::milliseconds>(end_ - start_).count() >= tickrate_) {
-            start_ = {std::chrono::high_resolution_clock::now()};
+        clock_.setEnd(std::chrono::high_resolution_clock::now());
+        if (std::chrono::duration_cast<std::chrono::milliseconds>(clock_.getEnd() - clock_.getStart()).count()
+            >= tickrate_) {
+            clock_.setStart(std::chrono::high_resolution_clock::now());
 
             if (clients_.size() == 0 && gameInstance_.getManager().getEntities().size() == 0) {
                 stop();
@@ -94,21 +92,20 @@ void Server::gameLoop() noexcept
 
 void Server::receive()
 {
-    auto endTime = std::chrono::high_resolution_clock::now();
+    clock_.setLastPing(std::chrono::high_resolution_clock::now());
     try {
         ReceivedInfos infoReceived = socket_->receive();
         if (!isKnownClient(infoReceived.address)) {
             if (players_.size() >= MAX_PLAYERS) { return; }
-            addClient(infoReceived.address, endTime);
-            int    size = players_.size();
-            Player player;
-            player.address     = infoReceived.address;
-            player.entities_id = {gameInstance_.createPlayer(20, 70 + (30 * size), size + 1)};
+            addClient(infoReceived.address, clock_.getLastPing());
+            int    size   = players_.size();
+            Player player = {.address = infoReceived.address,
+                .entities_id          = {gameInstance_.createPlayer(20, 70 + (30 * size), size + 1)}};
             players_.emplace_back(player);
         }
         // update the client lastPing
         for (auto& client : clients_) {
-            if (client.address == infoReceived.address) { client.lastPing = endTime; }
+            if (client.address == infoReceived.address) { client.lastPing = clock_.getLastPing(); }
         }
         handleData(infoReceived);
     } catch (const Error& e) {
@@ -198,10 +195,10 @@ void Server::removeClient(Address& clientAddress) noexcept
 
 void Server::areClientsConnected() noexcept
 {
-    actualTime_ = std::chrono::high_resolution_clock::now();
+    clock_.setActualTime(std::chrono::high_resolution_clock::now());
 
     for (auto& client : clients_) {
-        auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(actualTime_ - client.lastPing);
+        auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(clock_.getActualTime() - client.lastPing);
         if (timelapse >= std::chrono::seconds(MAX_TIMEOFF)) {
             if (client.isPingSent) {
                 std::cout << "client disconnected" << std::endl;
@@ -209,7 +206,7 @@ void Server::areClientsConnected() noexcept
             } else {
                 std::cout << "trying to send ping to client" << std::endl;
                 client.isPingSent = true;
-                client.lastPing   = actualTime_;
+                client.lastPing   = clock_.getActualTime();
                 client.dataToSend.push({CONNECT});
             }
         }

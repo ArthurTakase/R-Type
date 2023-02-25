@@ -33,6 +33,7 @@ add_subdirectory(src/ECS)
 add_subdirectory(src/Serializer)
 add_subdirectory(src/Json)
 add_subdirectory(src/Tools)
+add_subdirectory(src/Time)
 
 # ------------------------------
 # Server
@@ -62,6 +63,7 @@ target_link_libraries(${RTYPE_SERVER} ECSEncapsulation)
 target_link_libraries(${RTYPE_SERVER} CMakeSFMLProject)
 target_link_libraries(${RTYPE_SERVER} Serializer)
 target_link_libraries(${RTYPE_SERVER} Tools)
+target_link_libraries(${RTYPE_SERVER} Time)
 
 set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
 target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
