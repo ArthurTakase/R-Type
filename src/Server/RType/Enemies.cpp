@@ -45,6 +45,7 @@ int RType::createBasicEnemy(int x, int y) noexcept
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
         if (stat->getStat(RTypeStats::Life) <= 0) {
+            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
             nbEnemyAlive -= 1;
             dest->destroy();
         }
@@ -62,7 +63,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     auto enemy = entityManager_.newEntity();
     nbEnemyAlive += 1;
 
-    enemy->addComponent(DrawableComponent(0, 0, 16, 16, 2));
+    enemy->addComponent(DrawableComponent(0, 0, 16, 16, CURVE_ENEMY_ID_SPRITE));
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
     enemy->addComponent(DestroyableComponent());
@@ -91,6 +92,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
         if (stat->getStat(RTypeStats::Life) <= 0) {
+            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
             nbEnemyAlive -= 1;
             dest->destroy();
         }

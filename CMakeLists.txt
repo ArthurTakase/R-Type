@@ -32,6 +32,7 @@ add_subdirectory(src/Lib)
 add_subdirectory(src/ECS)
 add_subdirectory(src/Serializer)
 add_subdirectory(src/Json)
+add_subdirectory(src/Tools)
 
 # ------------------------------
 # Server
@@ -43,7 +44,7 @@ set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/Server.cpp
   ${SERVER_DIR}/RType.cpp
   ${SERVER_DIR}/RType/Asteroid.cpp
-  ${SERVER_DIR}/RType/Enemy_1.cpp
+  ${SERVER_DIR}/RType/Enemies.cpp
   ${SERVER_DIR}/RType/Misc.cpp
   ${SERVER_DIR}/RType/Player.cpp
   ${SERVER_DIR}/RType/Spawner.cpp
@@ -60,6 +61,7 @@ target_link_libraries(${RTYPE_SERVER} NetworkLib)
 target_link_libraries(${RTYPE_SERVER} ECSEncapsulation)
 target_link_libraries(${RTYPE_SERVER} CMakeSFMLProject)
 target_link_libraries(${RTYPE_SERVER} Serializer)
+target_link_libraries(${RTYPE_SERVER} Tools)
 
 set_property(TARGET ${RTYPE_SERVER} PROPERTY CXX_STANDARD 20)
 target_compile_options(${RTYPE_SERVER} PUBLIC ${CXX_FLAGS})
@@ -85,6 +87,7 @@ target_link_libraries(${RTYPE_CLIENT} NetworkLib)
 target_link_libraries(${RTYPE_CLIENT} ECSEncapsulation)
 target_link_libraries(${RTYPE_CLIENT} CMakeSFMLProject)
 target_link_libraries(${RTYPE_SERVER} Serializer)
+target_link_libraries(${RTYPE_SERVER} Tools)
 
 target_compile_options(${RTYPE_CLIENT} PUBLIC ${CXX_FLAGS})
 set_property(TARGET ${RTYPE_CLIENT} PROPERTY CXX_STANDARD 20)
@@ -137,6 +140,7 @@ if(DEFINED TESTS)
   target_link_libraries(${TEST_BUILD} CMakeSFMLProject)
   target_link_libraries(${TEST_BUILD} ECSEncapsulation)
   target_link_libraries(${TEST_BUILD} Serializer)
+  target_link_libraries(${TEST_BUILD} Tools)
   target_link_libraries(${TEST_BUILD} gtest gtest_main gmock pthread)
   
   # Includes

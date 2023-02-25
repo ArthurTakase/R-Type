@@ -96,7 +96,12 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
-        drawable->setTextureId(packet.idSprite);
+
+        if (packet.idSprite != drawable->getTextureId()) {
+            drawable->getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
+            drawable->setTextureId(packet.idSprite);
+        }
+
         if (packet.destroyed) destroy->destroy();
     }
 }

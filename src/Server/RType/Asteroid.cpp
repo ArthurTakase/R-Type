@@ -15,7 +15,7 @@ int RType::createAsteroid(int x) noexcept
     auto asteroid = entityManager_.newEntity();
 
     int   y     = (rand() % 239);
-    float speed = static_cast<float>(rand() % 25) / 10 + 5;
+    float speed = static_cast<float>(rand() % 25) / 10 + 2;
     float scale = static_cast<float>(rand() % 20) / 10 + 1;
 
     asteroid->addComponent(TransformComponent(x, y));
@@ -31,9 +31,13 @@ int RType::createAsteroid(int x) noexcept
         auto mouv  = entity->getComponent<MouvementComponent>();
         auto draw  = entity->getComponent<DrawableComponent>();
 
+        if (stat->getStat(RTypeStats::Life) <= 0) {
+            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        }
+
         if (trans->getX() <= -16 || stat->getStat(RTypeStats::Life) <= 0) {
             float behaviorScale = static_cast<float>(rand() % 20) / 10 + 1;
-            float behaviorSpeed = static_cast<float>(rand() % 25) / 10 + 5;
+            float behaviorSpeed = static_cast<float>(rand() % 25) / 10 + 2;
 
             mouv->setSpeed(behaviorSpeed);
             trans->setX(255);

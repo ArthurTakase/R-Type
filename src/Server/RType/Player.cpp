@@ -18,11 +18,11 @@ int RType::createPlayer(int x, int y, int nb) noexcept
     player->addComponent(DrawableComponent(0, 0, 16, 16, 10 + nb));
     player->addComponent(AnimationComponent(128, 0.1));
     player->addComponent(TransformComponent(x, y));
-    player->addComponent(StatComponent({100, 10, 10.0, 1.0}));
+    player->addComponent(StatComponent({100, 10, 10.0, 1.0, 1.0}));
     player->addComponent(MouvementComponent(0, 0, 3.0));
     player->addComponent(InputComponent());
     player->addComponent(DestroyableComponent());
-    player->addComponent(TimerComponent(0.1));
+    player->addComponent(TimerComponent(0.2));
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(
@@ -51,7 +51,17 @@ int RType::createPlayer(int x, int y, int nb) noexcept
                     auto bulletDamage = stat->getStat(RTypeStats::Damage);
                     auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
                     auto bulletSize   = stat->getStat(RTypeStats::Size);
-                    createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
+
+                    if (stat->getStat(RTypeStats::Level) < 5) {
+                        createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
+                    } else if (stat->getStat(RTypeStats::Level) < 10) {
+                        createPlayerBullet(x, y - 4, bulletDamage, bulletSpeed * dir, bulletSize);
+                        createPlayerBullet(x, y + 4, bulletDamage, bulletSpeed * dir, bulletSize);
+                    } else {
+                        createPlayerBullet(x, y, bulletDamage, bulletSpeed * dir, bulletSize);
+                        createPlayerBullet(x, y - 8, bulletDamage, bulletSpeed * dir, bulletSize);
+                        createPlayerBullet(x, y + 8, bulletDamage, bulletSpeed * dir, bulletSize);
+                    }
                 }
             }
         }
@@ -88,6 +98,10 @@ int RType::createPlayerBullet(int x, int y, float damage, float speed, float siz
             auto destMe = me->getComponent<DestroyableComponent>();
             auto life   = stat->getStat(RTypeStats::Life);
             auto dmg    = statMe->getStat(RTypeStats::Damage);
+            auto draw   = entity->getComponent<DrawableComponent>();
+
+            if (draw->getTextureId() == 3) { return; }
+
             stat->setStat(RTypeStats::Life, life - dmg);
             destMe->destroy();
         }

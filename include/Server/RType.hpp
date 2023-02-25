@@ -18,7 +18,7 @@
 #include <Serializer/BitSize.hpp>
 #include <memory>
 
-typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
+typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4 } RTypeStats;
 
 #define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
 #define BASIC_ENEMY_ID_SPRITE 2
@@ -56,8 +56,7 @@ class RType
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
     void createEnemyWave(std::string type, json::array_t positions) noexcept;
-
-    int curve(int center, int amplitude, int period, int x) noexcept;
+    int  createPowerUp(int x, int y, int type) noexcept;
 
   private:
     bool              looping_     = true;
