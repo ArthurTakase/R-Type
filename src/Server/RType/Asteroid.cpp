@@ -25,7 +25,7 @@ int RType::createAsteroid(int x) noexcept
     asteroid->addComponent(StatComponent({25 * scale, 2}));
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[=](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this](Entity* entity) {
         auto trans = entity->getComponent<TransformComponent>();
         auto stat  = entity->getComponent<StatComponent>();
         auto mouv  = entity->getComponent<MouvementComponent>();

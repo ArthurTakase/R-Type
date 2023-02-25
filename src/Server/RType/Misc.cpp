@@ -6,6 +6,7 @@
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
+#include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Curve.hpp>
@@ -45,15 +46,20 @@ int RType::createPowerUp(int x, int y, int type) noexcept
     powerUp->addComponent(DrawableComponent(0, 0, 16, 16, sprites[type]));
     powerUp->addComponent(MouvementComponent(-1, 0, 5.0));
     powerUp->addComponent(DestroyableComponent());
+    powerUp->addComponent(AnimationComponent(128, 0.1));
+    powerUp->addComponent(TimerComponent(10.0));
 
     auto behaviorComponent = BehaviorComponent();
     behaviorComponent.setOnUpdate(std::function<void(Entity * entity)>{[this, y](Entity* entity) {
-        auto trans = entity->getComponent<TransformComponent>();
-        auto mouv  = entity->getComponent<MouvementComponent>();
-        auto dest  = entity->getComponent<DestroyableComponent>();
+        auto  trans = entity->getComponent<TransformComponent>();
+        auto  mouv  = entity->getComponent<MouvementComponent>();
+        auto  dest  = entity->getComponent<DestroyableComponent>();
+        auto& timer = entity->getComponent<TimerComponent>()->getTimer();
 
         int x = trans->getX();
         if (trans->getX() <= 0 || trans->getX() >= 239) { mouv->setDirX(mouv->getDirX() * -1); }
+
+        if (timer.isOver()) { dest->destroy(); }
     }});
     powerUp->addComponent(behaviorComponent);
 

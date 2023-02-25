@@ -14,3 +14,5 @@ coverage:
     just tests && gcovr -r . --exclude "build/" --exclude "tests/"
 clear:
     rm -rf build/
+re:
+    just clear && just build
