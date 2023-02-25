@@ -60,6 +60,7 @@ int RType::createBasicEnemy(int x, int y) noexcept
 int RType::createCurvedEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
+    nbEnemyAlive += 1;
 
     enemy->addComponent(DrawableComponent(0, 0, 16, 16, 2));
     enemy->addComponent(AnimationComponent(128, 0.1));
@@ -89,7 +90,10 @@ int RType::createCurvedEnemy(int x, int y) noexcept
             auto bSize   = stat->getStat(RTypeStats::Size);
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
+        if (stat->getStat(RTypeStats::Life) <= 0) {
+            nbEnemyAlive -= 1;
+            dest->destroy();
+        }
         if (x <= -16) { trans->setX(255); }
     }});
 
