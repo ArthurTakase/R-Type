@@ -73,10 +73,12 @@ int Window::getKeyPressed()
             case sf::Keyboard::Down: return Input::Down;
             case sf::Keyboard::Space: return Input::Space;
             case sf::Keyboard::LShift: return Input::Shift;
-            case sf::Keyboard::E: return Input::Z;
-            case sf::Keyboard::S: return Input::Q;
-            case sf::Keyboard::D: return Input::S;
-            case sf::Keyboard::F: return Input::D;
+            case sf::Keyboard::Z:
+            case sf::Keyboard::W: return Input::Z;
+            case sf::Keyboard::Q:
+            case sf::Keyboard::A: return Input::Q;
+            case sf::Keyboard::S: return Input::S;
+            case sf::Keyboard::D: return Input::D;
             case sf::Keyboard::Escape: return Input::Exit;
             case sf::Keyboard::Enter: return Input::Return;
             case sf::Keyboard::BackSpace: return Input::BackSpace;
@@ -89,10 +91,12 @@ int Window::getKeyPressed()
             case sf::Keyboard::Num3:
             case sf::Keyboard::Numpad3: return Input::Three;
             case sf::Keyboard::Num4:
+            case 51:
             case sf::Keyboard::Numpad4: return Input::Four;
             case sf::Keyboard::Num5:
             case sf::Keyboard::Numpad5: return Input::Five;
             case sf::Keyboard::Num6:
+            case 56:
             case sf::Keyboard::Numpad6: return Input::Six;
             case sf::Keyboard::Num7:
             case sf::Keyboard::Numpad7: return Input::Seven;
