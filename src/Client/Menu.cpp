@@ -15,6 +15,7 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Error/Error.hpp>
 #include <NetworkLib/HostHandler.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 #include <vector>
 
@@ -75,12 +76,12 @@ int Menu::createText(int posX, int posY, int size, const std::string_view& messa
     return text->getId();
 }
 
-int Menu::createBackground(int posX, const std::string_view& imagePath) noexcept
+int Menu::createBackground(int posX) noexcept
 {
     auto background = manager_.newEntity();
 
-    background->addComponent(TransformComponent(posX, DEFAULT));
-    background->addComponent(MouvementComponent(-1, DEFAULT, 1.0));
+    background->addComponent(TransformComponent(posX, 0));
+    background->addComponent(MouvementComponent(-1, 0, 1.0));
     background->addComponent(DestroyableComponent());
 
     auto behaviorComponent = BehaviorComponent();
@@ -90,7 +91,7 @@ int Menu::createBackground(int posX, const std::string_view& imagePath) noexcept
         if (transform->getX() <= MIN_VALUE) { transform->setX(MAX_VALUE); }
     }});
 
-    auto  drawable = DrawableComponent(DEFAULT, DEFAULT, MAX_VALUE, MAX_VALUE, DEFAULT);
+    auto  drawable = DrawableComponent(0, 0, 255, 255, 0);
     auto& sprite   = drawable.getSprite();
     sprite.setSpritePath(BACKGROUND_PATH.data());
 
@@ -102,28 +103,27 @@ int Menu::createBackground(int posX, const std::string_view& imagePath) noexcept
 
 int Menu::createTitleMenu(Window& window) noexcept
 {
-    int bg1 = createBackground(DEFAULT, BACKGROUND_PATH);
-    int bg2 = createBackground(MAX_VALUE, BACKGROUND_PATH);
-    int t1  = createText(40, 230, 10, CREDITS_TEXT.data());
-    int t2  = createText(75, 200, 10, INSTRUCTIONS.data());
+    int bg1 = createBackground(0);
+    int bg2 = createBackground(255);
+    int t1  = createText(40, 230, 10, "@lefeudecamps 2023");
+    int t2  = createText(75, 200, 10, "Press Enter");
 
     auto menu = manager_.newEntity();
 
-    menu->addComponent(MouvementComponent(DEFAULT, 1, 1));
+    menu->addComponent(MouvementComponent(0, 1, 1));
     menu->addComponent(TransformComponent(20, 00));
     menu->addComponent(DestroyableComponent());
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, bg1, bg2, t1, t2](Entity* entity) {
         int                              input = window.getKeyPressed();
-        static const std::vector<int>    exit  = {MAX_VALUE, 36};
         static std::vector<std::string*> txt   = {&ip_, &port_};
 
-        if (std::find(exit.begin(), exit.end(), input) != exit.end()) {
+        if (input == Input::Exit) {
             for (auto& t : txt) *t = "";
             isOpen_ = false;
         }
-        if (input == RETURN_KEY) {
+        if (input == Input::Return) {
             createIPMenu(window);
             entity->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t1)->getComponent<DestroyableComponent>()->destroy();
@@ -133,10 +133,10 @@ int Menu::createTitleMenu(Window& window) noexcept
         auto mouvement = entity->getComponent<MouvementComponent>();
         auto transform = entity->getComponent<TransformComponent>();
 
-        if (transform->getY() >= 30) mouvement->setDirY(DEFAULT);
+        if (transform->getY() >= 30) mouvement->setDirY(0);
     }});
 
-    auto  drawable = DrawableComponent(DEFAULT, DEFAULT, 226, 97, 7);
+    auto  drawable = DrawableComponent(0, 0, 226, 97, 7);
     auto& sprite   = drawable.getSprite();
     sprite.setSpritePath(TITLE_PATH.data());
 
@@ -159,38 +159,27 @@ int Menu::createIPMenu(Window& window) noexcept
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, t1, t2](Entity* entity) {
         int                              input  = window.getKeyPressed();
-        static const std::vector<int>    numpad = {75, 76, 77, 78, 79, 80, 81, 82, 83, 84};
-        static const std::vector<int>    num    = {26, 27, 28, 29, 51, 31, 56, 33, 34, 35};
-        static const std::vector<int>    exit   = {MAX_VALUE, 36};
         static std::vector<std::string*> txt    = {&ip_, &port_};
         static int                       i      = 0;
         static std::vector<int>          allTxt = {t1, t2};
 
-        if (std::find(exit.begin(), exit.end(), input) != exit.end()) {
+        if (input == Input::Exit) {
             for (auto& t : txt) *t = "";
             isOpen_ = false;
         }
-        if (std::find(numpad.begin(), numpad.end(), input) != numpad.end()) {
-            *txt[i] += std::to_string(input - 75);
+        if (input >= Input::Zero && input <= Input::Nine) {
+            *txt[i] += std::to_string(input - Input::Zero);
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
         }
-        if (std::find(num.begin(), num.end(), input) != num.end()) {
-            if (input == 51) *txt[i] += "4";
-            else if (input == 56)
-                *txt[i] += "6";
-            else
-                *txt[i] += std::to_string(input - 26);
-            manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
-        }
-        if (input == DOT_KEY) {
+        if (input == Input::Dot) {
             *txt[i] += ".";
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
         }
-        if (input == RETURN_KEY) {
+        if (input == Input::Return) {
             if (txt[i]->length() > 1) i++;
             if (i >= MAX_INDEX) isOpen_ = false;
         }
-        if (input == BACKSPACE_KEY) {
+        if (input == Input::BackSpace) {
             if (txt[i]->length() > 0) {
                 txt[i]->erase(txt[i]->length() - 1, 1);
                 manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);

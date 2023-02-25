@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/StatComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
 #include <ECS/Systems/AnimationSystem.hpp>
 #include <ECS/Systems/BehaviorSystem.hpp>
@@ -52,7 +53,8 @@ class RType
     int  createCurvedEnemy(int x, int y) noexcept;
     int  createSpawner() noexcept;
     int  createBackground(int x) noexcept;
-    int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
+    void playerShoot(int x, int y, int dirX, int dirY, StatComponent* stats) noexcept;
+    int  createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept;
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
     void createEnemyWave(std::string type, json::array_t positions) noexcept;
@@ -62,6 +64,7 @@ class RType
     bool              looping_     = true;
     int               nbEnemyAlive = 0;
     int               playerLevel  = 1;
+    bool              started      = false;
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;
     BehaviorSystem    behaviorSystem_;

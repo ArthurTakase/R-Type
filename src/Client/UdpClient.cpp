@@ -9,6 +9,7 @@
 #include <Error/Error.hpp>
 #include <NetworkLib/SocketFactory.hpp>
 #include <NetworkLib/SocketSelectorFactory.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 #include <memory>
 
@@ -119,7 +120,7 @@ void UdpClient::gameLoop() noexcept
 
     while (looping_) {
         auto input = lib.getWindow().getKeyPressed();
-        if (input == 255 || input == 36) {
+        if (input == Input::Exit) {
             stop();
             break;
         }
@@ -186,7 +187,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
         if (infos.data.size() == 0) { return; }
         if (infos.data.size() == 1) {
             int value = infos.data[0];
-            if (value == ESCAPE || value == WINDOW_CLOSE) {
+            if (value == Input::Exit) {
                 stop();
                 auto& lib = game_.getLib();
                 lib.getWindow().close();

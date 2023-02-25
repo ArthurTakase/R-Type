@@ -6,6 +6,7 @@
 */
 
 #include <Lib/Window.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 
 Window::Window() noexcept {}
@@ -62,10 +63,53 @@ int Window::getKeyPressed()
 {
     sf::Event event;
 
-    if (!window.pollEvent(event)) return 0;
-    if (event.type == sf::Event::Closed) return 255;
-    if (event.type == sf::Event::KeyPressed) return event.key.code;
-    return 0;
+    if (!window.pollEvent(event)) return Input::None;
+    if (event.type == sf::Event::Closed) return Input::Exit;
+    if (event.type == sf::Event::KeyPressed) {
+        switch (event.key.code) {
+            case sf::Keyboard::Left: return Input::Left;
+            case sf::Keyboard::Right: return Input::Right;
+            case sf::Keyboard::Up: return Input::Up;
+            case sf::Keyboard::Down: return Input::Down;
+            case sf::Keyboard::Space: return Input::Space;
+            case sf::Keyboard::LShift: return Input::Shift;
+            case sf::Keyboard::E: return Input::Z;
+            case sf::Keyboard::S: return Input::Q;
+            case sf::Keyboard::D: return Input::S;
+            case sf::Keyboard::F: return Input::D;
+            case sf::Keyboard::Escape: return Input::Exit;
+            case sf::Keyboard::Enter: return Input::Return;
+            case sf::Keyboard::BackSpace: return Input::BackSpace;
+            case sf::Keyboard::Num0:
+            case sf::Keyboard::Numpad0: return Input::Zero;
+            case sf::Keyboard::Num1:
+            case sf::Keyboard::Numpad1: return Input::One;
+            case sf::Keyboard::Num2:
+            case sf::Keyboard::Numpad2: return Input::Two;
+            case sf::Keyboard::Num3:
+            case sf::Keyboard::Numpad3: return Input::Three;
+            case sf::Keyboard::Num4:
+            case sf::Keyboard::Numpad4: return Input::Four;
+            case sf::Keyboard::Num5:
+            case sf::Keyboard::Numpad5: return Input::Five;
+            case sf::Keyboard::Num6:
+            case sf::Keyboard::Numpad6: return Input::Six;
+            case sf::Keyboard::Num7:
+            case sf::Keyboard::Numpad7: return Input::Seven;
+            case sf::Keyboard::Num8:
+            case sf::Keyboard::Numpad8: return Input::Eight;
+            case sf::Keyboard::Num9:
+            case sf::Keyboard::Numpad9: return Input::Nine;
+            case sf::Keyboard::Period:
+            case sf::Keyboard::Comma:
+            case sf::Keyboard::Slash:
+            case sf::Keyboard::Semicolon:
+            case -1: return Input::Dot;
+            default: return Input::None;
+        }
+    }
+
+    return Input::None;
 }
 
 /**
