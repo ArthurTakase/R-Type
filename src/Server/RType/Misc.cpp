@@ -81,7 +81,7 @@ int RType::createPowerUp(int x, int y, int type) noexcept
             if ((int)player->getStat(RTypeStats::Level) % 5 == 0 && player->getStat(RTypeStats::Level) <= 10.0) {
                 spr->setTextureId(spr->getTextureId() + 10);
             }
-            player->setStat(RTypeStats::Damage, player->getStat(RTypeStats::Damage) + 5);
+            player->setStat(RTypeStats::Damage, player->getStat(RTypeStats::Damage) + 2);
         }
         dest->destroy();
     }});

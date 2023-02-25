@@ -110,14 +110,14 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
     auto  bullet = entityManager_.newEntity();
     float life   = type ? 1.0 : 200.0;
 
-    bullet->addComponent(TransformComponent(x, y));
+    bullet->addComponent(TransformComponent(x - 8, y + 4));
     bullet->addComponent(MouvementComponent(-1, 0, speed));
-    bullet->addComponent(DrawableComponent(0, 0, 16, 16, type ? 6 : 5, size, size));
-    bullet->addComponent(AnimationComponent(32, 0.1));
+    bullet->addComponent(DrawableComponent(0, 0, 8, 8, type ? 6 : 5, size, size));
+    bullet->addComponent(AnimationComponent(16, 0.1));
     bullet->addComponent(DestroyableComponent());
     bullet->addComponent(StatComponent({life, damage}));
 
-    auto hitbox = HitboxComponent(16, 16);
+    auto hitbox = HitboxComponent(8, 8);
     hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto stat   = entity->getComponent<StatComponent>();
