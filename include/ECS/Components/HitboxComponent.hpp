@@ -33,7 +33,7 @@ class HitboxComponent : public IComponent
     void   setSize(size_t width, size_t height) noexcept;
     void   setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept;
     void   onCollision(Entity* entity, Entity* me) const noexcept;
-    void   setSCale(float x, float y) noexcept;
+    void   setScale(float x, float y) noexcept;
 
   private:
     size_t                                width_;

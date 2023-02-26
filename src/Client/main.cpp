@@ -12,6 +12,14 @@
 #include <cstdlib>
 #include <iostream>
 
+/**
+ * It takes the command line arguments and returns a vector of strings
+ *
+ * @param ac The number of arguments passed to the program.
+ * @param av The array of arguments passed to the program.
+ *
+ * @return A vector of strings.
+ */
 std::vector<std::string> checkArgs(int ac, const char* const av[])
 {
     if (ac == 1) return {};
@@ -20,6 +28,14 @@ std::vector<std::string> checkArgs(int ac, const char* const av[])
         throw InitError("Error: Invalid number of arguments");
 }
 
+/**
+ * It checks the arguments, then it creates a client and runs it
+ *
+ * @param ac the number of arguments
+ * @param av the arguments passed to the program
+ *
+ * @return The return value of the main function is an integer.
+ */
 int main(int ac, const char* const av[])
 {
     try {

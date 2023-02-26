@@ -59,6 +59,11 @@ void DrawableSystem::run()
     window_->refresh();
 }
 
+/**
+ * It sets the window_ member variable to the window passed in
+ *
+ * @param window The window to draw to.
+ */
 void DrawableSystem::setWindow(Window* window) noexcept
 {
     window_ = window;

@@ -10,8 +10,16 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Keyboard.hpp>
-#include <iostream>
 
+/**
+ * It creates a player entity and adds all the components it needs
+ *
+ * @param x the x position of the player
+ * @param y y position
+ * @param nb the player number
+ *
+ * @return The id of the player entity
+ */
 int RType::createPlayer(int x, int y, int nb) noexcept
 {
     auto player = entityManager_.newEntity();
@@ -73,6 +81,15 @@ int RType::createPlayer(int x, int y, int nb) noexcept
     return player->getId();
 }
 
+/**
+ * It creates a bullet entity with the given parameters
+ *
+ * @param x The x position of the bullet
+ * @param y y position of the player
+ * @param dirX The direction of the bullet on the X axis.
+ * @param dirY The direction of the bullet on the Y axis.
+ * @param stat The player's stats
+ */
 void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) noexcept
 {
     auto bulletDamage = stat->getStat(RTypeStats::Damage);
@@ -92,6 +109,20 @@ void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) n
     }
 }
 
+/**
+ * It creates a bullet entity with a transform, a mouvement, a drawable, an
+ * animation, a destroyable, a stat, a hitbox and a behavior component
+ *
+ * @param x The x position of the bullet
+ * @param y the y position of the bullet
+ * @param damage the damage the bullet will deal to the enemy
+ * @param speed the speed of the bullet
+ * @param dirX The direction of the bullet on the X axis.
+ * @param dirY direction of the bullet on the Y axis
+ * @param size the size of the bullet
+ *
+ * @return The id of the bullet
+ */
 int RType::createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept
 {
     auto bullet = entityManager_.newEntity();

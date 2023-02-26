@@ -10,8 +10,15 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Curve.hpp>
-#include <iostream>
 
+/**
+ * It creates a background entity with a transform, drawable, mouvement,
+ * destroyable and behavior component
+ *
+ * @param x the x position of the background
+ *
+ * @return The id of the entity created.
+ */
 int RType::createBackground(int x) noexcept
 {
     auto background = entityManager_.newEntity();
@@ -33,6 +40,15 @@ int RType::createBackground(int x) noexcept
     return background->getId();
 }
 
+/**
+ * It creates a power up entity
+ *
+ * @param x The x position of the powerup
+ * @param y The y position of the powerup
+ * @param type 0 = heal, 1 = upgrade
+ *
+ * @return The id of the entity created.
+ */
 int RType::createPowerUp(int x, int y, int type) noexcept
 {
     auto             powerUp = entityManager_.newEntity();

@@ -8,6 +8,10 @@
 #pragma once
 #include <chrono>
 
+/**
+ * @brief a class that will be used to handle ping management in our game between a client and the server.
+ *
+ */
 class Clock
 {
   public:

@@ -11,11 +11,6 @@
 #include <iostream>
 
 /**
- * `EntityManager::EntityManager()` is the constructor for the `EntityManager` class
- */
-EntityManager::EntityManager() {}
-
-/**
  * It removes an entity from the entity manager
  *
  * @param id The id of the entity to remove.
@@ -91,6 +86,13 @@ Entity* EntityManager::newEntity() noexcept
     return entities_[entities_.size() - 1].get();
 }
 
+/**
+ * It creates a new entity and adds it to the list of entities
+ *
+ * @param id The id of the entity.
+ *
+ * @return A pointer to the last element in the vector.
+ */
 Entity* EntityManager::newEntity(int id) noexcept
 {
     std::unique_ptr<Entity> entity = std::make_unique<Entity>(id);

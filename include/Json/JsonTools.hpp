@@ -4,6 +4,10 @@
 
 using json = nlohmann::json;
 
+
+/**
+ * @brief A class to encapsulate and use json tools methods.
+ */
 class JsonTools
 {
   public:

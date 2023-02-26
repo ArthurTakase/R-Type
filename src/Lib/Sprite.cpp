@@ -8,6 +8,9 @@
 #include <Lib/Sprite.hpp>
 #include <iostream>
 
+/**
+ * This is the default constructor for the Sprite class.
+ */
 Sprite::Sprite()
     : spritePath("")
     , x(0)
@@ -145,6 +148,12 @@ void Sprite::updatePosition()
     sprite.setPosition(x, y);
 }
 
+/**
+ * Sets the scale of the sprite
+ *
+ * @param x The x-scale of the sprite.
+ * @param y The y coordinate of the sprite.
+ */
 void Sprite::setScale(float x, float y) noexcept
 {
     sprite.setScale(x, y);

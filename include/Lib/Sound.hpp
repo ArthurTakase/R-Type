@@ -9,6 +9,10 @@
 
 #include <SFML/Audio.hpp>
 
+/**
+ * @brief This class is used to create and encapsulate a Sf::Sound.
+ *
+ */
 class Sound
 {
   public:

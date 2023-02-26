@@ -10,8 +10,6 @@
 #include <ECS/Components/IComponent.hpp>
 #include <vector>
 
-#define NO_INDEX -10000
-
 /**
  * @brief Component used to store the stats of an entity
  */
@@ -19,7 +17,7 @@ class StatComponent : public IComponent
 {
   public:
     StatComponent(std::vector<float> stats);
-    ~StatComponent() noexcept;
+    ~StatComponent() noexcept                          = default;
     StatComponent(const StatComponent& other) noexcept = default;
     StatComponent(StatComponent&& other) noexcept      = default;
 
@@ -30,5 +28,6 @@ class StatComponent : public IComponent
     void  setStat(int index, float value) noexcept;
 
   private:
-    std::vector<float> stats;
+    std::vector<float>   statistics_;
+    static constexpr int NO_INDEX = -10000;
 };

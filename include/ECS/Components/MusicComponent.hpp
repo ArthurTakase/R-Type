@@ -10,6 +10,9 @@
 #include <Lib/Music.hpp>
 #include <memory>
 
+/**
+ * @brief Component used to set the music associated to an entity
+ */
 class MusicComponent : public IComponent
 {
   public:

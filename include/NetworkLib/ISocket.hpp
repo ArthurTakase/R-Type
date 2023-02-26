@@ -58,6 +58,10 @@ struct Client {
     bool                                  isPingSent = false;
 };
 
+/**
+ * @brief Encapsulate a server address and the last time a ping was sent
+ *
+ */
 struct ServerInfos {
     Address                               address;
     std::chrono::system_clock::time_point lastPing   = {};

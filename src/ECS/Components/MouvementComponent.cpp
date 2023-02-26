@@ -87,6 +87,12 @@ void MouvementComponent::setSpeed(float speed) noexcept
     speed_ = speed;
 }
 
+/**
+ * It sets the direction of the entity
+ *
+ * @param x The x-coordinate of the direction vector.
+ * @param y The y-coordinate of the direction vector.
+ */
 void MouvementComponent::setDir(int x, int y) noexcept
 {
     dirX_ = x;

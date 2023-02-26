@@ -16,6 +16,12 @@
 #include <iostream>
 #include <locale>
 
+/**
+ * It creates a socket and a selector, adds the socket to the selector, and starts
+ * the game and network threads
+ *
+ * @param port The port to listen on.
+ */
 [[nodiscard]] Server::Server(Address::Port port)
     : socket_(SocketFactory::createSocket(port))
     , selector_(SocketSelectorFactory::createSocketSelector())
@@ -26,23 +32,37 @@
     networkThread_ = std::thread([&]() { communicate(); });
 }
 
+/**
+ * It stops the server
+ */
 void Server::stop() noexcept
 {
     looping_ = false;
     gameInstance_.stop();
 }
 
+/**
+ * It resets the server to its initial state.
+ */
 void Server::reset() noexcept
 {
     looping_ = true;
 }
 
+/**
+ * The run function joins the game and network threads.
+ */
 void Server::run()
 {
     gameThread_.join();
     networkThread_.join();
 }
 
+/**
+ * It waits for a client to connect, then it waits for a client to send a message,
+ * then it sends a message to the client, then it checks if the client is still
+ * connected
+ */
 void Server::communicate() noexcept
 {
     while (looping_) {
@@ -58,6 +78,9 @@ void Server::communicate() noexcept
     }
 }
 
+/**
+ * It runs the game loop, and sends the data to the clients
+ */
 void Server::gameLoop() noexcept
 {
     gameInstance_.init();
@@ -90,6 +113,12 @@ void Server::gameLoop() noexcept
     }
 }
 
+/**
+ * It receives data from the client, checks if the client is known, if it is not,
+ * it adds it to the list of clients, and then handles the data received from it
+ *
+ * @return A reference to the player with the given address.
+ */
 void Server::receive()
 {
     clock_.setLastPing(std::chrono::high_resolution_clock::now());
@@ -99,7 +128,6 @@ void Server::receive()
             if (players_.size() >= MAX_PLAYERS) { return; }
             addClient(infoReceived.address, clock_.getLastPing());
         }
-        // update the client lastPing
         for (auto& client : clients_) {
             if (client.address == infoReceived.address) { client.lastPing = clock_.getLastPing(); }
         }
@@ -109,6 +137,9 @@ void Server::receive()
     }
 }
 
+/**
+ * If there's data to send, send it
+ */
 void Server::send() noexcept
 {
     for (auto& client : clients_) {
@@ -116,6 +147,12 @@ void Server::send() noexcept
     }
 }
 
+/**
+ * It sends a blob of data to a client
+ *
+ * @param client the client to send the data to
+ * @param blob the data to send
+ */
 void Server::sendToClient(Client& client, RawData blob) // blob : binary large object
 {
     try {
@@ -125,6 +162,13 @@ void Server::sendToClient(Client& client, RawData blob) // blob : binary large o
     }
 }
 
+/**
+ * Get the first element of the queue and return it.
+ *
+ * @param client The client to get the data from.
+ *
+ * @return A reference to the client object.
+ */
 RawData Server::getDataFromQueue(Client& client) noexcept
 {
     RawData blob = client.dataToSend.front();
@@ -132,6 +176,13 @@ RawData Server::getDataFromQueue(Client& client) noexcept
     return (blob);
 }
 
+/**
+ * It handles the data received from the client
+ *
+ * @param infos a struct containing the address of the client and the data received
+ *
+ * @return A reference to the player with the given address.
+ */
 void Server::handleData(ReceivedInfos infos) noexcept
 {
     if (infos.data.size() == 0) { return; }
@@ -152,6 +203,13 @@ void Server::handleData(ReceivedInfos infos) noexcept
     infos.data.clear();
 }
 
+/**
+ * Return true if the given address is known to the server.
+ *
+ * @param address The address of the client to check.
+ *
+ * @return A reference to the client with the given address.
+ */
 bool Server::isKnownClient(Address address) const
 {
     auto iterator = std::find_if(
@@ -159,6 +217,12 @@ bool Server::isKnownClient(Address address) const
     return (iterator != clients_.end());
 }
 
+/**
+ * It adds a new client to the server
+ *
+ * @param address The address of the client
+ * @param ping The time the client sent the ping
+ */
 void Server::addClient(Address address, std::chrono::system_clock::time_point ping) noexcept
 {
     Client client{.address = address, .lastPing = ping};
@@ -171,6 +235,13 @@ void Server::addClient(Address address, std::chrono::system_clock::time_point pi
     std::cout << "New client connected" << std::endl;
 }
 
+/**
+ * It removes a client from the server
+ *
+ * @param clientAddress The address of the client to remove.
+ *
+ * @return A reference to the client.
+ */
 void Server::removeClient(Address& clientAddress) noexcept
 {
     auto iterator = std::find_if(clients_.begin(), clients_.end(), [&clientAddress](const Client& client) {
@@ -194,6 +265,10 @@ void Server::removeClient(Address& clientAddress) noexcept
     }
 }
 
+/**
+ * If a client hasn't sent a ping in a while, send a ping to the client. If the
+ * client doesn't respond to the ping, disconnect the client
+ */
 void Server::areClientsConnected() noexcept
 {
     clock_.setActualTime(std::chrono::high_resolution_clock::now());
@@ -214,6 +289,15 @@ void Server::areClientsConnected() noexcept
     }
 }
 
+/**
+ * If the client is found in the clients_ vector, set the isPingSent flag to false
+ * and if the client sent a ping, send a pong back
+ *
+ * @param clientAddress The address of the client that sent the message.
+ * @param isPing true if the packet is a ping, false if it's a pong
+ *
+ * @return A reference to the client's data to send.
+ */
 void Server::updateClientState(Address& clientAddress, bool isPing) noexcept
 {
     auto iterator = std::find_if(clients_.begin(), clients_.end(), [&clientAddress](const Client& client) {

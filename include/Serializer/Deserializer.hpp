@@ -9,6 +9,9 @@
 #include <bitset>
 #include <memory>
 
+/**
+ * @brief A class that is used to deserialize objects for network.
+ */
 class Deserializer
 {
   public:

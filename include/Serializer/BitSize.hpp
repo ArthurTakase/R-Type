@@ -13,6 +13,9 @@ static constexpr unsigned int MAX_PLAYERS  = 4;
 
 static constexpr std::string_view PATH_BG_MUSIC = "./assets/audio/loading.wav";
 
+/**
+ * @brief This enum class is used to process the packets received from the server in order.
+ */
 typedef enum PacketName {
     X1        = 0,
     X2        = 1,

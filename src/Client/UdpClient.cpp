@@ -211,8 +211,6 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
     } else {
         if (infos.data.size() % PACKET_SIZE == 0) {
             for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
-                // TODO call the real method deserialize
-                // GamePacket entity = Deserializer::deserialize(infos.data);
                 GamePacket packet;
                 packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
                 packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
@@ -236,6 +234,9 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
     }
 }
 
+/**
+ * It checks if the server is still connected to the client
+ */
 void UdpClient::checkServerConnection() noexcept
 {
     clock_.setActualTime(std::chrono::high_resolution_clock::now());

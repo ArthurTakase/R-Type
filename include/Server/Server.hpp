@@ -17,6 +17,10 @@
 #include <thread>
 #include <vector>
 
+/**
+ * @brief struct that contains the client's address and a vector of entities' id relative to each player.
+ *
+ */
 typedef struct Player {
     Address          address;
     std::vector<int> entities_id;
@@ -28,6 +32,9 @@ typedef struct Player {
  */
 class Server
 {
+  public:
+    static constexpr unsigned int SERVER_PORT = 4242;
+
   public:
     Server() noexcept = delete;
     explicit Server(Address::Port port);
@@ -56,6 +63,7 @@ class Server
     RType                           gameInstance_;
     std::vector<Player>             players_;
     Clock                           clock_;
+
     // methods
     void                  receive();
     void                  send() noexcept;

@@ -15,8 +15,6 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <bitset>
 
-enum WINDOW_KEY { QUIT = 255 };
-
 /**
  * @brief This class is used to create a window.
  *

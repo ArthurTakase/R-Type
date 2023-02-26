@@ -9,6 +9,9 @@
 #include <ECS/Components/IComponent.hpp>
 #include <Lib/Sound.hpp>
 
+/**
+ * @brief Component used to set a sound associated to an entity
+ */
 class SoundComponent : public IComponent
 {
   public:

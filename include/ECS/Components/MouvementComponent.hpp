@@ -12,7 +12,6 @@
 /**
  * @brief Component used to set the direction and speed of the movement of an entity
  */
-
 class MouvementComponent : public IComponent
 {
   public:
