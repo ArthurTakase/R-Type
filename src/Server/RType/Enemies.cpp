@@ -57,6 +57,7 @@ int RType::createBasicEnemy(int x, int y) noexcept
         if (stat->getStat(RTypeStats::Life) <= 0) {
             if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
             nbEnemyAlive -= 1;
+            playerLevel += 1;
             dest->destroy();
         }
         if (x <= -16) { trans->setX(255); }
@@ -112,6 +113,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
         if (stat->getStat(RTypeStats::Life) <= 0) {
             if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
             nbEnemyAlive -= 1;
+            playerLevel += 1;
             dest->destroy();
         }
         if (x <= -16) { trans->setX(255); }

@@ -105,3 +105,17 @@ int RType::createPowerUp(int x, int y, int type) noexcept
 
     return powerUp->getId();
 }
+
+/**
+ * It creates a random power up entity
+ *
+ * @param x The x position of the powerup
+ * @param y The y position of the powerup
+ *
+ * @return The id of the entity created.
+ */
+int RType::createRandomPowerUp(int x, int y) noexcept
+{
+    int type = rand() % 2;
+    return createPowerUp(x, y, type);
+}
