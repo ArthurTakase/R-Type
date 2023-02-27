@@ -41,8 +41,11 @@ Menu::Menu()
  */
 Address Menu::run(Window& window)
 {
+    createBackground(0);
+    createBackground(255);
     createTitleMenu(window);
     // createMusic(BG_MUSIC_PATH);
+
     drawableSystem_.setWindow(&window);
     Address serverInfos;
 
@@ -102,6 +105,7 @@ int Menu::createText(int posX, int posY, int size, const std::string_view& messa
     text->addComponent(DrawableComponent());
     text->addComponent(TransformComponent(posX, posY));
     text->addComponent(DestroyableComponent());
+
     auto textComponent = TextComponent(message.data(), FONT_PATH.data(), size, posX, posY);
     text->addComponent(textComponent);
 
@@ -149,21 +153,33 @@ int Menu::createBackground(int posX) noexcept
  */
 int Menu::createTitleMenu(Window& window) noexcept
 {
-    int bg1 = createBackground(0);
-    int bg2 = createBackground(255);
-    int t1  = createText(40, 230, 10, "@lefeudecamps 2023");
-    int t2  = createText(75, 200, 10, "Press Enter");
+    int t1 = createText(65, 125, 10, "@lefeudecamps");
+    int t2 = createText(35, 180, 10, "Press Enter to Play");
+    int t3 = createText(45, 200, 10, "Press D for hints");
 
     auto menu = manager_.newEntity();
+
+    const std::vector<std::string> hints = {
+        "Use WASD or ZQSD\nto move",
+        "Press Shift to\nstop moving",
+        "Use the arrow keys\nto shoot",
+        "Collect blue stars\nfor upgrades",
+        "Collect green stars\nto heal",
+        "Kill all your\nopponents to win",
+        "Press Enter once\nconnected and ready",
+        "Press Escape to\nleave the game",
+        "You can play with\nup to 4 players",
+    };
 
     menu->addComponent(MouvementComponent(0, 1, 1));
     menu->addComponent(TransformComponent(20, 00));
     menu->addComponent(DestroyableComponent());
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, bg1, bg2, t1, t2](Entity* entity) {
-        int                              input = window.getKeyPressed();
-        static std::vector<std::string*> txt   = {&ip_, &port_};
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, t1, t2, t3, hints](Entity* entity) {
+        int                              input     = window.getKeyPressed();
+        static std::vector<std::string*> txt       = {&ip_, &port_};
+        static int                       hintIndex = -1;
 
         if (input == Input::Exit) {
             for (auto& t : txt) *t = "";
@@ -174,6 +190,11 @@ int Menu::createTitleMenu(Window& window) noexcept
             entity->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t1)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t2)->getComponent<DestroyableComponent>()->destroy();
+            manager_.getEntity(t3)->getComponent<DestroyableComponent>()->destroy();
+        }
+        if (input == Input::D) {
+            hintIndex = (hintIndex + 1) % hints.size();
+            manager_.getEntity(t3)->getComponent<TextComponent>()->getText().setTextString(hints[hintIndex]);
         }
 
         auto mouvement = entity->getComponent<MouvementComponent>();
