@@ -11,6 +11,9 @@
 #include <ECS/Entity/EntityManager.hpp>
 #include <Tools/EntityIterator.hpp>
 
+/**
+ * @brief A system that will handle and update all MusicComponents contained inside our entities.
+ */
 class MusicSystem
 {
   public:

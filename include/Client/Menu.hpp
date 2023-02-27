@@ -21,6 +21,9 @@
 #define AUDIO(name) ("assets/audio/r-type" name)
 #define FONT(name) ("assets/fonts/" name)
 
+/**
+ * @brief This class is used to create a menu instance in the client.
+ */
 class Menu
 {
   public:

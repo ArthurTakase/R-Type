@@ -9,6 +9,10 @@
 
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief This class is used to create, modify and encapsulate a Sf::Text.
+ *
+ */
 class Text
 {
   public:

@@ -11,7 +11,7 @@
 #include <vector>
 
 /**
- * @brief get infos about the host
+ * @brief get infos about the host from argc and argv
  *
  */
 class HostHandler

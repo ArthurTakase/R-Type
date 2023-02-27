@@ -19,6 +19,9 @@
 #include <iostream>
 #include <vector>
 
+/**
+ * It creates a Menu object, which will then later be used to handle our menu of the game.
+ */
 Menu::Menu()
     : drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
@@ -28,6 +31,14 @@ Menu::Menu()
 {
 }
 
+/**
+ * It creates the title menu, then runs the systems until the user enters all the necessary infos to connect to the
+ * server and play the game
+ *
+ * @param window the window in which the menu will be displayed
+ *
+ * @return The address of the server
+ */
 Address Menu::run(Window& window)
 {
     createTitleMenu(window);
@@ -50,12 +61,22 @@ Address Menu::run(Window& window)
 
     return serverInfos;
 }
-
+/**
+ * It returns the value of the private member variable isOpen_. When called, it allows to our program to know if the
+ * menu is still open or not.
+ *
+ * @return A boolean value.
+ */
 bool Menu::getIsOpen() const noexcept
 {
     return isOpen_;
 }
 
+/**
+ * It creates a new entity with a music component
+ *
+ * @param path The path to the music file.
+ */
 void Menu::createMusic(const std::string_view& path) noexcept
 {
     auto music = manager_.newEntity();
@@ -63,6 +84,17 @@ void Menu::createMusic(const std::string_view& path) noexcept
     music->addComponent(MusicComponent(path.data()));
 }
 
+/**
+ * It creates a new text entity with a drawable, transform, destroyable, and text
+ * component
+ *
+ * @param posX The x position of the text
+ * @param posY The y position of the text
+ * @param size The size of the text.
+ * @param message The text to be displayed
+ *
+ * @return The id of the entity.
+ */
 int Menu::createText(int posX, int posY, int size, const std::string_view& message) noexcept
 {
     auto text = manager_.newEntity();
@@ -76,6 +108,13 @@ int Menu::createText(int posX, int posY, int size, const std::string_view& messa
     return text->getId();
 }
 
+/**
+ * It creates a background entity
+ *
+ * @param posX the x position of the background
+ *
+ * @return The id of the entity.
+ */
 int Menu::createBackground(int posX) noexcept
 {
     auto background = manager_.newEntity();
@@ -101,6 +140,13 @@ int Menu::createBackground(int posX) noexcept
     return background->getId();
 }
 
+/**
+ * It creates a menu with a title and a button to press to go to the next menu
+ *
+ * @param window The window to draw on
+ *
+ * @return The id of the entity.
+ */
 int Menu::createTitleMenu(Window& window) noexcept
 {
     int bg1 = createBackground(0);
@@ -146,6 +192,13 @@ int Menu::createTitleMenu(Window& window) noexcept
     return menu->getId();
 }
 
+/**
+ * It creates a page that allows the user to input an IP address and a port number
+ *
+ * @param window The window to get the input from.
+ *
+ * @return The id of the entity that was created.
+ */
 int Menu::createIPMenu(Window& window) noexcept
 {
     createText(55, 10, 15, "Connect to");

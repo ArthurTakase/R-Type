@@ -2,6 +2,12 @@
 #include <iostream>
 #include <map>
 
+/**
+ * It creates a new entity, adds a behavior component to it, and returns the
+ * entity's id
+ *
+ * @return The id of the entity that was created.
+ */
 int RType::createSpawner() noexcept
 {
     auto spawner = entityManager_.newEntity();
@@ -31,6 +37,14 @@ int RType::createSpawner() noexcept
     return spawner->getId();
 }
 
+/**
+ * It creates a map of function pointers to member functions of the class, and then
+ * calls the function pointed to by the map's value, using the map's key as the
+ * argument
+ *
+ * @param type the type of enemy to create
+ * @param positions a json array of json arrays of 2 ints.
+ */
 void RType::createEnemyWave(std::string type, json::array_t positions) noexcept
 {
     std::map<std::string, int (RType::*)(int, int)> creation = {

@@ -10,8 +10,18 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Curve.hpp>
-#include <iostream>
 
+/**
+ * It creates an enemy entity with a drawable component, an animation component, a
+ * transform component, a destroyable component, a stat component, a mouvement
+ * component, a timer component, a hitbox component, a behavior component and
+ * returns the id of the entity
+ *
+ * @param x x position of the enemy
+ * @param y the y position of the enemy
+ *
+ * @return The id of the entity created
+ */
 int RType::createBasicEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
@@ -58,6 +68,14 @@ int RType::createBasicEnemy(int x, int y) noexcept
     return enemy->getId();
 }
 
+/**
+ * It creates an enemy that moves in a curve and shoots bullets
+ *
+ * @param x x position of the enemy
+ * @param y the y position of the enemy
+ *
+ * @return The id of the entity created
+ */
 int RType::createCurvedEnemy(int x, int y) noexcept
 {
     auto enemy = entityManager_.newEntity();
@@ -105,6 +123,19 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     return enemy->getId();
 }
 
+/**
+ * It creates an entity with a transform, a mouvement, a drawable, an animation, a
+ * destroyable, a stat, a hitbox, a behavior and returns the entity's id
+ *
+ * @param x the x position of the bullet
+ * @param y the y position of the bullet
+ * @param damage the damage the bullet will deal to the player
+ * @param speed the speed of the bullet
+ * @param size the size of the bullet
+ * @param type 0 = player, 1 = enemy
+ *
+ * @return The id of the entity
+ */
 int RType::createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept
 {
     auto  bullet = entityManager_.newEntity();

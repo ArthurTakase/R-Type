@@ -24,7 +24,7 @@
 class EntityManager
 {
   public:
-    EntityManager();
+    EntityManager()                                    = default;
     ~EntityManager() noexcept                          = default;
     EntityManager(const EntityManager& other) noexcept = default;
     EntityManager(EntityManager&& other) noexcept      = delete;
@@ -39,7 +39,8 @@ class EntityManager
     Entity*                               newEntity(int id) noexcept;
 
   private:
-    size_t                               createId() const noexcept;
-    size_t                               higherId() const noexcept;
+    size_t createId() const noexcept;
+    size_t higherId() const noexcept;
+
     std::vector<std::unique_ptr<Entity>> entities_;
 };

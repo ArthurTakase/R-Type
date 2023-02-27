@@ -10,6 +10,10 @@
 #include <SFML/Audio.hpp>
 #include <memory>
 
+/**
+ * @brief This class is used to create and encapsulate a Sf::Music.
+ *
+ */
 class Music
 {
   public:

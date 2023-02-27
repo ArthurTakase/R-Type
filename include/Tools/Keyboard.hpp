@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * @brief an enum class to define all possible inputs in our game
+ *
+ */
 typedef enum Input {
     None      = 0,
     Zero      = 1,

@@ -28,5 +28,5 @@ class DestroyableComponent : public IComponent
     void destroy() noexcept;
 
   private:
-    bool destroyed = false;
+    bool destroyed_ = false;
 };

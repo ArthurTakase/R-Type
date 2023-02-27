@@ -10,6 +10,13 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 
+/**
+ * It creates an asteroid entity with a random position, speed and scale
+ *
+ * @param x the x position of the asteroid
+ *
+ * @return The id of the entity
+ */
 int RType::createAsteroid(int x) noexcept
 {
     auto asteroid = entityManager_.newEntity();

@@ -16,8 +16,6 @@
 
 RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
 {
-    // assert((entity->hasComponents<TransformComponent, DrawableComponent>()));
-
     auto    transform   = entity->getComponent<TransformComponent>();
     auto    drawable    = entity->getComponent<DrawableComponent>();
     auto    destroyable = entity->getComponent<DestroyableComponent>();
@@ -47,6 +45,13 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     return data;
 }
 
+/**
+ * It takes an integer and returns a vector of bytes
+ *
+ * @param keyCode The key code to send.
+ *
+ * @return A vector of uint8_t
+ */
 RawData Serializer::serialize(int keyCode)
 {
     RawData data;

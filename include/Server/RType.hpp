@@ -19,12 +19,6 @@
 #include <Serializer/BitSize.hpp>
 #include <memory>
 
-typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4 } RTypeStats;
-
-#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
-#define BASIC_ENEMY_ID_SPRITE 2
-#define CURVE_ENEMY_ID_SPRITE 8
-
 /**
  * @brief Game Instance for the server
  *
@@ -33,9 +27,9 @@ class RType
 {
   public:
     RType();
-    ~RType() noexcept;
     RType(const RType& other) noexcept = delete;
     RType(RType&& other) noexcept      = delete;
+    ~RType() noexcept                  = default;
 
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = delete;
@@ -72,3 +66,9 @@ class RType
     AnimationSystem   animationSystem_;
     DestroyableSystem destroyableSystem_;
 };
+
+typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4 } RTypeStats;
+
+#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
+static constexpr unsigned int BASIC_ENEMY_ID_SPRITE = 2;
+static constexpr unsigned int CURVE_ENEMY_ID_SPRITE = 8;

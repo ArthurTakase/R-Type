@@ -72,16 +72,35 @@ void HitboxComponent::setSize(size_t width, size_t height) noexcept
     height_ = height;
 }
 
+/**
+ * It sets the onCollision_ function object to the function object passed in
+ *
+ * @param onCollision A function that takes two entities as parameters and returns
+ * void.
+ */
 void HitboxComponent::setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept
 {
     onCollision_ = onCollision;
 }
 
+/**
+ * It calls the function pointer `onCollision_` with the given arguments
+ *
+ * @param entity The entity that collided with this entity.
+ * @param me The entity that has this component.
+ */
 void HitboxComponent::onCollision(Entity* entity, Entity* me) const noexcept
 {
     onCollision_(entity, me);
 }
 
+/**
+ * This function sets the width and height of the hitbox to the width and height of
+ * the hitbox multiplied by the x and y values passed in.
+ *
+ * @param x The x position of the hitbox
+ * @param y The y position of the hitbox.
+ */
 void HitboxComponent::setScale(float x, float y) noexcept
 {
     width_  = width_ * x;

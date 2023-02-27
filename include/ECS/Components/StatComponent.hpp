@@ -19,7 +19,7 @@ class StatComponent : public IComponent
 {
   public:
     StatComponent(std::vector<float> stats);
-    ~StatComponent() noexcept;
+    ~StatComponent() noexcept                          = default;
     StatComponent(const StatComponent& other) noexcept = default;
     StatComponent(StatComponent&& other) noexcept      = default;
 
@@ -30,5 +30,5 @@ class StatComponent : public IComponent
     void  setStat(int index, float value) noexcept;
 
   private:
-    std::vector<float> stats;
+    std::vector<float> statistics_;
 };
