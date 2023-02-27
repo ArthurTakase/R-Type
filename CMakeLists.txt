@@ -120,19 +120,51 @@ if(DEFINED TESTS)
   # Sources
   set(
     TESTS_SRC
-    tests/HitboxComponent_t.cpp
-    tests/TransformComponent_t.cpp
-    tests/Entity_t.cpp
-    tests/EntityManager_t.cpp
-    tests/HitboxSystem_t.cpp
-    tests/Tools_t.cpp
-    tests/EntityIterator_t.cpp
-    tests/MouvementComponent_t.cpp
-    tests/MouvementSystem_t.cpp
+    tests/ECS/Components/HitboxComponent_t.cpp
+    tests/ECS/Components/TransformComponent_t.cpp
+    tests/ECS/Components/MouvementComponent_t.cpp
+    tests/ECS/Components/BehaviorComponent_t.cpp
+    tests/ECS/Components/DestroyableComponent_t.cpp
+    tests/ECS/Components/InputComponent_t.cpp
+    tests/ECS/Components/StatComponent_t.cpp
+
+    tests/ECS/Entity/Entity_t.cpp
+    tests/ECS/Entity/EntityManager_t.cpp
+
+    tests/ECS/Systems/HitboxSystem_t.cpp
+    tests/ECS/Systems/MouvementSystem_t.cpp
+    tests/ECS/Systems/BehaviorSystem_t.cpp
+    tests/ECS/Systems/DestroyableSystem_t.cpp
+    
+    tests/Tools/EntityIterator_t.cpp
+    tests/Tools/Tools_t.cpp
+    tests/Tools/Curve_t.cpp
+  )
+
+  set(
+    ALL_SRC
+
+    src/ECS/Components/BehaviorComponent.cpp
+    src/ECS/Components/DestroyableComponent.cpp
+    src/ECS/Components/HitboxComponent.cpp
+    src/ECS/Components/InputComponent.cpp
+    src/ECS/Components/MouvementComponent.cpp
+    src/ECS/Components/StatComponent.cpp
+    src/ECS/Components/TransformComponent.cpp
+
+    src/ECS/Entity/Entity.cpp
+    src/ECS/Entity/EntityManager.cpp
+
+    src/ECS/Systems/BehaviorSystem.cpp
+    src/ECS/Systems/DestroyableSystem.cpp
+    src/ECS/Systems/HitboxSystem.cpp
+    src/ECS/Systems/MouvementSystem.cpp
+
+    src/Tools/Curve.cpp
   )
 
   # Merge
-  add_executable(${TEST_BUILD} ${TESTS_SRC} ${RTYPE_SERVER_SRC} ${RTYPE_CLIENT_SRC})
+  add_executable(${TEST_BUILD} ${ALL_SRC} ${TESTS_SRC} ${RTYPE_SERVER_SRC} ${RTYPE_CLIENT_SRC})
 
   # Options
   target_link_libraries(${TEST_BUILD} Error)

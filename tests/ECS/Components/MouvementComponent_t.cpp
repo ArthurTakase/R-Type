@@ -47,3 +47,11 @@ TEST(MouvementComponent_, setSpeed)
     pos->setSpeed(20);
     EXPECT_EQ(pos->getSpeed(), 20);
 }
+
+TEST(MouvementComponent_, setDir)
+{
+    auto pos = std::make_unique<MouvementComponent>(10, 10, 5.0);
+    pos->setDir(20, 20);
+    EXPECT_EQ(pos->getDirX(), 20);
+    EXPECT_EQ(pos->getDirY(), 20);
+}

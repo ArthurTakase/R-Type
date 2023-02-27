@@ -33,11 +33,7 @@ void HitboxSystem::run()
     for (; !it_.isEnd(); ++it_) {
         if (!(it_.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
-        try {
-            checkCollision(it_.get());
-        } catch (const std::exception& e) {
-            std::cerr << e.what() << std::endl;
-        }
+        checkCollision(it_.get());
     }
     it_.reset();
 }

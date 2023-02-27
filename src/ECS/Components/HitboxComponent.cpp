@@ -82,7 +82,7 @@ void HitboxComponent::onCollision(Entity* entity, Entity* me) const noexcept
     onCollision_(entity, me);
 }
 
-void HitboxComponent::setSCale(float x, float y) noexcept
+void HitboxComponent::setScale(float x, float y) noexcept
 {
     width_  = width_ * x;
     height_ = height_ * y;

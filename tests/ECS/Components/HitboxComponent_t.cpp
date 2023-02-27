@@ -43,3 +43,11 @@ TEST(HitboxComponent_, setSize)
     EXPECT_EQ(hitbox->getWidth(), 20);
     EXPECT_EQ(hitbox->getHeight(), 20);
 }
+
+TEST(HitboxComponent_, setScale)
+{
+    auto hitbox = std::make_unique<HitboxComponent>(10, 10);
+    hitbox->setScale(3.0, 3.0);
+    EXPECT_EQ(hitbox->getWidth(), 30);
+    EXPECT_EQ(hitbox->getHeight(), 30);
+}

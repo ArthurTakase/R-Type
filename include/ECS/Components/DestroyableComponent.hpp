@@ -8,11 +8,6 @@
 #pragma once
 
 #include <ECS/Components/IComponent.hpp>
-#include <ECS/Entity/Entity.hpp>
-#include <Lib/Sprite.hpp>
-#include <Lib/Timer.hpp>
-#include <functional>
-#include <memory>
 
 /**
  * @brief Component assigned to drawable entities.

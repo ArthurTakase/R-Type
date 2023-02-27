@@ -11,8 +11,8 @@ compile:
 tests:
     mkdir -p build && cd build && cmake -DTESTS=ON -DCMAKE_BUILD_TYPE=Debug .. -GNinja && ninja && cd .. && ./build/runTests
 coverage:
-    just tests && gcovr -r . --exclude "build/" --exclude "tests/"
+    just tests && gcovr -r . --exclude "build/" --exclude "tests/" --exclude "src/Client/" --exclude "src/Server/" --exclude "include/"
 clear:
     rm -rf build/
 re:
-    just clear && just build
+    just clear && clear && just build

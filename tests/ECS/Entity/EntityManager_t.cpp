@@ -96,3 +96,12 @@ TEST(EntityManager_, getEntities)
     createEnemy_m(100, 100, manager.get());
     EXPECT_EQ(manager->getEntities().size(), 8);
 }
+
+TEST(EntityManager_, newEntityId)
+{
+    auto manager = std::make_unique<EntityManager>();
+
+    auto player = manager->newEntity(10);
+
+    EXPECT_EQ(player->getId(), 10);
+}

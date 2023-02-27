@@ -48,7 +48,7 @@ int RType::createAsteroid(int x) noexcept
     }});
 
     auto hitbox = HitboxComponent(16, 16);
-    hitbox.setSCale(scale, scale);
+    hitbox.setScale(scale, scale);
     hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[=](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto otherStat = entity->getComponent<StatComponent>();
