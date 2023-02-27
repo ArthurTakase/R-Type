@@ -9,11 +9,11 @@
  *
  * @return A json object
  */
-json JsonTools::getGroupFromFile(std::string filePath)
+json JsonTools::getPatternsFromFile()
 {
     std::map<int, std::vector<std::vector<int>>> patterns;
 
-    std::ifstream f(filePath);
+    std::ifstream f(PATTERN_ENEMY_GROUP_FILE_PATH);
     json          data = json::parse(f);
     return data;
 }

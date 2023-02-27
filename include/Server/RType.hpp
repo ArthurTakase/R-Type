@@ -51,8 +51,9 @@ class RType
     int  createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept;
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-    void createEnemyWave(std::string type, json::array_t positions) noexcept;
+    void createEntityWave(std::string type, json::array_t positions) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
+    int  createRandomPowerUp(int x, int y) noexcept;
 
   private:
     bool              looping_     = true;
@@ -69,6 +70,5 @@ class RType
 
 typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4 } RTypeStats;
 
-#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
 static constexpr unsigned int BASIC_ENEMY_ID_SPRITE = 2;
 static constexpr unsigned int CURVE_ENEMY_ID_SPRITE = 8;
