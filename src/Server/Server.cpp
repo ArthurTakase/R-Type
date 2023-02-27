@@ -194,6 +194,11 @@ void Server::handleData(ReceivedInfos infos) noexcept
         if (player.address != infos.address) continue;
         for (auto& ent : player.entities_id) {
             auto entity = gameInstance_.getManager().getEntity(ent);
+            if (!entity) {
+                player.entities_id.erase(
+                    std::remove(player.entities_id.begin(), player.entities_id.end(), ent), player.entities_id.end());
+                break;
+            }
             if (!entity->hasComponent<InputComponent>()) continue;
             auto input = entity->getComponent<InputComponent>();
             for (auto& i : infos.data) { input->addInput(static_cast<int>(i)); }

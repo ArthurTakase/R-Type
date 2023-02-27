@@ -10,6 +10,7 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Keyboard.hpp>
+#include <iostream>
 
 /**
  * It creates a player entity and adds all the components it needs
@@ -28,7 +29,7 @@ int RType::createPlayer(int x, int y, int nb) noexcept
     player->addComponent(AnimationComponent(128, 0.1));
     player->addComponent(TransformComponent(x, y));
     player->addComponent(StatComponent({100, 10, 10.0, 1.0, 1.0}));
-    player->addComponent(MouvementComponent(0, 0, 3.0));
+    player->addComponent(MouvementComponent(0, 0, 5.0));
     player->addComponent(InputComponent());
     player->addComponent(DestroyableComponent());
     player->addComponent(TimerComponent(0.1));
@@ -43,6 +44,7 @@ int RType::createPlayer(int x, int y, int nb) noexcept
         auto  mouv  = entity->getComponent<MouvementComponent>();
         auto  trans = entity->getComponent<TransformComponent>();
         auto  stat  = entity->getComponent<StatComponent>();
+        auto  dest  = entity->getComponent<DestroyableComponent>();
         auto& timer = entity->getComponent<TimerComponent>()->getTimer();
         int   lastInput;
         auto  x = trans->getX();
@@ -73,6 +75,14 @@ int RType::createPlayer(int x, int y, int nb) noexcept
         auto next_y = y + mouv->getDirY() * mouv->getSpeed();
         if (next_x >= 239 || next_x <= 0) mouv->setDirX(0);
         if (next_y >= 239 || next_y <= 0) mouv->setDirY(0);
+        if (stat->getStat(RTypeStats::Life) <= 0) {
+            playerShoot(x, y, 0, -1, stat);
+            playerShoot(x, y, -1, 0, stat);
+            playerShoot(x, y, 0, 1, stat);
+            playerShoot(x, y, 1, 0, stat);
+
+            dest->destroy();
+        }
     }});
 
     player->addComponent(hitbox);
