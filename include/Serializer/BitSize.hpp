@@ -32,6 +32,7 @@ typedef enum PacketName {
     OFFSET_Y  = 12,
     ID        = 13,
     DESTROYED = 14,
+    MusicId   = 15
 } PacketName;
 
 /**
@@ -49,4 +50,5 @@ struct GamePacket {
     std::uint8_t offsetY;
     std::uint8_t id;
     std::uint8_t destroyed;
+    std::uint8_t musicId;
 };

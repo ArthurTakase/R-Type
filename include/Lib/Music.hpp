@@ -25,13 +25,16 @@ class Music
     Music& operator=(const Music& rhs) noexcept = delete;
     Music& operator=(Music&& rhs) noexcept      = default;
 
-    void play() noexcept;
-    void pause() noexcept;
-    void stop() noexcept;
-    void setVolume(float volume) noexcept;
-    void setLoop(bool value) noexcept;
+    void        play() noexcept;
+    void        pause() noexcept;
+    void        stop() noexcept;
+    void        setVolume(float volume) noexcept;
+    void        setLoop(bool value) noexcept;
+    void        setPath(std::string path) noexcept;
+    std::string getPath() const noexcept;
 
   protected:
   private:
+    std::string                musicPath;
     std::unique_ptr<sf::Music> music_;
 };
