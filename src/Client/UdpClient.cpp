@@ -115,6 +115,7 @@ void UdpClient::gameLoop() noexcept
             std::cerr << e.what() << std::endl;
             stop();
             cv_.notify_all();
+            isFirstConnection_ = false;
         }
     }
 
