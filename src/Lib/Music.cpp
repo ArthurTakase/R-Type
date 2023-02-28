@@ -72,3 +72,21 @@ void Music::setLoop(bool value) noexcept
 {
     music_->setLoop(value);
 }
+
+/**
+ * Sets the musicPath of the music
+ *
+ * @param value The new value for the musicPath.
+ */
+void Music::setPath(std::string path) noexcept
+{
+    musicPath = path;
+}
+
+/**
+ * Gets the musicPath of the music
+ */
+std::string Music::getPath() const noexcept
+{
+    return musicPath;
+}
