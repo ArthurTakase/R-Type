@@ -11,6 +11,8 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <iostream>
 
+#include "ECS/Components/MusicComponent.hpp"
+
 /**
  * It's a constructor for the Game class
  *
@@ -82,6 +84,10 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         entity->addComponent(transform);
         entity->addComponent(drawable);
         entity->addComponent(DestroyableComponent(packet.destroyed));
+        if (packet.musicId != 0) {
+            auto musicable = MusicComponent(packet.musicId);
+            entity->addComponent(musicable);
+        }
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
@@ -100,6 +106,11 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         if (packet.idSprite != drawable->getTextureId()) {
             drawable->getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
             drawable->setTextureId(packet.idSprite);
+        }
+        if (packet.musicId != 0) {
+            auto musicable = m_entity->getComponent<MusicComponent>();
+            musicable->getMusic().setPath("assets/audio/r-type-" + std::to_string(packet.musicId) + ".wav");
+            musicable->setMusicId(packet.musicId);
         }
 
         if (packet.destroyed) destroy->destroy();

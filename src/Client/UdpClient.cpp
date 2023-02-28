@@ -225,6 +225,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
                 packet.id        = infos.data[i + PacketName::ID];
                 packet.destroyed = infos.data[i + PacketName::DESTROYED];
+                packet.musicId   = infos.data[i + PacketName::MusicId];
                 {
                     std::lock_guard<std::mutex> lock(mutexForPacket_);
                     dataReceived_.push(packet);
