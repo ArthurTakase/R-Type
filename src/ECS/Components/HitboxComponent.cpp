@@ -91,7 +91,7 @@ void HitboxComponent::setOnCollision(std::function<void(Entity*, Entity*)> onCol
  */
 void HitboxComponent::onCollision(Entity* entity, Entity* me) const noexcept
 {
-    onCollision_(entity, me);
+    if (onCollision_) onCollision_(entity, me);
 }
 
 /**

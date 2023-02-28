@@ -35,6 +35,10 @@ add_subdirectory(src/Json)
 add_subdirectory(src/Tools)
 add_subdirectory(src/Time)
 
+if(DEFINED SNAKE)
+  add_subdirectory(src/Snake)
+endif()
+
 # ------------------------------
 # Server
 # ------------------------------

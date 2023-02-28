@@ -16,3 +16,5 @@ clear:
     rm -rf build/
 re:
     just clear && clear && just build
+snake:
+    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DSNAKE=ON .. -GNinja && ninja && cd ..
