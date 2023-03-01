@@ -6,6 +6,7 @@
 */
 
 #include <Server/RType.hpp>
+#include <iostream>
 
 /**
  * It initializes the server's game systems and creates a game object
@@ -82,6 +83,7 @@ EntityManager& RType::getManager() noexcept
  */
 void RType::init() noexcept
 {
+    int s1 = createSound("assets/audio/shoot.wav"); // 0
     createBackground(0);
     createBackground(255);
 }

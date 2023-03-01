@@ -22,17 +22,6 @@ Music::Music(const std::string& path)
 }
 
 /**
- * The destructor stops the music
- */
-// Music::~Music() noexcept
-// {
-//     std::cout << "destroying music encapsulation" << std::endl;
-//     // if (music_->getStatus() == sf::SoundSource::Status::Playing) std::cout << "music is playing" << std::endl;
-//     // music_->stop();
-//     // music_->stop();
-// }
-
-/**
  * Play the music
  */
 void Music::play() noexcept

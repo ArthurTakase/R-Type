@@ -13,6 +13,7 @@
 #include <ECS/Systems/DrawableSystem.hpp>
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <ECS/Systems/MusicSystem.hpp>
+#include <ECS/Systems/SoundSystem.hpp>
 #include <Lib/Lib.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <string_view>
@@ -45,6 +46,7 @@ class Menu
     BehaviorSystem    behaviorSystem_;
     MouvementSystem   mouvementSystem_;
     MusicSystem       musicSystem_;
+    SoundSystem       soundSystem_;
 
     std::string ip_     = "";
     std::string port_   = "";
@@ -64,4 +66,5 @@ class Menu
     int  createIPMenu(Window& window) noexcept;
     int  createTitleMenu(Window& window) noexcept;
     int  createBackground(int x) noexcept;
+    int  createSound(const std::string& path) noexcept;
 };

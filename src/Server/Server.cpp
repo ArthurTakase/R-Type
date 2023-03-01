@@ -6,6 +6,7 @@
 */
 
 #include <ECS/Components/InputComponent.hpp>
+#include <ECS/Components/SoundComponent.hpp>
 #include <Error/Error.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketFactory.hpp>
@@ -98,10 +99,13 @@ void Server::gameLoop() noexcept
                 RawData dataToSend;
                 dataToSend.reserve(entities.size() * PACKET_SIZE);
                 for (auto& entity : entities) {
-                    if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
-
-                    RawData serializedData = Serializer::serialize(entity);
-                    dataToSend.insert(dataToSend.end(), serializedData.begin(), serializedData.end());
+                    if (entity->hasComponents<DrawableComponent, TransformComponent>()) {
+                        RawData serializedData = Serializer::serialize(entity);
+                        dataToSend.insert(dataToSend.end(), serializedData.begin(), serializedData.end());
+                    } else if (entity->hasComponent<SoundComponent>()) {
+                        RawData serializedData = Serializer::serializeMusic(entity);
+                        dataToSend.insert(dataToSend.end(), serializedData.begin(), serializedData.end());
+                    }
                 }
 
                 if (dataToSend.size() == 0) { dataToSend.emplace_back(CLOSE_VALUE); }

@@ -210,8 +210,18 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
         }
 
     } else {
-        if (infos.data.size() % PACKET_SIZE == 0) {
-            for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
+        if (infos.data.size() >= MUSIC_NB && (infos.data.size() - MUSIC_NB) % PACKET_SIZE == 0) {
+            auto& manager = game_.getManager();
+
+            for (int m = 0; m < MUSIC_NB; m++) {
+                if (infos.data[m]) {
+                    auto sound = manager.getEntity(m)->getComponent<SoundComponent>();
+                    if (!sound) { continue; }
+                    sound->setPlayed(true);
+                }
+            }
+
+            for (int i = MUSIC_NB; i < infos.data.size(); i += PACKET_SIZE) {
                 GamePacket packet;
                 packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
                 packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
@@ -226,7 +236,6 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
                 packet.id        = infos.data[i + PacketName::ID];
                 packet.destroyed = infos.data[i + PacketName::DESTROYED];
-                packet.musicId   = infos.data[i + PacketName::MusicId];
                 {
                     std::lock_guard<std::mutex> lock(mutexForPacket_);
                     dataReceived_.push(packet);

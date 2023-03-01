@@ -5,6 +5,7 @@
 #include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
@@ -106,6 +107,9 @@ void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) n
     auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
     auto bulletSize   = stat->getStat(RTypeStats::Size);
     auto playerLevel  = stat->getStat(RTypeStats::Level);
+
+    auto shotSound = entityManager_.getEntity(0);
+    shotSound->getComponent<SoundComponent>()->setPlayed(true);
 
     if (playerLevel < 5) {
         createPlayerBullet(x, y, bulletDamage, bulletSpeed, dirX, dirY, bulletSize);

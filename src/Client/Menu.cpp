@@ -14,6 +14,7 @@
 #include <ECS/Components/TextComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Error/Error.hpp>
+#include <Lib/Sound.hpp>
 #include <NetworkLib/HostHandler.hpp>
 #include <Tools/Keyboard.hpp>
 #include <iostream>
@@ -28,6 +29,7 @@ Menu::Menu()
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
     , musicSystem_(&manager_)
+    , soundSystem_(&manager_)
 {
 }
 
@@ -41,20 +43,28 @@ Menu::Menu()
  */
 Address Menu::run(Window& window)
 {
+    createSound("assets/audio/loading.wav");
     createBackground(0);
     createBackground(MAX_VALUE);
     createTitleMenu(window);
-    createMusic(BG_MUSIC_PATH);
+    // createMusic(BG_MUSIC_PATH);
+
+    // Sound sound("assets/audio/loading.wav");
 
     drawableSystem_.setWindow(&window);
     Address serverInfos;
 
     while (isOpen_) {
+        manager_.getEntity(0)->getComponent<SoundComponent>()->setPlayed(true);
+
         destroyableSystem_.run();
         drawableSystem_.run();
         behaviorSystem_.run();
         mouvementSystem_.run();
-        musicSystem_.run();
+        // musicSystem_.run();
+        soundSystem_.run();
+
+        // sound.play();
     }
 
     manager_.getEntities().clear();
@@ -266,4 +276,13 @@ int Menu::createIPMenu(Window& window) noexcept
     menu->addComponent(behavior);
 
     return menu->getId();
+}
+
+int Menu::createSound(const std::string& path) noexcept
+{
+    auto sound = manager_.newEntity();
+
+    sound->addComponent(SoundComponent(path));
+
+    return sound->getId();
 }

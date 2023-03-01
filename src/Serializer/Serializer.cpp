@@ -42,7 +42,21 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     data.push_back(drawable->getOffsetY());
     data.push_back(entity->getId());
     destroyable ? data.push_back(destroyable->getDestroyed()) : data.push_back(0);
-    soundable ? data.push_back(soundable->getSoundId()) : data.push_back(0);
+
+    return data;
+}
+
+RawData Serializer::serializeMusic(std::unique_ptr<Entity> const& entity) noexcept
+{
+    RawData data;
+
+    auto soundable = entity->getComponent<SoundComponent>();
+    if (!soundable) { return data; }
+
+    data.reserve(sizeof(std::int8_t));
+    data.push_back(soundable->getIsPlayed());
+
+    soundable->setPlayed(false);
 
     return data;
 }

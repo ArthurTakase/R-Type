@@ -33,6 +33,9 @@ class Game
     void run() noexcept;
     Lib& getLib() noexcept;
 
+    int            createSound(const std::string& path) noexcept;
+    EntityManager& getManager() noexcept;
+
   private:
     EntityManager           manager_;
     Lib                     lib_;

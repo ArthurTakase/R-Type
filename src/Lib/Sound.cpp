@@ -22,6 +22,14 @@ Sound::Sound(const std::string& path)
     sound_.setBuffer(buffer_);
 }
 
+Sound::Sound(const Sound& other) noexcept
+    : path_(other.path_)
+{
+    if (!buffer_.loadFromFile(path_)) std::cerr << "Error: Could not load sound from file" << std::endl;
+
+    sound_.setBuffer(buffer_);
+}
+
 /**
  * It stops the sound, if it's playing, and then it destroys the sound
  */
@@ -35,6 +43,7 @@ Sound::~Sound() noexcept
  */
 void Sound::play() noexcept
 {
+    std::cout << "Playing sound" << std::endl;
     sound_.play();
 }
 

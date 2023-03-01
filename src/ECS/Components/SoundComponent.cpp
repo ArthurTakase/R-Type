@@ -6,6 +6,7 @@
 */
 
 #include <ECS/Components/SoundComponent.hpp>
+#include <iostream>
 
 /**
  * It creates a sound component with the given path
@@ -17,14 +18,8 @@ SoundComponent::SoundComponent(const std::string& path)
 {
 }
 
-/**
- * It takes a sound ID, and creates a sound object with the corresponding file name
- *
- * @param soundId The ID of the sound to play.
- */
-SoundComponent::SoundComponent(const int soundId)
-    : soundId_(soundId)
-    , sound_(AUDIO_PATH.data() + std::to_string(soundId_) + ".wav")
+SoundComponent::SoundComponent(const SoundComponent& other) noexcept
+    : sound_(other.sound_.getPath())
 {
 }
 
@@ -33,19 +28,9 @@ SoundComponent::SoundComponent(const int soundId)
  *
  * @return A reference to the sound_ member variable.
  */
-Sound SoundComponent::getSound() const noexcept
+Sound& SoundComponent::getSound() noexcept
 {
     return sound_;
-}
-
-/**
- * This function returns the soundId_ member variable.
- *
- * @return The soundId_ variable.
- */
-int SoundComponent::getSoundId() const noexcept
-{
-    return soundId_;
 }
 
 /**
@@ -77,14 +62,4 @@ void SoundComponent::play() noexcept
         sound_.play();
         isPlayed_ = false;
     }
-}
-
-/**
- * It sets the soundId_ member variable to the value of the soundId parameter
- *
- * @param soundId The id of the sound to play.
- */
-void SoundComponent::setSoundId(const int soundId) noexcept
-{
-    soundId_ = soundId;
 }

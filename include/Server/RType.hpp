@@ -54,6 +54,7 @@ class RType
     void createEntityWave(std::string type, json::array_t positions) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
     int  createRandomPowerUp(int x, int y) noexcept;
+    int  createSound(const std::string& path) noexcept;
 
   private:
     bool              looping_     = true;

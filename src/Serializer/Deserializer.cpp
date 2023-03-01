@@ -25,7 +25,6 @@ GamePacket Deserializer::deserialize(std::vector<unsigned char, std::allocator<u
     packet.offsetY   = data[PacketName::OFFSET_Y];
     packet.id        = data[PacketName::ID];
     packet.destroyed = data[PacketName::DESTROYED];
-    packet.musicId   = data[PacketName::MusicId];
 
     return packet;
 }

@@ -8,8 +8,9 @@
 #include <Client/Game.hpp>
 #include <ECS/Components/DestroyableComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
-#include <ECS/Components/TransformComponent.hpp>
 #include <ECS/Components/MusicComponent.hpp>
+#include <ECS/Components/TransformComponent.hpp>
+#include <iostream>
 
 /**
  * It's a constructor for the Game class
@@ -33,6 +34,8 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
  */
 void Game::run() noexcept
 {
+    createSound("assets/audio/shoot.wav"); // 0
+
     {
         std::lock_guard<std::mutex> lock(mutexForPacket_);
         while (!dataReceived_.empty()) {
@@ -82,9 +85,6 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         entity->addComponent(transform);
         entity->addComponent(drawable);
         entity->addComponent(DestroyableComponent(packet.destroyed));
-        // if (packet.musicId != 0) {
-        //     entity->addComponent(MusicComponent(packet.musicId));
-        // }
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
@@ -104,12 +104,28 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
             drawable->getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
             drawable->setTextureId(packet.idSprite);
         }
-        // if (packet.musicId != 0) {
-        //     auto musicable = m_entity->getComponent<MusicComponent>();
-        //     musicable->getMusic().setPath("assets/audio/r-type-" + std::to_string(packet.musicId) + ".wav");
-        //     musicable->setMusicId(packet.musicId);
-        // }
 
         if (packet.destroyed) destroy->destroy();
     }
+}
+
+/**
+ * It creates a new entity, adds a sound component to it, and returns the entity's ID
+ *
+ * @param path The path to the sound file.
+ *
+ * @return The id of the entity.
+ */
+int Game::createSound(const std::string& path) noexcept
+{
+    auto sound = manager_.newEntity();
+
+    sound->addComponent(SoundComponent(path));
+
+    return sound->getId();
+}
+
+EntityManager& Game::getManager() noexcept
+{
+    return manager_;
 }
