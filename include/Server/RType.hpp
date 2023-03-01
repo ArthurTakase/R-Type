@@ -51,7 +51,7 @@ class RType
     int  createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept;
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-    void createEntityWave(std::string type, json::array_t positions) noexcept;
+    void createEntityWave(json::array_t pattern) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
     int  createRandomPowerUp(int x, int y) noexcept;
 
