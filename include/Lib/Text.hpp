@@ -9,17 +9,21 @@
 
 #include <SFML/Graphics.hpp>
 
+/**
+ * @brief This class is used to create, modify and encapsulate a Sf::Text.
+ *
+ */
 class Text
 {
   public:
     Text();
     Text(const std::string& text, const std::string& fontPath, int fontSize, int x, int y);
     ~Text() noexcept                 = default;
-    Text(const Text& other) noexcept = delete;
-    Text(Text&& other) noexcept      = delete;
+    Text(const Text& other) noexcept = default;
+    Text(Text&& other) noexcept      = default;
 
-    Text& operator=(const Text& rhs) noexcept = delete;
-    Text& operator=(Text&& rhs) noexcept      = delete;
+    Text& operator=(const Text& rhs) noexcept = default;
+    Text& operator=(Text&& rhs) noexcept      = default;
 
     void        setTextString(const std::string& text);
     void        setFontPath(const std::string& path);

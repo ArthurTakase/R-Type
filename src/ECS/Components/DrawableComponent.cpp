@@ -8,13 +8,24 @@
 #include <ECS/Components/DrawableComponent.hpp>
 #include <iostream>
 
-DrawableComponent::DrawableComponent() {}
-
 /**
  * It's a constructor for the DrawableComponent class
  *
  * @param offsetX The x offset of the texture.
  * @param offsetY The y offset of the texture
+ * @param width The width of the texture.
+ * @param height The height of the texture.
+ * @param textureId The id of the texture to use.
+ */
+
+DrawableComponent::DrawableComponent() noexcept {}
+
+/**
+ * It's a constructor for the DrawableComponent class
+ *
+ * @param offsetX The x-coordinate of the top-left corner of the texture relative
+ * to the top-left corner of the entity.
+ * @param offsetY The y-coordinate of the top-left corner of the texture.
  * @param width The width of the texture.
  * @param height The height of the texture.
  * @param textureId The id of the texture to use.
@@ -30,6 +41,18 @@ DrawableComponent::DrawableComponent(int offsetX, int offsetY, int width, int he
 {
 }
 
+/**
+ * It initializes the DrawableComponent class with the given parameters
+ *
+ * @param offsetX The x-coordinate of the top-left corner of the sprite relative to
+ * the top-left corner of the entity.
+ * @param offsetY The y-coordinate of the top-left corner of the sprite.
+ * @param width The width of the sprite in pixels.
+ * @param height The height of the sprite in pixels.
+ * @param textureId The id of the texture to use.
+ * @param scaleX The scale of the sprite in the X direction.
+ * @param scaleY The scale of the sprite in the Y direction.
+ */
 DrawableComponent::DrawableComponent(
     int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY)
     : offsetX_(offsetX)
@@ -43,6 +66,11 @@ DrawableComponent::DrawableComponent(
     sprite_.setScale(scaleX, scaleY);
 }
 
+/**
+ * Copy constructor for DrawableComponent.
+ *
+ * @param other The other DrawableComponent to copy from.
+ */
 DrawableComponent::DrawableComponent(const DrawableComponent& other) noexcept
     : offsetX_(other.offsetX_)
     , offsetY_(other.offsetY_)
@@ -175,6 +203,12 @@ Timer& DrawableComponent::getTimer() noexcept
     return timer_;
 }
 
+/**
+ * It sets the scale of the sprite
+ *
+ * @param x The x-coordinate of the position of the sprite.
+ * @param y The y coordinate of the sprite.
+ */
 void DrawableComponent::setScale(float x, float y) noexcept
 {
     scaleX_ = x;
@@ -182,11 +216,21 @@ void DrawableComponent::setScale(float x, float y) noexcept
     sprite_.setScale(x, y);
 }
 
+/**
+ * Returns the scale of the object in the X direction.
+ *
+ * @return The scaleX_ variable.
+ */
 float DrawableComponent::getScaleX() const noexcept
 {
     return scaleX_;
 }
 
+/**
+ * This function returns the scaleY_ member variable.
+ *
+ * @return The scaleY_ variable.
+ */
 float DrawableComponent::getScaleY() const noexcept
 {
     return scaleY_;

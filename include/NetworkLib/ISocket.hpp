@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include <chrono>
 #include <cstdint>
 #include <memory>
 #include <queue>
@@ -51,8 +52,20 @@ struct ReceivedInfos {
  *
  */
 struct Client {
-    Address             address;
-    std::queue<RawData> dataToSend = {};
+    Address                               address;
+    std::queue<RawData>                   dataToSend = {};
+    std::chrono::system_clock::time_point lastPing   = {};
+    bool                                  isPingSent = false;
+};
+
+/**
+ * @brief Encapsulate a server address and the last time a ping was sent
+ *
+ */
+struct ServerInfos {
+    Address                               address;
+    std::chrono::system_clock::time_point lastPing   = {};
+    bool                                  isPingSent = false;
 };
 
 /**

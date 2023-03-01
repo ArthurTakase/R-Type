@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/StatComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
 #include <ECS/Systems/AnimationSystem.hpp>
 #include <ECS/Systems/BehaviorSystem.hpp>
@@ -18,12 +19,6 @@
 #include <Serializer/BitSize.hpp>
 #include <memory>
 
-typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3 } RTypeStats;
-
-#define PATTERN_ENEMY_GROUP_FILE_PATH "assets/jsons/pattern_enemy_group.json"
-#define BASIC_ENEMY_ID_SPRITE 2
-#define CURVE_ENEMY_ID_SPRITE 8
-
 /**
  * @brief Game Instance for the server
  *
@@ -32,9 +27,9 @@ class RType
 {
   public:
     RType();
-    ~RType() noexcept;
     RType(const RType& other) noexcept = delete;
     RType(RType&& other) noexcept      = delete;
+    ~RType() noexcept                  = default;
 
     RType& operator=(const RType& rhs) noexcept = delete;
     RType& operator=(RType&& rhs) noexcept      = delete;
@@ -47,22 +42,24 @@ class RType
     BehaviorSystem& getBehaviorSystem() noexcept;
     void            init() noexcept;
 
-    int  createPlayer(int x, int y) noexcept;
+    int  createPlayer(int x, int y, int nb) noexcept;
     int  createBasicEnemy(int x, int y) noexcept;
-    int  createCurveEnemy(int x, int y) noexcept;
+    int  createCurvedEnemy(int x, int y) noexcept;
     int  createSpawner() noexcept;
     int  createBackground(int x) noexcept;
-    int  createPlayerBullet(int x, int y, float damage, float speed, float size) noexcept;
+    void playerShoot(int x, int y, int dirX, int dirY, StatComponent* stats) noexcept;
+    int  createPlayerBullet(int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept;
     int  createAsteroid(int x) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-    void createEnemyWave(std::string type, json::array_t positions) noexcept;
-
-    int curve(int center, int amplitude, int period, int x) noexcept;
+    void createEntityWave(std::string type, json::array_t positions) noexcept;
+    int  createPowerUp(int x, int y, int type) noexcept;
+    int  createRandomPowerUp(int x, int y) noexcept;
 
   private:
     bool              looping_     = true;
     int               nbEnemyAlive = 0;
     int               playerLevel  = 1;
+    bool              started      = false;
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;
     BehaviorSystem    behaviorSystem_;
@@ -70,3 +67,8 @@ class RType
     AnimationSystem   animationSystem_;
     DestroyableSystem destroyableSystem_;
 };
+
+typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4 } RTypeStats;
+
+static constexpr unsigned int BASIC_ENEMY_ID_SPRITE = 2;
+static constexpr unsigned int CURVE_ENEMY_ID_SPRITE = 8;

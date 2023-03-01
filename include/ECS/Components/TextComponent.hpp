@@ -21,12 +21,12 @@ class TextComponent : public IComponent
   public:
     TextComponent();
     TextComponent(const std::string& text, const std::string& fontPath, int fontSize, int x, int y);
-    ~TextComponent() noexcept = default;
     TextComponent(const TextComponent& other) noexcept;
-    TextComponent(TextComponent&& other) noexcept = delete;
+    TextComponent(TextComponent&& other) noexcept      = default;
+    ~TextComponent() noexcept                          = default;
 
-    TextComponent& operator=(const TextComponent& rhs) noexcept = delete;
-    TextComponent& operator=(TextComponent&& rhs) noexcept      = delete;
+    TextComponent& operator=(const TextComponent& rhs) noexcept = default;
+    TextComponent& operator=(TextComponent&& rhs) noexcept      = default;
 
     Text& getText() noexcept;
 

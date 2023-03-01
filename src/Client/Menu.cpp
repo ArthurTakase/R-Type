@@ -10,105 +10,191 @@
 #include <ECS/Components/DestroyableComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/MusicComponent.hpp>
 #include <ECS/Components/TextComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
+#include <Error/Error.hpp>
+#include <NetworkLib/HostHandler.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 #include <vector>
 
+/**
+ * It creates a Menu object, which will then later be used to handle our menu of the game.
+ */
 Menu::Menu()
     : drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
-    , ip_("")
-    , port_("")
-    , client_port_("")
+    , musicSystem_(&manager_)
 {
-    createTitleMenu();
 }
 
-std::vector<std::string> Menu::run() noexcept
+/**
+ * It creates the title menu, then runs the systems until the user enters all the necessary infos to connect to the
+ * server and play the game
+ *
+ * @param window the window in which the menu will be displayed
+ *
+ * @return The address of the server
+ */
+Address Menu::run(Window& window)
 {
-    auto& window = lib_.getWindow();
-    int   input;
+    createBackground(0);
+    createBackground(255);
+    createTitleMenu(window);
+    // createMusic(BG_MUSIC_PATH);
 
-    window.open(256, 256, "Menu");
-    drawableSystem_.setWindow(&lib_.getWindow());
+    drawableSystem_.setWindow(&window);
+    Address serverInfos;
 
-    while (open) {
+    while (isOpen_) {
         destroyableSystem_.run();
         drawableSystem_.run();
         behaviorSystem_.run();
         mouvementSystem_.run();
+        musicSystem_.run();
     }
 
-    window.close();
+    serverInfos.port = std::atoi(port_.c_str());
+    if (serverInfos.port <= 0) throw Error("Port must be a positive number");
+    serverInfos.ip = HostHandler::getIp(ip_.c_str());
+    if (serverInfos.ip <= 0) throw Error("No server found with this IP address");
 
-    return {ip_, port_, client_port_};
+    return serverInfos;
+}
+/**
+ * It returns the value of the private member variable isOpen_. When called, it allows to our program to know if the
+ * menu is still open or not.
+ *
+ * @return A boolean value.
+ */
+bool Menu::getIsOpen() const noexcept
+{
+    return isOpen_;
 }
 
-int Menu::createText(int x, int y, int size, std::string txt) noexcept
+/**
+ * It creates a new entity with a music component
+ *
+ * @param path The path to the music file.
+ */
+void Menu::createMusic(const std::string_view& path) noexcept
+{
+    auto music = manager_.newEntity();
+
+    music->addComponent(MusicComponent(path.data()));
+}
+
+/**
+ * It creates a new text entity with a drawable, transform, destroyable, and text
+ * component
+ *
+ * @param posX The x position of the text
+ * @param posY The y position of the text
+ * @param size The size of the text.
+ * @param message The text to be displayed
+ *
+ * @return The id of the entity.
+ */
+int Menu::createText(int posX, int posY, int size, const std::string_view& message) noexcept
 {
     auto text = manager_.newEntity();
 
     text->addComponent(DrawableComponent());
-    text->addComponent(TransformComponent(x, y));
+    text->addComponent(TransformComponent(posX, posY));
     text->addComponent(DestroyableComponent());
-    text->addComponent(TextComponent(txt, "assets/fonts/gameboy.ttf", size, x, y));
+
+    auto textComponent = TextComponent(message.data(), FONT_PATH.data(), size, posX, posY);
+    text->addComponent(textComponent);
 
     return text->getId();
 }
 
-int Menu::createBackground(int x) noexcept
+/**
+ * It creates a background entity
+ *
+ * @param posX the x position of the background
+ *
+ * @return The id of the entity.
+ */
+int Menu::createBackground(int posX) noexcept
 {
     auto background = manager_.newEntity();
+
+    background->addComponent(TransformComponent(posX, 0));
+    background->addComponent(MouvementComponent(-1, 0, 1.0));
+    background->addComponent(DestroyableComponent());
 
     auto behaviorComponent = BehaviorComponent();
     behaviorComponent.setOnUpdate(std::function<void(Entity * entity)>{[](Entity* entity) {
         auto transform = entity->getComponent<TransformComponent>();
 
-        if (transform->getX() <= -255) { transform->setX(255); }
+        if (transform->getX() <= MIN_VALUE) { transform->setX(MAX_VALUE); }
     }});
 
     auto  drawable = DrawableComponent(0, 0, 255, 255, 0);
     auto& sprite   = drawable.getSprite();
-    sprite.setSpritePath("assets/img/r-typesheet0.gif");
+    sprite.setSpritePath(BACKGROUND_PATH.data());
 
-    background->addComponent(TransformComponent(x, 0));
     background->addComponent(drawable);
     background->addComponent(behaviorComponent);
-    background->addComponent(MouvementComponent(-1, 0, 1.0));
-    background->addComponent(DestroyableComponent());
 
     return background->getId();
 }
 
-int Menu::createTitleMenu() noexcept
+/**
+ * It creates a menu with a title and a button to press to go to the next menu
+ *
+ * @param window The window to draw on
+ *
+ * @return The id of the entity.
+ */
+int Menu::createTitleMenu(Window& window) noexcept
 {
-    int bg1 = createBackground(0);
-    int bg2 = createBackground(255);
-    int t1  = createText(40, 230, 10, "@lefeudecamps 2023");
-    int t2  = createText(75, 200, 10, "Press Enter");
+    int t1 = createText(65, 125, 10, "@lefeudecamps");
+    int t2 = createText(35, 180, 10, "Press Enter to Play");
+    int t3 = createText(45, 200, 10, "Press D for hints");
 
     auto menu = manager_.newEntity();
 
-    auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, bg1, bg2, t1, t2](Entity* entity) {
-        static auto&                     window = lib_.getWindow();
-        int                              input  = window.getKeyPressed();
-        static const std::vector<int>    exit   = {255, 36};
-        static std::vector<std::string*> txt    = {&ip_, &port_, &client_port_};
+    const std::vector<std::string> hints = {
+        "Use WASD or ZQSD\nto move",
+        "Press Shift to\nstop moving",
+        "Use the arrow keys\nto shoot",
+        "Collect blue stars\nfor upgrades",
+        "Collect green stars\nto heal",
+        "Kill all your\nopponents to win",
+        "Press Enter once\nconnected and ready",
+        "Press Escape to\nleave the game",
+        "You can play with\nup to 4 players",
+    };
 
-        if (std::find(exit.begin(), exit.end(), input) != exit.end()) {
+    menu->addComponent(MouvementComponent(0, 1, 1));
+    menu->addComponent(TransformComponent(20, 00));
+    menu->addComponent(DestroyableComponent());
+
+    auto behavior = BehaviorComponent();
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, t1, t2, t3, hints](Entity* entity) {
+        int                              input     = window.getKeyPressed();
+        static std::vector<std::string*> txt       = {&ip_, &port_};
+        static int                       hintIndex = -1;
+
+        if (input == Input::Exit) {
             for (auto& t : txt) *t = "";
-            open = false;
+            isOpen_ = false;
         }
-        if (input == 58) // return
-        {
-            createIPMenu();
+        if (input == Input::Return) {
+            createIPMenu(window);
             entity->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t1)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t2)->getComponent<DestroyableComponent>()->destroy();
+            manager_.getEntity(t3)->getComponent<DestroyableComponent>()->destroy();
+        }
+        if (input == Input::D) {
+            hintIndex = (hintIndex + 1) % hints.size();
+            manager_.getEntity(t3)->getComponent<TextComponent>()->getText().setTextString(hints[hintIndex]);
         }
 
         auto mouvement = entity->getComponent<MouvementComponent>();
@@ -119,65 +205,55 @@ int Menu::createTitleMenu() noexcept
 
     auto  drawable = DrawableComponent(0, 0, 226, 97, 7);
     auto& sprite   = drawable.getSprite();
-    sprite.setSpritePath("assets/img/r-typesheet7.gif");
+    sprite.setSpritePath(TITLE_PATH.data());
 
     menu->addComponent(behavior);
     menu->addComponent(drawable);
-    menu->addComponent(MouvementComponent(0, 1, 1));
-    menu->addComponent(TransformComponent(20, 00));
-    menu->addComponent(DestroyableComponent());
 
     return menu->getId();
 }
 
-int Menu::createIPMenu() noexcept
+/**
+ * It creates a page that allows the user to input an IP address and a port number
+ *
+ * @param window The window to get the input from.
+ *
+ * @return The id of the entity that was created.
+ */
+int Menu::createIPMenu(Window& window) noexcept
 {
     createText(55, 10, 15, "Connect to");
     createText(10, 60, 15, "Server IP:");
     createText(10, 120, 15, "Server Port:");
-    createText(10, 180, 15, "Client Port:");
     int t1 = createText(10, 80, 15, "...");
     int t2 = createText(10, 140, 15, "...");
-    int t3 = createText(10, 200, 15, "...");
 
     auto menu = manager_.newEntity();
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, t1, t2, t3](Entity* entity) {
-        static auto&                     window = lib_.getWindow();
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[&, t1, t2](Entity* entity) {
         int                              input  = window.getKeyPressed();
-        static const std::vector<int>    numpad = {75, 76, 77, 78, 79, 80, 81, 82, 83, 84};
-        static const std::vector<int>    num    = {26, 27, 28, 29, 51, 31, 56, 33, 34, 35};
-        static const std::vector<int>    exit   = {255, 36};
-        static std::vector<std::string*> txt    = {&ip_, &port_, &client_port_};
+        static std::vector<std::string*> txt    = {&ip_, &port_};
         static int                       i      = 0;
-        static std::vector<int>          allTxt = {t1, t2, t3};
+        static std::vector<int>          allTxt = {t1, t2};
 
-        if (std::find(exit.begin(), exit.end(), input) != exit.end()) {
+        if (input == Input::Exit) {
             for (auto& t : txt) *t = "";
-            open = false;
+            isOpen_ = false;
         }
-        if (std::find(numpad.begin(), numpad.end(), input) != numpad.end()) {
-            *txt[i] += std::to_string(input - 75);
+        if (input >= Input::Zero && input <= Input::Nine) {
+            *txt[i] += std::to_string(input - Input::Zero);
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
         }
-        if (std::find(num.begin(), num.end(), input) != num.end()) {
-            if (input == 51) *txt[i] += "4";
-            else if (input == 56)
-                *txt[i] += "6";
-            else
-                *txt[i] += std::to_string(input - 26);
-            manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
-        }
-        if (input == 48) { // .
+        if (input == Input::Dot) {
             *txt[i] += ".";
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
         }
-        if (input == 58) { // return
+        if (input == Input::Return) {
             if (txt[i]->length() > 1) i++;
-            if (i >= 3) open = false;
+            if (i >= MAX_INDEX) isOpen_ = false;
         }
-        if (input == 59) { // backspace
+        if (input == Input::BackSpace) {
             if (txt[i]->length() > 0) {
                 txt[i]->erase(txt[i]->length() - 1, 1);
                 manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);

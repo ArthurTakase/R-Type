@@ -11,7 +11,7 @@
 #include <vector>
 
 /**
- * @brief get infos about the host
+ * @brief get infos about the host from argc and argv
  *
  */
 class HostHandler
@@ -27,8 +27,8 @@ class HostHandler
 
     static Address       getHostAddress(std::vector<std::string>& av);
     static Address::Port getClientPort(std::vector<std::string>& av);
+    static Address::Ip   getIp(std::string_view hostname);
 
   protected:
   private:
-    static Address::Ip getIp(std::string_view hostname);
 };

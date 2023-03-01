@@ -19,16 +19,16 @@ class StatComponent : public IComponent
 {
   public:
     StatComponent(std::vector<float> stats);
-    ~StatComponent() noexcept;
+    ~StatComponent() noexcept                          = default;
     StatComponent(const StatComponent& other) noexcept = default;
-    StatComponent(StatComponent&& other) noexcept      = delete;
+    StatComponent(StatComponent&& other) noexcept      = default;
 
-    StatComponent& operator=(const StatComponent& rhs) noexcept = delete;
-    StatComponent& operator=(StatComponent&& rhs) noexcept      = delete;
+    StatComponent& operator=(const StatComponent& rhs) noexcept = default;
+    StatComponent& operator=(StatComponent&& rhs) noexcept      = default;
 
     float getStat(int index) const noexcept;
     void  setStat(int index, float value) noexcept;
 
   private:
-    std::vector<float> stats;
+    std::vector<float> statistics_;
 };

@@ -21,10 +21,10 @@ class HitboxComponent : public IComponent
     HitboxComponent(size_t width, size_t height);
     ~HitboxComponent() noexcept                            = default;
     HitboxComponent(const HitboxComponent& other) noexcept = default;
-    HitboxComponent(HitboxComponent&& other) noexcept      = delete;
+    HitboxComponent(HitboxComponent&& other) noexcept      = default;
 
-    HitboxComponent& operator=(const HitboxComponent& rhs) noexcept = delete;
-    HitboxComponent& operator=(HitboxComponent&& rhs) noexcept      = delete;
+    HitboxComponent& operator=(const HitboxComponent& rhs) noexcept = default;
+    HitboxComponent& operator=(HitboxComponent&& rhs) noexcept      = default;
 
     size_t getWidth() const noexcept;
     size_t getHeight() const noexcept;
@@ -33,7 +33,7 @@ class HitboxComponent : public IComponent
     void   setSize(size_t width, size_t height) noexcept;
     void   setOnCollision(std::function<void(Entity*, Entity*)> onCollision) noexcept;
     void   onCollision(Entity* entity, Entity* me) const noexcept;
-    void   setSCale(float x, float y) noexcept;
+    void   setScale(float x, float y) noexcept;
 
   private:
     size_t                                width_;

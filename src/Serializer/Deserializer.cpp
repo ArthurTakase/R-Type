@@ -1,8 +1,14 @@
 #include <Serializer/Deserializer.hpp>
 #include <algorithm>
 #include <cstdint>
-#include <iostream>
 
+/**
+ * It takes a vector of unsigned chars and returns a GamePacket
+ *
+ * @param data The data to deserialize
+ *
+ * @return A GamePacket object.
+ */
 GamePacket Deserializer::deserialize(std::vector<unsigned char, std::allocator<unsigned char>>& data)
 {
     GamePacket packet;
@@ -19,10 +25,18 @@ GamePacket Deserializer::deserialize(std::vector<unsigned char, std::allocator<u
     packet.offsetY   = data[PacketName::OFFSET_Y];
     packet.id        = data[PacketName::ID];
     packet.destroyed = data[PacketName::DESTROYED];
+    packet.musicId   = data[PacketName::MusicId];
 
     return packet;
 }
 
+/**
+ * It returns the first element of the vector.
+ *
+ * @param data The data to deserialize.
+ *
+ * @return The first element of the vector.
+ */
 int Deserializer::deserializeSingleValue(std::vector<unsigned char, std::allocator<unsigned char>>& data)
 {
     return data[0];

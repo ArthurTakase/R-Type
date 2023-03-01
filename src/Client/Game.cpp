@@ -11,6 +11,8 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <iostream>
 
+#include "ECS/Components/MusicComponent.hpp"
+
 /**
  * It's a constructor for the Game class
  *
@@ -22,6 +24,8 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     , mutexForPacket_(mutex)
     , drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
+    , soundSystem_(&manager_)
+    , musicSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
 }
@@ -41,6 +45,8 @@ void Game::run() noexcept
     }
     destroyableSystem_.run();
     drawableSystem_.run();
+    soundSystem_.run();
+    musicSystem_.run();
 }
 
 /**
@@ -62,10 +68,10 @@ Lib& Game::getLib() noexcept
  */
 void Game::updateOrCreateEntity(GamePacket packet) noexcept
 {
-    auto m_entity = manager_.getEntity(packet.id);
+    auto m_entity = manager_.getEntity(static_cast<size_t>(packet.id));
 
     if (m_entity == nullptr) {
-        auto entity = manager_.newEntity();
+        auto entity = manager_.newEntity(packet.id);
 
         auto transform = TransformComponent(packet.x, packet.y);
 
@@ -78,10 +84,16 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         entity->addComponent(transform);
         entity->addComponent(drawable);
         entity->addComponent(DestroyableComponent(packet.destroyed));
+        if (packet.musicId != 0) {
+            auto musicable = MusicComponent(packet.musicId);
+            entity->addComponent(musicable);
+        }
     } else {
         auto transform = m_entity->getComponent<TransformComponent>();
         auto drawable  = m_entity->getComponent<DrawableComponent>();
         auto destroy   = m_entity->getComponent<DestroyableComponent>();
+
+        if (transform == nullptr || drawable == nullptr || destroy == nullptr) { return; }
 
         transform->setX(packet.x);
         transform->setY(packet.y);
@@ -90,7 +102,17 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
-        drawable->setTextureId(packet.idSprite);
+
+        if (packet.idSprite != drawable->getTextureId()) {
+            drawable->getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
+            drawable->setTextureId(packet.idSprite);
+        }
+        if (packet.musicId != 0) {
+            auto musicable = m_entity->getComponent<MusicComponent>();
+            musicable->getMusic().setPath("assets/audio/r-type-" + std::to_string(packet.musicId) + ".wav");
+            musicable->setMusicId(packet.musicId);
+        }
+
         if (packet.destroyed) destroy->destroy();
     }
 }

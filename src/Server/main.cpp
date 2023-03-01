@@ -9,10 +9,15 @@
 #include <Server/Server.hpp>
 #include <iostream>
 
+/**
+ * It creates a server on port 4242, and then runs it
+ *
+ * @return The server is being returned.
+ */
 int main()
 {
     try {
-        Server server(4242);
+        Server server(Server::SERVER_PORT);
 
         server.run();
     } catch (Error const& error) {

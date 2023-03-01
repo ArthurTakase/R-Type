@@ -38,13 +38,13 @@ void DrawableSystem::run()
 
         if (!entity->hasComponents<DrawableComponent, TransformComponent>()) { continue; }
 
-        auto transform = entity->getComponent<TransformComponent>();
-        auto drawable  = entity->getComponent<DrawableComponent>();
-
         if (entity->hasComponent<TextComponent>()) {
             auto text = entity->getComponent<TextComponent>();
             window_->draw(text->getText());
         } else {
+            auto transform = entity->getComponent<TransformComponent>();
+            auto drawable  = entity->getComponent<DrawableComponent>();
+
             drawable->getSprite().setX(transform->getX());
             drawable->getSprite().setY(transform->getY());
             window_->draw(drawable->getSprite(),
@@ -59,6 +59,11 @@ void DrawableSystem::run()
     window_->refresh();
 }
 
+/**
+ * It sets the window_ member variable to the window passed in
+ *
+ * @param window The window to draw to.
+ */
 void DrawableSystem::setWindow(Window* window) noexcept
 {
     window_ = window;

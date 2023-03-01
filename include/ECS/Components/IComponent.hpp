@@ -20,8 +20,8 @@ class IComponent
     virtual ~IComponent() noexcept = default;
 
     IComponent(const IComponent& other) noexcept = default;
-    IComponent(IComponent&& other) noexcept      = delete;
+    IComponent(IComponent&& other) noexcept      = default;
 
     IComponent& operator=(const IComponent& rhs) noexcept = default;
-    IComponent& operator=(IComponent&& rhs) noexcept      = delete;
+    IComponent& operator=(IComponent&& rhs) noexcept      = default;
 };

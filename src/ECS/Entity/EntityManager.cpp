@@ -11,11 +11,6 @@
 #include <iostream>
 
 /**
- * `EntityManager::EntityManager()` is the constructor for the `EntityManager` class
- */
-EntityManager::EntityManager() {}
-
-/**
  * It removes an entity from the entity manager
  *
  * @param id The id of the entity to remove.
@@ -70,16 +65,6 @@ size_t EntityManager::createId() const noexcept
 }
 
 /**
- * Add an entity to the entities list
- *
- * @param entity The entity you wish to add
- */
-void EntityManager::addEntity(std::unique_ptr<Entity>&& entity) noexcept
-{
-    entities_.emplace_back(std::move(entity));
-}
-
-/**
  * It creates a new entity and adds it to the entity manager
  *
  * @return A pointer to the newly created entity.
@@ -87,6 +72,20 @@ void EntityManager::addEntity(std::unique_ptr<Entity>&& entity) noexcept
 Entity* EntityManager::newEntity() noexcept
 {
     std::unique_ptr<Entity> entity = std::make_unique<Entity>(createId());
+    entities_.emplace_back(std::move(entity));
+    return entities_[entities_.size() - 1].get();
+}
+
+/**
+ * It creates a new entity and adds it to the list of entities
+ *
+ * @param id The id of the entity.
+ *
+ * @return A pointer to the last element in the vector.
+ */
+Entity* EntityManager::newEntity(int id) noexcept
+{
+    std::unique_ptr<Entity> entity = std::make_unique<Entity>(id);
     entities_.emplace_back(std::move(entity));
     return entities_[entities_.size() - 1].get();
 }

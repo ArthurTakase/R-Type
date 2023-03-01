@@ -2,11 +2,18 @@
 #include <fstream>
 #include <iostream>
 
-json JsonTools::getGroupFromFile(std::string filePath)
+/**
+ * It reads a json file and returns the json object
+ *
+ * @param filePath The path to the file you want to read.
+ *
+ * @return A json object
+ */
+json JsonTools::getPatternsFromFile()
 {
     std::map<int, std::vector<std::vector<int>>> patterns;
 
-    std::ifstream f(filePath);
+    std::ifstream f(PATTERN_ENEMY_GROUP_FILE_PATH);
     json          data = json::parse(f);
     return data;
 }

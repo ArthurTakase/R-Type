@@ -9,12 +9,18 @@
 
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
+#include <Serializer/BitSize.hpp>
 #include <Serializer/Serializer.hpp>
 #include <Server/RType.hpp>
+#include <Time/Clock.hpp>
 #include <memory>
 #include <thread>
 #include <vector>
 
+/**
+ * @brief struct that contains the client's address and a vector of entities' id relative to each player.
+ *
+ */
 typedef struct Player {
     Address          address;
     std::vector<int> entities_id;
@@ -26,6 +32,9 @@ typedef struct Player {
  */
 class Server
 {
+  public:
+    static constexpr unsigned int SERVER_PORT = 4242;
+
   public:
     Server() noexcept = delete;
     explicit Server(Address::Port port);
@@ -44,27 +53,26 @@ class Server
   protected:
   private:
     // attributes
-    bool                                           looping_  = true;
-    int                                            tickrate_ = 60;
-    std::vector<Client>                            clients_  = {};
-    std::unique_ptr<ISocket>                       socket_;
-    std::unique_ptr<SocketSelector>                selector_;
-    std::thread                                    gameThread_;
-    std::thread                                    networkThread_;
-    RType                                          gameInstance_;
-    std::chrono::system_clock::time_point          end_;
-    std::chrono::high_resolution_clock::time_point start_;
-    std::vector<Player>                            players_;
-
-    static constexpr int CLOSE_VALUE = 255;
-    static constexpr int PACKET_SIZE = 13;
+    bool                            looping_  = true;
+    int                             tickrate_ = 60;
+    std::vector<Client>             clients_  = {};
+    std::unique_ptr<ISocket>        socket_;
+    std::unique_ptr<SocketSelector> selector_;
+    std::thread                     gameThread_;
+    std::thread                     networkThread_;
+    RType                           gameInstance_;
+    std::vector<Player>             players_;
+    Clock                           clock_;
 
     // methods
     void                  receive();
     void                  send() noexcept;
     void                  sendToClient(Client& client, RawData blob);
     bool                  isKnownClient(Address address) const;
-    void                  addClient(Address address) noexcept;
+    void                  removeClient(Address& clientAddress) noexcept;
+    void                  addClient(Address address, std::chrono::system_clock::time_point ping) noexcept;
+    void                  updateClientState(Address& clientAddress, bool isPing) noexcept;
+    void                  areClientsConnected() noexcept;
     void                  handleData(ReceivedInfos infos) noexcept;
     [[nodiscard]] RawData getDataFromQueue(Client& client) noexcept;
 
