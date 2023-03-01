@@ -14,7 +14,7 @@
 
 TEST(DestroyableComponent_, classic)
 {
-    auto dest = DestroyableComponent();
+    DestroyableComponent dest;
 
     EXPECT_EQ(dest.getDestroyed(), false);
 
@@ -25,7 +25,7 @@ TEST(DestroyableComponent_, classic)
 
 TEST(DestroyableComponent_, argument)
 {
-    auto dest = DestroyableComponent(1);
+    DestroyableComponent dest(1);
 
     EXPECT_EQ(dest.getDestroyed(), true);
 
