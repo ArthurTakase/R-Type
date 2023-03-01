@@ -16,6 +16,7 @@ class SoundComponent : public IComponent
 {
   public:
     SoundComponent(const std::string& path);
+    SoundComponent(const int soundId);
     SoundComponent(const SoundComponent& other) noexcept = delete;
     SoundComponent(SoundComponent&& other) noexcept      = default;
     ~SoundComponent() noexcept                           = default;
@@ -27,9 +28,15 @@ class SoundComponent : public IComponent
     bool  getIsPlayed() const noexcept;
     void  setPlayed(bool value) noexcept;
     void  play() noexcept;
+    int   getSoundId() const noexcept;
+    void  setSoundId(const int soundId) noexcept;
 
   protected:
   private:
+    int   soundId_;
     Sound sound_;
     bool  isPlayed_ = true;
+
+  private:
+    static constexpr std::string_view AUDIO_PATH = "assets/audio/";
 };

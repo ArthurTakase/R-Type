@@ -84,5 +84,4 @@ void RType::init() noexcept
 {
     createBackground(0);
     createBackground(255);
-    createSpawner();
 }

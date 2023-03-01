@@ -18,7 +18,7 @@
 #include <string_view>
 
 #define SPRITE(id) ("assets/img/r-typesheet" id ".gif")
-#define AUDIO(name) ("assets/audio/r-type" name)
+#define AUDIO(name) ("assets/audio/" name)
 #define FONT(name) ("assets/fonts/" name)
 
 /**
@@ -57,6 +57,7 @@ class Menu
     static constexpr std::string_view BG_MUSIC_PATH   = AUDIO("loading.wav");
     static constexpr std::string_view FONT_PATH       = FONT("gameboy.ttf");
     static constexpr std::string_view BACKGROUND_PATH = SPRITE("0");
+
     // methods
     void createMusic(const std::string_view& path) noexcept;
     int  createText(int x, int y, int size, const std::string_view& txt) noexcept;

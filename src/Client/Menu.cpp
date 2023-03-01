@@ -42,9 +42,9 @@ Menu::Menu()
 Address Menu::run(Window& window)
 {
     createBackground(0);
-    createBackground(255);
+    createBackground(MAX_VALUE);
     createTitleMenu(window);
-    // createMusic(BG_MUSIC_PATH);
+    createMusic(BG_MUSIC_PATH);
 
     drawableSystem_.setWindow(&window);
     Address serverInfos;
@@ -57,6 +57,7 @@ Address Menu::run(Window& window)
         musicSystem_.run();
     }
 
+    manager_.getEntities().clear();
     serverInfos.port = std::atoi(port_.c_str());
     if (serverInfos.port <= 0) throw Error("Port must be a positive number");
     serverInfos.ip = HostHandler::getIp(ip_.c_str());
@@ -64,6 +65,7 @@ Address Menu::run(Window& window)
 
     return serverInfos;
 }
+
 /**
  * It returns the value of the private member variable isOpen_. When called, it allows to our program to know if the
  * menu is still open or not.
@@ -134,7 +136,7 @@ int Menu::createBackground(int posX) noexcept
         if (transform->getX() <= MIN_VALUE) { transform->setX(MAX_VALUE); }
     }});
 
-    auto  drawable = DrawableComponent(0, 0, 255, 255, 0);
+    auto  drawable = DrawableComponent(0, 0, MAX_VALUE, MAX_VALUE, 0);
     auto& sprite   = drawable.getSprite();
     sprite.setSpritePath(BACKGROUND_PATH.data());
 

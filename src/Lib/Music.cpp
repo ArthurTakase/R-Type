@@ -24,10 +24,13 @@ Music::Music(const std::string& path)
 /**
  * The destructor stops the music
  */
-Music::~Music() noexcept
-{
-    this->stop();
-}
+// Music::~Music() noexcept
+// {
+//     std::cout << "destroying music encapsulation" << std::endl;
+//     // if (music_->getStatus() == sf::SoundSource::Status::Playing) std::cout << "music is playing" << std::endl;
+//     // music_->stop();
+//     // music_->stop();
+// }
 
 /**
  * Play the music
@@ -80,7 +83,7 @@ void Music::setLoop(bool value) noexcept
  */
 void Music::setPath(std::string path) noexcept
 {
-    musicPath = path;
+    musicPath_ = path;
 }
 
 /**
@@ -88,5 +91,5 @@ void Music::setPath(std::string path) noexcept
  */
 std::string Music::getPath() const noexcept
 {
-    return musicPath;
+    return musicPath_;
 }
