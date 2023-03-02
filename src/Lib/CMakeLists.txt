@@ -27,6 +27,7 @@ add_library(
   Text.cpp
   Sound.cpp
   Music.cpp
+  Buffer.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)

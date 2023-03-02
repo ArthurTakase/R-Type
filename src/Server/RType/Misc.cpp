@@ -121,19 +121,3 @@ int RType::createRandomPowerUp(int x, int y) noexcept
     int type = rand() % 2;
     return createPowerUp(x, y, type);
 }
-
-/**
- * It creates a new entity, adds a SoundComponent to it, and returns the entity's ID
- *
- * @param path The path to the sound file.
- *
- * @return The id of the entity.
- */
-int RType::createSound(const std::string& path) noexcept
-{
-    auto sound = entityManager_.newEntity();
-
-    sound->addComponent(SoundComponent(path));
-
-    return sound->getId();
-}

@@ -83,7 +83,6 @@ EntityManager& RType::getManager() noexcept
  */
 void RType::init() noexcept
 {
-    int s1 = createSound("assets/audio/shoot.wav"); // 0
     createBackground(0);
     createBackground(255);
 }
