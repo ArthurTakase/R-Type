@@ -23,7 +23,7 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     , mutexForPacket_(mutex)
     , drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
-    , soundSystem_(&manager_)
+    , soundSystem_(&manager_, soundPaths_)
     , musicSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
@@ -34,8 +34,6 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
  */
 void Game::run() noexcept
 {
-    createSound("assets/audio/shoot.wav"); // 0
-
     {
         std::lock_guard<std::mutex> lock(mutexForPacket_);
         while (!dataReceived_.empty()) {
@@ -116,11 +114,11 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
  *
  * @return The id of the entity.
  */
-int Game::createSound(const std::string& path) noexcept
+int Game::createSound(const std::string_view& path) noexcept
 {
     auto sound = manager_.newEntity();
 
-    sound->addComponent(SoundComponent(path));
+    sound->addComponent(SoundComponent(soundSystem_.getBufferFromPath(path)));
 
     return sound->getId();
 }

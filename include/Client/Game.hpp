@@ -14,6 +14,7 @@
 #include <ECS/Systems/SoundSystem.hpp>
 #include <Lib/Lib.hpp>
 #include <Serializer/BitSize.hpp>
+#include <Tools/Shortcuts.hpp>
 #include <queue>
 
 /**
@@ -33,10 +34,11 @@ class Game
     void run() noexcept;
     Lib& getLib() noexcept;
 
-    int            createSound(const std::string& path) noexcept;
     EntityManager& getManager() noexcept;
 
   private:
+    std::vector<std::string_view> soundPaths_ = {PIOU_PATH, SHOOT_PATH};
+
     EntityManager           manager_;
     Lib                     lib_;
     DrawableSystem          drawableSystem_;
@@ -47,4 +49,5 @@ class Game
     std::mutex&             mutexForPacket_;
 
     void updateOrCreateEntity(GamePacket packet) noexcept;
+    int  createSound(const std::string_view& path) noexcept;
 };
