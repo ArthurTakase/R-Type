@@ -12,10 +12,11 @@
  *
  * @param manager The entity manager that the system will be using.
  */
-SoundSystem::SoundSystem(EntityManager* manager) noexcept
-    : manager_(manager)
+SoundSystem::SoundSystem(EntityManager* manager, std::vector<std::string_view> listPath) noexcept
+    : entityManager_(manager)
     , it_(manager->getEntities())
 {
+    for (auto& path : listPath) { soundManager_.addSoundBuffer(path.data()); }
 }
 
 /**
@@ -32,4 +33,9 @@ void SoundSystem::run()
         sound->play();
     }
     it_.reset();
+}
+
+Buffer& SoundSystem::getBufferFromPath(const std::string_view& path)
+{
+    return (soundManager_.getBufferFromPath(path));
 }
