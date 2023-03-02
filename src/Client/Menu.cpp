@@ -29,7 +29,7 @@ Menu::Menu()
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
     , musicSystem_(&manager_)
-    , soundSystem_(&manager_)
+    , soundSystem_(&manager_, soundPaths_)
 {
 }
 
@@ -43,7 +43,6 @@ Menu::Menu()
  */
 Address Menu::run(Window& window)
 {
-    createSound("assets/audio/piou.wav");
     createBackground(0);
     createBackground(MAX_VALUE);
     createTitleMenu(window);
@@ -272,11 +271,11 @@ int Menu::createIPMenu(Window& window) noexcept
     return menu->getId();
 }
 
-int Menu::createSound(const std::string& path) noexcept
+int Menu::createSound(const std::string_view& path) noexcept
 {
     auto sound = manager_.newEntity();
 
-    sound->addComponent(SoundComponent(path));
+    sound->addComponent(SoundComponent(soundSystem_.getBufferFromPath(path)));
 
     return sound->getId();
 }
