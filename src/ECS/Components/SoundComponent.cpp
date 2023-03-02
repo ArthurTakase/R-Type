@@ -18,11 +18,6 @@ SoundComponent::SoundComponent(const std::string& path)
 {
 }
 
-SoundComponent::SoundComponent(const SoundComponent& other) noexcept
-    : sound_(other.sound_.getPath())
-{
-}
-
 /**
  * It returns the sound_ member variable
  *

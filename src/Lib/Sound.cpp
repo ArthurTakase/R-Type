@@ -5,10 +5,8 @@
 ** Sound
 */
 
-#include <Lib/Sound.hpp>
 #include <Error/Error.hpp>
-
-#include <iostream>
+#include <Lib/Sound.hpp>
 
 /**
  * It takes a path to a sound file, loads the sound file into a buffer, and then
@@ -19,17 +17,9 @@
 Sound::Sound(const std::string& path)
     : path_(path)
 {
-    if (!buffer_.loadFromFile(path)) throw Error("Error: Could not load sound from file");
+    if (!soundData_.buffer_.loadFromFile(path)) throw Error("Error: Could not load sound from file");
 
-    sound_.setBuffer(buffer_);
-}
-
-/**
- * It stops the sound, if it's playing, and then it destroys the sound
- */
-Sound::~Sound() noexcept
-{
-    this->stop();
+    soundData_.sound_.setBuffer(soundData_.buffer_);
 }
 
 /**
@@ -37,8 +27,7 @@ Sound::~Sound() noexcept
  */
 void Sound::play() noexcept
 {
-    std::cout << "Playing sound" << std::endl;
-    sound_.play();
+    soundData_.sound_.play();
 }
 
 /**
@@ -46,7 +35,7 @@ void Sound::play() noexcept
  */
 void Sound::pause() noexcept
 {
-    sound_.pause();
+    soundData_.sound_.pause();
 }
 
 /**
@@ -54,7 +43,7 @@ void Sound::pause() noexcept
  */
 void Sound::stop() noexcept
 {
-    sound_.stop();
+    soundData_.sound_.stop();
 }
 
 /**
@@ -64,7 +53,7 @@ void Sound::stop() noexcept
  */
 void Sound::setVolume(float value) noexcept
 {
-    sound_.setVolume(value);
+    soundData_.sound_.setVolume(value);
 }
 
 /**
@@ -75,4 +64,74 @@ void Sound::setVolume(float value) noexcept
 std::string Sound::getPath() const noexcept
 {
     return path_;
+}
+
+/**
+ * This function initializes the sound_ and buffer_ members of the SoundData class.
+ *
+ * @param sound The sound object that will be played.
+ * @param buffer The sound buffer to use for the sound.
+ */
+SoundData::SoundData(sf::Sound sound, sf::SoundBuffer buffer) noexcept
+    : sound_(sound)
+    , buffer_(buffer)
+{
+}
+
+/**
+ * It copies the sound and buffer from the other SoundData object
+ *
+ * @param other The SoundData object to copy from.
+ */
+SoundData::SoundData(const SoundData& other) noexcept
+    : sound_(other.sound_)
+    , buffer_(other.buffer_)
+{
+    sound_.setBuffer(buffer_);
+}
+
+/**
+ * "Move the other object's sound and buffer into this object, and set the sound's
+ * buffer to the new buffer."
+ *
+ * The first line of the function is the function declaration. It's the same as the
+ * copy constructor, except that it uses the move constructor syntax
+ *
+ * @param other The object to move from.
+ */
+SoundData::SoundData(SoundData&& other) noexcept
+    : sound_(std::move(other.sound_))
+    , buffer_(std::move(other.buffer_))
+{
+    sound_.setBuffer(buffer_);
+}
+
+/**
+ * Copy the data from the right hand side of the assignment operator to the left
+ * hand side of the assignment operator.
+ *
+ * @return A reference to the object that called the function.
+ */
+SoundData& SoundData::operator=(const SoundData& rhs) noexcept
+{
+    sound_  = rhs.sound_;
+    buffer_ = rhs.buffer_;
+    sound_.setBuffer(buffer_);
+    return *this;
+}
+
+/**
+ * "Move the data from the right hand side to the left hand side."
+ *
+ * The first thing we do is move the sound_ data member from the right hand side
+ * to the left hand side
+ *
+ * @return A reference to the object that called the function.
+ */
+SoundData& SoundData::operator=(SoundData&& rhs) noexcept
+{
+    sound_  = std::move(rhs.sound_);
+    buffer_ = std::move(rhs.buffer_);
+    sound_.setBuffer(buffer_);
+    return *this;
 }

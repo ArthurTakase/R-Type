@@ -43,28 +43,22 @@ Menu::Menu()
  */
 Address Menu::run(Window& window)
 {
-    createSound("assets/audio/loading.wav");
+    createSound("assets/audio/piou.wav");
     createBackground(0);
     createBackground(MAX_VALUE);
     createTitleMenu(window);
-    // createMusic(BG_MUSIC_PATH);
-
-    // Sound sound("assets/audio/loading.wav");
+    createMusic(BG_MUSIC_PATH);
 
     drawableSystem_.setWindow(&window);
     Address serverInfos;
 
     while (isOpen_) {
-        manager_.getEntity(0)->getComponent<SoundComponent>()->setPlayed(true);
-
         destroyableSystem_.run();
         drawableSystem_.run();
         behaviorSystem_.run();
         mouvementSystem_.run();
-        // musicSystem_.run();
+        musicSystem_.run();
         soundSystem_.run();
-
-        // sound.play();
     }
 
     manager_.getEntities().clear();
