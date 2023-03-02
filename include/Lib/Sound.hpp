@@ -17,7 +17,7 @@ class Sound
 {
   public:
     explicit Sound(const std::string& path);
-    Sound(const Sound& other) noexcept;
+    Sound(const Sound& other) noexcept = default;
     Sound(Sound&& other) noexcept = default;
     ~Sound() noexcept;
 

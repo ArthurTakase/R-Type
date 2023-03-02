@@ -24,14 +24,6 @@ Sound::Sound(const std::string& path)
     sound_.setBuffer(buffer_);
 }
 
-Sound::Sound(const Sound& other) noexcept
-    : path_(other.path_)
-{
-    if (!buffer_.loadFromFile(path_)) throw Error("Error: Could not load sound from file");
-
-    sound_.setBuffer(buffer_);
-}
-
 /**
  * It stops the sound, if it's playing, and then it destroys the sound
  */
