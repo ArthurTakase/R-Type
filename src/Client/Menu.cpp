@@ -29,7 +29,7 @@ Menu::Menu()
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
     , musicSystem_(&manager_)
-    , soundSystem_(&manager_, soundPaths_)
+    , soundSystem_(&manager_)
 {
 }
 

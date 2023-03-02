@@ -23,10 +23,15 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     , mutexForPacket_(mutex)
     , drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
-    , soundSystem_(&manager_, soundPaths_)
+    , soundSystem_(&manager_)
     , musicSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
+
+    auto& soundManager = soundSystem_.getSoundManager();
+    for (auto& path : soundPaths_) { soundManager.addSoundBuffer(path); }
+    createSound(PIOU_PATH);
+    createSound(SHOOT_PATH);
 }
 
 /**

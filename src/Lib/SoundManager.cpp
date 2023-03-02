@@ -5,8 +5,8 @@
 ** SoundManager
 */
 
-#include <ECS/Systems/SoundManager.hpp>
 #include <Error/Error.hpp>
+#include <Lib/SoundManager.hpp>
 #include <iostream>
 
 void SoundManager::addSoundBuffer(const std::string_view& path) noexcept
@@ -33,7 +33,7 @@ unsigned int SoundManager::getBufferIdFromPath(const std::string_view& path) con
     return (id);
 }
 
-Buffer &SoundManager::getBufferFromPath(const std::string_view& path)
+Buffer& SoundManager::getBufferFromPath(const std::string_view& path)
 {
     return (buffers_[getBufferIdFromPath(path)]);
 }

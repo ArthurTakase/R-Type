@@ -17,8 +17,8 @@
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <Json/JsonTools.hpp>
 #include <Serializer/BitSize.hpp>
-#include <memory>
 #include <Tools/Shortcuts.hpp>
+#include <memory>
 
 /**
  * @brief Game Instance for the server
@@ -55,12 +55,13 @@ class RType
     void createEntityWave(std::string type, json::array_t positions) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
     int  createRandomPowerUp(int x, int y) noexcept;
+    int  createSound() noexcept;
 
   private:
-    bool              looping_     = true;
-    int               nbEnemyAlive = 0;
-    int               playerLevel  = 1;
-    bool              started      = false;
+    bool looping_     = true;
+    int  nbEnemyAlive = 0;
+    int  playerLevel  = 1;
+    bool started      = false;
 
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;

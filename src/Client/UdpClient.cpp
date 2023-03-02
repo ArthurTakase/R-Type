@@ -216,8 +216,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
             for (int m = 0; m < MUSIC_NB; m++) {
                 if (infos.data[m]) {
                     auto sound = manager.getEntity(m)->getComponent<SoundComponent>();
-                    if (!sound) { continue; }
-                    sound->setPlayed(true);
+                    if (sound) sound->setPlayed(true);
                 }
             }
 

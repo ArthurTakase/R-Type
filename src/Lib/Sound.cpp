@@ -8,6 +8,8 @@
 #include <Error/Error.hpp>
 #include <Lib/Sound.hpp>
 
+Sound::Sound() noexcept {}
+
 /**
  * It takes a path to a sound file, loads the sound file into a buffer, and then
  * sets the sound object's buffer to the buffer that was just loaded

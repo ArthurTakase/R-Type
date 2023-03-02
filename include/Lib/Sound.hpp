@@ -19,6 +19,7 @@ class Buffer;
 class Sound
 {
   public:
+    Sound() noexcept;
     explicit Sound(const Buffer& buffer);
     Sound(const Sound& other) noexcept = delete;
     Sound(Sound&& other) noexcept      = default;

@@ -30,7 +30,6 @@ set(
   Systems/DestroyableSystem.cpp
   Systems/SoundSystem.cpp
   Systems/MusicSystem.cpp
-  Systems/SoundManager.cpp
 )
 
 # Merge

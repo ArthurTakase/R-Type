@@ -9,7 +9,7 @@
 
 #include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
-#include <ECS/Systems/SoundManager.hpp>
+#include <Lib/SoundManager.hpp>
 #include <Tools/EntityIterator.hpp>
 
 /**
@@ -18,7 +18,7 @@
 class SoundSystem
 {
   public:
-    SoundSystem(EntityManager* manager, std::vector<std::string_view> listPaths) noexcept;
+    SoundSystem(EntityManager* manager) noexcept;
     SoundSystem(const SoundSystem& other) noexcept = delete;
     SoundSystem(SoundSystem&& other) noexcept      = delete;
     ~SoundSystem() noexcept                        = default;
@@ -26,8 +26,9 @@ class SoundSystem
     SoundSystem& operator=(const SoundSystem& rhs) noexcept = delete;
     SoundSystem& operator=(SoundSystem&& rhs) noexcept      = delete;
 
-    void    run();
-    Buffer& getBufferFromPath(const std::string_view& path);
+    void          run();
+    Buffer&       getBufferFromPath(const std::string_view& path);
+    SoundManager& getSoundManager() noexcept;
 
   protected:
   private:
