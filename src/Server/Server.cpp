@@ -69,7 +69,7 @@ void Server::communicate() noexcept
     while (looping_) {
         try {
             selector_->select(true, true, false);
-        } catch (const NetworkExecError& message) {
+        } catch (const NetworkError& message) {
             std::cerr << message.what() << std::endl;
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }

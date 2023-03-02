@@ -78,7 +78,7 @@ void WindowsFdSet::clear() noexcept
 void WindowsSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
     auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
-    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+    if (windowsSocket == nullptr) throw NetworkError("Error while using the socket with select.");
 
     if (isRead) readFds_.add(windowsSocket->getSocketFd());
     if (isWrite) writeFds_.add(windowsSocket->getSocketFd());
@@ -101,7 +101,7 @@ void WindowsSocketSelector::add(ISocket& socket, bool isRead, bool isWrite, bool
 void WindowsSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, bool isExcept)
 {
     auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
-    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+    if (windowsSocket == nullptr) throw NetworkError("Error while using the socket with select.");
 
     if (isRead) readFds_.remove(windowsSocket->getSocketFd());
     if (isWrite) writeFds_.remove(windowsSocket->getSocketFd());
@@ -130,7 +130,7 @@ void WindowsSocketSelector::remove(ISocket& socket, bool isRead, bool isWrite, b
 bool WindowsSocketSelector::isSet(ISocket& socket, Operation type) const
 {
     auto windowsSocket = dynamic_cast<WindowsSocket*>(&socket);
-    if (windowsSocket == nullptr) throw NetworkExecError("Error while using the socket with select.");
+    if (windowsSocket == nullptr) throw NetworkError("Error while using the socket with select.");
 
     if (type == Operation::READ) return (readyReadFds_.isSet(windowsSocket->getSocketFd()));
     if (type == Operation::WRITE) return (readyWriteFds_.isSet(windowsSocket->getSocketFd()));
@@ -173,7 +173,7 @@ void WindowsSocketSelector::select(bool isRead, bool isWrite, bool isExcept)
         (isWrite ? &readyWriteFds_.get() : nullptr),
         (isExcept ? &readyExceptFds_.get() : nullptr),
         nullptr);
-    if (status < 0) { throw NetworkExecError("Error while using the socket with select."); }
+    if (status < 0) { throw NetworkError("Error while using the socket with select."); }
 }
 
 #endif

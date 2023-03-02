@@ -87,7 +87,7 @@ void UdpClient::communicate() noexcept
     while (looping_) {
         try {
             selector_->select(true, true, false);
-        } catch (const NetworkExecError& message) {
+        } catch (const NetworkError& message) {
             std::cerr << message.what() << std::endl;
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
@@ -146,7 +146,7 @@ void UdpClient::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         handleData(infoReceived);
-    } catch (const NetworkExecError& e) {
+    } catch (const NetworkError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -160,7 +160,7 @@ void UdpClient::send()
         auto blob = getDataFromQueue();
         try {
             socket_->send(blob.data(), blob.size(), serverInfos_.address);
-        } catch (const NetworkExecError& e) {
+        } catch (const NetworkError& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
         }
