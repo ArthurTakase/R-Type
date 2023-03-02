@@ -6,6 +6,8 @@
 */
 
 #include <Lib/Sound.hpp>
+#include <Error/Error.hpp>
+
 #include <iostream>
 
 /**
@@ -17,7 +19,7 @@
 Sound::Sound(const std::string& path)
     : path_(path)
 {
-    if (!buffer_.loadFromFile(path)) std::cerr << "Error: Could not load sound from file" << std::endl;
+    if (!buffer_.loadFromFile(path)) throw Error("Error: Could not load sound from file");
 
     sound_.setBuffer(buffer_);
 }
@@ -25,7 +27,7 @@ Sound::Sound(const std::string& path)
 Sound::Sound(const Sound& other) noexcept
     : path_(other.path_)
 {
-    if (!buffer_.loadFromFile(path_)) std::cerr << "Error: Could not load sound from file" << std::endl;
+    if (!buffer_.loadFromFile(path_)) throw Error("Error: Could not load sound from file");
 
     sound_.setBuffer(buffer_);
 }

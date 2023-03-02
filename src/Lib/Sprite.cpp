@@ -6,7 +6,7 @@
 */
 
 #include <Lib/Sprite.hpp>
-#include <iostream>
+#include <Error/Error.hpp>
 
 /**
  * This is the default constructor for the Sprite class.
@@ -33,9 +33,7 @@ Sprite::Sprite(std::string path, int x, int y)
 {
     if (path == "") { return; }
 
-    if (!texture.loadFromFile(spritePath)) {
-        std::cerr << "Error: Could not load sprite from file: " << spritePath << std::endl;
-    }
+    if (!texture.loadFromFile(spritePath)) { throw Error("Error: Could not load sprite from file: " + spritePath); }
     sprite.setTexture(texture);
     sprite.setPosition(x, y);
 }
@@ -50,7 +48,7 @@ void Sprite::setSpritePath(const std::string& path)
     spritePath = path;
 
     if (!texture.loadFromFile(spritePath)) {
-        std::cerr << "Error: Could not load sprite from file: " << spritePath << std::endl;
+        throw Error("Error: Could not load sprite from file: " + spritePath);
     }
     sprite.setTexture(texture);
 }
