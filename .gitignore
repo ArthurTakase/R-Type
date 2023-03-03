@@ -25,3 +25,4 @@ googletest-src
 runTests
 generate_compile_command
 !cmake/*.cmake
+*.csv

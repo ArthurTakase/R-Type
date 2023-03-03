@@ -70,6 +70,7 @@ int RType::createPlayer(int x, int y, int nb) noexcept
                 if (lastInput == Input::Down) { playerShoot(x, y, 0, 1, stat); }
                 if (lastInput == Input::Right) { playerShoot(x, y, 1, 0, stat); }
             }
+            if (lastInput == Input::L) { entityManager_.log(); }
         }
 
         auto next_x = x + mouv->getDirX() * mouv->getSpeed();
