@@ -16,7 +16,7 @@ int RType::createSpawner() noexcept
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         const static json patterns = JsonTools::getPatternsFromFile();
 
-        if (nbEnemyAlive > 1) { return; }
+        if (nbEnemyAlive < 1) { return; }
         int  wave_id = rand() % patterns.size();
         auto pattern = patterns[wave_id];
         createEntityWave(pattern);
