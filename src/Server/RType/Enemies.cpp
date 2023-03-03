@@ -59,6 +59,7 @@ int RType::createBasicEnemy(int x, int y) noexcept
             nbEnemyAlive -= 1;
             playerLevel += 1;
             dest->destroy();
+            playSound(RTypeSounds::EXPLOSION_SOUND);
         }
         if (x <= -16) { trans->setX(255); }
     }});
@@ -115,6 +116,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
             nbEnemyAlive -= 1;
             playerLevel += 1;
             dest->destroy();
+            playSound(RTypeSounds::EXPLOSION_SOUND);
         }
         if (x <= -16) { trans->setX(255); }
     }});
@@ -143,6 +145,8 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
     auto  bullet = entityManager_.newEntity();
     float life   = type ? 1.0 : 200.0;
 
+    playSound(RTypeSounds::MENU_SOUND);
+
     bullet->addComponent(TransformComponent(x - 8, y + 4));
     bullet->addComponent(MouvementComponent(-1, 0, speed));
     bullet->addComponent(DrawableComponent(0, 0, 8, 8, type ? 6 : 5, size, size));
@@ -151,11 +155,13 @@ int RType::createEnemyBullet(int x, int y, float damage, float speed, float size
     bullet->addComponent(StatComponent({life, damage}));
 
     auto hitbox = HitboxComponent(8, 8);
-    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) {
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[&](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto stat   = entity->getComponent<StatComponent>();
             auto statMe = me->getComponent<StatComponent>();
             auto destMe = me->getComponent<DestroyableComponent>();
+
+            playSound(RTypeSounds::HURT_SOUND);
 
             auto life = stat->getStat(RTypeStats::Life);
             auto dmg  = statMe->getStat(RTypeStats::Damage);

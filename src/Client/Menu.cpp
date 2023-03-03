@@ -34,8 +34,8 @@ Menu::Menu()
     soundSystem_.setSoundManager(&soundManager_);
 
     for (auto& path : soundPaths_) { soundManager_.addSoundBuffer(path); }
-    createSound(PIOU_PATH);
-    createSound(SHOOT_PATH);
+    menuSound = createSound(MENU_PATH);
+    hurtSound = createSound(HURT_PATH);
 }
 
 /**
@@ -201,10 +201,12 @@ int Menu::createTitleMenu(Window& window) noexcept
             manager_.getEntity(t1)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t2)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t3)->getComponent<DestroyableComponent>()->destroy();
+            playSound(menuSound);
         }
         if (input == Input::D) {
             hintIndex = (hintIndex + 1) % hints.size();
             manager_.getEntity(t3)->getComponent<TextComponent>()->getText().setTextString(hints[hintIndex]);
+            playSound(menuSound);
         }
 
         auto mouvement = entity->getComponent<MouvementComponent>();
@@ -254,19 +256,23 @@ int Menu::createIPMenu(Window& window) noexcept
         if (input >= Input::Zero && input <= Input::Nine) {
             *txt[i] += std::to_string(input - Input::Zero);
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+            playSound(menuSound);
         }
         if (input == Input::Dot) {
             *txt[i] += ".";
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+            playSound(menuSound);
         }
         if (input == Input::Return) {
             if (txt[i]->length() > 1) i++;
             if (i >= MAX_INDEX) isOpen_ = false;
+            playSound(menuSound);
         }
         if (input == Input::BackSpace) {
             if (txt[i]->length() > 0) {
                 txt[i]->erase(txt[i]->length() - 1, 1);
                 manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+                playSound(hurtSound);
             }
         }
     }});
@@ -283,4 +289,15 @@ int Menu::createSound(const std::string_view& path) noexcept
     sound->addComponent(SoundComponent(soundManager_.getBufferFromPath(path)));
 
     return sound->getId();
+}
+
+/**
+ * It plays a sound
+ *
+ * @param id The id of the entity that has the SoundComponent
+ */
+void Menu::playSound(int id) noexcept
+{
+    auto sound = manager_.getEntity(id);
+    sound->getComponent<SoundComponent>()->setPlayed(true);
 }

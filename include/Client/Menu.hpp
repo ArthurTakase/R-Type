@@ -49,7 +49,8 @@ class Menu
     std::string port_   = "";
     bool        isOpen_ = true;
 
-    std::vector<std::string_view> soundPaths_ = {PIOU_PATH, SHOOT_PATH};
+    std::vector<std::string_view> soundPaths_ = {
+        EXPLOSION_PATH, HEAL_PATH, HURT_PATH, MENU_PATH, PIOU_PATH, POWERUP_PATH};
 
     EntityManager     manager_;
     DrawableSystem    drawableSystem_;
@@ -60,6 +61,8 @@ class Menu
     SoundSystem       soundSystem_;
 
     SoundManager soundManager_;
+    int          menuSound;
+    int          hurtSound;
 
     // methods
     void createMusic(const std::string_view& path) noexcept;
@@ -68,4 +71,5 @@ class Menu
     int  createTitleMenu(Window& window) noexcept;
     int  createBackground(int x) noexcept;
     int  createSound(const std::string_view& path) noexcept;
+    void playSound(int id) noexcept;
 };

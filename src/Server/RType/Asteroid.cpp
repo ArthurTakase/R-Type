@@ -40,6 +40,7 @@ int RType::createAsteroid(int x) noexcept
 
         if (stat->getStat(RTypeStats::Life) <= 0) {
             if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+            playSound(RTypeSounds::EXPLOSION_SOUND);
         }
 
         if (trans->getX() <= -16 || stat->getStat(RTypeStats::Life) <= 0) {
@@ -70,6 +71,8 @@ int RType::createAsteroid(int x) noexcept
 
             float hitboxScale = static_cast<float>(rand() % 20) / 10 + 1;
             float hitboxSpeed = static_cast<float>(rand() % 25) / 10 + 5;
+
+            playSound(RTypeSounds::HURT_SOUND);
 
             meMouv->setSpeed(hitboxSpeed);
             meTrans->setX(255);

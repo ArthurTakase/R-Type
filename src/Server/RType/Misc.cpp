@@ -92,9 +92,11 @@ int RType::createPowerUp(int x, int y, int type) noexcept
 
         if (type == 0) { // HEAL THE PLAYER
             if (player->getStat(RTypeStats::Life) < 100) {
+                playSound(RTypeSounds::HEAL_SOUND);
                 player->setStat(RTypeStats::Life, player->getStat(RTypeStats::Life) + 20);
             }
         } else if (type == 1) { // UPGRADE THE PLAYER
+            playSound(RTypeSounds::POWERUP_SOUND);
             player->setStat(RTypeStats::Level, player->getStat(RTypeStats::Level) + 1);
             if ((int)player->getStat(RTypeStats::Level) % 5 == 0 && player->getStat(RTypeStats::Level) <= 10.0) {
                 spr->setTextureId(spr->getTextureId() + 10);

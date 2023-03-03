@@ -38,7 +38,8 @@ class Game
     EntityManager& getManager() noexcept;
 
   private:
-    std::vector<std::string_view> soundPaths_ = {PIOU_PATH, SHOOT_PATH};
+    std::vector<std::string_view> soundPaths_ = {
+        EXPLOSION_PATH, HEAL_PATH, HURT_PATH, MENU_PATH, PIOU_PATH, POWERUP_PATH};
 
     EntityManager           manager_;
     Lib                     lib_;

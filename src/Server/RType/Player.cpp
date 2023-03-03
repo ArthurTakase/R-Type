@@ -109,8 +109,7 @@ void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) n
     auto bulletSize   = stat->getStat(RTypeStats::Size);
     auto playerLevel  = stat->getStat(RTypeStats::Level);
 
-    auto shotSound = entityManager_.getEntity(0);
-    shotSound->getComponent<SoundComponent>()->setPlayed(true);
+    playSound(RTypeSounds::PIOU_SOUND);
 
     if (playerLevel < 5) {
         createPlayerBullet(x, y, bulletDamage, bulletSpeed, dirX, dirY, bulletSize);

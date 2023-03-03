@@ -30,8 +30,12 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     soundSystem_.setSoundManager(&soundManager_);
 
     for (auto& path : soundPaths_) { soundManager_.addSoundBuffer(path); }
+    createSound(EXPLOSION_PATH);
+    createSound(HEAL_PATH);
+    createSound(HURT_PATH);
+    createSound(MENU_PATH);
     createSound(PIOU_PATH);
-    createSound(SHOOT_PATH);
+    createSound(POWERUP_PATH);
 }
 
 /**
