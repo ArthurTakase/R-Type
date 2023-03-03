@@ -87,7 +87,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
     enemy->addComponent(DestroyableComponent());
-    enemy->addComponent(StatComponent({30, 2, 6, 1}));
+    enemy->addComponent(StatComponent({30, 10, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
     enemy->addComponent(TimerComponent(0.8));
 

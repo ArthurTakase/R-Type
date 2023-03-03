@@ -83,6 +83,8 @@ int RType::createPlayer(int x, int y, int nb) noexcept
             playerShoot(x, y, 0, 1, stat);
             playerShoot(x, y, 1, 0, stat);
 
+            playSound(RTypeSounds::EXPLOSION_SOUND);
+
             dest->destroy();
         }
     }});

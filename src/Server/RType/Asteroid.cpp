@@ -29,7 +29,7 @@ int RType::createAsteroid(int x) noexcept
     asteroid->addComponent(AnimationComponent(128, 0.1));
     asteroid->addComponent(MouvementComponent(-1, 0, speed));
     asteroid->addComponent(DestroyableComponent());
-    asteroid->addComponent(StatComponent({25 * scale, 2}));
+    asteroid->addComponent(StatComponent({25 * scale, 4 * scale}));
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[this](Entity* entity) {
@@ -57,7 +57,7 @@ int RType::createAsteroid(int x) noexcept
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setScale(scale, scale);
-    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[=](Entity* entity, Entity* me) {
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[this](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto otherStat = entity->getComponent<StatComponent>();
             auto meStat    = me->getComponent<StatComponent>();
