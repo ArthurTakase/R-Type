@@ -5,6 +5,7 @@
 #include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
@@ -69,6 +70,7 @@ int RType::createPlayer(int x, int y, int nb) noexcept
                 if (lastInput == Input::Down) { playerShoot(x, y, 0, 1, stat); }
                 if (lastInput == Input::Right) { playerShoot(x, y, 1, 0, stat); }
             }
+            if (lastInput == Input::L) { entityManager_.log(); }
         }
 
         auto next_x = x + mouv->getDirX() * mouv->getSpeed();
@@ -80,6 +82,8 @@ int RType::createPlayer(int x, int y, int nb) noexcept
             playerShoot(x, y, -1, 0, stat);
             playerShoot(x, y, 0, 1, stat);
             playerShoot(x, y, 1, 0, stat);
+
+            playSound(RTypeSounds::EXPLOSION_SOUND);
 
             dest->destroy();
         }
@@ -106,6 +110,8 @@ void RType::playerShoot(int x, int y, int dirX, int dirY, StatComponent* stat) n
     auto bulletSpeed  = stat->getStat(RTypeStats::Speed);
     auto bulletSize   = stat->getStat(RTypeStats::Size);
     auto playerLevel  = stat->getStat(RTypeStats::Level);
+
+    playSound(RTypeSounds::PIOU_SOUND);
 
     if (playerLevel < 5) {
         createPlayerBullet(x, y, bulletDamage, bulletSpeed, dirX, dirY, bulletSize);

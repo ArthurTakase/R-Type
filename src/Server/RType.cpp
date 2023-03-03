@@ -5,7 +5,9 @@
 ** RType.cpp
 */
 
+#include <ECS/Components/SoundComponent.hpp>
 #include <Server/RType.hpp>
+#include <iostream>
 
 /**
  * It initializes the server's game systems and creates a game object
@@ -78,11 +80,22 @@ EntityManager& RType::getManager() noexcept
 }
 
 /**
+ * It plays a sound
+ *
+ * @param id The id of the entity that has the SoundComponent
+ */
+void RType::playSound(int id) noexcept
+{
+    auto sound = entityManager_.getEntity(id);
+    sound->getComponent<SoundComponent>()->setPlayed(true);
+}
+
+/**
  * It creates two backgrounds with different positions
  */
 void RType::init() noexcept
 {
+    for (int i = 0; i < MUSIC_NB; i++) createSound();
     createBackground(0);
     createBackground(255);
-    createSpawner();
 }

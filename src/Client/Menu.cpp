@@ -14,6 +14,7 @@
 #include <ECS/Components/TextComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Error/Error.hpp>
+#include <Lib/Sound.hpp>
 #include <NetworkLib/HostHandler.hpp>
 #include <Tools/Keyboard.hpp>
 #include <iostream>
@@ -28,7 +29,13 @@ Menu::Menu()
     , behaviorSystem_(&manager_)
     , mouvementSystem_(&manager_)
     , musicSystem_(&manager_)
+    , soundSystem_(&manager_)
 {
+    soundSystem_.setSoundManager(&soundManager_);
+
+    for (auto& path : soundPaths_) { soundManager_.addSoundBuffer(path); }
+    menuSound = createSound(MENU_PATH);
+    hurtSound = createSound(HURT_PATH);
 }
 
 /**
@@ -42,9 +49,9 @@ Menu::Menu()
 Address Menu::run(Window& window)
 {
     createBackground(0);
-    createBackground(255);
+    createBackground(MAX_VALUE);
     createTitleMenu(window);
-    // createMusic(BG_MUSIC_PATH);
+    createMusic(BG_MUSIC_PATH);
 
     drawableSystem_.setWindow(&window);
     Address serverInfos;
@@ -55,8 +62,10 @@ Address Menu::run(Window& window)
         behaviorSystem_.run();
         mouvementSystem_.run();
         musicSystem_.run();
+        soundSystem_.run();
     }
 
+    manager_.getEntities().clear();
     serverInfos.port = std::atoi(port_.c_str());
     if (serverInfos.port <= 0) throw Error("Port must be a positive number");
     serverInfos.ip = HostHandler::getIp(ip_.c_str());
@@ -64,6 +73,7 @@ Address Menu::run(Window& window)
 
     return serverInfos;
 }
+
 /**
  * It returns the value of the private member variable isOpen_. When called, it allows to our program to know if the
  * menu is still open or not.
@@ -134,7 +144,7 @@ int Menu::createBackground(int posX) noexcept
         if (transform->getX() <= MIN_VALUE) { transform->setX(MAX_VALUE); }
     }});
 
-    auto  drawable = DrawableComponent(0, 0, 255, 255, 0);
+    auto  drawable = DrawableComponent(0, 0, MAX_VALUE, MAX_VALUE, 0);
     auto& sprite   = drawable.getSprite();
     sprite.setSpritePath(BACKGROUND_PATH.data());
 
@@ -191,10 +201,12 @@ int Menu::createTitleMenu(Window& window) noexcept
             manager_.getEntity(t1)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t2)->getComponent<DestroyableComponent>()->destroy();
             manager_.getEntity(t3)->getComponent<DestroyableComponent>()->destroy();
+            playSound(menuSound);
         }
         if (input == Input::D) {
             hintIndex = (hintIndex + 1) % hints.size();
             manager_.getEntity(t3)->getComponent<TextComponent>()->getText().setTextString(hints[hintIndex]);
+            playSound(menuSound);
         }
 
         auto mouvement = entity->getComponent<MouvementComponent>();
@@ -244,19 +256,23 @@ int Menu::createIPMenu(Window& window) noexcept
         if (input >= Input::Zero && input <= Input::Nine) {
             *txt[i] += std::to_string(input - Input::Zero);
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+            playSound(menuSound);
         }
         if (input == Input::Dot) {
             *txt[i] += ".";
             manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+            playSound(menuSound);
         }
         if (input == Input::Return) {
             if (txt[i]->length() > 1) i++;
             if (i >= MAX_INDEX) isOpen_ = false;
+            playSound(menuSound);
         }
         if (input == Input::BackSpace) {
             if (txt[i]->length() > 0) {
                 txt[i]->erase(txt[i]->length() - 1, 1);
                 manager_.getEntity(allTxt[i])->getComponent<TextComponent>()->getText().setTextString(*txt[i]);
+                playSound(hurtSound);
             }
         }
     }});
@@ -264,4 +280,24 @@ int Menu::createIPMenu(Window& window) noexcept
     menu->addComponent(behavior);
 
     return menu->getId();
+}
+
+int Menu::createSound(const std::string_view& path) noexcept
+{
+    auto sound = manager_.newEntity();
+
+    sound->addComponent(SoundComponent(soundManager_.getBufferFromPath(path)));
+
+    return sound->getId();
+}
+
+/**
+ * It plays a sound
+ *
+ * @param id The id of the entity that has the SoundComponent
+ */
+void Menu::playSound(int id) noexcept
+{
+    auto sound = manager_.getEntity(id);
+    sound->getComponent<SoundComponent>()->setPlayed(true);
 }

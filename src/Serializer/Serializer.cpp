@@ -1,10 +1,9 @@
 #include <ECS/Components/DestroyableComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
+#include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
+#include <NetworkLib/ISocket.hpp>
 #include <Serializer/Serializer.hpp>
-
-#include "ECS/Components/MusicComponent.hpp"
-#include "NetworkLib/ISocket.hpp"
 
 /**
  * It takes an entity, gets its position and drawable components, and serializes
@@ -27,7 +26,6 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     int16_t  absPosX = posX < 0 ? -posX : posX;
     int16_t  absPosY = posY < 0 ? -posY : posY;
     uint16_t id      = entity->getId();
-
     data.reserve(15 * sizeof(std::int8_t));
     data.push_back((absPosX & 0xFF));
     data.push_back(((absPosX >> 8) & 0xFF));
@@ -45,7 +43,21 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     data.push_back(id & 0xFF);
     data.push_back((id >> 8) & 0xFF);
     destroyable ? data.push_back(destroyable->getDestroyed()) : data.push_back(0);
-    musicable ? data.push_back(musicable->getMusicId()) : data.push_back(0);
+
+    return data;
+}
+
+RawData Serializer::serializeMusic(std::unique_ptr<Entity> const& entity) noexcept
+{
+    RawData data;
+
+    auto soundable = entity->getComponent<SoundComponent>();
+    if (!soundable) { return data; }
+
+    data.reserve(sizeof(std::int8_t));
+    data.push_back(soundable->getIsPlayed());
+
+    soundable->setPlayed(false);
 
     return data;
 }

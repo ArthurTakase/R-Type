@@ -29,7 +29,7 @@ int RType::createAsteroid(int x) noexcept
     asteroid->addComponent(AnimationComponent(128, 0.1));
     asteroid->addComponent(MouvementComponent(-1, 0, speed));
     asteroid->addComponent(DestroyableComponent());
-    asteroid->addComponent(StatComponent({25 * scale, 2}));
+    asteroid->addComponent(StatComponent({25 * scale, 4 * scale}));
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[this](Entity* entity) {
@@ -40,6 +40,7 @@ int RType::createAsteroid(int x) noexcept
 
         if (stat->getStat(RTypeStats::Life) <= 0) {
             if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+            playSound(RTypeSounds::EXPLOSION_SOUND);
         }
 
         if (trans->getX() <= -16 || stat->getStat(RTypeStats::Life) <= 0) {
@@ -56,7 +57,7 @@ int RType::createAsteroid(int x) noexcept
 
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setScale(scale, scale);
-    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[=](Entity* entity, Entity* me) {
+    hitbox.setOnCollision(std::function<void(Entity * entity, Entity * me)>{[this](Entity* entity, Entity* me) {
         if (entity->hasComponents<DestroyableComponent, HitboxComponent, StatComponent, InputComponent>()) {
             auto otherStat = entity->getComponent<StatComponent>();
             auto meStat    = me->getComponent<StatComponent>();
@@ -70,6 +71,8 @@ int RType::createAsteroid(int x) noexcept
 
             float hitboxScale = static_cast<float>(rand() % 20) / 10 + 1;
             float hitboxSpeed = static_cast<float>(rand() % 25) / 10 + 5;
+
+            playSound(RTypeSounds::HURT_SOUND);
 
             meMouv->setSpeed(hitboxSpeed);
             meTrans->setX(255);

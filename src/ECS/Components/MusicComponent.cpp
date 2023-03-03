@@ -18,38 +18,6 @@ MusicComponent::MusicComponent(const std::string_view& path)
 }
 
 /**
- * It takes a string_view, and uses it to construct a music object.
- *
- * @param path The path to the music file.
- */
-MusicComponent::MusicComponent(const int musicId)
-    : musicId_(musicId)
-    , music_(("assets/audio/r-type" + std::to_string(musicId_) + ".wav"))
-{
-}
-
-/**
- * Copy constructor for DrawableComponent.
- *
- * @param other The other DrawableComponent to copy from.
- */
-MusicComponent::MusicComponent(const MusicComponent& other) noexcept
-    : music_(other.music_.getPath())
-    , musicId_(other.musicId_)
-{
-}
-
-/**
- * It returns the value of the private member variable _textureId
- *
- * @return The texture id of the drawable component.
- */
-int MusicComponent::getMusicId() const noexcept
-{
-    return musicId_;
-}
-
-/**
  * `getIsPlayed` returns the value of the private member variable `isPlayed_`
  *
  * @return isPlayed_
@@ -81,6 +49,11 @@ void MusicComponent::play() noexcept
     }
 }
 
+void MusicComponent::stop() noexcept
+{
+    music_.stop();
+}
+
 /**
  * `getMusic` returns the value of the private member variable `music_`
  *
@@ -89,15 +62,4 @@ void MusicComponent::play() noexcept
 Music& MusicComponent::getMusic() noexcept
 {
     return music_;
-}
-
-/**
- * It sets the value of the musicId member variable to the value of the value
- * parameter
- *
- * @param value The value to set the musicId.
- */
-void MusicComponent::setMusicId(const int musicId) noexcept
-{
-    musicId_ = musicId;
 }

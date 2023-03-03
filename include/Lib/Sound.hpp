@@ -7,7 +7,10 @@
 
 #pragma once
 
+#include <Lib/Buffer.hpp>
 #include <SFML/Audio.hpp>
+
+class Buffer;
 
 /**
  * @brief This class is used to create and encapsulate a Sf::Sound.
@@ -16,12 +19,13 @@
 class Sound
 {
   public:
-    explicit Sound(const std::string& path);
-    Sound(const Sound& other) noexcept = default;
+    Sound() noexcept;
+    explicit Sound(const Buffer& buffer);
+    Sound(const Sound& other) noexcept = delete;
     Sound(Sound&& other) noexcept      = default;
-    ~Sound() noexcept;
+    ~Sound() noexcept                  = default;
 
-    Sound& operator=(const Sound& rhs) noexcept = default;
+    Sound& operator=(const Sound& rhs) noexcept = delete;
     Sound& operator=(Sound&& rhs) noexcept      = default;
 
     void        play() noexcept;
@@ -32,7 +36,5 @@ class Sound
 
   protected:
   private:
-    sf::Sound       sound_;
-    sf::SoundBuffer buffer_;
-    std::string     path_;
+    sf::Sound sound_;
 };

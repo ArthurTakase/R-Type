@@ -17,7 +17,10 @@
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <Json/JsonTools.hpp>
 #include <Serializer/BitSize.hpp>
+#include <Tools/Shortcuts.hpp>
 #include <memory>
+
+typedef enum RTypeSounds { EXPLOSION_SOUND, HEAL_SOUND, HURT_SOUND, MENU_SOUND, PIOU_SOUND, POWERUP_SOUND } RTypeSounds;
 
 /**
  * @brief Game Instance for the server
@@ -54,12 +57,15 @@ class RType
     void createEntityWave(json::array_t pattern) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
     int  createRandomPowerUp(int x, int y) noexcept;
+    int  createSound() noexcept;
+    void playSound(int id) noexcept;
 
   private:
-    bool              looping_     = true;
-    int               nbEnemyAlive = 0;
-    int               playerLevel  = 1;
-    bool              started      = false;
+    bool looping_     = true;
+    int  nbEnemyAlive = 0;
+    int  playerLevel  = 1;
+    bool started      = false;
+
     EntityManager     entityManager_;
     HitboxSystem      hitboxSystem_;
     BehaviorSystem    behaviorSystem_;

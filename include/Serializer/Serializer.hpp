@@ -22,6 +22,7 @@ class Serializer
 
     static RawData serialize(std::unique_ptr<Entity> const& entity) noexcept;
     static RawData serialize(int keyCode);
+    static RawData serializeMusic(std::unique_ptr<Entity> const& entity) noexcept;
 
   protected:
   private:

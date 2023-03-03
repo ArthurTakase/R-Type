@@ -5,8 +5,8 @@
 ** Music
 */
 
+#include <Error/Error.hpp>
 #include <Lib/Music.hpp>
-#include <iostream>
 
 /**
  * It creates a new music object from a file path
@@ -16,17 +16,9 @@
 Music::Music(const std::string& path)
     : music_(std::make_unique<sf::Music>())
 {
-    if (!music_->openFromFile(path)) std::cerr << "Error: Could not load music from file: " + path << std::endl;
+    if (!music_->openFromFile(path)) throw Error("Error: Could not load music from file: " + path);
 
     music_->setLoop(true);
-}
-
-/**
- * The destructor stops the music
- */
-Music::~Music() noexcept
-{
-    this->stop();
 }
 
 /**
@@ -80,7 +72,7 @@ void Music::setLoop(bool value) noexcept
  */
 void Music::setPath(std::string path) noexcept
 {
-    musicPath = path;
+    musicPath_ = path;
 }
 
 /**
@@ -88,5 +80,5 @@ void Music::setPath(std::string path) noexcept
  */
 std::string Music::getPath() const noexcept
 {
-    return musicPath;
+    return musicPath_;
 }

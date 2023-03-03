@@ -15,7 +15,8 @@
 class SoundComponent : public IComponent
 {
   public:
-    SoundComponent(const std::string& path);
+    SoundComponent() noexcept;
+    SoundComponent(const Buffer& buffer);
     SoundComponent(const SoundComponent& other) noexcept = delete;
     SoundComponent(SoundComponent&& other) noexcept      = default;
     ~SoundComponent() noexcept                           = default;
@@ -23,13 +24,13 @@ class SoundComponent : public IComponent
     SoundComponent& operator=(const SoundComponent& rhs) noexcept = delete;
     SoundComponent& operator=(SoundComponent&& rhs) noexcept      = default;
 
-    Sound getSound() const noexcept;
-    bool  getIsPlayed() const noexcept;
-    void  setPlayed(bool value) noexcept;
-    void  play() noexcept;
+    Sound& getSound() noexcept;
+    bool   getIsPlayed() const noexcept;
+    void   setPlayed(bool value) noexcept;
+    void   play() noexcept;
 
   protected:
   private:
     Sound sound_;
-    bool  isPlayed_ = true;
+    bool  isPlayed_ = false;
 };

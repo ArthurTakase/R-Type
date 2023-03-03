@@ -12,6 +12,7 @@ static constexpr unsigned int PONG         = 2;
 static constexpr unsigned int MAX_PLAYERS  = 4;
 
 static constexpr std::string_view PATH_BG_MUSIC = "./assets/audio/loading.wav";
+static constexpr int              MUSIC_NB      = 7;
 
 /**
  * @brief This enum class is used to process the packets received from the server in order.
@@ -51,5 +52,4 @@ struct GamePacket {
     std::uint8_t offsetY;
     std::uint8_t id;
     std::uint8_t destroyed;
-    std::uint8_t musicId;
 };

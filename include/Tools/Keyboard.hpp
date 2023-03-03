@@ -29,5 +29,6 @@ typedef enum Input {
     Return    = 21,
     BackSpace = 22,
     Dot       = 23,
+    L         = 24,
     Exit      = 255,
 } Input;

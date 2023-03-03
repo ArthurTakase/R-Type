@@ -108,6 +108,7 @@ int Window::getKeyPressed()
             case sf::Keyboard::Comma:
             case sf::Keyboard::Slash:
             case sf::Keyboard::Semicolon:
+            case sf::Keyboard::L: return Input::L;
             case -1: return Input::Dot;
             default: return Input::None;
         }

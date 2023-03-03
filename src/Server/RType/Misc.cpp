@@ -5,11 +5,13 @@
 #include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/InputComponent.hpp>
 #include <ECS/Components/MouvementComponent.hpp>
+#include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Components/StatComponent.hpp>
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Curve.hpp>
+#include <iostream>
 
 /**
  * It creates a background entity with a transform, drawable, mouvement,
@@ -90,9 +92,11 @@ int RType::createPowerUp(int x, int y, int type) noexcept
 
         if (type == 0) { // HEAL THE PLAYER
             if (player->getStat(RTypeStats::Life) < 100) {
+                playSound(RTypeSounds::HEAL_SOUND);
                 player->setStat(RTypeStats::Life, player->getStat(RTypeStats::Life) + 20);
             }
         } else if (type == 1) { // UPGRADE THE PLAYER
+            playSound(RTypeSounds::POWERUP_SOUND);
             player->setStat(RTypeStats::Level, player->getStat(RTypeStats::Level) + 1);
             if ((int)player->getStat(RTypeStats::Level) % 5 == 0 && player->getStat(RTypeStats::Level) <= 10.0) {
                 spr->setTextureId(spr->getTextureId() + 10);
@@ -118,4 +122,20 @@ int RType::createRandomPowerUp(int x, int y) noexcept
 {
     int type = rand() % 2;
     return createPowerUp(x, y, type);
+}
+
+/**
+ * It creates a new entity, adds a SoundComponent to it, and returns the entity's ID
+ *
+ * @param path The path to the sound file.
+ *
+ * @return The id of the entity.
+ */
+int RType::createSound() noexcept
+{
+    auto sound = entityManager_.newEntity();
+
+    sound->addComponent(SoundComponent());
+
+    return sound->getId();
 }

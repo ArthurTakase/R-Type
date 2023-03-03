@@ -13,9 +13,19 @@
  * @param manager The entity manager that the system will be using.
  */
 SoundSystem::SoundSystem(EntityManager* manager) noexcept
-    : manager_(manager)
+    : entityManager_(manager)
     , it_(manager->getEntities())
 {
+}
+
+/**
+ * It sets the sound manager that the system will be using.
+ *
+ * @param soundManager The sound manager that the system will be using.
+ */
+void SoundSystem::setSoundManager(SoundManager* soundManager) noexcept
+{
+    soundManager_ = soundManager;
 }
 
 /**
@@ -23,6 +33,8 @@ SoundSystem::SoundSystem(EntityManager* manager) noexcept
  */
 void SoundSystem::run()
 {
+    if (!soundManager_) { return; }
+
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 

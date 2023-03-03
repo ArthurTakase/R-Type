@@ -106,7 +106,7 @@ void LinuxSocket::send(const void* data, int data_size, Address destAddr) const
     int sent_bytes =
         sendto(socketFd_, data, data_size, 0, reinterpret_cast<sockaddr*>(&linuxDestAddr), sizeof(linuxDestAddr));
 
-    if (sent_bytes < 0) { throw NetworkExecError("Error in sending data from the server to the client"); }
+    if (sent_bytes < 0) { throw NetworkError("Error in sending data from the server to the client"); }
 }
 
 /**
@@ -129,7 +129,7 @@ ReceivedInfos LinuxSocket::receive()
         reinterpret_cast<sockaddr*>(&address),
         &addrLen);
 
-    if (bytesReceived < 0) { throw NetworkExecError("Error receiving data from the client"); }
+    if (bytesReceived < 0) { throw NetworkError("Error receiving data from the client"); }
 
     infos.address = linuxAddressToAddress(address);
     infos.data.insert(infos.data.begin(), receivedBuffer_.data(), receivedBuffer_.data() + bytesReceived);

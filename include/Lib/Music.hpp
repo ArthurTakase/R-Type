@@ -20,7 +20,7 @@ class Music
     explicit Music(const std::string& path);
     Music(const Music& other) noexcept = delete;
     Music(Music&& other) noexcept      = default;
-    ~Music() noexcept;
+    ~Music() noexcept                  = default;
 
     Music& operator=(const Music& rhs) noexcept = delete;
     Music& operator=(Music&& rhs) noexcept      = default;
@@ -35,6 +35,6 @@ class Music
 
   protected:
   private:
-    std::string                musicPath;
+    std::string                musicPath_;
     std::unique_ptr<sf::Music> music_;
 };

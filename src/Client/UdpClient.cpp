@@ -87,7 +87,7 @@ void UdpClient::communicate() noexcept
     while (looping_) {
         try {
             selector_->select(true, true, false);
-        } catch (const NetworkExecError& message) {
+        } catch (const NetworkError& message) {
             std::cerr << message.what() << std::endl;
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
@@ -146,7 +146,7 @@ void UdpClient::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         handleData(infoReceived);
-    } catch (const NetworkExecError& e) {
+    } catch (const NetworkError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -160,7 +160,7 @@ void UdpClient::send()
         auto blob = getDataFromQueue();
         try {
             socket_->send(blob.data(), blob.size(), serverInfos_.address);
-        } catch (const NetworkExecError& e) {
+        } catch (const NetworkError& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
         }
@@ -210,8 +210,17 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
         }
 
     } else {
-        if (infos.data.size() % PACKET_SIZE == 0) {
-            for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
+        if (infos.data.size() >= MUSIC_NB && (infos.data.size() - MUSIC_NB) % PACKET_SIZE == 0) {
+            auto& manager = game_.getManager();
+
+            for (int m = 0; m < MUSIC_NB; m++) {
+                if (infos.data[m]) {
+                    auto sound = manager.getEntity(m)->getComponent<SoundComponent>();
+                    if (sound) sound->setPlayed(true);
+                }
+            }
+
+            for (int i = MUSIC_NB; i < infos.data.size(); i += PACKET_SIZE) {
                 GamePacket packet;
                 packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
                 packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
@@ -226,7 +235,6 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
                 packet.id        = infos.data[i + PacketName::ID1] | (infos.data[i + PacketName::ID2] << 8);
                 packet.destroyed = infos.data[i + PacketName::DESTROYED];
-                packet.musicId   = infos.data[i + PacketName::MusicId];
                 {
                     std::lock_guard<std::mutex> lock(mutexForPacket_);
                     dataReceived_.push(packet);
