@@ -224,7 +224,7 @@ void UdpClient::handleData(ReceivedInfos infos) noexcept
                 packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
                 packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
                 packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
-                packet.id        = infos.data[i + PacketName::ID];
+                packet.id        = infos.data[i + PacketName::ID1] | (infos.data[i + PacketName::ID2] << 8);
                 packet.destroyed = infos.data[i + PacketName::DESTROYED];
                 packet.musicId   = infos.data[i + PacketName::MusicId];
                 {

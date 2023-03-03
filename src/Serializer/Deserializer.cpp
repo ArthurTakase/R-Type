@@ -23,7 +23,7 @@ GamePacket Deserializer::deserialize(std::vector<unsigned char, std::allocator<u
     packet.scaleY    = data[PacketName::SCALE_Y] / 10;
     packet.offsetX   = data[PacketName::OFFSET_X];
     packet.offsetY   = data[PacketName::OFFSET_Y];
-    packet.id        = data[PacketName::ID];
+    packet.id        = data[PacketName::ID1] | (data[PacketName::ID2] << 8);
     packet.destroyed = data[PacketName::DESTROYED];
     packet.musicId   = data[PacketName::MusicId];
 

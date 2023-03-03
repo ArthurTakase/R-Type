@@ -17,15 +17,16 @@
 
 RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
 {
-    auto    transform   = entity->getComponent<TransformComponent>();
-    auto    drawable    = entity->getComponent<DrawableComponent>();
-    auto    destroyable = entity->getComponent<DestroyableComponent>();
-    auto    musicable   = entity->getComponent<MusicComponent>();
-    RawData data;
-    auto    posX    = transform->getX();
-    auto    posY    = transform->getY();
-    int16_t absPosX = posX < 0 ? -posX : posX;
-    int16_t absPosY = posY < 0 ? -posY : posY;
+    auto     transform   = entity->getComponent<TransformComponent>();
+    auto     drawable    = entity->getComponent<DrawableComponent>();
+    auto     destroyable = entity->getComponent<DestroyableComponent>();
+    auto     musicable   = entity->getComponent<MusicComponent>();
+    RawData  data;
+    auto     posX    = transform->getX();
+    auto     posY    = transform->getY();
+    int16_t  absPosX = posX < 0 ? -posX : posX;
+    int16_t  absPosY = posY < 0 ? -posY : posY;
+    uint16_t id      = entity->getId();
 
     data.reserve(15 * sizeof(std::int8_t));
     data.push_back((absPosX & 0xFF));
@@ -41,7 +42,8 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     data.push_back(drawable->getScaleY() * 10);
     data.push_back(drawable->getOffsetX());
     data.push_back(drawable->getOffsetY());
-    data.push_back(entity->getId());
+    data.push_back(id & 0xFF);
+    data.push_back((id >> 8) & 0xFF);
     destroyable ? data.push_back(destroyable->getDestroyed()) : data.push_back(0);
     musicable ? data.push_back(musicable->getMusicId()) : data.push_back(0);
 

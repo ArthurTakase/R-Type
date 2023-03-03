@@ -30,9 +30,10 @@ typedef enum PacketName {
     SCALE_Y   = 10,
     OFFSET_X  = 11,
     OFFSET_Y  = 12,
-    ID        = 13,
-    DESTROYED = 14,
-    MusicId   = 15
+    ID1       = 13,
+    ID2       = 14,
+    DESTROYED = 15,
+    MusicId   = 16
 } PacketName;
 
 /**
