@@ -26,13 +26,12 @@ class SoundSystem
     SoundSystem& operator=(const SoundSystem& rhs) noexcept = delete;
     SoundSystem& operator=(SoundSystem&& rhs) noexcept      = delete;
 
-    void          run();
-    Buffer&       getBufferFromPath(const std::string_view& path);
-    SoundManager& getSoundManager() noexcept;
+    void run();
+    void setSoundManager(SoundManager* soundManager) noexcept;
 
   protected:
   private:
     EntityIterator<SoundComponent> it_;
     EntityManager*                 entityManager_;
-    SoundManager                   soundManager_;
+    SoundManager*                  soundManager_;
 };

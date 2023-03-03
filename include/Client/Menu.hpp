@@ -15,8 +15,10 @@
 #include <ECS/Systems/MusicSystem.hpp>
 #include <ECS/Systems/SoundSystem.hpp>
 #include <Lib/Lib.hpp>
+#include <Lib/SoundManager.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <Tools/Shortcuts.hpp>
+
 /**
  * @brief This class is used to create a menu instance in the client.
  */
@@ -56,6 +58,8 @@ class Menu
     MouvementSystem   mouvementSystem_;
     MusicSystem       musicSystem_;
     SoundSystem       soundSystem_;
+
+    SoundManager soundManager_;
 
     // methods
     void createMusic(const std::string_view& path) noexcept;

@@ -18,9 +18,14 @@ SoundSystem::SoundSystem(EntityManager* manager) noexcept
 {
 }
 
-SoundManager& SoundSystem::getSoundManager() noexcept
+/**
+ * It sets the sound manager that the system will be using.
+ *
+ * @param soundManager The sound manager that the system will be using.
+ */
+void SoundSystem::setSoundManager(SoundManager* soundManager) noexcept
 {
-    return (soundManager_);
+    soundManager_ = soundManager;
 }
 
 /**
@@ -28,6 +33,8 @@ SoundManager& SoundSystem::getSoundManager() noexcept
  */
 void SoundSystem::run()
 {
+    if (!soundManager_) { return; }
+
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
@@ -37,9 +44,4 @@ void SoundSystem::run()
         sound->play();
     }
     it_.reset();
-}
-
-Buffer& SoundSystem::getBufferFromPath(const std::string_view& path)
-{
-    return (soundManager_.getBufferFromPath(path));
 }

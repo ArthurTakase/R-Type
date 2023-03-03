@@ -13,6 +13,7 @@
 #include <ECS/Systems/MusicSystem.hpp>
 #include <ECS/Systems/SoundSystem.hpp>
 #include <Lib/Lib.hpp>
+#include <Lib/SoundManager.hpp>
 #include <Serializer/BitSize.hpp>
 #include <Tools/Shortcuts.hpp>
 #include <queue>
@@ -47,6 +48,7 @@ class Game
     MusicSystem             musicSystem_;
     std::queue<GamePacket>& dataReceived_;
     std::mutex&             mutexForPacket_;
+    SoundManager            soundManager_;
 
     void updateOrCreateEntity(GamePacket packet) noexcept;
     int  createSound(const std::string_view& path) noexcept;

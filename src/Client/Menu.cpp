@@ -31,6 +31,11 @@ Menu::Menu()
     , musicSystem_(&manager_)
     , soundSystem_(&manager_)
 {
+    soundSystem_.setSoundManager(&soundManager_);
+
+    for (auto& path : soundPaths_) { soundManager_.addSoundBuffer(path); }
+    createSound(PIOU_PATH);
+    createSound(SHOOT_PATH);
 }
 
 /**
@@ -275,7 +280,7 @@ int Menu::createSound(const std::string_view& path) noexcept
 {
     auto sound = manager_.newEntity();
 
-    sound->addComponent(SoundComponent(soundSystem_.getBufferFromPath(path)));
+    sound->addComponent(SoundComponent(soundManager_.getBufferFromPath(path)));
 
     return sound->getId();
 }

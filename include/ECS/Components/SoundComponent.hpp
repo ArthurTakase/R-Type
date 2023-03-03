@@ -32,5 +32,5 @@ class SoundComponent : public IComponent
   protected:
   private:
     Sound sound_;
-    bool  isPlayed_ = true;
+    bool  isPlayed_ = false;
 };
