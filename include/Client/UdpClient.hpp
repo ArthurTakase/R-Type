@@ -62,7 +62,7 @@ class UdpClient
     ServerInfos                     serverInfos_ = {};
 
     static constexpr int              CLOSE_VALUE   = 255;
-    static constexpr int              PACKET_SIZE   = 15;
+    static constexpr int              PACKET_SIZE   = 17;
     static constexpr int              WIDTH_WINDOW  = 256;
     static constexpr int              HEIGHT_WINDOW = 256;
     static constexpr std::string_view WINDOW_NAME   = "Client R-Type";

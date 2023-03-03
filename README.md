@@ -23,6 +23,10 @@ Implementation of a multithreaded server and a graphical client for a game calle
 * Launch Client
 
     ```bash
+    cd build && ./r-type_client 
+    ```
+    or
+    ```bash
     cd build && ./r-type_client [server port] [server ip] [client port]
     ```
 
