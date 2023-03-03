@@ -4,6 +4,7 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <NetworkLib/ISocket.hpp>
 #include <Serializer/Serializer.hpp>
+#include <iostream>
 
 /**
  * It takes an entity, gets its position and drawable components, and serializes
@@ -19,14 +20,13 @@ RawData Serializer::serialize(std::unique_ptr<Entity> const& entity) noexcept
     auto     transform   = entity->getComponent<TransformComponent>();
     auto     drawable    = entity->getComponent<DrawableComponent>();
     auto     destroyable = entity->getComponent<DestroyableComponent>();
-    auto     musicable   = entity->getComponent<MusicComponent>();
     RawData  data;
     auto     posX    = transform->getX();
     auto     posY    = transform->getY();
     int16_t  absPosX = posX < 0 ? -posX : posX;
     int16_t  absPosY = posY < 0 ? -posY : posY;
     uint16_t id      = entity->getId();
-    data.reserve(15 * sizeof(std::int8_t));
+    data.reserve(PACKET_SIZE * sizeof(std::int8_t));
     data.push_back((absPosX & 0xFF));
     data.push_back(((absPosX >> 8) & 0xFF));
     data.push_back((absPosY & 0xFF));
@@ -72,7 +72,7 @@ RawData Serializer::serializeMusic(std::unique_ptr<Entity> const& entity) noexce
 RawData Serializer::serialize(int keyCode)
 {
     RawData data;
-    data.reserve(1);
+    data.reserve(sizeof(std::int8_t));
     data.push_back(static_cast<uint8_t>(keyCode));
     return data;
 }

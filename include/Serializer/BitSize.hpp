@@ -5,14 +5,14 @@
 static constexpr unsigned int ESCAPE       = 120;
 static constexpr unsigned int WINDOW_CLOSE = 36;
 static constexpr unsigned int CLOSE_VALUE  = 255;
-static constexpr unsigned int PACKET_SIZE  = 13;
+static constexpr unsigned int PACKET_SIZE  = 16;
 static constexpr unsigned int MAX_TIMEOFF  = 5;
 static constexpr unsigned int PING         = 1;
 static constexpr unsigned int PONG         = 2;
 static constexpr unsigned int MAX_PLAYERS  = 4;
 
 static constexpr std::string_view PATH_BG_MUSIC = "./assets/audio/loading.wav";
-static constexpr int              MUSIC_NB      = 7;
+static constexpr int              MUSIC_NB      = 6;
 
 /**
  * @brief This enum class is used to process the packets received from the server in order.
@@ -33,8 +33,7 @@ typedef enum PacketName {
     OFFSET_Y  = 12,
     ID1       = 13,
     ID2       = 14,
-    DESTROYED = 15,
-    MusicId   = 16
+    DESTROYED = 15
 } PacketName;
 
 /**
