@@ -140,7 +140,7 @@ if(DEFINED TESTS)
     tests/ECS/Systems/MouvementSystem_t.cpp
     tests/ECS/Systems/BehaviorSystem_t.cpp
     tests/ECS/Systems/DestroyableSystem_t.cpp
-    
+
     tests/Tools/EntityIterator_t.cpp
     tests/Tools/Tools_t.cpp
     tests/Tools/Curve_t.cpp

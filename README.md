@@ -1,105 +1,95 @@
-# R-TYPE
+# {EPITECH} | Third year | Network | OOP | R-Type
 
-Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.
+## R-Type project
 
-## Team
+This project aims to recreate the cross-platform video game R-Type with an online mutiplayer mode.
+It required the implementation of a multithreaded server and a graphical client, using an engine of our own design.
 
-* Arthur Decaen (arthur.decaen@epitech.eu)
-* Corentin Roy (corentin.roy@epitech.eu)
-* Solène Lefeu (solene.lefeu@epitech.eu)
-* Guillaume Vernizeau (guillaume.vernizeau@epitech.eu)
-* Geoffrey Labruyère (geoffrey.labruyere@epitech.eu)
+- `Tools:`
+    - Project made in `C++` version 20
+    - use of the `SFML` graphical library to display game elements
+    - Compiled with `CMake`, minimum version required : `3.17`
+    - `Google Test` for unit tests
+    - `Doxygen` for documentation
+    - A `justfile` is provided to compile, run and test the project
 
-## Usage
 
-### Linux
+- `Some of the features we implemented:`
+    - A multithreaded server, to handle communication and game logic at the same time
+    - A graphical client, to display the game and handle user input
+    - A generic Entity Component System architecture and game engine
+    - A encapsulated implementation of a UDP socket, compatible with Linux and Windows
+    - A client-server communication UDP protocol
 
-* Build
+For further details about the implementation of these notions, you can click [here](https://arthurtakase.github.io/R-Type/) to be redirected to our documentation.
 
-    ```bash
-    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja && ninja && cd ..
-    ```
+## Usage for Linux users
 
-* Launch Client
+### Build
+- Debug mode:
 
-    ```bash
-    cd build && ./r-type_client 
-    ```
-
-    or
-
-    ```bash
-    cd build && ./r-type_client [server port] [server ip] [client port]
-    ```
-
-* Launch Server
-
-    ```bash
-    cd build && ./r-type_server
-    ```
-
-### Window
-
-* Compile with Cmake GUI
-* Use Visual Studio
-* Launch .exe (r-type_client.exe and r-type_server.exe)
-
-## Dev Infos
-
-### ECS
-
-![ECS](docs/ECS.png)
-
-### ECS Entity graph
-
-![ECS Entity](docs/ECSEntity.png)
-
-### Client protocol graph
-
-![ClientProtocol](docs/ProtocoleClient.png)
-
-### Server protocol graph
-
-![ServerProtocol](docs/ProtocoleServeur.png)
-
-### Commit norm
-
-Exemples :
-
-* **ADD:** good ECS
-* **FIX:** no collision on same entity
-* **UP:** remove useless print
-
-| Name | Explanation                                                            |
-| ---- | ---------------------------------------------------------------------- |
-| ADD  | If you add files, features...                                          |
-| FIX  | If you were working on a bug or any form of default that you corrected |
-| DEL  | If you removed files, features...                                      |
-| UP   | If you change something without adding any features or content         |
-
-### CI/CD
-
-* Automatic build on main and dev branches.
-* Running Google Test unit tests on main and dev branches.
-* Generating coverage on main and dev branches.
-* Automatic generation of Doxygen documentation on main and dev branches accessible here.
-* Sending a discord message on push/merge on all branches.
-
-### Doxygen
-
-For proper documentation generation, please put comments above your functions using the following format.
-
-```cpp
-/**
- * @brief Description of the function's behavior
- * 
- * @param parameter1 description of the parameter
- * @param parameter2 description of the parameter
- * 
- * @return explanation of the return value
- */
+```bash
+    mkdir -p build && just debug
 ```
 
-### Google Test
+- Release mode:
 
-Every function must have at least one unit test. The tests work with Google Test, documentation is here.
+```bash
+    mkdir -p build && just build
+```
+
+### Run
+
+/!\ If you want your game to launch, you need to have one server and at least one client running.
+
+- Launch a client:
+
+```bash
+    cd build && ./r-type_client
+```
+    or
+```bash
+    cd build && ./r-type_client [server port] [server ip] [client port]
+```
+
+- Launch the server:
+
+```bash
+    cd build && ./r-type_server
+```
+
+### Important note
+Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command:
+```bash
+    cargo install just
+```
+
+## Usage for Windows users
+
+* Compile with `Cmake GUI`
+* Use Visual Studio
+* Launch .exe `r-type_client.exe` and `r-type_server.exe`
+
+## Continuous integration/Continuous Deployment
+
+* Automatic build on `main` and `develop` branches.
+* Running Google Test unit tests on `main` and `develop` branches.
+* Generating coverage on `main` and `develop` branches.
+* Automatic generation of Doxygen documentation on `main` and `develop` branches accessible [here](!!!!!!d;q:d;q!d).
+* Sending a discord message on push/merge on all branches.
+
+## Highlights:
+
+- ECS architecture graph : [documentation](docs/ECS.md)
+- Client protocol graph : [documentation](docs/ClientProtocol.md)
+- Server protocol graph : [documentation](docs/ServerProtocol.md)
+
+## Contributors
+
+* [Arthur D.](https://github.com/ArthurTakase)
+* [Corentin R.](https://github.com/roy-corentin)
+* [Solène L.](https://github.com/slefeu)
+* [Geoffrey L.](https://github.com/GeoffreyLabruyere)
+* [Guillaume V.](https://github.com/GuillaumeVernizeau)
+
+Want to become a contributor ? Check out our [Contributor's guide](docs/Contributor.md) !
