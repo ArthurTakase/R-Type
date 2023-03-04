@@ -19,7 +19,7 @@ TEST(StatComponent_, getStat)
     EXPECT_EQ(dest.getStat(0), 1);
     EXPECT_EQ(dest.getStat(1), 2);
     EXPECT_EQ(dest.getStat(2), 3);
-    EXPECT_EQ(dest.getStat(3), NO_INDEX);
+    EXPECT_EQ(dest.getStat(3), StatComponent::NO_INDEX);
 }
 
 TEST(StatComponent_, setStat)

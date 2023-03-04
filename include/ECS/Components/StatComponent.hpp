@@ -27,7 +27,8 @@ class StatComponent : public IComponent
     float getStat(int index) const noexcept;
     void  setStat(int index, float value) noexcept;
 
-  private:
-    std::vector<float>   statistics_;
     static constexpr int NO_INDEX = -10000;
+
+  private:
+    std::vector<float> statistics_;
 };
