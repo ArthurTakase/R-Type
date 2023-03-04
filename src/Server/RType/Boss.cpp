@@ -38,9 +38,11 @@ int RType::createBoss(int x, int y) noexcept
         auto  stat    = entity->getComponent<StatComponent>();
         auto  trans   = entity->getComponent<TransformComponent>();
         auto& timer   = entity->getComponent<TimerComponent>()->getTimer();
+        auto  scaling = entity->getComponent<DrawableComponent>();
         auto x = trans->getX();
         auto y = trans->getY();
 
+        scaling->setScale(2, 2);
         centerx = 120 + radius * cos(m_angle);
         centery = 120 + radius * sin(m_angle);
         trans->setPos(centerx, centery);
