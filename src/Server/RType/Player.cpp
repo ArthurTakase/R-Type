@@ -174,7 +174,8 @@ int RType::createPlayerBullet(int x, int y, float damage, float speed, int dirX,
         auto dest  = entity->getComponent<DestroyableComponent>();
 
         auto x = trans->getX();
-        if (x >= 255 || x <= -16) { dest->destroy(); }
+        auto y = trans->getY();
+        if (x >= 255 || x <= -16 || y >= 255 || y <= -16) { dest->destroy(); }
     }};
     behavior.setOnUpdate(function);
 

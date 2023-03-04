@@ -136,7 +136,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
  * @param damage the damage the bullet will deal to the player
  * @param speed the speed of the bullet
  * @param size the size of the bullet
- * @param type 0 = player, 1 = enemy
+ * @param type false = not destroyable, true = destroyable
  *
  * @return The id of the entity
  */
