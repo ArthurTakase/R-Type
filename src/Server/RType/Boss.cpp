@@ -39,8 +39,8 @@ int RType::createBoss(int x, int y) noexcept
         auto  trans   = entity->getComponent<TransformComponent>();
         auto& timer   = entity->getComponent<TimerComponent>()->getTimer();
         auto  scaling = entity->getComponent<DrawableComponent>();
-        auto xact = trans->getX();
-        auto yact = trans->getY();
+        auto  xact    = trans->getX();
+        auto  yact    = trans->getX();
 
         scaling->setScale(2, 2);
         centerx = x + radius * cos(m_angle);
@@ -48,16 +48,15 @@ int RType::createBoss(int x, int y) noexcept
         trans->setPos(centerx, centery);
         m_angle += 0.1;
         if (m_angle >= 2 * M_PI) { m_angle = 0; }
-
         if (timer.isOver()) {
             auto bDamage = stat->getStat(RTypeStats::Damage);
             auto bSpeed  = stat->getStat(RTypeStats::Speed);
             auto bSize   = stat->getStat(RTypeStats::Size);
-            auto xs      = (trans->getX() + 16);
-            auto ys      = (trans->getY() + 4);
 
+            xact         +=  16;
+            yact         +=   4;
             for (int i = 0; i != 8; i++) {
-                createBossBullet(xs, ys, bDamage, bSpeed, bSize, rand() % 2 == 0, bulletpos[i][0], bulletpos[i][1]);
+                createBossBullet(xact, yact, bDamage, bSpeed, bSize, rand() % 2 == 0, bulletpos[i][0], bulletpos[i][1]);
             }
         }
         if (stat->getStat(RTypeStats::Life) <= 0) {
