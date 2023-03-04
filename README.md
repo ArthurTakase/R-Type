@@ -50,6 +50,18 @@ Implementation of a multithreaded server and a graphical client for a game calle
 
 ![ECS](docs/ECS.png)
 
+### ECS Entity graph
+
+![ECS Entity](docs/ECSEntity.png)
+
+### Client protocol graph
+
+![ClientProtocol](docs/ProtocoleClient.png)
+
+### Server protocol graph
+
+![ServerProtocol](docs/ProtocoleServeur.png)
+
 ### Commit norm
 
 Exemples :
