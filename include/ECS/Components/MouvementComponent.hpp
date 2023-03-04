@@ -23,8 +23,8 @@ class MouvementComponent : public IComponent
     MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = default;
     MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = default;
 
-    float getDirX() const noexcept;
-    float getDirY() const noexcept;
+    int getDirX() const noexcept;
+    int getDirY() const noexcept;
     float getSpeed() const noexcept;
     void  setDirX(int x) noexcept;
     void  setDirY(int y) noexcept;

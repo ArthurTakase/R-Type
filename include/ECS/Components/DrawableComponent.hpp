@@ -55,5 +55,4 @@ class DrawableComponent : public IComponent
     float  scaleX_;
     float  scaleY_;
     Sprite sprite_;
-    Timer  timer_;
 };
