@@ -1,6 +1,6 @@
 # {EPITECH} | Third year | Network | OOP | R-Type
 
-## R-Type project
+## About the project
 
 This project aims to recreate the cross-platform video game R-Type with an online mutiplayer mode.
 It required the implementation of a multithreaded server and a graphical client, using an engine of our own design.
@@ -26,17 +26,10 @@ For further details about the implementation of these notions, you can click [he
 ## Usage for Linux users
 
 ### Build
-- Debug mode:
+- Debug mode: `just debug`
+- Release mode: `just build`
 
-```bash
-    mkdir -p build && just debug
-```
-
-- Release mode:
-
-```bash
-    mkdir -p build && just build
-```
+Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command: `cargo install just`
 
 ### Run
 
@@ -47,7 +40,7 @@ For further details about the implementation of these notions, you can click [he
 ```bash
     cd build && ./r-type_client
 ```
-    or
+or
 ```bash
     cd build && ./r-type_client [server port] [server ip] [client port]
 ```
@@ -56,12 +49,6 @@ For further details about the implementation of these notions, you can click [he
 
 ```bash
     cd build && ./r-type_server
-```
-
-### Important note
-Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command:
-```bash
-    cargo install just
 ```
 
 ## Usage for Windows users
