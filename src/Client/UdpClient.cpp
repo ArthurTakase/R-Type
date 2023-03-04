@@ -14,8 +14,8 @@
 #include <memory>
 
 /**
- * It creates a socket, a selector, a deserializer, a game, and two threads.
- *
+ * Constructor for my UDP client's class.
+ * It initializes its socket, a deserializer, a game object, and two threads for its execution.
  * @param serverAddress The address of the server to connect to.
  * @param clientPort The port that the client will use to communicate with the
  * server.
@@ -33,6 +33,12 @@
     networkThread_ = std::thread([&]() { communicate(); });
 }
 
+/**
+ * Constructor for my UDP client's class.
+ * It initializes its socket, a deserializer, a game object, and two threads for its execution.
+ * @param clientPort The port that the client will use to communicate with the
+ * server.
+ */
 [[nodiscard]] UdpClient::UdpClient(Address::Port clientPort)
     : socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())

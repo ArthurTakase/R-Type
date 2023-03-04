@@ -6,10 +6,14 @@
 */
 
 #pragma once
-#include <Lib/Buffer.hpp>
+#include <Lib/Sound.hpp>
 #include <string_view>
 #include <vector>
 
+/**
+ * @brief This class is used to create and encapsulate a vector of Sf::SoundBuffer.
+ *
+ */
 class SoundManager
 {
   public:

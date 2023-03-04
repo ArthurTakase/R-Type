@@ -132,6 +132,9 @@ int Game::createSound(const std::string_view& path) noexcept
     return sound->getId();
 }
 
+/**
+ * It returns a reference to our entities manager
+ */
 EntityManager& Game::getManager() noexcept
 {
     return manager_;
