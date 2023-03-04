@@ -33,18 +33,18 @@ int RType::createBoss(int x, int y) noexcept
 
     auto behavior = BehaviorComponent();
 
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, y, bulletpos](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, x, y, bulletpos](Entity* entity) {
         auto  dest    = entity->getComponent<DestroyableComponent>();
         auto  stat    = entity->getComponent<StatComponent>();
         auto  trans   = entity->getComponent<TransformComponent>();
         auto& timer   = entity->getComponent<TimerComponent>()->getTimer();
         auto  scaling = entity->getComponent<DrawableComponent>();
-        auto x = trans->getX();
-        auto y = trans->getY();
+        auto xact = trans->getX();
+        auto yact = trans->getY();
 
         scaling->setScale(2, 2);
-        centerx = 120 + radius * cos(m_angle);
-        centery = 120 + radius * sin(m_angle);
+        centerx = x + radius * cos(m_angle);
+        centery = y + radius * sin(m_angle);
         trans->setPos(centerx, centery);
         m_angle += 0.1;
         if (m_angle >= 2 * M_PI) { m_angle = 0; }
@@ -66,7 +66,7 @@ int RType::createBoss(int x, int y) noexcept
             playerLevel += 1;
             dest->destroy();
         }
-        if (x <= -16) { trans->setX(255); }
+        if (xact <= -16) { trans->setX(255); }
     }});
 
     Boss->addComponent(hitbox);
