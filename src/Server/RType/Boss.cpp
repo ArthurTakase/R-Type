@@ -24,27 +24,34 @@
 int RType::createBoss(int x, int y) noexcept
 {
     double radius = 30;
-    auto   Boss   = entityManager_.newEntity();
+    auto   boss   = entityManager_.newEntity();
     nbEnemyAlive += 1;
     std::vector<std::vector<int>> bulletpos = {{-1, 0}, {0, -1}, {-1, 1}, {1, -1}, {1, 1}, {0, 1}, {1, 0}, {-1, -1}};
 
-    Boss->addComponent(DrawableComponent(0, 0, 16, 16, 35));
-    Boss->addComponent(TransformComponent(x, y));
-    Boss->addComponent(DestroyableComponent());
-    Boss->addComponent(MouvementComponent(-1, 0, 0));
-    Boss->addComponent(TimerComponent(0.8));
+    boss->addComponent(DrawableComponent(0, 0, 16, 16, 35));
+    boss->addComponent(TransformComponent(x, y));
+    boss->addComponent(MouvementComponent(-1, 0, 0));
+    boss->addComponent(TimerComponent(0.8));
 
     auto stats = StatComponent({70, 2, 6, 1});
     stats.setStat(RTypeStats::ANGLE, 0.0);
-    Boss->addComponent(stats);
+    boss->addComponent(stats);
+
+    auto dest = DestroyableComponent();
+    dest.setOnDestroy(std::function<void(Entity * entity)>{[this](Entity* entity) {
+        auto trans = entity->getComponent<TransformComponent>();
+        if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        nbEnemyAlive -= 1;
+        playSound(RTypeSounds::EXPLOSION_SOUND);
+    }});
+    boss->addComponent(dest);
 
     auto hitbox = HitboxComponent(32, 32);
-
     hitbox.setOnCollision(
         std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
+    boss->addComponent(hitbox);
 
     auto behavior = BehaviorComponent();
-
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, x, y, bulletpos, radius](Entity* entity) {
         auto  dest    = entity->getComponent<DestroyableComponent>();
         auto  stat    = entity->getComponent<StatComponent>();
@@ -73,19 +80,12 @@ int RType::createBoss(int x, int y) noexcept
                 createBossBullet(xAct, yAct, bDamage, bSpeed, bSize, rand() % 2 == 0, bulletpos[i][0], bulletpos[i][1]);
             }
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) {
-            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
-            nbEnemyAlive -= 1;
-            playerLevel += 1;
-            dest->destroy();
-        }
+        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
         if (xAct <= -16) { trans->setX(255); }
     }});
+    boss->addComponent(behavior);
 
-    Boss->addComponent(hitbox);
-    Boss->addComponent(behavior);
-
-    return Boss->getId();
+    return boss->getId();
 }
 
 /**

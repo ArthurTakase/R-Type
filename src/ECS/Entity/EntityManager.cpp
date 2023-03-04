@@ -127,34 +127,34 @@ void EntityManager::log() const noexcept
     std::string   fileName    = "log_" + std::to_string(currentTime) + ".csv";
     std::ofstream outFile(fileName);
 
-    outFile << "Entity ID;Animation;Destroyable;Drawable;Transform;Mouvement;Behavior;Hitbox;Input;Sound;Stat"
+    outFile << "Entity ID,Animation,Destroyable,Drawable,Transform,Mouvement,Behavior,Hitbox,Input,Sound,Stat"
             << std::endl;
 
     for (auto& entity : entities_) {
-        outFile << entity->getId() << ";";
+        outFile << entity->getId() << ",";
         entity->hasComponent<AnimationComponent>()
-            ? outFile << entity->getComponent<AnimationComponent>()->getTimer().getElapsedTime() << ";"
-            : outFile << "___;";
+            ? outFile << entity->getComponent<AnimationComponent>()->getTimer().getElapsedTime() << ","
+            : outFile << "___,";
         entity->hasComponent<DestroyableComponent>()
-            ? outFile << (int)entity->getComponent<DestroyableComponent>()->getDestroyed() << ";"
-            : outFile << "___;";
+            ? outFile << (int)entity->getComponent<DestroyableComponent>()->getDestroyed() << ","
+            : outFile << "___,";
         entity->hasComponent<DrawableComponent>()
-            ? outFile << (int)entity->getComponent<DrawableComponent>()->getTextureId() << ";"
-            : outFile << "___;";
+            ? outFile << (int)entity->getComponent<DrawableComponent>()->getTextureId() << ","
+            : outFile << "___,";
         entity->hasComponent<TransformComponent>()
             ? outFile << "x: " << (int)entity->getComponent<TransformComponent>()->getX()
-                      << " y: " << (int)entity->getComponent<TransformComponent>()->getY() << ";"
-            : outFile << "___;";
+                      << " y: " << (int)entity->getComponent<TransformComponent>()->getY() << ","
+            : outFile << "___,";
         entity->hasComponent<MouvementComponent>()
             ? outFile << "x: " << (int)entity->getComponent<MouvementComponent>()->getDirX()
                       << " y: " << (int)entity->getComponent<MouvementComponent>()->getDirY()
-                      << " speed: " << (float)entity->getComponent<MouvementComponent>()->getSpeed() << ";"
-            : outFile << "___;";
-        entity->hasComponent<BehaviorComponent>() ? outFile << "yes;" : outFile << "___;";
-        entity->hasComponent<HitboxComponent>() ? outFile << "yes;" : outFile << "___;";
-        entity->hasComponent<InputComponent>() ? outFile << "yes;" : outFile << "___;";
-        entity->hasComponent<SoundComponent>() ? outFile << "yes;" : outFile << "___;";
-        entity->hasComponent<StatComponent>() ? outFile << "yes;" : outFile << "___;";
+                      << " speed: " << (float)entity->getComponent<MouvementComponent>()->getSpeed() << ","
+            : outFile << "___,";
+        entity->hasComponent<BehaviorComponent>() ? outFile << "yes," : outFile << "___,";
+        entity->hasComponent<HitboxComponent>() ? outFile << "yes," : outFile << "___,";
+        entity->hasComponent<InputComponent>() ? outFile << "yes," : outFile << "___,";
+        entity->hasComponent<SoundComponent>() ? outFile << "yes," : outFile << "___,";
+        entity->hasComponent<StatComponent>() ? outFile << "yes," : outFile << "___,";
         outFile << std::endl;
     }
 

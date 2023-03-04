@@ -35,3 +35,26 @@ void DestroyableComponent::destroy() noexcept
 {
     destroyed_ = true;
 }
+
+/**
+ * It sets the function that will be called when the entity is destroyed
+ *
+ * @param self The entity that this component is attached to.
+ */
+void DestroyableComponent::setOnDestroy(std::function<void(Entity* self)> onDestroy) noexcept
+{
+    onDestroy_ = onDestroy;
+}
+
+/**
+ * If the onDestroy_ function pointer is not null, call it
+ *
+ * @param self The entity that the component is attached to.
+ *
+ * @return A pointer to the DestroyableComponent.
+ */
+void DestroyableComponent::onDestroy(Entity* self) const noexcept
+{
+    if (!onDestroy_) return;
+    onDestroy_(self);
+}

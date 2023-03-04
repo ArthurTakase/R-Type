@@ -8,6 +8,8 @@
 #pragma once
 
 #include <ECS/Components/IComponent.hpp>
+#include <ECS/Entity/Entity.hpp>
+#include <functional>
 
 /**
  * @brief Component assigned to drawable entities.
@@ -27,6 +29,10 @@ class DestroyableComponent : public IComponent
     bool getDestroyed() const noexcept;
     void destroy() noexcept;
 
+    void setOnDestroy(std::function<void(Entity* self)> onDestroy) noexcept;
+    void onDestroy(Entity* self) const noexcept;
+
   private:
-    bool destroyed_ = false;
+    bool                              destroyed_ = false;
+    std::function<void(Entity* self)> onDestroy_;
 };

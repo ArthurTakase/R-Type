@@ -39,7 +39,7 @@ int RType::createAsteroid(int x) noexcept
         auto draw  = entity->getComponent<DrawableComponent>();
 
         if (stat->getStat(RTypeStats::Life) <= 0) {
-            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+            if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
             playSound(RTypeSounds::EXPLOSION_SOUND);
         }
 

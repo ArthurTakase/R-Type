@@ -16,8 +16,6 @@ int RType::createSpawner() noexcept
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         const static json patterns = JsonTools::getPatternsFromFile();
 
-        std::cout << "nbEnemyAlive: " << nbEnemyAlive << std::endl;
-
         if (nbEnemyAlive > 0) { return; }
 
         nbEnemyAlive = 0;

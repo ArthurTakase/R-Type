@@ -30,7 +30,6 @@ int RType::createBasicEnemy(int x, int y) noexcept
     enemy->addComponent(DrawableComponent(0, 0, 16, 16, BASIC_ENEMY_ID_SPRITE));
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
-    enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent({30, 2, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
     enemy->addComponent(TimerComponent(0.8));
@@ -38,33 +37,35 @@ int RType::createBasicEnemy(int x, int y) noexcept
     auto hitbox = HitboxComponent(16, 16);
     hitbox.setOnCollision(
         std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
+    enemy->addComponent(hitbox);
+
+    auto dest = DestroyableComponent();
+    dest.setOnDestroy(std::function<void(Entity * entity)>{[this](Entity* entity) {
+        auto trans = entity->getComponent<TransformComponent>();
+        if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        nbEnemyAlive -= 1;
+        playerLevel += 1;
+        playSound(RTypeSounds::EXPLOSION_SOUND);
+    }});
+    enemy->addComponent(dest);
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, y](Entity* entity) {
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this](Entity* entity) {
         auto  dest  = entity->getComponent<DestroyableComponent>();
         auto  stat  = entity->getComponent<StatComponent>();
         auto  trans = entity->getComponent<TransformComponent>();
         auto& timer = entity->getComponent<TimerComponent>()->getTimer();
 
         auto x = trans->getX();
-
         if (timer.isOver()) {
             auto bDamage = stat->getStat(RTypeStats::Damage);
             auto bSpeed  = stat->getStat(RTypeStats::Speed);
             auto bSize   = stat->getStat(RTypeStats::Size);
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) {
-            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
-            nbEnemyAlive -= 1;
-            playerLevel += 1;
-            dest->destroy();
-            playSound(RTypeSounds::EXPLOSION_SOUND);
-        }
+        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
         if (x <= -16) { trans->setX(255); }
     }});
-
-    enemy->addComponent(hitbox);
     enemy->addComponent(behavior);
 
     return enemy->getId();
@@ -86,14 +87,20 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     enemy->addComponent(DrawableComponent(0, 0, 16, 16, CURVE_ENEMY_ID_SPRITE));
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
-    enemy->addComponent(DestroyableComponent());
     enemy->addComponent(StatComponent({30, 10, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
     enemy->addComponent(TimerComponent(0.8));
+    enemy->addComponent(HitboxComponent(16, 16));
 
-    auto hitbox = HitboxComponent(16, 16);
-    hitbox.setOnCollision(
-        std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
+    auto dest = DestroyableComponent();
+    dest.setOnDestroy(std::function<void(Entity * entity)>{[this](Entity* entity) {
+        auto trans = entity->getComponent<TransformComponent>();
+        if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        nbEnemyAlive -= 1;
+        playerLevel += 1;
+        playSound(RTypeSounds::EXPLOSION_SOUND);
+    }});
+    enemy->addComponent(dest);
 
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, y](Entity* entity) {
@@ -111,17 +118,10 @@ int RType::createCurvedEnemy(int x, int y) noexcept
             auto bSize   = stat->getStat(RTypeStats::Size);
             createEnemyBullet(x, trans->getY(), bDamage, bSpeed, bSize, rand() % 2 == 0);
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) {
-            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
-            nbEnemyAlive -= 1;
-            playerLevel += 1;
-            dest->destroy();
-            playSound(RTypeSounds::EXPLOSION_SOUND);
-        }
+        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
         if (x <= -16) { trans->setX(255); }
     }});
 
-    enemy->addComponent(hitbox);
     enemy->addComponent(behavior);
 
     return enemy->getId();

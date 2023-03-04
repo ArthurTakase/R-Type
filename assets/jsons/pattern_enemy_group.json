@@ -17,10 +17,6 @@
         }
     ],
     [{
-        "type": "boss",
-        "positions": [200, 100]
-    }],
-    [{
             "type": "basic",
             "positions": [255, 10]
         },

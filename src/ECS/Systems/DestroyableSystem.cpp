@@ -33,6 +33,7 @@ void DestroyableSystem::run()
         auto dest = entity->getComponent<DestroyableComponent>();
 
         if (dest->getDestroyed()) {
+            dest->onDestroy(entity);
             manager_->removeEntity(entity->getId());
             --it_;
         }
