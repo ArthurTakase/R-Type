@@ -9,10 +9,19 @@
 #include <ECS/Components/TimerComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
-#include <Tools/Curve.hpp>
 #include <cmath>
 #include <vector>
 
+
+/**
+ * It creates a boss entity, which is a big enemy that moves in a circle and shoots bullets in 8
+ * directions
+ * 
+ * @param x x position of the boss
+ * @param y y position of the boss
+ * 
+ * @return The id of the boss entity
+ */
 int RType::createBoss(int x, int y) noexcept
 {
     auto Boss = entityManager_.newEntity();
@@ -26,7 +35,7 @@ int RType::createBoss(int x, int y) noexcept
     Boss->addComponent(MouvementComponent(-1, 0, 0));
     Boss->addComponent(TimerComponent(0.8));
 
-    auto hitbox = HitboxComponent(16, 16);
+    auto hitbox = HitboxComponent(32, 32);
 
     hitbox.setOnCollision(
         std::function<void(Entity * entity, Entity * me)>{[](Entity* entity, Entity* me) { return; }});
@@ -73,6 +82,22 @@ int RType::createBoss(int x, int y) noexcept
 
     return Boss->getId();
 }
+
+/**
+ * It creates a bullet entity with a transform, a mouvement, a drawable, an animation, a destroyable, a
+ * stat, a hitbox, a behavior and a collision function
+ * 
+ * @param x x position of the bullet
+ * @param y the y position of the bullet
+ * @param damage the damage the bullet will do
+ * @param speed the speed of the bullet
+ * @param size the size of the bullet
+ * @param type 0 for a normal bullet, 1 for a boss bullet
+ * @param xp x position of the player
+ * @param yp y position of the player
+ * 
+ * @return The id of the bullet
+ */
 
 int RType::createBossBullet(int x, int y, float damage, float speed, float size, bool type, int xp, int yp) noexcept
 {
