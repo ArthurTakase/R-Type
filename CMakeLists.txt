@@ -50,6 +50,7 @@ set(RTYPE_SERVER_SRC
   ${SERVER_DIR}/RType.cpp
   ${SERVER_DIR}/RType/Asteroid.cpp
   ${SERVER_DIR}/RType/Enemies.cpp
+  ${SERVER_DIR}/RType/Boss.cpp
   ${SERVER_DIR}/RType/Misc.cpp
   ${SERVER_DIR}/RType/Player.cpp
   ${SERVER_DIR}/RType/Spawner.cpp
