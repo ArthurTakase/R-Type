@@ -38,10 +38,14 @@ int RType::createBoss(int x, int y) noexcept
         auto  stat    = entity->getComponent<StatComponent>();
         auto  trans   = entity->getComponent<TransformComponent>();
         auto& timer   = entity->getComponent<TimerComponent>()->getTimer();
-        auto  move    = entity->getComponent<MouvementComponent>();
-
         auto x = trans->getX();
         auto y = trans->getY();
+
+        centerx = 120 + radius * cos(m_angle);
+        centery = 120 + radius * sin(m_angle);
+        trans->setPos(centerx, centery);
+        m_angle += 0.1;
+        if (m_angle >= 2 * M_PI) { m_angle = 0; }
 
         if (timer.isOver()) {
             auto bDamage = stat->getStat(RTypeStats::Damage);

@@ -58,6 +58,10 @@ class RType
     int  createRandomPowerUp(int x, int y) noexcept;
 
   private:
+    double            m_angle = 0;
+    double            radius  = 15;
+    double            centerx;
+    double            centery;
     bool              looping_     = true;
     int               nbEnemyAlive = 0;
     int               playerLevel  = 1;
