@@ -65,7 +65,7 @@ or
 * Automatic build on `main` and `develop` branches.
 * Running Google Test unit tests on `main` and `develop` branches.
 * Generating coverage on `main` and `develop` branches.
-* Automatic generation of Doxygen documentation on `main` and `develop` branches accessible [here](!!!!!!d;q:d;q!d).
+* Automatic generation of Doxygen documentation on `main` and `develop` branches accessible [here](https://arthurtakase.github.io/R-Type/).
 * Sending a discord message on push/merge on all branches.
 
 ## Highlights:
