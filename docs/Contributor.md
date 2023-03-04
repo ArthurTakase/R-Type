@@ -33,11 +33,13 @@ Each function must be documented using Doxygen. For proper documentation generat
  * @return explanation of the return value
  */
 ```
-You can install the extension [Mintlify Doc Writer](https://marketplace.visualstudio.com/items?itemName=mintlify.document) for Visual Studio Code to help you with the documentation, as it follow this format already.
+You can install the extension [Mintlify Doc Writer](https://marketplace.visualstudio.com/items?itemName=mintlify.document) for Visual Studio Code to help you with the documentation, as it follows this format already.
 
 ## Testing Policy
 
 Every function must have at least one unit test. The tests work with [Google Test](https://github.com/google/googletest), click [here](http://google.github.io/googletest/) to see a beginner's user guide.
+
+
 To run our tests you can do the following:
 
 ```bash
