@@ -1,5 +1,4 @@
 #include <Server/RType.hpp>
-#include <iostream>
 #include <map>
 
 /**
