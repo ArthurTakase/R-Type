@@ -8,8 +8,6 @@
 #include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
-#include <cassert>
-#include <iostream>
 
 /**
  * It takes an iterator of entities with a position and hitbox component, and stores it in a private

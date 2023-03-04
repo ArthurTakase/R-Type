@@ -7,8 +7,6 @@
 
 #include <ECS/Components/BehaviorComponent.hpp>
 
-BehaviorComponent::BehaviorComponent() {}
-
 /**
  * It sets the onUpdate_ member variable to the function passed in as a parameter
  *

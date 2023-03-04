@@ -17,8 +17,6 @@
 #include <Lib/Sound.hpp>
 #include <NetworkLib/HostHandler.hpp>
 #include <Tools/Keyboard.hpp>
-#include <iostream>
-#include <vector>
 
 /**
  * It creates a Menu object, which will then later be used to handle our menu of the game.
@@ -282,6 +280,11 @@ int Menu::createIPMenu(Window& window) noexcept
     return menu->getId();
 }
 
+/**
+ * It creates an entity containing a sound component
+ *
+ * @return The id of the entity that has the SoundComponent
+ */
 int Menu::createSound(const std::string_view& path) noexcept
 {
     auto sound = manager_.newEntity();

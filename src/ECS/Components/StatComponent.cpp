@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/StatComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor that takes two parameters and assigns them to the two member variables
@@ -14,7 +13,7 @@
  * @param life The life of the entity.
  * @param damage The damage of the entity.
  */
-StatComponent::StatComponent(std::vector<float> statistics_)
+StatComponent::StatComponent(std::vector<float> statistics_) noexcept
     : statistics_(statistics_)
 {
 }

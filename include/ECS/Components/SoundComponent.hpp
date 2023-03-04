@@ -15,8 +15,8 @@
 class SoundComponent : public IComponent
 {
   public:
-    SoundComponent() noexcept;
-    SoundComponent(const Buffer& buffer);
+    SoundComponent() noexcept = default;
+    explicit SoundComponent(const Buffer& buffer);
     SoundComponent(const SoundComponent& other) noexcept = delete;
     SoundComponent(SoundComponent&& other) noexcept      = default;
     ~SoundComponent() noexcept                           = default;

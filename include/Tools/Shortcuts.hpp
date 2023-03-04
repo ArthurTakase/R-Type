@@ -18,5 +18,4 @@ static constexpr std::string_view HURT_PATH      = AUDIO("hurt.wav");
 static constexpr std::string_view MENU_PATH      = AUDIO("menu.wav");
 static constexpr std::string_view PIOU_PATH      = AUDIO("piou.wav");
 static constexpr std::string_view POWERUP_PATH   = AUDIO("powerUp.wav");
-
-static constexpr std::string_view BG_MUSIC_PATH = AUDIO("loading.wav");
+static constexpr std::string_view BG_MUSIC_PATH  = AUDIO("loading.wav");

@@ -49,15 +49,18 @@ void MusicComponent::play() noexcept
     }
 }
 
+/**
+ * It stops the music
+ */
 void MusicComponent::stop() noexcept
 {
     music_.stop();
 }
 
 /**
- * `getMusic` returns the value of the private member variable `music_`
+ * It returns the value of the private member variable `music_`
  *
- * @return music_
+ * @return a Music class object
  */
 Music& MusicComponent::getMusic() noexcept
 {

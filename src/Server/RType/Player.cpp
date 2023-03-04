@@ -11,7 +11,6 @@
 #include <ECS/Components/TransformComponent.hpp>
 #include <Server/RType.hpp>
 #include <Tools/Keyboard.hpp>
-#include <iostream>
 
 /**
  * It creates a player entity and adds all the components it needs

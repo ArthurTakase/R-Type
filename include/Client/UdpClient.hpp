@@ -12,7 +12,6 @@
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
 #include <Serializer/BitSize.hpp>
-#include <Serializer/Deserializer.hpp>
 #include <Time/Clock.hpp>
 #include <condition_variable>
 #include <memory>
@@ -73,8 +72,6 @@ class UdpClient
     RawData getDataFromQueue() noexcept;
     void    checkServerConnection() noexcept;
     void    firstConnection() noexcept;
-
-    // thread methods
-    void communicate() noexcept;
-    void gameLoop() noexcept;
+    void    communicate() noexcept;
+    void    gameLoop() noexcept;
 };

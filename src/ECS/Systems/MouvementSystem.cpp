@@ -6,8 +6,6 @@
 */
 
 #include <ECS/Systems/MouvementSystem.hpp>
-#include <cassert>
-#include <iostream>
 
 /**
  * It's a constructor that takes an EntityIterator as a parameter and assigns it to the EntityIterator

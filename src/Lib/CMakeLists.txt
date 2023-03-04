@@ -27,7 +27,6 @@ add_library(
   Text.cpp
   Sound.cpp
   Music.cpp
-  Buffer.cpp
   SoundManager.cpp
 )
 

@@ -18,10 +18,10 @@
 class BehaviorComponent : public IComponent
 {
   public:
-    BehaviorComponent();
-    ~BehaviorComponent() noexcept                              = default;
+    BehaviorComponent()                                        = default;
     BehaviorComponent(const BehaviorComponent& other) noexcept = default;
     BehaviorComponent(BehaviorComponent&& other) noexcept      = default;
+    ~BehaviorComponent() noexcept                              = default;
 
     BehaviorComponent& operator=(const BehaviorComponent& rhs) noexcept = default;
     BehaviorComponent& operator=(BehaviorComponent&& rhs) noexcept      = default;

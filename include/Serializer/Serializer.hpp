@@ -7,7 +7,7 @@
 #include <memory>
 
 /**
- * @brief Object used to serialize objects for network
+ * @brief class used to serialize objects for network
  */
 class Serializer
 {

@@ -4,7 +4,6 @@ project(Serializer LANGUAGES CXX)
 add_library(
     ${PROJECT_NAME}
     Serializer.cpp
-    Deserializer.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} ECSEncapsulation)

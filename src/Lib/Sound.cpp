@@ -8,7 +8,16 @@
 #include <Error/Error.hpp>
 #include <Lib/Sound.hpp>
 
-Sound::Sound() noexcept {}
+/**
+ * It takes a string_view as an argument, and uses it to load a sound buffer from a
+ * file
+ *
+ * @param path The path to the file to load the buffer from.
+ */
+Buffer::Buffer(const std::string_view& path)
+{
+    if (!buffer_.loadFromFile(path.data())) throw Error("Error: Could not load buffer from file");
+}
 
 /**
  * It takes a path to a sound file, loads the sound file into a buffer, and then

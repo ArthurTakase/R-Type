@@ -7,8 +7,6 @@
 
 #include <ECS/Components/DestroyableComponent.hpp>
 
-DestroyableComponent::DestroyableComponent() noexcept {}
-
 /**
  * It's a constructor that takes an integer and sets the destroyed_ member variable
  * to the integer's value

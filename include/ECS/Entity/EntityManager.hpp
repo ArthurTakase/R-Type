@@ -19,7 +19,7 @@
 #include <vector>
 
 /**
- * @brief Object used to create the different entities of the software
+ * @brief Object used to create the different entities of the game
  */
 class EntityManager
 {

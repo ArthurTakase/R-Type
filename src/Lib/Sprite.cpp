@@ -5,16 +5,16 @@
 ** Sprite.cpp
 */
 
-#include <Lib/Sprite.hpp>
 #include <Error/Error.hpp>
+#include <Lib/Sprite.hpp>
 
 /**
  * This is the default constructor for the Sprite class.
  */
 Sprite::Sprite()
-    : spritePath("")
-    , x(0)
-    , y(0)
+    : spritePath_("")
+    , x_(0)
+    , y_(0)
 {
 }
 
@@ -27,15 +27,15 @@ Sprite::Sprite()
  * @param y The y coordinate of the sprite.
  */
 Sprite::Sprite(std::string path, int x, int y)
-    : spritePath(path)
-    , x(x)
-    , y(y)
+    : spritePath_(path)
+    , x_(x)
+    , y_(y)
 {
     if (path == "") { return; }
 
-    if (!texture.loadFromFile(spritePath)) { throw Error("Error: Could not load sprite from file: " + spritePath); }
-    sprite.setTexture(texture);
-    sprite.setPosition(x, y);
+    if (!texture_.loadFromFile(spritePath_)) { throw Error("Error: Could not load sprite from file: " + spritePath_); }
+    sprite_.setTexture(texture_);
+    sprite_.setPosition(x_, y_);
 }
 
 /**
@@ -45,12 +45,10 @@ Sprite::Sprite(std::string path, int x, int y)
  */
 void Sprite::setSpritePath(const std::string& path)
 {
-    spritePath = path;
+    spritePath_ = path;
 
-    if (!texture.loadFromFile(spritePath)) {
-        throw Error("Error: Could not load sprite from file: " + spritePath);
-    }
-    sprite.setTexture(texture);
+    if (!texture_.loadFromFile(spritePath_)) { throw Error("Error: Could not load sprite from file: " + spritePath_); }
+    sprite_.setTexture(texture_);
 }
 
 /**
@@ -58,9 +56,9 @@ void Sprite::setSpritePath(const std::string& path)
  *
  * @return The spritePath variable is being returned.
  */
-const std::string& Sprite::getSpritePath() const
+const std::string& Sprite::getSpritePath() const noexcept
 {
-    return spritePath;
+    return spritePath_;
 }
 
 /**
@@ -68,10 +66,10 @@ const std::string& Sprite::getSpritePath() const
  *
  * @param x The x coordinate of the sprite.
  */
-void Sprite::setX(int x)
+void Sprite::setX(int x) noexcept
 {
-    this->x = x;
-    sprite.setPosition(x, y);
+    x_ = x;
+    sprite_.setPosition(x_, y_);
 }
 
 /**
@@ -79,10 +77,10 @@ void Sprite::setX(int x)
  *
  * @param y The y coordinate of the sprite.
  */
-void Sprite::setY(int y)
+void Sprite::setY(int y) noexcept
 {
-    this->y = y;
-    sprite.setPosition(x, y);
+    y_ = y;
+    sprite_.setPosition(x_, y_);
 }
 
 /**
@@ -90,9 +88,9 @@ void Sprite::setY(int y)
  *
  * @return The x coordinate of the sprite.
  */
-int Sprite::getX() const
+int Sprite::getX() const noexcept
 {
-    return x;
+    return x_;
 }
 
 /**
@@ -100,9 +98,9 @@ int Sprite::getX() const
  *
  * @return The y coordinate of the sprite.
  */
-int Sprite::getY() const
+int Sprite::getY() const noexcept
 {
-    return y;
+    return y_;
 }
 
 /**
@@ -110,9 +108,9 @@ int Sprite::getY() const
  *
  * @return The sprite.
  */
-void* Sprite::getSprite()
+void* Sprite::getSprite() noexcept
 {
-    return static_cast<void*>(&sprite);
+    return static_cast<void*>(&sprite_);
 }
 
 /**
@@ -120,9 +118,9 @@ void* Sprite::getSprite()
  *
  * @return The texture.
  */
-void* Sprite::getTexture()
+void* Sprite::getTexture() noexcept
 {
-    return static_cast<void*>(&texture);
+    return static_cast<void*>(&texture_);
 }
 
 /**
@@ -133,17 +131,17 @@ void* Sprite::getTexture()
  * @param width The width of the texture.
  * @param height The height of the texture.
  */
-void Sprite::setTextureRect(int xtexture, int ytexture, int width, int height)
+void Sprite::setTextureRect(int xtexture, int ytexture, int width, int height) noexcept
 {
-    sprite.setTextureRect(sf::IntRect(xtexture, ytexture, width, height));
+    sprite_.setTextureRect(sf::IntRect(xtexture, ytexture, width, height));
 }
 
 /**
  * This function updates the position of the sprite.
  */
-void Sprite::updatePosition()
+void Sprite::updatePosition() noexcept
 {
-    sprite.setPosition(x, y);
+    sprite_.setPosition(x_, y_);
 }
 
 /**
@@ -154,5 +152,5 @@ void Sprite::updatePosition()
  */
 void Sprite::setScale(float x, float y) noexcept
 {
-    sprite.setScale(x, y);
+    sprite_.setScale(x, y);
 }

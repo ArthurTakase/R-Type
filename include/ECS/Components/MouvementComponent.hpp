@@ -15,10 +15,10 @@
 class MouvementComponent : public IComponent
 {
   public:
-    MouvementComponent(int dirX, int dirY, float speed);
-    ~MouvementComponent() noexcept;
+    MouvementComponent(int dirX, int dirY, float speed) noexcept;
     MouvementComponent(const MouvementComponent& other) noexcept = default;
     MouvementComponent(MouvementComponent&& other) noexcept      = default;
+    ~MouvementComponent() noexcept                               = default;
 
     MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = default;
     MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = default;

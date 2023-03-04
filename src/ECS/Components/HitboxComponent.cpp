@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/HitboxComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor for the HitboxComponent class

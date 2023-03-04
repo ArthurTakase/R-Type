@@ -20,8 +20,6 @@
 #include <Tools/Shortcuts.hpp>
 #include <memory>
 
-typedef enum RTypeSounds { EXPLOSION_SOUND, HEAL_SOUND, HURT_SOUND, MENU_SOUND, PIOU_SOUND, POWERUP_SOUND } RTypeSounds;
-
 /**
  * @brief Game Instance for the server
  *

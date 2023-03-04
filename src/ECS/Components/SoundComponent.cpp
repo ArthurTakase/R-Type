@@ -6,12 +6,7 @@
 */
 
 #include <ECS/Components/SoundComponent.hpp>
-#include <Lib/Buffer.hpp>
-
-SoundComponent::SoundComponent() noexcept
-    : sound_()
-{
-}
+#include <Lib/Sound.hpp>
 
 /**
  * It creates a sound component with the given path

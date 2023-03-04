@@ -53,9 +53,9 @@ class Server
   protected:
   private:
     // attributes
-    bool                            looping_  = true;
-    int                             tickrate_ = 60;
-    std::vector<Client>             clients_  = {};
+    bool                            looping_ = true;
+    unsigned int                    tickrate_ = 60;
+    std::vector<Client>             clients_ = {};
     std::unique_ptr<ISocket>        socket_;
     std::unique_ptr<SocketSelector> selector_;
     std::thread                     gameThread_;

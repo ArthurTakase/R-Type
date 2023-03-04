@@ -7,7 +7,6 @@
 
 #include <ECS/Components/SoundComponent.hpp>
 #include <Server/RType.hpp>
-#include <iostream>
 
 /**
  * It initializes the server's game systems and creates a game object

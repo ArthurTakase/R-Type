@@ -22,10 +22,10 @@
 class Entity
 {
   public:
-    Entity(size_t id);
-    ~Entity() noexcept;
+    explicit Entity(size_t id);
     Entity(const Entity& other) noexcept = default;
     Entity(Entity&& other) noexcept      = default;
+    ~Entity() noexcept                   = default;
 
     Entity& operator=(const Entity& rhs) noexcept = delete;
     Entity& operator=(Entity&& rhs) noexcept      = delete;

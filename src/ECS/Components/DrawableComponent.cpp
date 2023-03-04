@@ -6,19 +6,6 @@
 */
 
 #include <ECS/Components/DrawableComponent.hpp>
-#include <iostream>
-
-/**
- * It's a constructor for the DrawableComponent class
- *
- * @param offsetX The x offset of the texture.
- * @param offsetY The y offset of the texture
- * @param width The width of the texture.
- * @param height The height of the texture.
- * @param textureId The id of the texture to use.
- */
-
-DrawableComponent::DrawableComponent() noexcept {}
 
 /**
  * It's a constructor for the DrawableComponent class
