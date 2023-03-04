@@ -31,7 +31,7 @@ int RType::createBoss(int x, int y) noexcept
     Boss->addComponent(DrawableComponent(0, 0, 16, 16, 35));
     Boss->addComponent(TransformComponent(x, y));
     Boss->addComponent(DestroyableComponent());
-    Boss->addComponent(StatComponent({30, 2, 6, 1}));
+    Boss->addComponent(StatComponent({70, 2, 6, 1}));
     Boss->addComponent(MouvementComponent(-1, 0, 0));
     Boss->addComponent(TimerComponent(0.8));
 
