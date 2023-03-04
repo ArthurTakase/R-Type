@@ -43,6 +43,7 @@ class RType
     void            init() noexcept;
 
     int  createPlayer(int x, int y, int nb) noexcept;
+    int  createBoss(int x, int y) noexcept;
     int  createBasicEnemy(int x, int y) noexcept;
     int  createCurvedEnemy(int x, int y) noexcept;
     int  createSpawner() noexcept;
