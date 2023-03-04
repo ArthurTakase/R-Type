@@ -144,6 +144,7 @@ if(DEFINED TESTS)
     tests/Tools/EntityIterator_t.cpp
     tests/Tools/Tools_t.cpp
     tests/Tools/Curve_t.cpp
+    tests/Tools/JsonTools_t.cpp
   )
 
   set(
