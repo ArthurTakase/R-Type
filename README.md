@@ -14,12 +14,12 @@ It required the implementation of a multithreaded server and a graphical client,
     - A `justfile` is provided to compile, run and test the project
 
 
-- `Some of the features we implemented:`
-    - A multithreaded server, to handle communication and game logic at the same time
+- Some of the features we implemented:
+    - A `multithreaded` server, to handle communication and game logic at the same time
     - A graphical client, to display the game and handle user input
-    - A generic Entity Component System architecture and game engine
-    - A encapsulated implementation of a UDP socket, compatible with Linux and Windows
-    - A client-server communication UDP protocol
+    - A generic `Entity Component System` architecture and game engine
+    - A encapsulated implementation of an `UDP socket`, compatible with Linux and Windows
+    - A client-server communication protocol
 
 For further details about the implementation of these notions, you can click [here](https://arthurtakase.github.io/R-Type/) to be redirected to our documentation.
 
