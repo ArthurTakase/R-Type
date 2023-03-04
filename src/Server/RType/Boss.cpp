@@ -34,8 +34,8 @@ int RType::createBoss(int x, int y) noexcept
     boss->addComponent(MouvementComponent(-1, 0, 2.0));
     boss->addComponent(TimerComponent(0.8));
 
-    auto stats = StatComponent({70, 2, 6, 1});
-    stats.setStat(RTypeStats::ANGLE, 0.0);
+    auto stats = StatComponent({1000, 4, 6, 1});
+    stats.setStat(RTypeStats::Angle, 0.0);
     boss->addComponent(stats);
 
     auto dest = DestroyableComponent();
@@ -61,16 +61,16 @@ int RType::createBoss(int x, int y) noexcept
         auto        mouvement = entity->getComponent<MouvementComponent>();
         auto        currentX  = trans->getX();
         auto        currentY  = trans->getX();
-        auto        mAngle    = stat->getStat(RTypeStats::ANGLE);
+        auto        mAngle    = stat->getStat(RTypeStats::Angle);
         const float speed     = mouvement->getSpeed();
 
-        if (currentX <= 120 && speed != 0.0) { mouvement->setSpeed(0.0); }
+        if (currentX <= 160 && speed != 0.0) { mouvement->setSpeed(0.0); }
         if (speed == 0.0) {
-            double centerX = 90 + radius * cos(mAngle);
+            double centerX = 130 + radius * cos(mAngle);
             double centerY = y + radius * sin(mAngle);
-            stat->setStat(RTypeStats::ANGLE, mAngle + 0.1);
+            stat->setStat(RTypeStats::Angle, mAngle + 0.1);
             trans->setPos(centerX, centerY);
-            if (stat->getStat(RTypeStats::ANGLE) >= (2 * M_PI)) { stat->setStat(RTypeStats::ANGLE, 0); }
+            if (stat->getStat(RTypeStats::Angle) >= (2 * M_PI)) { stat->setStat(RTypeStats::Angle, 0); }
             if (timer.isOver()) {
                 auto bDamage = stat->getStat(RTypeStats::Damage);
                 auto bSpeed  = stat->getStat(RTypeStats::Speed);
@@ -150,7 +150,12 @@ int RType::createBossBullet(int x, int y, float damage, float speed, float size,
         auto move  = entity->getComponent<MouvementComponent>();
 
         move->setDir(xp, yp);
-        if (trans->getX() <= 0 || stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
+        int currentX = trans->getX();
+        int currentY = trans->getY();
+        if (currentX <= 0 || currentX >= 255 || currentY <= 0 || currentY >= 255
+            || stat->getStat(RTypeStats::Life) <= 0) {
+            dest->destroy();
+        }
     }});
 
     bullet->addComponent(hitbox);

@@ -42,7 +42,7 @@ int RType::createBasicEnemy(int x, int y) noexcept
     auto dest = DestroyableComponent();
     dest.setOnDestroy(std::function<void(Entity * entity)>{[this](Entity* entity) {
         auto trans = entity->getComponent<TransformComponent>();
-        if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        if (rand() % 6 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
         nbEnemyAlive -= 1;
         playerLevel += 1;
         playSound(RTypeSounds::EXPLOSION_SOUND);
@@ -87,7 +87,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     enemy->addComponent(DrawableComponent(0, 0, 16, 16, CURVE_ENEMY_ID_SPRITE));
     enemy->addComponent(AnimationComponent(128, 0.1));
     enemy->addComponent(TransformComponent(x, y));
-    enemy->addComponent(StatComponent({30, 10, 6, 1}));
+    enemy->addComponent(StatComponent({50, 4, 6, 1}));
     enemy->addComponent(MouvementComponent(-1, 0, 2.0));
     enemy->addComponent(TimerComponent(0.8));
     enemy->addComponent(HitboxComponent(16, 16));
@@ -95,7 +95,7 @@ int RType::createCurvedEnemy(int x, int y) noexcept
     auto dest = DestroyableComponent();
     dest.setOnDestroy(std::function<void(Entity * entity)>{[this](Entity* entity) {
         auto trans = entity->getComponent<TransformComponent>();
-        if (rand() % 2 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+        if (rand() % 4 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
         nbEnemyAlive -= 1;
         playerLevel += 1;
         playSound(RTypeSounds::EXPLOSION_SOUND);

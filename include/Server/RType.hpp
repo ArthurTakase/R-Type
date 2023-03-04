@@ -73,7 +73,7 @@ class RType
     DestroyableSystem destroyableSystem_;
 };
 
-typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4, ANGLE = 5 } RTypeStats;
+typedef enum RTypeStats { Life = 0, Damage = 1, Speed = 2, Size = 3, Level = 4, Angle = 5 } RTypeStats;
 
 static constexpr unsigned int BASIC_ENEMY_ID_SPRITE = 2;
 static constexpr unsigned int CURVE_ENEMY_ID_SPRITE = 8;
