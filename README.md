@@ -29,7 +29,10 @@ For further details about the implementation of these notions, you can click [he
 - Debug mode: `just debug`
 - Release mode: `just build`
 
-Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command: `cargo install just`
+Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command:
+```bash
+    cargo install just
+```
 
 ### Run
 
@@ -70,6 +73,8 @@ or
 - ECS architecture graph : [documentation](docs/ECS.md)
 - Client protocol graph : [documentation](docs/ClientProtocol.md)
 - Server protocol graph : [documentation](docs/ServerProtocol.md)
+
+Our complete documentation can be found [here](https://arthurtakase.github.io/R-Type/).
 
 ## Contributors
 
