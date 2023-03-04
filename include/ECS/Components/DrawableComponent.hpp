@@ -44,7 +44,6 @@ class DrawableComponent : public IComponent
     float   getScaleY() const noexcept;
     void    setTextureId(int textureId) noexcept;
     Sprite& getSprite() noexcept;
-    Timer&  getTimer() noexcept;
 
   private:
     int    offsetX_;

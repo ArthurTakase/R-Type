@@ -1,4 +1,5 @@
 #include <Server/RType.hpp>
+#include <iostream>
 #include <map>
 
 /**
@@ -15,7 +16,11 @@ int RType::createSpawner() noexcept
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         const static json patterns = JsonTools::getPatternsFromFile();
 
+        std::cout << "nbEnemyAlive: " << nbEnemyAlive << std::endl;
+
         if (nbEnemyAlive > 0) { return; }
+
+        nbEnemyAlive = 0;
         int  wave_id = rand() % patterns.size();
         auto pattern = patterns[wave_id];
         createEntityWave(pattern);
@@ -37,6 +42,7 @@ void RType::createEntityWave(json::array_t pattern) noexcept
 {
     std::map<std::string, int (RType::*)(int, int)> creation = {{"basic", &RType::createBasicEnemy},
         {"curve", &RType::createCurvedEnemy},
-        {"powerup", &RType::createRandomPowerUp}};
+        {"powerup", &RType::createRandomPowerUp},
+        {"boss", &RType::createBoss}};
     for (auto& info : pattern) { (this->*(creation[info["type"]]))(info["positions"][0], info["positions"][1]); }
 }

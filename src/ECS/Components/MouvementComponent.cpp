@@ -26,7 +26,7 @@ MouvementComponent::MouvementComponent(int dirX, int dirY, float speed) noexcept
  *
  * @return The direction of the x axis.
  */
-float MouvementComponent::getDirX() const noexcept
+int MouvementComponent::getDirX() const noexcept
 {
     return dirX_;
 }
@@ -36,7 +36,7 @@ float MouvementComponent::getDirX() const noexcept
  *
  * @return The direction of the Y axis.
  */
-float MouvementComponent::getDirY() const noexcept
+int MouvementComponent::getDirY() const noexcept
 {
     return dirY_;
 }

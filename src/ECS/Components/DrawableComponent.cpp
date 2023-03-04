@@ -181,16 +181,6 @@ Sprite& DrawableComponent::getSprite() noexcept
 }
 
 /**
- * It returns the timer of the drawable component
- *
- * @return The timer of the drawable component.
- */
-Timer& DrawableComponent::getTimer() noexcept
-{
-    return timer_;
-}
-
-/**
  * It sets the scale of the sprite
  *
  * @param x The x-coordinate of the position of the sprite.
