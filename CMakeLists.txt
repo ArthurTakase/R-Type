@@ -145,6 +145,7 @@ if(DEFINED TESTS)
     tests/Tools/Tools_t.cpp
     tests/Tools/Curve_t.cpp
     tests/Tools/JsonTools_t.cpp
+    tests/Tools/Error_t.cpp
   )
 
   set(
