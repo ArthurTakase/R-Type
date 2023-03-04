@@ -73,9 +73,7 @@ void Text::setFontPath(const std::string& path)
 {
     fontPath_ = path;
 
-    if (!font_.loadFromFile(fontPath_)) {
-        throw Error("Error: Could not load font from file: " + fontPath_);
-    }
+    if (!font_.loadFromFile(fontPath_)) { throw Error("Error: Could not load font from file: " + fontPath_); }
     text_.setFont(font_);
 }
 
