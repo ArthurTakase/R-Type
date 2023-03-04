@@ -28,9 +28,10 @@ int RType::createBoss(int x, int y) noexcept
     nbEnemyAlive += 1;
     std::vector<std::vector<int>> bulletpos = {{-1, 0}, {0, -1}, {-1, 1}, {1, -1}, {1, 1}, {0, 1}, {1, 0}, {-1, -1}};
 
-    boss->addComponent(DrawableComponent(0, 0, 16, 16, 35));
+    boss->addComponent(DrawableComponent(0, 0, 16, 16, 35, 2, 2));
     boss->addComponent(TransformComponent(x, y));
-    boss->addComponent(MouvementComponent(-1, 0, 0));
+    boss->addComponent(DestroyableComponent());
+    boss->addComponent(MouvementComponent(-1, 0, 2.0));
     boss->addComponent(TimerComponent(0.8));
 
     auto stats = StatComponent({70, 2, 6, 1});
@@ -52,36 +53,47 @@ int RType::createBoss(int x, int y) noexcept
     boss->addComponent(hitbox);
 
     auto behavior = BehaviorComponent();
-    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, x, y, bulletpos, radius](Entity* entity) {
-        auto  dest    = entity->getComponent<DestroyableComponent>();
-        auto  stat    = entity->getComponent<StatComponent>();
-        auto  trans   = entity->getComponent<TransformComponent>();
-        auto& timer   = entity->getComponent<TimerComponent>()->getTimer();
-        auto  scaling = entity->getComponent<DrawableComponent>();
-        auto  xAct    = trans->getX();
-        auto  yAct    = trans->getX();
-        auto  mAngle  = stat->getStat(RTypeStats::ANGLE);
+    behavior.setOnUpdate(std::function<void(Entity * entity)>{[this, y, bulletpos, radius](Entity* entity) {
+        auto        dest      = entity->getComponent<DestroyableComponent>();
+        auto        stat      = entity->getComponent<StatComponent>();
+        auto        trans     = entity->getComponent<TransformComponent>();
+        auto&       timer     = entity->getComponent<TimerComponent>()->getTimer();
+        auto        mouvement = entity->getComponent<MouvementComponent>();
+        auto        currentX  = trans->getX();
+        auto        currentY  = trans->getX();
+        auto        mAngle    = stat->getStat(RTypeStats::ANGLE);
+        const float speed     = mouvement->getSpeed();
 
-        scaling->setScale(2, 2);
-        double centerX = x + radius * cos(mAngle);
-        double centerY = y + radius * sin(mAngle);
-        trans->setPos(centerX, centerY);
+        if (currentX <= 120 && speed != 0.0) { mouvement->setSpeed(0.0); }
+        if (speed == 0.0) {
+            double centerX = 90 + radius * cos(mAngle);
+            double centerY = y + radius * sin(mAngle);
+            stat->setStat(RTypeStats::ANGLE, mAngle + 0.1);
+            trans->setPos(centerX, centerY);
+            if (stat->getStat(RTypeStats::ANGLE) >= (2 * M_PI)) { stat->setStat(RTypeStats::ANGLE, 0); }
+            if (timer.isOver()) {
+                auto bDamage = stat->getStat(RTypeStats::Damage);
+                auto bSpeed  = stat->getStat(RTypeStats::Speed);
+                auto bSize   = stat->getStat(RTypeStats::Size);
 
-        stat->setStat(RTypeStats::ANGLE, mAngle + 0.1);
-        if (stat->getStat(RTypeStats::ANGLE) >= 2 * M_PI) { stat->setStat(RTypeStats::ANGLE, 0); }
-        if (timer.isOver()) {
-            auto bDamage = stat->getStat(RTypeStats::Damage);
-            auto bSpeed  = stat->getStat(RTypeStats::Speed);
-            auto bSize   = stat->getStat(RTypeStats::Size);
-
-            xAct += 16;
-            yAct += 4;
-            for (int i = 0; i != 8; i++) {
-                createBossBullet(xAct, yAct, bDamage, bSpeed, bSize, rand() % 2 == 0, bulletpos[i][0], bulletpos[i][1]);
+                for (int i = 0; i != 8; i++) {
+                    createBossBullet(centerX + 16,
+                        centerY + 4,
+                        bDamage,
+                        bSpeed,
+                        bSize,
+                        rand() % 2 == 0,
+                        bulletpos[i][0],
+                        bulletpos[i][1]);
+                }
             }
         }
-        if (stat->getStat(RTypeStats::Life) <= 0) { dest->destroy(); }
-        if (xAct <= -16) { trans->setX(255); }
+        if (stat->getStat(RTypeStats::Life) <= 0) {
+            if (rand() % 1 == 0) { createPowerUp(trans->getX(), trans->getY(), rand() % 2); }
+            nbEnemyAlive -= 1;
+            playerLevel += 1;
+            dest->destroy();
+        }
     }});
     boss->addComponent(behavior);
 
