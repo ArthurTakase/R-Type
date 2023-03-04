@@ -17,6 +17,7 @@
 #include <ECS/Systems/MouvementSystem.hpp>
 #include <Json/JsonTools.hpp>
 #include <Serializer/BitSize.hpp>
+#include <Tools/Shortcuts.hpp>
 #include <memory>
 
 /**
@@ -53,9 +54,11 @@ class RType
     int  createAsteroid(int x) noexcept;
     int  createBossBullet(int x, int y, float damage, float speed, float size, bool type, int xp, int yp) noexcept;
     int  createEnemyBullet(int x, int y, float damage, float speed, float size, bool type) noexcept;
-    void createEntityWave(std::string type, json::array_t positions) noexcept;
+    void createEntityWave(json::array_t pattern) noexcept;
     int  createPowerUp(int x, int y, int type) noexcept;
     int  createRandomPowerUp(int x, int y) noexcept;
+    int  createSound() noexcept;
+    void playSound(int id) noexcept;
 
   private:
     double            m_angle = 0;

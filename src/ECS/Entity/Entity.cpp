@@ -19,11 +19,6 @@ Entity::Entity(size_t id)
 }
 
 /**
- * Destructor for Entity.
- */
-Entity::~Entity() noexcept {}
-
-/**
  * It returns the value of the private member variable _id
  *
  * @return The id of the entity.

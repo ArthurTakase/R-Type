@@ -6,14 +6,15 @@
 */
 
 #include <ECS/Components/SoundComponent.hpp>
+#include <Lib/Sound.hpp>
 
 /**
  * It creates a sound component with the given path
  *
  * @param path The path to the sound file.
  */
-SoundComponent::SoundComponent(const std::string& path)
-    : sound_(path)
+SoundComponent::SoundComponent(const Buffer& buffer)
+    : sound_(buffer)
 {
 }
 
@@ -22,7 +23,7 @@ SoundComponent::SoundComponent(const std::string& path)
  *
  * @return A reference to the sound_ member variable.
  */
-Sound SoundComponent::getSound() const noexcept
+Sound& SoundComponent::getSound() noexcept
 {
     return sound_;
 }

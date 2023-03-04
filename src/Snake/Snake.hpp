@@ -16,6 +16,9 @@
 #include <Lib/Lib.hpp>
 #include <vector>
 
+/**
+ * The class used to handle the snake game, its entities and systems.
+ */
 class SnakeGame
 {
   public:

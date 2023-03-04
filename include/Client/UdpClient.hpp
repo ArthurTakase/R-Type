@@ -12,7 +12,6 @@
 #include <NetworkLib/ISocket.hpp>
 #include <NetworkLib/SocketSelector.hpp>
 #include <Serializer/BitSize.hpp>
-#include <Serializer/Deserializer.hpp>
 #include <Time/Clock.hpp>
 #include <condition_variable>
 #include <memory>
@@ -62,7 +61,6 @@ class UdpClient
     ServerInfos                     serverInfos_ = {};
 
     static constexpr int              CLOSE_VALUE   = 255;
-    static constexpr int              PACKET_SIZE   = 16;
     static constexpr int              WIDTH_WINDOW  = 256;
     static constexpr int              HEIGHT_WINDOW = 256;
     static constexpr std::string_view WINDOW_NAME   = "Client R-Type";
@@ -74,8 +72,6 @@ class UdpClient
     RawData getDataFromQueue() noexcept;
     void    checkServerConnection() noexcept;
     void    firstConnection() noexcept;
-
-    // thread methods
-    void communicate() noexcept;
-    void gameLoop() noexcept;
+    void    communicate() noexcept;
+    void    gameLoop() noexcept;
 };

@@ -54,16 +54,16 @@ class InitError : public Error
  * @brief This class is used to create an error when the network execution fails.
  *
  */
-class NetworkExecError : public Error
+class NetworkError : public Error
 {
   public:
-    explicit NetworkExecError(std::string) noexcept;
-    NetworkExecError(const NetworkExecError& other) noexcept = default;
-    NetworkExecError(NetworkExecError&& other) noexcept      = default;
-    ~NetworkExecError() noexcept override                    = default;
+    explicit NetworkError(std::string) noexcept;
+    NetworkError(const NetworkError& other) noexcept = default;
+    NetworkError(NetworkError&& other) noexcept      = default;
+    ~NetworkError() noexcept override                    = default;
 
-    NetworkExecError& operator=(const NetworkExecError& rhs) noexcept = default;
-    NetworkExecError& operator=(NetworkExecError&& rhs) noexcept      = default;
+    NetworkError& operator=(const NetworkError& rhs) noexcept = default;
+    NetworkError& operator=(NetworkError&& rhs) noexcept      = default;
 
   protected:
   private:

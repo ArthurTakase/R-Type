@@ -5,8 +5,19 @@
 ** Sound
 */
 
+#include <Error/Error.hpp>
 #include <Lib/Sound.hpp>
-#include <iostream>
+
+/**
+ * It takes a string_view as an argument, and uses it to load a sound buffer from a
+ * file
+ *
+ * @param path The path to the file to load the buffer from.
+ */
+Buffer::Buffer(const std::string_view& path)
+{
+    if (!buffer_.loadFromFile(path.data())) throw Error("Error: Could not load buffer from file");
+}
 
 /**
  * It takes a path to a sound file, loads the sound file into a buffer, and then
@@ -14,20 +25,9 @@
  *
  * @param path The path to the sound file.
  */
-Sound::Sound(const std::string& path)
-    : path_(path)
+Sound::Sound(const Buffer& buffer)
 {
-    if (!buffer_.loadFromFile(path)) std::cerr << "Error: Could not load sound from file" << std::endl;
-
-    sound_.setBuffer(buffer_);
-}
-
-/**
- * It stops the sound, if it's playing, and then it destroys the sound
- */
-Sound::~Sound() noexcept
-{
-    this->stop();
+    sound_.setBuffer(buffer.buffer_);
 }
 
 /**
@@ -62,14 +62,4 @@ void Sound::stop() noexcept
 void Sound::setVolume(float value) noexcept
 {
     sound_.setVolume(value);
-}
-
-/**
- * This function returns the path of the sound.
- *
- * @return The path of the sound file.
- */
-std::string Sound::getPath() const noexcept
-{
-    return path_;
 }

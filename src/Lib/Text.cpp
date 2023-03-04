@@ -5,6 +5,7 @@
 ** Text.cpp
 */
 
+#include <Error/Error.hpp>
 #include <Lib/Text.hpp>
 #include <iostream>
 
@@ -45,9 +46,7 @@ Text::Text(const std::string& text, const std::string& fontPath, int fontSize, i
 {
     if (text == "" || fontPath == "") { return; }
 
-    if (!font_.loadFromFile(fontPath)) {
-        std::cerr << "Error: Could not load font from file: " << fontPath << std::endl;
-    }
+    if (!font_.loadFromFile(fontPath)) { throw Error("Error: Could not load font from file: " + fontPath); }
     text_.setFont(font_);
     text_.setString(textString_);
     text_.setCharacterSize(fontSize);
@@ -74,9 +73,7 @@ void Text::setFontPath(const std::string& path)
 {
     fontPath_ = path;
 
-    if (!font_.loadFromFile(fontPath_)) {
-        std::cerr << "Error: Could not load font from file: " << fontPath_ << std::endl;
-    }
+    if (!font_.loadFromFile(fontPath_)) { throw Error("Error: Could not load font from file: " + fontPath_); }
     text_.setFont(font_);
 }
 

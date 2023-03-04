@@ -1,5 +1,4 @@
 #include <Server/RType.hpp>
-#include <iostream>
 #include <map>
 
 /**
@@ -15,12 +14,11 @@ int RType::createSpawner() noexcept
     auto behavior = BehaviorComponent();
     behavior.setOnUpdate(std::function<void(Entity * entity)>{[&](Entity* entity) {
         const static json patterns = JsonTools::getPatternsFromFile();
-        // std::cout << patterns.dump() << std::endl;
 
-        if (nbEnemyAlive > 1) { return; }
+        if (nbEnemyAlive > 0) { return; }
         int  wave_id = rand() % patterns.size();
-        auto group   = patterns[wave_id];
-        createEntityWave(group["type"], group["positions"]);
+        auto pattern = patterns[wave_id];
+        createEntityWave(pattern);
     }});
 
     spawner->addComponent(behavior);
@@ -35,10 +33,10 @@ int RType::createSpawner() noexcept
  * @param type the type of enemy to create
  * @param positions a json array of json arrays of 2 ints.
  */
-void RType::createEntityWave(std::string type, json::array_t positions) noexcept
+void RType::createEntityWave(json::array_t pattern) noexcept
 {
     std::map<std::string, int (RType::*)(int, int)> creation = {{"basic", &RType::createBasicEnemy},
         {"curve", &RType::createCurvedEnemy},
         {"powerup", &RType::createRandomPowerUp}};
-    for (auto& position : positions) { (this->*(creation[type]))(position[0], position[1]); }
+    for (auto& info : pattern) { (this->*(creation[info["type"]]))(info["positions"][0], info["positions"][1]); }
 }

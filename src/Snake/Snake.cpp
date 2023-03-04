@@ -16,6 +16,9 @@
 #include <Snake.hpp>
 #include <Tools/Keyboard.hpp>
 
+/**
+ * It creates a new snake game object class and initializes the game systems
+ */
 SnakeGame::SnakeGame()
     : entityManager_()
     , drawableSystem_(&entityManager_)
@@ -28,6 +31,12 @@ SnakeGame::SnakeGame()
     drawableSystem_.setWindow(&lib_.getWindow());
 }
 
+/**
+ * It creates a fruit entity, which is a destroyable entity with a hitbox and a
+ * drawable component
+ *
+ * @return The id of the fruit entity
+ */
 int SnakeGame::fruit() noexcept
 {
     auto fruit = entityManager_.newEntity();
@@ -67,6 +76,15 @@ int SnakeGame::fruit() noexcept
     return fruit->getId();
 }
 
+/**
+ * It creates a wall entity, which is a 16x16 sprite that will be destroyed after
+ * 60 frames
+ *
+ * @param x the x position of the wall
+ * @param y the y position of the wall
+ *
+ * @return The id of the entity.
+ */
 int SnakeGame::wall(int x, int y) noexcept
 {
     auto wall = entityManager_.newEntity();
@@ -100,6 +118,12 @@ int SnakeGame::wall(int x, int y) noexcept
     return wall->getId();
 }
 
+/**
+ * It creates a new entity, adds a bunch of components to it, and returns the
+ * entity's id
+ *
+ * @return The id of the entity that was created.
+ */
 int SnakeGame::player() noexcept
 {
     auto part = entityManager_.newEntity();
@@ -132,6 +156,16 @@ int SnakeGame::player() noexcept
     return part->getId();
 }
 
+/**
+ * It creates a new entity, adds a few components to it, and returns the entity's
+ * ID
+ *
+ * @param size The size of the text
+ * @param posX The x position of the text
+ * @param posY The y position of the text
+ *
+ * @return The id of the entity that was created.
+ */
 int SnakeGame::score(int size, int posX, int posY) noexcept
 {
     auto text = entityManager_.newEntity();
@@ -146,6 +180,9 @@ int SnakeGame::score(int size, int posX, int posY) noexcept
     return text->getId();
 }
 
+/**
+ * It runs the game
+ */
 int SnakeGame::run() noexcept
 {
     player();
@@ -164,11 +201,22 @@ int SnakeGame::run() noexcept
     return 0;
 }
 
+/**
+ * It stops the game
+ */
 void SnakeGame::stop() noexcept
 {
     running_ = false;
 }
 
+/**
+ * "The main function creates a SnakeGame object and calls its run function."
+ *
+ * The run function is the heart of the game. It's where the game loop is located.
+ * The game loop is a while loop that runs until the game is over
+ *
+ * @return The return value of the run() function.
+ */
 int main()
 {
     SnakeGame game;

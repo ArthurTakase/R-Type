@@ -12,7 +12,7 @@
 #include <string>
 
 /**
- * @brief This class is used to create a sprite.
+ * @brief This class is used to create and encapsulate a sprite.
  *
  */
 class Sprite
@@ -28,21 +28,21 @@ class Sprite
     Sprite& operator=(Sprite&& rhs) noexcept      = default;
 
     void               setSpritePath(const std::string& path);
-    const std::string& getSpritePath() const;
-    void               setX(int x);
-    void               setY(int y);
-    int                getX() const;
-    int                getY() const;
-    void*              getSprite();
-    void*              getTexture();
-    void               setTextureRect(int xtexture, int ytexture, int width, int height);
-    void               updatePosition();
+    const std::string& getSpritePath() const noexcept;
+    void               setX(int x) noexcept;
+    void               setY(int y) noexcept;
+    int                getX() const noexcept;
+    int                getY() const noexcept;
+    void*              getSprite() noexcept;
+    void*              getTexture() noexcept;
+    void               setTextureRect(int xtexture, int ytexture, int width, int height) noexcept;
+    void               updatePosition() noexcept;
     void               setScale(float x, float y) noexcept;
 
   private:
-    std::string spritePath;
-    int         x;
-    int         y;
-    sf::Sprite  sprite;
-    sf::Texture texture;
+    std::string spritePath_;
+    int         x_;
+    int         y_;
+    sf::Sprite  sprite_;
+    sf::Texture texture_;
 };

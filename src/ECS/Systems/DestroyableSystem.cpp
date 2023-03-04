@@ -6,9 +6,6 @@
 */
 
 #include <ECS/Systems/DestroyableSystem.hpp>
-#include <cassert>
-#include <iostream>
-#include <memory>
 
 /**
  * It takes a reference to a unique pointer to an EntityManager, and then it initializes the manager_

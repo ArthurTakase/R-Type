@@ -20,7 +20,7 @@
 class DrawableComponent : public IComponent
 {
   public:
-    DrawableComponent() noexcept;
+    DrawableComponent() noexcept = default;
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId);
     DrawableComponent(int offsetX, int offsetY, int width, int height, int textureId, float scaleX, float scaleY);
     DrawableComponent(const DrawableComponent& other) noexcept;
@@ -55,5 +55,4 @@ class DrawableComponent : public IComponent
     float  scaleX_;
     float  scaleY_;
     Sprite sprite_;
-    Timer  timer_;
 };

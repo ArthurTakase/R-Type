@@ -1,44 +1,106 @@
 [
-  {
-    "type": "basic",
-    "positions": [
-      [255, 30],
-      [275, 40],
-      [295, 50],
-      [315, 60]
-    ]
-  },
-  {
-    "type": "curve",
-    "positions": [
-      [255, 30],
-      [275, 30],
-      [295, 30]
-    ]
-  },
-  {
-    "type": "curve",
-    "positions": [
-      [255, 80],
-      [265, 80],
-      [275, 80],
-      [285, 80]
-    ]
-  },
-  {
-    "type": "basic",
-    "positions": [
-      [255, 30],
-      [265, 35],
-      [255, 40]
-    ]
-  },
-  {
-    "type": "powerup",
-    "positions": [
-      [212, 80],
-      [212, 90],
-      [212, 100]
-    ]
-  }
+  [
+    {
+      "type": "basic",
+      "positions": [255, 30]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 50]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 50]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 60]
+    }
+  ],
+  [
+    {
+      "type": "basic",
+      "positions": [255, 10]
+    },
+    {
+      "type": "basic",
+      "positions": [255, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [255, 50]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 50]
+    },
+    {
+      "type": "curve",
+      "positions": [295, 50]
+    }
+  ],
+  [
+    {
+      "type": "curve",
+      "positions": [255, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 80]
+    }
+  ],
+  [
+    {
+      "type": "curve",
+      "positions": [255, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [265, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 80]
+    },
+    {
+      "type": "curve",
+      "positions": [285, 80]
+    }
+  ],
+  [
+    {
+      "type": "basic",
+      "positions": [255, 30]
+    },
+    {
+      "type": "basic",
+      "positions": [265, 35]
+    },
+    {
+      "type": "curve",
+      "positions": [275, 40]
+    }
+  ],
+  [
+    {
+      "type": "powerup",
+      "positions": [212, 80]
+    },
+    {
+      "type": "powerup",
+      "positions": [212, 90]
+    },
+    {
+      "type": "curve",
+      "positions": [212, 100]
+    }
+  ]
 ]

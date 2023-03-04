@@ -9,6 +9,7 @@
 
 #include <ECS/Components/SoundComponent.hpp>
 #include <ECS/Entity/EntityManager.hpp>
+#include <Lib/SoundManager.hpp>
 #include <Tools/EntityIterator.hpp>
 
 /**
@@ -26,9 +27,11 @@ class SoundSystem
     SoundSystem& operator=(SoundSystem&& rhs) noexcept      = delete;
 
     void run();
+    void setSoundManager(SoundManager* soundManager) noexcept;
 
   protected:
   private:
     EntityIterator<SoundComponent> it_;
-    EntityManager*                 manager_;
+    EntityManager*                 entityManager_;
+    SoundManager*                  soundManager_;
 };

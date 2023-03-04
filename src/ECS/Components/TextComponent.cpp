@@ -8,11 +8,6 @@
 #include <ECS/Components/TextComponent.hpp>
 
 /**
- * A constructor for the TextComponent class.
- */
-TextComponent::TextComponent() {}
-
-/**
  * It's a constructor that takes a string, a font path, a font size, and two
  * integers, and it uses those to initialize a Text object
  *

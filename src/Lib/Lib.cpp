@@ -6,7 +6,6 @@
 */
 
 #include <Lib/Lib.hpp>
-#include <iostream>
 
 /**
  * This function returns a reference to the window object.
@@ -15,5 +14,5 @@
  */
 Window& Lib::getWindow()
 {
-    return window;
+    return window_;
 }

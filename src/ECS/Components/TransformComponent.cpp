@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/TransformComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor for the TransformComponent class
@@ -19,11 +18,6 @@ TransformComponent::TransformComponent(int x, int y)
     , y_(y)
 {
 }
-
-/**
- * The destructor for the TransformComponent class.
- */
-TransformComponent::~TransformComponent() noexcept {}
 
 /**
  * This function returns the value of the private member variable _x.

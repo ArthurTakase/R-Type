@@ -15,11 +15,11 @@
 class DestroyableComponent : public IComponent
 {
   public:
-    DestroyableComponent() noexcept;
+    DestroyableComponent() noexcept = default;
     DestroyableComponent(int destroy) noexcept;
-    ~DestroyableComponent() noexcept                                 = default;
     DestroyableComponent(const DestroyableComponent& other) noexcept = default;
     DestroyableComponent(DestroyableComponent&& other) noexcept      = default;
+    ~DestroyableComponent() noexcept                                 = default;
 
     DestroyableComponent& operator=(const DestroyableComponent& rhs) noexcept = default;
     DestroyableComponent& operator=(DestroyableComponent&& rhs) noexcept      = default;

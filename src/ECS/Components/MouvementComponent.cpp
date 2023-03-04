@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/MouvementComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor that takes three parameters and assigns them to the three member variables
@@ -15,17 +14,12 @@
  * @param dirY The direction of the movement on the Y axis. (-1, 0 or 1)
  * @param speed the speed of the entity
  */
-MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)
+MouvementComponent::MouvementComponent(int dirX, int dirY, float speed) noexcept
     : dirX_(dirX)
     , dirY_(dirY)
     , speed_(speed)
 {
 }
-
-/**
- * It's the destructor of the class MouvementComponent
- */
-MouvementComponent::~MouvementComponent() noexcept {}
 
 /**
  * It returns the value of the private member _dirX

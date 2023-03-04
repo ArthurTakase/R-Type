@@ -30,15 +30,16 @@ class Window
     Window& operator=(const Window& rhs) noexcept = delete;
     Window& operator=(Window&& rhs) noexcept      = delete;
 
-    void open(int width, int height, const std::string& title);
-    void close();
-    void clear();
-    void refresh();
-    bool isOpen();
-    int  getKeyPressed();
-    void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height);
-    void draw(Text& text);
+    void open(int width, int height, const std::string& title) noexcept;
+    void close() noexcept;
+    void clear() noexcept;
+    void refresh() noexcept;
+    bool isOpen() const noexcept;
+    int  getKeyPressed() noexcept;
+    void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height) noexcept;
+    void draw(Text& text) noexcept;
 
   private:
-    sf::RenderWindow window;
+    sf::RenderWindow              window_;
+    static constexpr unsigned int FRAMERATE_LIMIT = 30;
 };
