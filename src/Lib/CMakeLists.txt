@@ -14,7 +14,7 @@ include(FetchContent)
 FetchContent_Declare(
   sfml
   GIT_REPOSITORY https://github.com/SFML/SFML.git
-  GIT_TAG 2.5.1
+  GIT_TAG 2.5.0
 )
 FetchContent_MakeAvailable(sfml)
 
@@ -30,6 +30,6 @@ add_library(
   SoundManager.cpp
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
+target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system)
 target_link_libraries(${PROJECT_NAME} PUBLIC Error)
 target_include_directories(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

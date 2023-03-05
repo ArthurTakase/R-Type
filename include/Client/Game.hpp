@@ -17,6 +17,7 @@
 #include <Serializer/BitSize.hpp>
 #include <Tools/Shortcuts.hpp>
 #include <queue>
+#include <mutex>
 
 /**
  * @brief This class is used to create a game instance in the client.
