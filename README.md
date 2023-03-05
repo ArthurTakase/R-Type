@@ -27,7 +27,7 @@ For further details about the implementation of these notions, you can click [he
 - For Linux users, check out our [Usage for Linux users](docs/UsageLinux.md) guide.
 - For Windows users, check out our [Usage for Windows users](docs/UsageWindows.md) guide.
 
-## Highlights
+## Documentation
 
 - ECS architecture graph : [documentation](docs/ECS.md)
 - Client protocol graph : [documentation](docs/ClientProtocol.md)
