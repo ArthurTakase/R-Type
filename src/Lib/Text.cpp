@@ -50,7 +50,7 @@ Text::Text(const std::string& text, const std::string& fontPath, int fontSize, i
     text_.setFont(font_);
     text_.setString(textString_);
     text_.setCharacterSize(fontSize);
-    text_.setPosition(x, y);
+    text_.setPosition({static_cast<float>(x), static_cast<float>(y)});
 }
 
 /**
@@ -96,7 +96,7 @@ void Text::setFontSize(int size)
 void Text::setX(int x)
 {
     this->x_ = x;
-    text_.setPosition(x, y_);
+    text_.setPosition({static_cast<float>(x), static_cast<float>(y_)});
 }
 
 /**
@@ -107,7 +107,7 @@ void Text::setX(int x)
 void Text::setY(int y)
 {
     this->y_ = y;
-    text_.setPosition(x_, y);
+    text_.setPosition({static_cast<float>(x_), static_cast<float>(y)});
 }
 
 /**

@@ -7,6 +7,7 @@ set(CMAKE_CXX_FLAGS_DEBUG_INIT "-g")
 # Sources
 set(
   ECS_SRC
+  STATIC
   Entity/Entity.cpp
   Entity/EntityManager.cpp
   Components/TransformComponent.cpp

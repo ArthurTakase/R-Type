@@ -16,7 +16,11 @@ Window::Window() noexcept {}
  */
 void Window::open(int width, int height, const std::string& title) noexcept
 {
-    window_.create(sf::VideoMode(width, height), title);
+    unsigned int w = static_cast<unsigned int>(width);
+    unsigned int h = static_cast<unsigned int>(height);
+
+    sf::VideoMode mode({w, h});
+    window_.create(mode, title);
     window_.setFramerateLimit(FRAMERATE_LIMIT);
 }
 
@@ -81,7 +85,7 @@ int Window::getKeyPressed() noexcept
             case sf::Keyboard::D: return Input::D;
             case sf::Keyboard::Escape: return Input::Exit;
             case sf::Keyboard::Enter: return Input::Return;
-            case sf::Keyboard::BackSpace: return Input::BackSpace;
+            case sf::Keyboard::Backspace: return Input::BackSpace;
             case sf::Keyboard::Num0:
             case sf::Keyboard::Numpad0: return Input::Zero;
             case sf::Keyboard::Num1:

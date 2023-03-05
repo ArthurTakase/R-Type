@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 project(Error LANGUAGES CXX)
 
 add_library(
-    ${PROJECT_NAME} SHARED
+    ${PROJECT_NAME}
     Error.cpp
 )
 

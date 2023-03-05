@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.16)
 project(CMakeSFMLProject LANGUAGES CXX)
 
+set(CMAKE_CXX_STANDARD 20)
+
 # Force the script to use FetchContent and not CPM internally to fetch asio
 option(SFML_USE_CPM "Download SFML with CPM instead of FetchContent" OFF)
 option(
@@ -13,13 +15,13 @@ option(
 include(FetchContent)
 FetchContent_Declare(
   sfml
-  GIT_REPOSITORY https://github.com/SFML/SFML.git
-  GIT_TAG 2.5.1
+  URL https://github.com/SFML/SFML/archive/refs/heads/master.zip
 )
 FetchContent_MakeAvailable(sfml)
 
 add_library(
   ${PROJECT_NAME}
+  STATIC
   Lib.cpp
   Window.cpp
   Sprite.cpp
