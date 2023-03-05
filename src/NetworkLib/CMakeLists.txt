@@ -14,10 +14,9 @@ set(SRC
 
 if(WIN32)
   target_link_libraries(${PROJECT_NAME} wsock32 ws2_32)
-  add_library(${PROJECT_NAME} STATIC ${SRC})
-else()
-  add_library(${PROJECT_NAME} ${SRC})
 endif()
+
+add_library(${PROJECT_NAME} STATIC ${SRC})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include)
 target_link_libraries(${PROJECT_NAME} Error)

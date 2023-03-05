@@ -32,11 +32,7 @@ set(
   Systems/MusicSystem.cpp
 )
 
-if (WIN32)
-  add_library(${PROJECT_NAME} STATIC ${SRC})
-else()
-  add_library(${PROJECT_NAME} ${SRC})
-endif()
+add_library(${PROJECT_NAME} STATIC ${SRC})
 
 target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
 target_link_libraries(${PROJECT_NAME} JSONTools)
