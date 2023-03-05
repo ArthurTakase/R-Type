@@ -67,7 +67,7 @@ jobs:
       - name: tests
         run: ./build/runTests
       - name: install gcovr
-        run: yum install -y gcovr
+        run: sudo apt-get install -y gcovr
       - name: launch coverage
         run: gcovr -r . --exclude "build/" --exclude "tests/"
   Doxygen:
