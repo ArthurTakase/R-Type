@@ -2,9 +2,7 @@
 cmake_minimum_required(VERSION 3.17)
 project(NetworkLib)
 
-add_library(
-  ${PROJECT_NAME}
-  STATIC
+set(SRC
   LinuxSocketSelector.cpp
   LinuxSocket.cpp
   SocketFactory.cpp
@@ -16,6 +14,9 @@ add_library(
 
 if(WIN32)
   target_link_libraries(${PROJECT_NAME} wsock32 ws2_32)
+  add_library(${PROJECT_NAME} STATIC ${SRC})
+else()
+  add_library(${PROJECT_NAME} ${SRC})
 endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/../../include)

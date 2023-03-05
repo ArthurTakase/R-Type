@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(CMakeSFMLProject LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
-
 # Force the script to use FetchContent and not CPM internally to fetch asio
 option(SFML_USE_CPM "Download SFML with CPM instead of FetchContent" OFF)
 option(
@@ -19,9 +17,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(sfml)
 
-add_library(
-  ${PROJECT_NAME}
-  STATIC
+set(SRC
   Lib.cpp
   Window.cpp
   Sprite.cpp
@@ -31,6 +27,12 @@ add_library(
   Music.cpp
   SoundManager.cpp
 )
+
+if (WIN32)
+  add_library(${PROJECT_NAME} STATIC ${SRC})
+else()
+  add_library(${PROJECT_NAME} ${SRC})
+endif()
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
 target_link_libraries(${PROJECT_NAME} PUBLIC Error)
