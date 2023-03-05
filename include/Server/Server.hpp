@@ -70,7 +70,7 @@ class Server
     void                  sendToClient(Client& client, RawData blob);
     bool                  isKnownClient(Address address) const;
     void                  removeClient(Address& clientAddress) noexcept;
-    void                  addClient(Address address, std::chrono::system_clock::time_point ping) noexcept;
+    void                  addClient(Address address, std::chrono::high_resolution_clock::time_point ping) noexcept;
     void                  updateClientState(Address& clientAddress, bool isPing) noexcept;
     void                  areClientsConnected() noexcept;
     void                  handleData(ReceivedInfos infos) noexcept;

@@ -13,13 +13,11 @@ option(
 include(FetchContent)
 FetchContent_Declare(
   sfml
-  GIT_REPOSITORY https://github.com/SFML/SFML.git
-  GIT_TAG 2.5.1
+  URL https://github.com/SFML/SFML/archive/refs/heads/master.zip
 )
 FetchContent_MakeAvailable(sfml)
 
-add_library(
-  ${PROJECT_NAME}
+set(SRC
   Lib.cpp
   Window.cpp
   Sprite.cpp
@@ -29,6 +27,8 @@ add_library(
   Music.cpp
   SoundManager.cpp
 )
+
+add_library(${PROJECT_NAME} STATIC ${SRC})
 
 target_link_libraries(${PROJECT_NAME} PUBLIC sfml-graphics sfml-window sfml-system sfml-audio)
 target_link_libraries(${PROJECT_NAME} PUBLIC Error)

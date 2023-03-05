@@ -35,7 +35,7 @@ Sprite::Sprite(std::string path, int x, int y)
 
     if (!texture_.loadFromFile(spritePath_)) { throw Error("Error: Could not load sprite from file: " + spritePath_); }
     sprite_.setTexture(texture_);
-    sprite_.setPosition(x_, y_);
+    sprite_.setPosition({static_cast<float>(x_), static_cast<float>(y_)});
 }
 
 /**
@@ -69,7 +69,7 @@ const std::string& Sprite::getSpritePath() const noexcept
 void Sprite::setX(int x) noexcept
 {
     x_ = x;
-    sprite_.setPosition(x_, y_);
+    sprite_.setPosition({static_cast<float>(x_), static_cast<float>(y_)});
 }
 
 /**
@@ -80,7 +80,7 @@ void Sprite::setX(int x) noexcept
 void Sprite::setY(int y) noexcept
 {
     y_ = y;
-    sprite_.setPosition(x_, y_);
+    sprite_.setPosition({static_cast<float>(x_), static_cast<float>(y_)});
 }
 
 /**
@@ -133,7 +133,9 @@ void* Sprite::getTexture() noexcept
  */
 void Sprite::setTextureRect(int xtexture, int ytexture, int width, int height) noexcept
 {
-    sprite_.setTextureRect(sf::IntRect(xtexture, ytexture, width, height));
+    sf::Rect<int> rect({xtexture, ytexture}, {width, height});
+
+    sprite_.setTextureRect(rect);
 }
 
 /**
@@ -141,7 +143,7 @@ void Sprite::setTextureRect(int xtexture, int ytexture, int width, int height) n
  */
 void Sprite::updatePosition() noexcept
 {
-    sprite_.setPosition(x_, y_);
+    sprite_.setPosition({static_cast<float>(x_), static_cast<float>(y_)});
 }
 
 /**
@@ -152,5 +154,5 @@ void Sprite::updatePosition() noexcept
  */
 void Sprite::setScale(float x, float y) noexcept
 {
-    sprite_.setScale(x, y);
+    sprite_.setScale({x, y});
 }

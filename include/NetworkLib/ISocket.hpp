@@ -54,7 +54,7 @@ struct ReceivedInfos {
 struct Client {
     Address                               address;
     std::queue<RawData>                   dataToSend = {};
-    std::chrono::system_clock::time_point lastPing   = {};
+    std::chrono::high_resolution_clock::time_point lastPing   = {};
     bool                                  isPingSent = false;
 };
 
@@ -64,7 +64,7 @@ struct Client {
  */
 struct ServerInfos {
     Address                               address;
-    std::chrono::system_clock::time_point lastPing   = {};
+    std::chrono::high_resolution_clock::time_point lastPing   = {};
     bool                                  isPingSent = false;
 };
 

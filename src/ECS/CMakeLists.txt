@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS_DEBUG_INIT "-g")
 
 # Sources
 set(
-  ECS_SRC
+  SRC
   Entity/Entity.cpp
   Entity/EntityManager.cpp
   Components/TransformComponent.cpp
@@ -32,8 +32,7 @@ set(
   Systems/MusicSystem.cpp
 )
 
-# Merge
-add_library(${PROJECT_NAME} ${ECS_SRC})
+add_library(${PROJECT_NAME} STATIC ${SRC})
 
 target_link_libraries(${PROJECT_NAME} CMakeSFMLProject)
 target_link_libraries(${PROJECT_NAME} JSONTools)

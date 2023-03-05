@@ -5,10 +5,11 @@ on: push
 jobs:
   Linux:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v2
+      - name: install SFML dependencies
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev libudev-dev libopenal-dev libvorbis-dev libflac-dev
       - name: Setup cmake
         uses: jwlawson/actions-setup-cmake@v1.13
         with:
@@ -29,7 +30,6 @@ jobs:
             ${{ runner.os }}-
   Windows:
     runs-on: windows-latest
-    continue-on-error: true
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -49,13 +49,22 @@ jobs:
       run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
     - name: Launch build
       run: cmake --build build
+    - name: Cache build
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
   Tests:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     needs: [Linux, Windows]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: install SFML dependencies
+        run: sudo apt-get update && sudo apt-get install -y xorg-dev libudev-dev libopenal-dev libvorbis-dev libflac-dev
       - name: Restore build
         uses: actions/cache@v3
         with:
@@ -67,9 +76,9 @@ jobs:
       - name: tests
         run: ./build/runTests
       - name: install gcovr
-        run: yum install -y gcovr
+        run: sudo apt-get install -y gcovr
       - name: launch coverage
-        run: gcovr -r . --exclude "build/" --exclude "tests/"
+        run: gcovr -r . --exclude "build/" --exclude "tests/" --exclude "src/Client/" --exclude "src/Server/" --exclude "include/"
   Doxygen:
     runs-on: ubuntu-latest
     needs: [Tests]
@@ -99,9 +108,8 @@ jobs:
         uses: Ilshidur/action-discord@master
   ReleaseLinux:
     runs-on: ubuntu-latest
-    container: epitechcontent/epitest-docker:latest
     needs: [Tests, Linux]
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
     steps:
@@ -124,4 +132,31 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: linux.zip
+          overwrite: true
+  ReleaseWindows:
+    runs-on: windows-latest
+    needs: [Tests, Windows]
+    # if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    steps:
+      - name: Restore Build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Archive Build
+        uses: thedoctor0/zip-release@0.7.0
+        with:
+          path: build
+          type: 'zip'
+          filename: 'windows.zip'
+      - name: Upload Build
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: windows.zip
           overwrite: true

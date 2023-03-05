@@ -12,6 +12,8 @@
 #include <cmath>
 #include <vector>
 
+#define PI 3.14159265358979323846
+
 /**
  * It creates a boss entity, which is a big enemy that moves in a circle and shoots bullets in 8
  * directions
@@ -70,7 +72,7 @@ int RType::createBoss(int x, int y) noexcept
             double centerY = y + radius * sin(mAngle);
             stat->setStat(RTypeStats::Angle, mAngle + 0.1);
             trans->setPos(centerX, centerY);
-            if (stat->getStat(RTypeStats::Angle) >= (2 * M_PI)) { stat->setStat(RTypeStats::Angle, 0); }
+            if (stat->getStat(RTypeStats::Angle) >= (2 * PI)) { stat->setStat(RTypeStats::Angle, 0); }
             if (timer.isOver()) {
                 auto bDamage = stat->getStat(RTypeStats::Damage);
                 auto bSpeed  = stat->getStat(RTypeStats::Speed);
