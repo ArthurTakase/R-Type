@@ -106,12 +106,12 @@ $(document).ready(function(){initNavTree('class_r_type.html',''); initResizable(
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bd13f83697bbdaf51034018e6aa1cfa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a5bd13f83697bbdaf51034018e6aa1cfa">RType</a> ()</td></tr>
 <tr class="separator:a5bd13f83697bbdaf51034018e6aa1cfa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1ac07ee355537e6d4be8fa357ff1baed"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a1ac07ee355537e6d4be8fa357ff1baed">~RType</a> () noexcept</td></tr>
-<tr class="separator:a1ac07ee355537e6d4be8fa357ff1baed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91bb46538f68705a2e7f4c1037269a66"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a91bb46538f68705a2e7f4c1037269a66">RType</a> (const <a class="el" href="class_r_type.html">RType</a> &amp;other) noexcept=delete</td></tr>
 <tr class="separator:a91bb46538f68705a2e7f4c1037269a66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9c749e253b9f20f9e03a01cfafae53d8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a9c749e253b9f20f9e03a01cfafae53d8">RType</a> (<a class="el" href="class_r_type.html">RType</a> &amp;&amp;other) noexcept=delete</td></tr>
 <tr class="separator:a9c749e253b9f20f9e03a01cfafae53d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f59bbfbbdb187883527356af7ab2be0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a8f59bbfbbdb187883527356af7ab2be0">~RType</a> () noexcept=default</td></tr>
+<tr class="separator:a8f59bbfbbdb187883527356af7ab2be0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9a2773fd1a585b35098f18b8a75c66a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_type.html">RType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a9a2773fd1a585b35098f18b8a75c66a4">operator=</a> (const <a class="el" href="class_r_type.html">RType</a> &amp;rhs) noexcept=delete</td></tr>
 <tr class="separator:a9a2773fd1a585b35098f18b8a75c66a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a897089c13c372c67d0557a9a99a7d70b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_r_type.html">RType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a897089c13c372c67d0557a9a99a7d70b">operator=</a> (<a class="el" href="class_r_type.html">RType</a> &amp;&amp;rhs) noexcept=delete</td></tr>
@@ -130,20 +130,38 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad41e3d9cd3417dce2e07c1fea17c1ac8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4aea07988fe756aac14748c5c727fe0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#ac4aea07988fe756aac14748c5c727fe0">init</a> () noexcept</td></tr>
 <tr class="separator:ac4aea07988fe756aac14748c5c727fe0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2b0992a89aa83d170205277d5507ad87"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a2b0992a89aa83d170205277d5507ad87">createPlayer</a> (int x, int y) noexcept</td></tr>
-<tr class="separator:a2b0992a89aa83d170205277d5507ad87"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5270112ef8f92ec4ce87bdd483633426"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a5270112ef8f92ec4ce87bdd483633426">createEnemy</a> (int x, int y) noexcept</td></tr>
-<tr class="separator:a5270112ef8f92ec4ce87bdd483633426"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac69b82585664bdefe4116de0662b2509"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#ac69b82585664bdefe4116de0662b2509">createPlayer</a> (int x, int y, int nb) noexcept</td></tr>
+<tr class="separator:ac69b82585664bdefe4116de0662b2509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5b96ea4833a41de97efd7e7b3bb9df0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#af5b96ea4833a41de97efd7e7b3bb9df0">createBoss</a> (int x, int y) noexcept</td></tr>
+<tr class="separator:af5b96ea4833a41de97efd7e7b3bb9df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae1b1d087b93ae6df7e2ed7ae70fa38a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#aae1b1d087b93ae6df7e2ed7ae70fa38a">createBasicEnemy</a> (int x, int y) noexcept</td></tr>
+<tr class="separator:aae1b1d087b93ae6df7e2ed7ae70fa38a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a848e4ac7a8f201caf6542e49211f5f4e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a848e4ac7a8f201caf6542e49211f5f4e">createCurvedEnemy</a> (int x, int y) noexcept</td></tr>
+<tr class="separator:a848e4ac7a8f201caf6542e49211f5f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f14b60ca46a8fb7055c6d07269b444e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a9f14b60ca46a8fb7055c6d07269b444e">createSpawner</a> () noexcept</td></tr>
+<tr class="separator:a9f14b60ca46a8fb7055c6d07269b444e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa6e29385aecf40593188f86ce6b67320"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#aa6e29385aecf40593188f86ce6b67320">createBackground</a> (int x) noexcept</td></tr>
 <tr class="separator:aa6e29385aecf40593188f86ce6b67320"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3bb793eba566656a818d9e68b89f69c3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a3bb793eba566656a818d9e68b89f69c3">createPlayerBullet</a> (int x, int y, float damage, float speed, float size) noexcept</td></tr>
-<tr class="separator:a3bb793eba566656a818d9e68b89f69c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9dddf1f85a77237c6ccc04abd49c4509"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a9dddf1f85a77237c6ccc04abd49c4509">playerShoot</a> (int x, int y, int dirX, int dirY, <a class="el" href="class_stat_component.html">StatComponent</a> *stats) noexcept</td></tr>
+<tr class="separator:a9dddf1f85a77237c6ccc04abd49c4509"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8f5622abfdf952f1582c2373318d11f7"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a8f5622abfdf952f1582c2373318d11f7">createPlayerBullet</a> (int x, int y, float damage, float speed, int dirX, int dirY, float size) noexcept</td></tr>
+<tr class="separator:a8f5622abfdf952f1582c2373318d11f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad283d1da9b0bc05b41c923c6cb097e5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#ad283d1da9b0bc05b41c923c6cb097e5f">createAsteroid</a> (int x) noexcept</td></tr>
 <tr class="separator:ad283d1da9b0bc05b41c923c6cb097e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa5930b522d2ccb14ba21dfd127f7178a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#aa5930b522d2ccb14ba21dfd127f7178a">createBossBullet</a> (int x, int y, float damage, float speed, float size, bool type, int xp, int yp) noexcept</td></tr>
+<tr class="separator:aa5930b522d2ccb14ba21dfd127f7178a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7057204ad8e81921afc87ea6e5e009e3"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a7057204ad8e81921afc87ea6e5e009e3">createEnemyBullet</a> (int x, int y, float damage, float speed, float size, bool type) noexcept</td></tr>
 <tr class="separator:a7057204ad8e81921afc87ea6e5e009e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05409aa30b666c8028167e9ce872a659"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a05409aa30b666c8028167e9ce872a659">curve</a> (int center, int amplitude, int period, int x) noexcept</td></tr>
-<tr class="separator:a05409aa30b666c8028167e9ce872a659"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f06be97389046af920a54b25f44c69"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a58f06be97389046af920a54b25f44c69">createEntityWave</a> (json::array_t pattern) noexcept</td></tr>
+<tr class="separator:a58f06be97389046af920a54b25f44c69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3d0a43122920c00e11fa2cb9d39f9d69"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a3d0a43122920c00e11fa2cb9d39f9d69">createPowerUp</a> (int x, int y, int type) noexcept</td></tr>
+<tr class="separator:a3d0a43122920c00e11fa2cb9d39f9d69"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a69fa3f997688f502c48c2fba09f565ec"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#a69fa3f997688f502c48c2fba09f565ec">createRandomPowerUp</a> (int x, int y) noexcept</td></tr>
+<tr class="separator:a69fa3f997688f502c48c2fba09f565ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abcc1474a6312d90718cf09cfde8f07f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#abcc1474a6312d90718cf09cfde8f07f6">createSound</a> () noexcept</td></tr>
+<tr class="separator:abcc1474a6312d90718cf09cfde8f07f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecc4e39c9d3ba919b385264ae37309fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_type.html#aecc4e39c9d3ba919b385264ae37309fd">playSound</a> (int id) noexcept</td></tr>
+<tr class="separator:aecc4e39c9d3ba919b385264ae37309fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p ><a class="el" href="class_game.html" title="This class is used to create a game instance in the client.">Game</a> Instance for the server. </p>
@@ -162,31 +180,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1ac07ee355537e6d4be8fa357ff1baed" name="a1ac07ee355537e6d4be8fa357ff1baed"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1ac07ee355537e6d4be8fa357ff1baed">&#9670;&#160;</a></span>~RType()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">RType::~RType </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p >It initializes the server's game systems and creates a game object </p>
 
 </div>
 </div>
@@ -242,6 +236,31 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a8f59bbfbbdb187883527356af7ab2be0" name="a8f59bbfbbdb187883527356af7ab2be0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f59bbfbbdb187883527356af7ab2be0">&#9670;&#160;</a></span>~RType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">RType::~RType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad283d1da9b0bc05b41c923c6cb097e5f" name="ad283d1da9b0bc05b41c923c6cb097e5f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad283d1da9b0bc05b41c923c6cb097e5f">&#9670;&#160;</a></span>createAsteroid()</h2>
@@ -266,6 +285,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates an asteroid entity with a random position, speed and scale</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x position of the asteroid</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity </dd></dl>
 
 </div>
 </div>
@@ -292,11 +319,19 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates a background entity with a transform, drawable, mouvement, destroyable and behavior component</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x position of the background</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity created. </dd></dl>
 
 </div>
 </div>
-<a id="a5270112ef8f92ec4ce87bdd483633426" name="a5270112ef8f92ec4ce87bdd483633426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5270112ef8f92ec4ce87bdd483633426">&#9670;&#160;</a></span>createEnemy()</h2>
+<a id="aae1b1d087b93ae6df7e2ed7ae70fa38a" name="aae1b1d087b93ae6df7e2ed7ae70fa38a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae1b1d087b93ae6df7e2ed7ae70fa38a">&#9670;&#160;</a></span>createBasicEnemy()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -305,7 +340,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int RType::createEnemy </td>
+          <td class="memname">int RType::createBasicEnemy </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>x</em>, </td>
@@ -328,6 +363,192 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates an enemy entity with a drawable component, an animation component, a transform component, a destroyable component, a stat component, a mouvement component, a timer component, a hitbox component, a behavior component and returns the id of the entity</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x position of the enemy </td></tr>
+    <tr><td class="paramname">y</td><td>the y position of the enemy</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity created </dd></dl>
+
+</div>
+</div>
+<a id="af5b96ea4833a41de97efd7e7b3bb9df0" name="af5b96ea4833a41de97efd7e7b3bb9df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5b96ea4833a41de97efd7e7b3bb9df0">&#9670;&#160;</a></span>createBoss()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createBoss </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a boss entity, which is a big enemy that moves in a circle and shoots bullets in 8 directions</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x position of the boss </td></tr>
+    <tr><td class="paramname">y</td><td>y position of the boss</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the boss entity </dd></dl>
+
+</div>
+</div>
+<a id="aa5930b522d2ccb14ba21dfd127f7178a" name="aa5930b522d2ccb14ba21dfd127f7178a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5930b522d2ccb14ba21dfd127f7178a">&#9670;&#160;</a></span>createBossBullet()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createBossBullet </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>damage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>size</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>xp</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>yp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a bullet entity with a transform, a mouvement, a drawable, an animation, a destroyable, a stat, a hitbox, a behavior and a collision function</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x position of the bullet </td></tr>
+    <tr><td class="paramname">y</td><td>the y position of the bullet </td></tr>
+    <tr><td class="paramname">damage</td><td>the damage the bullet will do </td></tr>
+    <tr><td class="paramname">speed</td><td>the speed of the bullet </td></tr>
+    <tr><td class="paramname">size</td><td>the size of the bullet </td></tr>
+    <tr><td class="paramname">type</td><td>0 for a normal bullet, 1 for a boss bullet </td></tr>
+    <tr><td class="paramname">xp</td><td>x position of the player </td></tr>
+    <tr><td class="paramname">yp</td><td>y position of the player</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the bullet </dd></dl>
+
+</div>
+</div>
+<a id="a848e4ac7a8f201caf6542e49211f5f4e" name="a848e4ac7a8f201caf6542e49211f5f4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a848e4ac7a8f201caf6542e49211f5f4e">&#9670;&#160;</a></span>createCurvedEnemy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createCurvedEnemy </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates an enemy that moves in a curve and shoots bullets</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>x position of the enemy </td></tr>
+    <tr><td class="paramname">y</td><td>the y position of the enemy</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity created </dd></dl>
 
 </div>
 </div>
@@ -388,11 +609,58 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates an entity with a transform, a mouvement, a drawable, an animation, a destroyable, a stat, a hitbox, a behavior and returns the entity's id</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x position of the bullet </td></tr>
+    <tr><td class="paramname">y</td><td>the y position of the bullet </td></tr>
+    <tr><td class="paramname">damage</td><td>the damage the bullet will deal to the player </td></tr>
+    <tr><td class="paramname">speed</td><td>the speed of the bullet </td></tr>
+    <tr><td class="paramname">size</td><td>the size of the bullet </td></tr>
+    <tr><td class="paramname">type</td><td>false = not destroyable, true = destroyable</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity </dd></dl>
 
 </div>
 </div>
-<a id="a2b0992a89aa83d170205277d5507ad87" name="a2b0992a89aa83d170205277d5507ad87"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2b0992a89aa83d170205277d5507ad87">&#9670;&#160;</a></span>createPlayer()</h2>
+<a id="a58f06be97389046af920a54b25f44c69" name="a58f06be97389046af920a54b25f44c69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58f06be97389046af920a54b25f44c69">&#9670;&#160;</a></span>createEntityWave()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::createEntityWave </td>
+          <td>(</td>
+          <td class="paramtype">json::array_t&#160;</td>
+          <td class="paramname"><em>pattern</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a map of function pointers to member functions of the class, and then calls the function pointed to by the map's value, using the map's key as the argument</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>the type of enemy to create </td></tr>
+    <tr><td class="paramname">positions</td><td>a json array of json arrays of 2 ints. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ac69b82585664bdefe4116de0662b2509" name="ac69b82585664bdefe4116de0662b2509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac69b82585664bdefe4116de0662b2509">&#9670;&#160;</a></span>createPlayer()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -410,7 +678,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nb</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -424,11 +698,21 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates a player entity and adds all the components it needs</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>the x position of the player </td></tr>
+    <tr><td class="paramname">y</td><td>y position </td></tr>
+    <tr><td class="paramname">nb</td><td>the player number</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the player entity </dd></dl>
 
 </div>
 </div>
-<a id="a3bb793eba566656a818d9e68b89f69c3" name="a3bb793eba566656a818d9e68b89f69c3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3bb793eba566656a818d9e68b89f69c3">&#9670;&#160;</a></span>createPlayerBullet()</h2>
+<a id="a8f5622abfdf952f1582c2373318d11f7" name="a8f5622abfdf952f1582c2373318d11f7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f5622abfdf952f1582c2373318d11f7">&#9670;&#160;</a></span>createPlayerBullet()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,6 +747,18 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dirX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dirY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">float&#160;</td>
           <td class="paramname"><em>size</em>&#160;</td>
         </tr>
@@ -478,11 +774,25 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates a bullet entity with a transform, a mouvement, a drawable, an animation, a destroyable, a stat, a hitbox and a behavior component</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position of the bullet </td></tr>
+    <tr><td class="paramname">y</td><td>the y position of the bullet </td></tr>
+    <tr><td class="paramname">damage</td><td>the damage the bullet will deal to the enemy </td></tr>
+    <tr><td class="paramname">speed</td><td>the speed of the bullet </td></tr>
+    <tr><td class="paramname">dirX</td><td>The direction of the bullet on the X axis. </td></tr>
+    <tr><td class="paramname">dirY</td><td>direction of the bullet on the Y axis </td></tr>
+    <tr><td class="paramname">size</td><td>the size of the bullet</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the bullet </dd></dl>
 
 </div>
 </div>
-<a id="a05409aa30b666c8028167e9ce872a659" name="a05409aa30b666c8028167e9ce872a659"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a05409aa30b666c8028167e9ce872a659">&#9670;&#160;</a></span>curve()</h2>
+<a id="a3d0a43122920c00e11fa2cb9d39f9d69" name="a3d0a43122920c00e11fa2cb9d39f9d69"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3d0a43122920c00e11fa2cb9d39f9d69">&#9670;&#160;</a></span>createPowerUp()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -491,28 +801,22 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int RType::curve </td>
+          <td class="memname">int RType::createPowerUp </td>
           <td>(</td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>center</em>, </td>
+          <td class="paramname"><em>x</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>amplitude</em>, </td>
+          <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>period</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>x</em>&#160;</td>
+          <td class="paramname"><em>type</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -526,6 +830,121 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates a power up entity</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position of the powerup </td></tr>
+    <tr><td class="paramname">y</td><td>The y position of the powerup </td></tr>
+    <tr><td class="paramname">type</td><td>0 = heal, 1 = upgrade</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity created. </dd></dl>
+
+</div>
+</div>
+<a id="a69fa3f997688f502c48c2fba09f565ec" name="a69fa3f997688f502c48c2fba09f565ec"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a69fa3f997688f502c48c2fba09f565ec">&#9670;&#160;</a></span>createRandomPowerUp()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createRandomPowerUp </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a random power up entity</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position of the powerup </td></tr>
+    <tr><td class="paramname">y</td><td>The y position of the powerup</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity created. </dd></dl>
+
+</div>
+</div>
+<a id="abcc1474a6312d90718cf09cfde8f07f6" name="abcc1474a6312d90718cf09cfde8f07f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abcc1474a6312d90718cf09cfde8f07f6">&#9670;&#160;</a></span>createSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createSound </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a new entity, adds a <a class="el" href="class_sound_component.html" title="Component used to set a sound associated to an entity.">SoundComponent</a> to it, and returns the entity's ID</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to the sound file.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity. </dd></dl>
+
+</div>
+</div>
+<a id="a9f14b60ca46a8fb7055c6d07269b444e" name="a9f14b60ca46a8fb7055c6d07269b444e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f14b60ca46a8fb7055c6d07269b444e">&#9670;&#160;</a></span>createSpawner()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int RType::createSpawner </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a new entity, adds a behavior component to it, and returns the entity's id</p>
+<dl class="section return"><dt>Returns</dt><dd>The id of the entity that was created. </dd></dl>
 
 </div>
 </div>
@@ -551,6 +970,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It returns a reference to the behavior system</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the behavior system. </dd></dl>
 
 </div>
 </div>
@@ -576,6 +997,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It returns a reference to the hitbox system</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the hitbox system. </dd></dl>
 
 </div>
 </div>
@@ -601,6 +1024,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It returns a reference to the entity manager</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the entity manager. </dd></dl>
 
 </div>
 </div>
@@ -626,6 +1051,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It creates two backgrounds with different positions </p>
 
 </div>
 </div>
@@ -681,6 +1107,104 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a9dddf1f85a77237c6ccc04abd49c4509" name="a9dddf1f85a77237c6ccc04abd49c4509"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dddf1f85a77237c6ccc04abd49c4509">&#9670;&#160;</a></span>playerShoot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::playerShoot </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>x</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>y</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dirX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dirY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_stat_component.html">StatComponent</a> *&#160;</td>
+          <td class="paramname"><em>stat</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It creates a bullet entity with the given parameters</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x position of the bullet </td></tr>
+    <tr><td class="paramname">y</td><td>y position of the player </td></tr>
+    <tr><td class="paramname">dirX</td><td>The direction of the bullet on the X axis. </td></tr>
+    <tr><td class="paramname">dirY</td><td>The direction of the bullet on the Y axis. </td></tr>
+    <tr><td class="paramname">stat</td><td>The player's stats </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aecc4e39c9d3ba919b385264ae37309fd" name="aecc4e39c9d3ba919b385264ae37309fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aecc4e39c9d3ba919b385264ae37309fd">&#9670;&#160;</a></span>playSound()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RType::playSound </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >It plays a sound</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The id of the entity that has the <a class="el" href="class_sound_component.html" title="Component used to set a sound associated to an entity.">SoundComponent</a> </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ac68a1ebb24945de77fe235b1a63d186e" name="ac68a1ebb24945de77fe235b1a63d186e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac68a1ebb24945de77fe235b1a63d186e">&#9670;&#160;</a></span>reset()</h2>
 
@@ -703,6 +1227,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It sets the looping_ variable to true. </p>
 
 </div>
 </div>
@@ -728,6 +1253,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It runs all the game's systems </p>
 
 </div>
 </div>
@@ -753,6 +1279,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It stops the game loop </p>
 
 </div>
 </div>
@@ -760,9 +1287,11 @@ Public Member Functions</h2></td></tr>
 <li>include/Server/<a class="el" href="_r_type_8hpp_source.html">RType.hpp</a></li>
 <li>src/Server/<a class="el" href="_r_type_8cpp.html">RType.cpp</a></li>
 <li>src/Server/RType/<a class="el" href="_asteroid_8cpp.html">Asteroid.cpp</a></li>
-<li>src/Server/RType/<a class="el" href="_enemy__1_8cpp.html">Enemy_1.cpp</a></li>
+<li>src/Server/RType/<a class="el" href="_boss_8cpp.html">Boss.cpp</a></li>
+<li>src/Server/RType/<a class="el" href="_enemies_8cpp.html">Enemies.cpp</a></li>
 <li>src/Server/RType/<a class="el" href="_misc_8cpp.html">Misc.cpp</a></li>
 <li>src/Server/RType/<a class="el" href="_player_8cpp.html">Player.cpp</a></li>
+<li>src/Server/RType/<a class="el" href="_spawner_8cpp.html">Spawner.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['rawdata_0',['RawData',['../_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e',1,'ISocket.hpp']]],
-  ['rtypestats_1',['RTypeStats',['../_r_type_8hpp.html#aff2f8e7f96d9d0011f34c0353f13b4ec',1,'RType.hpp']]]
+  ['packetname_0',['PacketName',['../_bit_size_8hpp.html#aa1aaf974061168237cd62271f9ad6036',1,'BitSize.hpp']]],
+  ['player_1',['Player',['../_server_8hpp.html#a480a040facb94f90060562cd65274385',1,'Server.hpp']]],
+  ['port_2',['Port',['../struct_address.html#ae45ef09ad9e7f1a977f00fcd7d637935',1,'Address']]]
 ];

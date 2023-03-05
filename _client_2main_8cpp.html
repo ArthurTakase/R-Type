@@ -95,7 +95,8 @@ $(document).ready(function(){initNavTree('_client_2main_8cpp.html',''); initResi
   <div class="headertitle"><div class="title">main.cpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>#include &lt;<a class="el" href="_udp_client_8hpp_source.html">Client/UdpClient.hpp</a>&gt;</code><br />
+<div class="textblock"><code>#include &lt;<a class="el" href="_menu_8hpp_source.html">Client/Menu.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_udp_client_8hpp_source.html">Client/UdpClient.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_error_8hpp_source.html">Error/Error.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_host_handler_8hpp_source.html">NetworkLib/HostHandler.hpp</a>&gt;</code><br />
 <code>#include &lt;cstdlib&gt;</code><br />
@@ -103,10 +104,49 @@ $(document).ready(function(){initNavTree('_client_2main_8cpp.html',''); initResi
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:aec4847cdb5e47efbdaccbc000455a06d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_2main_8cpp.html#aec4847cdb5e47efbdaccbc000455a06d">checkArgs</a> (int ac, const char *const av[])</td></tr>
+<tr class="separator:aec4847cdb5e47efbdaccbc000455a06d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af5e94063ba644cdcadf0663d627432de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_client_2main_8cpp.html#af5e94063ba644cdcadf0663d627432de">main</a> (int ac, const char *const av[])</td></tr>
 <tr class="separator:af5e94063ba644cdcadf0663d627432de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="aec4847cdb5e47efbdaccbc000455a06d" name="aec4847cdb5e47efbdaccbc000455a06d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec4847cdb5e47efbdaccbc000455a06d">&#9670;&#160;</a></span>checkArgs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::string &gt; checkArgs </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>ac</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *const&#160;</td>
+          <td class="paramname"><em>av</em>[]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >It takes the command line arguments and returns a vector of strings</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ac</td><td>The number of arguments passed to the program. </td></tr>
+    <tr><td class="paramname">av</td><td>The array of arguments passed to the program.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of strings. </dd></dl>
+
+</div>
+</div>
 <a id="af5e94063ba644cdcadf0663d627432de" name="af5e94063ba644cdcadf0663d627432de"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af5e94063ba644cdcadf0663d627432de">&#9670;&#160;</a></span>main()</h2>
 
@@ -132,6 +172,15 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >It checks the arguments, then it creates a client and runs it</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ac</td><td>the number of arguments </td></tr>
+    <tr><td class="paramname">av</td><td>the arguments passed to the program</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The return value of the main function is an integer. </dd></dl>
 
 </div>
 </div>

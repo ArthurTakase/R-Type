@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['y1_0',['Y1',['../_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813baf26f030266e81913d436638038d3792a',1,'BitSize.hpp']]],
-  ['y2_1',['Y2',['../_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813bacf107119eb35819acf084d560eb38902',1,'BitSize.hpp']]],
-  ['ypositive_2',['YPOSITIVE',['../_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813baf078c87dae650381c6643179f9138710',1,'BitSize.hpp']]]
+  ['q_0',['Q',['../_keyboard_8hpp.html#a080a822f0093973313bd644e517a5090aa53ab217f1572250a530c8c2b3c820cf',1,'Keyboard.hpp']]]
 ];

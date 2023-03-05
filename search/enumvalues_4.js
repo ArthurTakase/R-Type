@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['leftarrow_0',['LeftArrow',['../_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090ad1cdcbb9f0878ccfc73ef07bf17f7f04',1,'BitSize.hpp']]],
-  ['life_1',['Life',['../_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66ac9d5db092bc7a12cfcf11c5dc3c1038b',1,'RType.hpp']]]
+  ['five_0',['Five',['../_keyboard_8hpp.html#a080a822f0093973313bd644e517a5090af107e3c0debe405b548ccedcc0827556',1,'Keyboard.hpp']]],
+  ['four_1',['Four',['../_keyboard_8hpp.html#a080a822f0093973313bd644e517a5090a56504d7f6f1ef88c211d788b514d53d1',1,'Keyboard.hpp']]]
 ];

@@ -97,7 +97,7 @@ $(document).ready(function(){initNavTree('class_sprite.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 
-<p>This class is used to create a sprite.  
+<p>This class is used to create and encapsulate a sprite.  
  <a href="class_sprite.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_sprite_8hpp_source.html">Sprite.hpp</a>&gt;</code></p>
@@ -108,41 +108,41 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a12cba3ac1868418add3c4d95ce87e615"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a948bd182c155eae769d013997ed4a7d3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a948bd182c155eae769d013997ed4a7d3">Sprite</a> (std::string path, int x, int y)</td></tr>
 <tr class="separator:a948bd182c155eae769d013997ed4a7d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae8ec20cba0bba54665686c014e5e9bce"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ae8ec20cba0bba54665686c014e5e9bce">Sprite</a> (const <a class="el" href="class_sprite.html">Sprite</a> &amp;other) noexcept=default</td></tr>
+<tr class="separator:ae8ec20cba0bba54665686c014e5e9bce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a428bd59065dd7ae93d5e0783215906ad"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a428bd59065dd7ae93d5e0783215906ad">Sprite</a> (<a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="separator:a428bd59065dd7ae93d5e0783215906ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a22961a9289b1d7e973180b8c4df5f9b1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a22961a9289b1d7e973180b8c4df5f9b1">~Sprite</a> () noexcept=default</td></tr>
 <tr class="separator:a22961a9289b1d7e973180b8c4df5f9b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a569c59a0e65d7a8454bd8d5bae65dbae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a569c59a0e65d7a8454bd8d5bae65dbae">Sprite</a> (const <a class="el" href="class_sprite.html">Sprite</a> &amp;other) noexcept=delete</td></tr>
-<tr class="separator:a569c59a0e65d7a8454bd8d5bae65dbae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1e2d5f335ef19d55a6b2915b1555ac77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a1e2d5f335ef19d55a6b2915b1555ac77">Sprite</a> (<a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;other) noexcept=delete</td></tr>
-<tr class="separator:a1e2d5f335ef19d55a6b2915b1555ac77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ac370e3574ccfadc8097a0c6c1a6ad9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a5ac370e3574ccfadc8097a0c6c1a6ad9">operator=</a> (const <a class="el" href="class_sprite.html">Sprite</a> &amp;rhs) noexcept=delete</td></tr>
-<tr class="separator:a5ac370e3574ccfadc8097a0c6c1a6ad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa01b614fdc10721190f1bd639643690c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa01b614fdc10721190f1bd639643690c">operator=</a> (<a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;rhs) noexcept=delete</td></tr>
-<tr class="separator:aa01b614fdc10721190f1bd639643690c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfcc7e9f85c997968e4131db38bc13ba"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#abfcc7e9f85c997968e4131db38bc13ba">operator=</a> (const <a class="el" href="class_sprite.html">Sprite</a> &amp;rhs) noexcept=default</td></tr>
+<tr class="separator:abfcc7e9f85c997968e4131db38bc13ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b8640f89b360a7242dde24d79531dd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a3b8640f89b360a7242dde24d79531dd0">operator=</a> (<a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;rhs) noexcept=default</td></tr>
+<tr class="separator:a3b8640f89b360a7242dde24d79531dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aad8066d0af0d52013969e91f231439d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aad8066d0af0d52013969e91f231439d3">setSpritePath</a> (const std::string &amp;path)</td></tr>
 <tr class="separator:aad8066d0af0d52013969e91f231439d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2eeb7617b19fbc2a816c5e4065fa0cae"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a2eeb7617b19fbc2a816c5e4065fa0cae">getSpritePath</a> () const</td></tr>
-<tr class="separator:a2eeb7617b19fbc2a816c5e4065fa0cae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae21322c28b8719af996990fafa920762"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ae21322c28b8719af996990fafa920762">setX</a> (int x)</td></tr>
-<tr class="separator:ae21322c28b8719af996990fafa920762"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe7d6d636fc460358c40a403af259d0e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#afe7d6d636fc460358c40a403af259d0e">setY</a> (int y)</td></tr>
-<tr class="separator:afe7d6d636fc460358c40a403af259d0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5d2c390d02a3b001e7ca82ec98e5eaaa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a5d2c390d02a3b001e7ca82ec98e5eaaa">getX</a> () const</td></tr>
-<tr class="separator:a5d2c390d02a3b001e7ca82ec98e5eaaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5ebf0db842c2067df8c14e04c9f0fa25"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a5ebf0db842c2067df8c14e04c9f0fa25">getY</a> () const</td></tr>
-<tr class="separator:a5ebf0db842c2067df8c14e04c9f0fa25"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acee444c53d46a8ed28898d89bbc9b445"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#acee444c53d46a8ed28898d89bbc9b445">getSprite</a> ()</td></tr>
-<tr class="separator:acee444c53d46a8ed28898d89bbc9b445"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab6b8f866371ab56142aca49410f60cfb"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#ab6b8f866371ab56142aca49410f60cfb">getTexture</a> ()</td></tr>
-<tr class="separator:ab6b8f866371ab56142aca49410f60cfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a87534205e09b432f4d74c46617b651ec"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a87534205e09b432f4d74c46617b651ec">setTextureRect</a> (int xtexture, int ytexture, int width, int height)</td></tr>
-<tr class="separator:a87534205e09b432f4d74c46617b651ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7ab26528e126bf96408bda756ead304f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a7ab26528e126bf96408bda756ead304f">updatePosition</a> ()</td></tr>
-<tr class="separator:a7ab26528e126bf96408bda756ead304f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa05b31603b6c8b729f3bf581e39fa7df"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#aa05b31603b6c8b729f3bf581e39fa7df">getSpritePath</a> () const noexcept</td></tr>
+<tr class="separator:aa05b31603b6c8b729f3bf581e39fa7df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adc3614ae09e14d8617cfeb71c69656bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#adc3614ae09e14d8617cfeb71c69656bc">setX</a> (int x) noexcept</td></tr>
+<tr class="separator:adc3614ae09e14d8617cfeb71c69656bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a789835aafb1a340d5c294529aca4a34c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a789835aafb1a340d5c294529aca4a34c">setY</a> (int y) noexcept</td></tr>
+<tr class="separator:a789835aafb1a340d5c294529aca4a34c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af674f40b5c43ac2988a4e85338b5c73e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#af674f40b5c43ac2988a4e85338b5c73e">getX</a> () const noexcept</td></tr>
+<tr class="separator:af674f40b5c43ac2988a4e85338b5c73e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a296c76daa262694a6a650cdcc1829197"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a296c76daa262694a6a650cdcc1829197">getY</a> () const noexcept</td></tr>
+<tr class="separator:a296c76daa262694a6a650cdcc1829197"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a814a77e598718d7dcde165e87a19d66a"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a814a77e598718d7dcde165e87a19d66a">getSprite</a> () noexcept</td></tr>
+<tr class="separator:a814a77e598718d7dcde165e87a19d66a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc4c5a85f5000cafe7a4559a4235ed66"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#acc4c5a85f5000cafe7a4559a4235ed66">getTexture</a> () noexcept</td></tr>
+<tr class="separator:acc4c5a85f5000cafe7a4559a4235ed66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58eece9ea4ca09efcc74897c9328ae00"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a58eece9ea4ca09efcc74897c9328ae00">setTextureRect</a> (int xtexture, int ytexture, int width, int height) noexcept</td></tr>
+<tr class="separator:a58eece9ea4ca09efcc74897c9328ae00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abde85a6e0d3d8da7900274969ff8b467"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#abde85a6e0d3d8da7900274969ff8b467">updatePosition</a> () noexcept</td></tr>
+<tr class="separator:abde85a6e0d3d8da7900274969ff8b467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6aab56e1c4d2c7b288f8a24e587ec305"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_sprite.html#a6aab56e1c4d2c7b288f8a24e587ec305">setScale</a> (float x, float y) noexcept</td></tr>
 <tr class="separator:a6aab56e1c4d2c7b288f8a24e587ec305"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >This class is used to create a sprite. </p>
+<div class="textblock"><p >This class is used to create and encapsulate a sprite. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a12cba3ac1868418add3c4d95ce87e615" name="a12cba3ac1868418add3c4d95ce87e615"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a12cba3ac1868418add3c4d95ce87e615">&#9670;&#160;</a></span>Sprite() <span class="overload">[1/4]</span></h2>
@@ -158,6 +158,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >This is the default constructor for the <a class="el" href="class_sprite.html" title="This class is used to create and encapsulate a sprite.">Sprite</a> class. </p>
 
 </div>
 </div>
@@ -192,7 +193,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p ><a class="el" href="class_sprite.html" title="This class is used to create a sprite.">Sprite</a> is a class that takes a string, an int, and an int and sets the spritePath, x, and y variables to the values of the string, int, and int.</p>
+<p ><a class="el" href="class_sprite.html" title="This class is used to create and encapsulate a sprite.">Sprite</a> is a class that takes a string, an int, and an int and sets the spritePath, x, and y variables to the values of the string, int, and int.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">path</td><td>The path to the image file. </td></tr>
@@ -201,6 +202,58 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="ae8ec20cba0bba54665686c014e5e9bce" name="ae8ec20cba0bba54665686c014e5e9bce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae8ec20cba0bba54665686c014e5e9bce">&#9670;&#160;</a></span>Sprite() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a428bd59065dd7ae93d5e0783215906ad" name="a428bd59065dd7ae93d5e0783215906ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a428bd59065dd7ae93d5e0783215906ad">&#9670;&#160;</a></span>Sprite() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Sprite::Sprite </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -229,64 +282,15 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a569c59a0e65d7a8454bd8d5bae65dbae" name="a569c59a0e65d7a8454bd8d5bae65dbae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a569c59a0e65d7a8454bd8d5bae65dbae">&#9670;&#160;</a></span>Sprite() <span class="overload">[3/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Sprite::Sprite </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="class_sprite.html">Sprite</a> &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a1e2d5f335ef19d55a6b2915b1555ac77" name="a1e2d5f335ef19d55a6b2915b1555ac77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1e2d5f335ef19d55a6b2915b1555ac77">&#9670;&#160;</a></span>Sprite() <span class="overload">[4/4]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Sprite::Sprite </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="class_sprite.html">Sprite</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acee444c53d46a8ed28898d89bbc9b445" name="acee444c53d46a8ed28898d89bbc9b445"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acee444c53d46a8ed28898d89bbc9b445">&#9670;&#160;</a></span>getSprite()</h2>
+<a id="a814a77e598718d7dcde165e87a19d66a" name="a814a77e598718d7dcde165e87a19d66a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a814a77e598718d7dcde165e87a19d66a">&#9670;&#160;</a></span>getSprite()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void * Sprite::getSprite </td>
@@ -295,17 +299,25 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function returns the sprite.</p>
 <dl class="section return"><dt>Returns</dt><dd>The sprite. </dd></dl>
 
 </div>
 </div>
-<a id="a2eeb7617b19fbc2a816c5e4065fa0cae" name="a2eeb7617b19fbc2a816c5e4065fa0cae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2eeb7617b19fbc2a816c5e4065fa0cae">&#9670;&#160;</a></span>getSpritePath()</h2>
+<a id="aa05b31603b6c8b729f3bf581e39fa7df" name="aa05b31603b6c8b729f3bf581e39fa7df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa05b31603b6c8b729f3bf581e39fa7df">&#9670;&#160;</a></span>getSpritePath()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">const std::string &amp; Sprite::getSpritePath </td>
@@ -314,17 +326,25 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >Returns the path to the sprite's image file.</p>
 <dl class="section return"><dt>Returns</dt><dd>The spritePath variable is being returned. </dd></dl>
 
 </div>
 </div>
-<a id="ab6b8f866371ab56142aca49410f60cfb" name="ab6b8f866371ab56142aca49410f60cfb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab6b8f866371ab56142aca49410f60cfb">&#9670;&#160;</a></span>getTexture()</h2>
+<a id="acc4c5a85f5000cafe7a4559a4235ed66" name="acc4c5a85f5000cafe7a4559a4235ed66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc4c5a85f5000cafe7a4559a4235ed66">&#9670;&#160;</a></span>getTexture()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void * Sprite::getTexture </td>
@@ -333,17 +353,25 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function returns the texture.</p>
 <dl class="section return"><dt>Returns</dt><dd>The texture. </dd></dl>
 
 </div>
 </div>
-<a id="a5d2c390d02a3b001e7ca82ec98e5eaaa" name="a5d2c390d02a3b001e7ca82ec98e5eaaa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5d2c390d02a3b001e7ca82ec98e5eaaa">&#9670;&#160;</a></span>getX()</h2>
+<a id="af674f40b5c43ac2988a4e85338b5c73e" name="af674f40b5c43ac2988a4e85338b5c73e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af674f40b5c43ac2988a4e85338b5c73e">&#9670;&#160;</a></span>getX()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int Sprite::getX </td>
@@ -352,17 +380,25 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function returns the x coordinate of the sprite.</p>
 <dl class="section return"><dt>Returns</dt><dd>The x coordinate of the sprite. </dd></dl>
 
 </div>
 </div>
-<a id="a5ebf0db842c2067df8c14e04c9f0fa25" name="a5ebf0db842c2067df8c14e04c9f0fa25"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ebf0db842c2067df8c14e04c9f0fa25">&#9670;&#160;</a></span>getY()</h2>
+<a id="a296c76daa262694a6a650cdcc1829197" name="a296c76daa262694a6a650cdcc1829197"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a296c76daa262694a6a650cdcc1829197">&#9670;&#160;</a></span>getY()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int Sprite::getY </td>
@@ -371,14 +407,19 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function returns the y coordinate of the sprite.</p>
 <dl class="section return"><dt>Returns</dt><dd>The y coordinate of the sprite. </dd></dl>
 
 </div>
 </div>
-<a id="a5ac370e3574ccfadc8097a0c6c1a6ad9" name="a5ac370e3574ccfadc8097a0c6c1a6ad9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5ac370e3574ccfadc8097a0c6c1a6ad9">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="abfcc7e9f85c997968e4131db38bc13ba" name="abfcc7e9f85c997968e4131db38bc13ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfcc7e9f85c997968e4131db38bc13ba">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -396,15 +437,15 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aa01b614fdc10721190f1bd639643690c" name="aa01b614fdc10721190f1bd639643690c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa01b614fdc10721190f1bd639643690c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="a3b8640f89b360a7242dde24d79531dd0" name="a3b8640f89b360a7242dde24d79531dd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b8640f89b360a7242dde24d79531dd0">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -422,7 +463,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -462,6 +503,14 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >Sets the scale of the sprite</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x</td><td>The x-scale of the sprite. </td></tr>
+    <tr><td class="paramname">y</td><td>The y coordinate of the sprite. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -490,11 +539,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a87534205e09b432f4d74c46617b651ec" name="a87534205e09b432f4d74c46617b651ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a87534205e09b432f4d74c46617b651ec">&#9670;&#160;</a></span>setTextureRect()</h2>
+<a id="a58eece9ea4ca09efcc74897c9328ae00" name="a58eece9ea4ca09efcc74897c9328ae00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58eece9ea4ca09efcc74897c9328ae00">&#9670;&#160;</a></span>setTextureRect()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Sprite::setTextureRect </td>
@@ -526,6 +578,11 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function sets the texture rectangle of the sprite.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -540,11 +597,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="ae21322c28b8719af996990fafa920762" name="ae21322c28b8719af996990fafa920762"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae21322c28b8719af996990fafa920762">&#9670;&#160;</a></span>setX()</h2>
+<a id="adc3614ae09e14d8617cfeb71c69656bc" name="adc3614ae09e14d8617cfeb71c69656bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adc3614ae09e14d8617cfeb71c69656bc">&#9670;&#160;</a></span>setX()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Sprite::setX </td>
@@ -554,6 +614,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function sets the x coordinate of the sprite.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -565,11 +630,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="afe7d6d636fc460358c40a403af259d0e" name="afe7d6d636fc460358c40a403af259d0e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe7d6d636fc460358c40a403af259d0e">&#9670;&#160;</a></span>setY()</h2>
+<a id="a789835aafb1a340d5c294529aca4a34c" name="a789835aafb1a340d5c294529aca4a34c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a789835aafb1a340d5c294529aca4a34c">&#9670;&#160;</a></span>setY()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Sprite::setY </td>
@@ -579,6 +647,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function sets the y coordinate of the sprite.</p>
 <dl class="params"><dt>Parameters</dt><dd>
@@ -590,11 +663,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7ab26528e126bf96408bda756ead304f" name="a7ab26528e126bf96408bda756ead304f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7ab26528e126bf96408bda756ead304f">&#9670;&#160;</a></span>updatePosition()</h2>
+<a id="abde85a6e0d3d8da7900274969ff8b467" name="abde85a6e0d3d8da7900274969ff8b467"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abde85a6e0d3d8da7900274969ff8b467">&#9670;&#160;</a></span>updatePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Sprite::updatePosition </td>
@@ -603,6 +679,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 <p >This function updates the position of the sprite. </p>
 

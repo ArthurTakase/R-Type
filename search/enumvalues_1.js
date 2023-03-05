@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['exception_0',['EXCEPTION',['../class_socket_selector.html#a47da7296086ca61ceb2f10f655bd13c6acccc265b14c17af799a1834f4fbbe7cf',1,'SocketSelector']]]
+  ['backspace_0',['BackSpace',['../_keyboard_8hpp.html#a080a822f0093973313bd644e517a5090ae8ac20c34c3685c933fbea4575a64ea3',1,'Keyboard.hpp']]]
 ];

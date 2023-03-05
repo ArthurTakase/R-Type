@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['offsetx_0',['offsetX',['../struct_game_packet.html#a2ff7e510bc528bc3a6b403d05c59b0d2',1,'GamePacket']]],
-  ['offsety_1',['offsetY',['../struct_game_packet.html#a3ac435a056196f5cfe59c82a0d95a8d2',1,'GamePacket']]]
+  ['lastping_0',['lastPing',['../struct_client.html#a9d6dd0bfc2dce704eabe3533ea4bd5ce',1,'Client::lastPing()'],['../struct_server_infos.html#a04aaa38e3679560f345ae35204be0294',1,'ServerInfos::lastPing()']]]
 ];

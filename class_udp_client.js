@@ -2,6 +2,7 @@ var class_udp_client =
 [
     [ "UdpClient", "class_udp_client.html#ab587f9a1af59c5616c560e74fa98e876", null ],
     [ "UdpClient", "class_udp_client.html#ac9373adbab81c59c42047ee9a72b5a2c", null ],
+    [ "UdpClient", "class_udp_client.html#abb7ac5a7852a4a553a54a1dba409bb06", null ],
     [ "UdpClient", "class_udp_client.html#a858629194a1765397334d161743caeb0", null ],
     [ "UdpClient", "class_udp_client.html#a8b5cabdab5e1f4564470475c607c0f2c", null ],
     [ "~UdpClient", "class_udp_client.html#acb769b726d4d0c3d0a00994bf0b332f2", null ],

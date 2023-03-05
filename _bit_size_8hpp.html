@@ -92,13 +92,13 @@ $(document).ready(function(){initNavTree('_bit_size_8hpp.html',''); initResizabl
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#define-members">Macros</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#enum-members">Enumerations</a>  </div>
   <div class="headertitle"><div class="title">BitSize.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;cstdint&gt;</code><br />
+<code>#include &lt;string_view&gt;</code><br />
 </div>
 <p><a href="_bit_size_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -108,21 +108,14 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This struct is used to process the data received from the server.  <a href="struct_game_packet.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
-Macros</h2></td></tr>
-<tr class="memitem:afe4b0e625372cd38ec60150d6f5594b8"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#afe4b0e625372cd38ec60150d6f5594b8">ESCAPE</a>&#160;&#160;&#160;120</td></tr>
-<tr class="separator:afe4b0e625372cd38ec60150d6f5594b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a6da1b7648b5185023d1bec9a550cd1"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a0a6da1b7648b5185023d1bec9a550cd1">WINDOW_CLOSE</a>&#160;&#160;&#160;36</td></tr>
-<tr class="separator:a0a6da1b7648b5185023d1bec9a550cd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a65528c74adc6691eac2c7a2f39328064"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a65528c74adc6691eac2c7a2f39328064">CONNECT</a>&#160;&#160;&#160;12</td></tr>
-<tr class="separator:a65528c74adc6691eac2c7a2f39328064"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
 <tr class="memitem:aa1aaf974061168237cd62271f9ad6036"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813b">PacketName</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#aa1aaf974061168237cd62271f9ad6036">PacketName</a></td></tr>
+<tr class="memdesc:aa1aaf974061168237cd62271f9ad6036"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum class is used to process the packets received from the server in order.  <a href="_bit_size_8hpp.html#aa1aaf974061168237cd62271f9ad6036">More...</a><br /></td></tr>
 <tr class="separator:aa1aaf974061168237cd62271f9ad6036"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7fce383d27ee69c16337b7082d8872ab"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090">Input</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a7fce383d27ee69c16337b7082d8872ab">Input</a></td></tr>
-<tr class="separator:a7fce383d27ee69c16337b7082d8872ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09216382cf42965f51c30d2b9d7e5524"><td class="memItemLeft" align="right" valign="top">typedef enum <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">RTypeSounds</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a09216382cf42965f51c30d2b9d7e5524">RTypeSounds</a></td></tr>
+<tr class="memdesc:a09216382cf42965f51c30d2b9d7e5524"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum defines all sounds handled in our game.  <a href="_bit_size_8hpp.html#a09216382cf42965f51c30d2b9d7e5524">More...</a><br /></td></tr>
+<tr class="separator:a09216382cf42965f51c30d2b9d7e5524"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -143,81 +136,27 @@ Enumerations</h2></td></tr>
 , <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813bafb536e799ac4fb85c36a2bbfc14bcb80">OFFSET_X</a> = 11
 , <br />
 &#160;&#160;<a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813bad3e4d17b884318df8faaed364a0af37f">OFFSET_Y</a> = 12
-, <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813ba001479a58fb44c39a29b20d565081a68">ID</a> = 13
-, <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813ba4ff8bebc049a0e8fa161e18027e989ff">DESTROYED</a> = 14
+, <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813baf17cd41000539ac8829ba42153f1c38b">ID1</a> = 13
+, <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813ba99ecb417772f800ada2cd5918e53e27b">ID2</a> = 14
+, <a class="el" href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813ba4ff8bebc049a0e8fa161e18027e989ff">DESTROYED</a> = 15
 <br />
  }</td></tr>
+<tr class="memdesc:a46654f691a6cef48cc04f0f2f0e0813b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum class is used to process the packets received from the server in order.  <a href="_bit_size_8hpp.html#a46654f691a6cef48cc04f0f2f0e0813b">More...</a><br /></td></tr>
 <tr class="separator:a46654f691a6cef48cc04f0f2f0e0813b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a080a822f0093973313bd644e517a5090"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090">Input</a> { <br />
-&#160;&#160;<a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090ad1cdcbb9f0878ccfc73ef07bf17f7f04">LeftArrow</a> = 71
-, <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090ab947d01f1561b3d5c053c7a564edc29b">RightArrow</a> = 72
-, <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090a2027cc12530a59d7f1588d29c833cde6">UpArrow</a> = 73
-, <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090a1274a787cc2c960735cbec20bf50d394">DownArrow</a> = 74
+<tr class="memitem:a79bb1eca0f8e7dc785cb887c88509369"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">RTypeSounds</a> { <br />
+&#160;&#160;<a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369a7bf45ca089ae12f8ae267ff3a41725d1">EXPLOSION_SOUND</a>
+, <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369a72093ca5df751055fea167e9de58b532">HEAL_SOUND</a>
+, <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369a844dde4934d77c11bc08f271ac2f24b0">HURT_SOUND</a>
+, <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369a853e944033140e5443e07441d3a5398c">MENU_SOUND</a>
 , <br />
-&#160;&#160;<a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090a0382a67585728ea620079642f363466a">Space</a> = 57
-, <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090ae4a1b28ecfe89d0bac93fee76b23ba68">Shift</a> = 38
+&#160;&#160;<a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369a8fac7573b1714313503cc6f73b6259e7">PIOU_SOUND</a>
+, <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369acf6f37e06770f8e043c4df2d93028753">POWERUP_SOUND</a>
 <br />
  }</td></tr>
-<tr class="separator:a080a822f0093973313bd644e517a5090"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memdesc:a79bb1eca0f8e7dc785cb887c88509369"><td class="mdescLeft">&#160;</td><td class="mdescRight">This enum defines all sounds handled in our game.  <a href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">More...</a><br /></td></tr>
+<tr class="separator:a79bb1eca0f8e7dc785cb887c88509369"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Macro Definition Documentation</h2>
-<a id="a65528c74adc6691eac2c7a2f39328064" name="a65528c74adc6691eac2c7a2f39328064"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a65528c74adc6691eac2c7a2f39328064">&#9670;&#160;</a></span>CONNECT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define CONNECT&#160;&#160;&#160;12</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="afe4b0e625372cd38ec60150d6f5594b8" name="afe4b0e625372cd38ec60150d6f5594b8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afe4b0e625372cd38ec60150d6f5594b8">&#9670;&#160;</a></span>ESCAPE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define ESCAPE&#160;&#160;&#160;120</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a0a6da1b7648b5185023d1bec9a550cd1" name="a0a6da1b7648b5185023d1bec9a550cd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a6da1b7648b5185023d1bec9a550cd1">&#9670;&#160;</a></span>WINDOW_CLOSE</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">#define WINDOW_CLOSE&#160;&#160;&#160;36</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <h2 class="groupheader">Typedef Documentation</h2>
-<a id="a7fce383d27ee69c16337b7082d8872ab" name="a7fce383d27ee69c16337b7082d8872ab"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7fce383d27ee69c16337b7082d8872ab">&#9670;&#160;</a></span>Input</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef enum <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090">Input</a> <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090">Input</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="aa1aaf974061168237cd62271f9ad6036" name="aa1aaf974061168237cd62271f9ad6036"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa1aaf974061168237cd62271f9ad6036">&#9670;&#160;</a></span>PacketName</h2>
 
@@ -230,31 +169,27 @@ Enumerations</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>This enum class is used to process the packets received from the server in order. </p>
+
 </div>
 </div>
-<h2 class="groupheader">Enumeration Type Documentation</h2>
-<a id="a080a822f0093973313bd644e517a5090" name="a080a822f0093973313bd644e517a5090"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a080a822f0093973313bd644e517a5090">&#9670;&#160;</a></span>Input</h2>
+<a id="a09216382cf42965f51c30d2b9d7e5524" name="a09216382cf42965f51c30d2b9d7e5524"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09216382cf42965f51c30d2b9d7e5524">&#9670;&#160;</a></span>RTypeSounds</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">enum <a class="el" href="_bit_size_8hpp.html#a080a822f0093973313bd644e517a5090">Input</a></td>
+          <td class="memname">typedef enum <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">RTypeSounds</a> <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">RTypeSounds</a></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<table class="fieldtable">
-<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090ad1cdcbb9f0878ccfc73ef07bf17f7f04" name="a080a822f0093973313bd644e517a5090ad1cdcbb9f0878ccfc73ef07bf17f7f04"></a>LeftArrow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090ab947d01f1561b3d5c053c7a564edc29b" name="a080a822f0093973313bd644e517a5090ab947d01f1561b3d5c053c7a564edc29b"></a>RightArrow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090a2027cc12530a59d7f1588d29c833cde6" name="a080a822f0093973313bd644e517a5090a2027cc12530a59d7f1588d29c833cde6"></a>UpArrow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090a1274a787cc2c960735cbec20bf50d394" name="a080a822f0093973313bd644e517a5090a1274a787cc2c960735cbec20bf50d394"></a>DownArrow&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090a0382a67585728ea620079642f363466a" name="a080a822f0093973313bd644e517a5090a0382a67585728ea620079642f363466a"></a>Space&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a080a822f0093973313bd644e517a5090ae4a1b28ecfe89d0bac93fee76b23ba68" name="a080a822f0093973313bd644e517a5090ae4a1b28ecfe89d0bac93fee76b23ba68"></a>Shift&#160;</td><td class="fielddoc"></td></tr>
-</table>
+
+<p>This enum defines all sounds handled in our game. </p>
 
 </div>
 </div>
+<h2 class="groupheader">Enumeration Type Documentation</h2>
 <a id="a46654f691a6cef48cc04f0f2f0e0813b" name="a46654f691a6cef48cc04f0f2f0e0813b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a46654f691a6cef48cc04f0f2f0e0813b">&#9670;&#160;</a></span>PacketName</h2>
 
@@ -266,6 +201,8 @@ Enumerations</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>This enum class is used to process the packets received from the server in order. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba8ac6d0df00f849f8ffdc6a7900e5d6d5" name="a46654f691a6cef48cc04f0f2f0e0813ba8ac6d0df00f849f8ffdc6a7900e5d6d5"></a>X1&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba0f6c4c83e4fac43cef81eaddb3e90f4d" name="a46654f691a6cef48cc04f0f2f0e0813ba0f6c4c83e4fac43cef81eaddb3e90f4d"></a>X2&#160;</td><td class="fielddoc"></td></tr>
@@ -280,8 +217,33 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba4bbdf62f20331dbd03177169cb6fc9f4" name="a46654f691a6cef48cc04f0f2f0e0813ba4bbdf62f20331dbd03177169cb6fc9f4"></a>SCALE_Y&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813bafb536e799ac4fb85c36a2bbfc14bcb80" name="a46654f691a6cef48cc04f0f2f0e0813bafb536e799ac4fb85c36a2bbfc14bcb80"></a>OFFSET_X&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813bad3e4d17b884318df8faaed364a0af37f" name="a46654f691a6cef48cc04f0f2f0e0813bad3e4d17b884318df8faaed364a0af37f"></a>OFFSET_Y&#160;</td><td class="fielddoc"></td></tr>
-<tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba001479a58fb44c39a29b20d565081a68" name="a46654f691a6cef48cc04f0f2f0e0813ba001479a58fb44c39a29b20d565081a68"></a>ID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813baf17cd41000539ac8829ba42153f1c38b" name="a46654f691a6cef48cc04f0f2f0e0813baf17cd41000539ac8829ba42153f1c38b"></a>ID1&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba99ecb417772f800ada2cd5918e53e27b" name="a46654f691a6cef48cc04f0f2f0e0813ba99ecb417772f800ada2cd5918e53e27b"></a>ID2&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a46654f691a6cef48cc04f0f2f0e0813ba4ff8bebc049a0e8fa161e18027e989ff" name="a46654f691a6cef48cc04f0f2f0e0813ba4ff8bebc049a0e8fa161e18027e989ff"></a>DESTROYED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+<a id="a79bb1eca0f8e7dc785cb887c88509369" name="a79bb1eca0f8e7dc785cb887c88509369"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a79bb1eca0f8e7dc785cb887c88509369">&#9670;&#160;</a></span>RTypeSounds</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="_bit_size_8hpp.html#a79bb1eca0f8e7dc785cb887c88509369">RTypeSounds</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This enum defines all sounds handled in our game. </p>
+<table class="fieldtable">
+<tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369a7bf45ca089ae12f8ae267ff3a41725d1" name="a79bb1eca0f8e7dc785cb887c88509369a7bf45ca089ae12f8ae267ff3a41725d1"></a>EXPLOSION_SOUND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369a72093ca5df751055fea167e9de58b532" name="a79bb1eca0f8e7dc785cb887c88509369a72093ca5df751055fea167e9de58b532"></a>HEAL_SOUND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369a844dde4934d77c11bc08f271ac2f24b0" name="a79bb1eca0f8e7dc785cb887c88509369a844dde4934d77c11bc08f271ac2f24b0"></a>HURT_SOUND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369a853e944033140e5443e07441d3a5398c" name="a79bb1eca0f8e7dc785cb887c88509369a853e944033140e5443e07441d3a5398c"></a>MENU_SOUND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369a8fac7573b1714313503cc6f73b6259e7" name="a79bb1eca0f8e7dc785cb887c88509369a8fac7573b1714313503cc6f73b6259e7"></a>PIOU_SOUND&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a79bb1eca0f8e7dc785cb887c88509369acf6f37e06770f8e043c4df2d93028753" name="a79bb1eca0f8e7dc785cb887c88509369acf6f37e06770f8e043c4df2d93028753"></a>POWERUP_SOUND&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>

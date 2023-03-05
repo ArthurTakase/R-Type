@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>R-Type: R-TYPE</title>
+<title>R-Type: {EPITECH} | Third year | Network | OOP | R-Type</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -90,83 +90,62 @@ $(document).ready(function(){initNavTree('md__r_e_a_d_m_e.html',''); initResizab
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">R-TYPE </div></div>
+  <div class="headertitle"><div class="title">{EPITECH} | Third year | Network | OOP | R-Type </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p >Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Team</h1>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md24"></a>
+About the project</h1>
+<p >This project aims to recreate the cross-platform video game R-Type with an online mutiplayer mode. It required the implementation of a multithreaded server and a graphical client, using an engine of our own design.</p>
 <ul>
-<li>Arthur Decaen (<a href="#" onclick="location.href='mai'+'lto:'+'art'+'hu'+'r.d'+'ec'+'aen'+'@e'+'pit'+'ec'+'h.e'+'u'; return false;">arthu<span class="obfuscator">.nosp@m.</span>r.de<span class="obfuscator">.nosp@m.</span>caen@<span class="obfuscator">.nosp@m.</span>epit<span class="obfuscator">.nosp@m.</span>ech.e<span class="obfuscator">.nosp@m.</span>u</a>)</li>
-<li>Corentin Roy (<a href="#" onclick="location.href='mai'+'lto:'+'cor'+'en'+'tin'+'.r'+'oy@'+'ep'+'ite'+'ch'+'.eu'; return false;">coren<span class="obfuscator">.nosp@m.</span>tin.<span class="obfuscator">.nosp@m.</span>roy@e<span class="obfuscator">.nosp@m.</span>pite<span class="obfuscator">.nosp@m.</span>ch.eu</a>)</li>
-<li>Solène Lefeu (<a href="#" onclick="location.href='mai'+'lto:'+'sol'+'en'+'e.l'+'ef'+'eu@'+'ep'+'ite'+'ch'+'.eu'; return false;">solen<span class="obfuscator">.nosp@m.</span>e.le<span class="obfuscator">.nosp@m.</span>feu@e<span class="obfuscator">.nosp@m.</span>pite<span class="obfuscator">.nosp@m.</span>ch.eu</a>)</li>
-<li>Guillaume Vernizeau (<a href="#" onclick="location.href='mai'+'lto:'+'gui'+'ll'+'aum'+'e.'+'ver'+'ni'+'zea'+'u@'+'epi'+'te'+'ch.'+'eu'; return false;">guill<span class="obfuscator">.nosp@m.</span>aume<span class="obfuscator">.nosp@m.</span>.vern<span class="obfuscator">.nosp@m.</span>izea<span class="obfuscator">.nosp@m.</span>u@epi<span class="obfuscator">.nosp@m.</span>tech<span class="obfuscator">.nosp@m.</span>.eu</a>)</li>
-<li>Geoffrey Labruyère (<a href="#" onclick="location.href='mai'+'lto:'+'geo'+'ff'+'rey'+'.l'+'abr'+'uy'+'ere'+'@e'+'pit'+'ec'+'h.e'+'u'; return false;">geoff<span class="obfuscator">.nosp@m.</span>rey.<span class="obfuscator">.nosp@m.</span>labru<span class="obfuscator">.nosp@m.</span>yere<span class="obfuscator">.nosp@m.</span>@epit<span class="obfuscator">.nosp@m.</span>ech.<span class="obfuscator">.nosp@m.</span>eu</a>)</li>
+<li><code><a class="el" href="namespace_tools.html">Tools</a>:</code><ul>
+<li>Project made in <code>C++</code> version 20</li>
+<li>use of the <code>SFML</code> graphical library to display game elements</li>
+<li>Compiled with <code>CMake</code>, minimum version required : <code>3.17</code></li>
+<li><code>Google Test</code> for unit tests</li>
+<li><code>Doxygen</code> for documentation</li>
+<li>A <code>justfile</code> is provided to compile, run and test the project</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md2"></a>
+</li>
+<li>Some of the features we implemented:<ul>
+<li>A <code>multithreaded</code> server, to handle communication and game logic at the same time</li>
+<li>A graphical client, to display the game and handle user input</li>
+<li>A generic <code><a class="el" href="class_entity.html" title="Entity part of the ECS. It can be linked to many components to add attributes to it....">Entity</a> Component System</code> architecture and game engine</li>
+<li>A encapsulated implementation of an <code>UDP socket</code>, compatible with Linux and Windows</li>
+<li>A client-server communication protocol</li>
+</ul>
+</li>
+</ul>
+<p >For further details about the implementation of these notions, you can click <a href="https://arthurtakase.github.io/R-Type/">here</a> to be redirected to our documentation.</p>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Usage</h1>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Linux</h2>
 <ul>
-<li><p class="startli">Build</p>
-<div class="fragment"><div class="line">mkdir -p build &amp;&amp; cd build &amp;&amp; cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja &amp;&amp; ninja &amp;&amp; cd ..</div>
-</div><!-- fragment --></li>
-<li><p class="startli">Launch <a class="el" href="struct_client.html" title="Encapsulate a client address and the data to send.">Client</a></p>
-<div class="fragment"><div class="line">cd build &amp;&amp; ./r-type_client </div>
-</div><!-- fragment --><p> or </p><div class="fragment"><div class="line">cd build &amp;&amp; ./r-type_client [server port] [server ip] [client port]</div>
-</div><!-- fragment --></li>
-<li><p class="startli">Launch <a class="el" href="class_server.html" title="Server class using UDP protocol.">Server</a></p>
-<div class="fragment"><div class="line">cd build &amp;&amp; ./r-type_server</div>
-</div><!-- fragment --></li>
+<li>For Linux users, check out our <a class="el" href="md_docs__usage_linux.html">Usage for Linux users</a> guide.</li>
+<li>For Windows users, check out our <a class="el" href="md_docs__usage_windows.html">Usage for Windows users</a> guide.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md4"></a>
-Window</h2>
+<h1><a class="anchor" id="autotoc_md26"></a>
+Documentation</h1>
 <ul>
-<li>Compile with Cmake GUI</li>
-<li>Use Visual Studio</li>
-<li>Launch .exe (r-type_client.exe and r-type_server.exe)</li>
+<li>ECS architecture graph : <a class="el" href="md_docs__e_c_s.html">documentation</a></li>
+<li><a class="el" href="struct_client.html" title="Encapsulate a client address and the data to send.">Client</a> protocol graph : <a class="el" href="md_docs__client_protocol.html">documentation</a></li>
+<li><a class="el" href="class_server.html" title="Server class using UDP protocol.">Server</a> protocol graph : <a class="el" href="md_docs__server_protocol.html">documentation</a></li>
 </ul>
-<h1><a class="anchor" id="autotoc_md5"></a>
-Dev Infos</h1>
-<h2><a class="anchor" id="autotoc_md6"></a>
-ECS</h2>
-<p ><img src="docs/ECS.png" alt="ECS" class="inline"/></p>
-<h2><a class="anchor" id="autotoc_md7"></a>
-Commit norm</h2>
-<p >Exemples :</p>
+<p >Our complete documentation can be found <a href="https://arthurtakase.github.io/R-Type/">here</a>.</p>
+<h1><a class="anchor" id="autotoc_md27"></a>
+Game improvements</h1>
 <ul>
-<li><b>ADD:</b> good ECS</li>
-<li><b>FIX:</b> no collision on same entity</li>
-<li><b>UP:</b> remove useless print</li>
+<li>Want to contribute to the project ? Check out our <a class="el" href="md_docs__contributor.html">Contributor's guide</a> !</li>
+<li>Want to create your own custom levels ? Check out our <a class="el" href="md_docs__custom_level.html">Level's guide</a> !</li>
 </ul>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadNone">Name   </th><th class="markdownTableHeadNone">Explanation    </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">ADD   </td><td class="markdownTableBodyNone">If you add files, features...    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">FIX   </td><td class="markdownTableBodyNone">If you were working on a bug or any form of default that you corrected    </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">DEL   </td><td class="markdownTableBodyNone">If you removed files, features...    </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyNone">UP   </td><td class="markdownTableBodyNone">If you change something without adding any features or content   </td></tr>
-</table>
-<h2><a class="anchor" id="autotoc_md8"></a>
-CI/CD</h2>
+<h1><a class="anchor" id="autotoc_md28"></a>
+Continuous integration/Continuous Deployment</h1>
 <ul>
-<li>Automatic build on main and dev branches.</li>
-<li>Running Google Test unit tests on main and dev branches.</li>
-<li>Generating coverage on main and dev branches.</li>
-<li>Automatic generation of Doxygen documentation on main and dev branches accessible here.</li>
+<li>Automatic build on <code>main</code> and <code>develop</code> branches.</li>
+<li>Running Google Test unit tests on <code>main</code> and <code>develop</code> branches.</li>
+<li>Generating coverage on <code>main</code> and <code>develop</code> branches.</li>
+<li>Automatic generation of Doxygen documentation on <code>main</code> and <code>develop</code> branches accessible <a href="https://arthurtakase.github.io/R-Type/">here</a>.</li>
 <li>Sending a discord message on push/merge on all branches.</li>
 </ul>
-<h2><a class="anchor" id="autotoc_md9"></a>
-Doxygen</h2>
-<p >For proper documentation generation, please put comments above your functions using the following format.</p>
-<div class="fragment"><div class="line"> </div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md10"></a>
-Google Test</h2>
-<p >Every function must have at least one unit test. The tests work with Google Test, documentation is here. </p>
+<p >Project made by <a href="https://github.com/ArthurTakase">Arthur D.</a>, <a href="https://github.com/slefeu">Solène L.</a>, <a href="https://github.com/roy-corentin">Corentin R.</a>, <a href="https://github.com/GeoffreyLabruyere">Geoffrey L.</a> and <a href="https://github.com/GuillaumeVernizeau">Guillaume V.</a> </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

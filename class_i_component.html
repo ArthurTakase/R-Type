@@ -114,9 +114,12 @@ Inheritance diagram for IComponent:</div>
 <area href="class_hitbox_component.html" title="Component for the hitbox of an entity. Contain the width and the height of the box." alt="HitboxComponent" shape="rect" coords="153,280,296,304"/>
 <area href="class_input_component.html" title="Component assigned to drawable entities." alt="InputComponent" shape="rect" coords="153,336,296,360"/>
 <area href="class_mouvement_component.html" title="Component used to set the direction and speed of the movement of an entity." alt="MouvementComponent" shape="rect" coords="153,392,296,416"/>
-<area href="class_stat_component.html" title="Component used to store the stats of an entity." alt="StatComponent" shape="rect" coords="153,448,296,472"/>
-<area href="class_timer_component.html" title="Component used to store the position of an entity." alt="TimerComponent" shape="rect" coords="153,504,296,528"/>
-<area href="class_transform_component.html" title="Component used to store the position of an entity." alt="TransformComponent" shape="rect" coords="153,560,296,584"/>
+<area href="class_music_component.html" title="Component used to set the music associated to an entity." alt="MusicComponent" shape="rect" coords="153,448,296,472"/>
+<area href="class_sound_component.html" title="Component used to set a sound associated to an entity." alt="SoundComponent" shape="rect" coords="153,504,296,528"/>
+<area href="class_stat_component.html" title="Component used to store the stats of an entity." alt="StatComponent" shape="rect" coords="153,560,296,584"/>
+<area href="class_text_component.html" title="Component assigned to drawable entities." alt="TextComponent" shape="rect" coords="153,616,296,640"/>
+<area href="class_timer_component.html" title="Component used to store the position of an entity." alt="TimerComponent" shape="rect" coords="153,672,296,696"/>
+<area href="class_transform_component.html" title="Component used to store the position of an entity." alt="TransformComponent" shape="rect" coords="153,728,296,752"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -128,12 +131,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a17624fd3b8897b7372590256dc0f3d5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0374efede06b56b823d4711f04f9508b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a0374efede06b56b823d4711f04f9508b">IComponent</a> (const <a class="el" href="class_i_component.html">IComponent</a> &amp;other) noexcept=default</td></tr>
 <tr class="separator:a0374efede06b56b823d4711f04f9508b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cdf3cad14aa80497458333a4a952544"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a4cdf3cad14aa80497458333a4a952544">IComponent</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;other) noexcept=delete</td></tr>
-<tr class="separator:a4cdf3cad14aa80497458333a4a952544"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07c6b51f0fffb9fdf5457d6febdf50b8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a07c6b51f0fffb9fdf5457d6febdf50b8">IComponent</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="separator:a07c6b51f0fffb9fdf5457d6febdf50b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c49cf8694f602d1e048f844de8097f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a7c49cf8694f602d1e048f844de8097f6">operator=</a> (const <a class="el" href="class_i_component.html">IComponent</a> &amp;rhs) noexcept=default</td></tr>
 <tr class="separator:a7c49cf8694f602d1e048f844de8097f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5403a9fd83857575fcb696f082acbf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#a5a5403a9fd83857575fcb696f082acbf">operator=</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;rhs) noexcept=delete</td></tr>
-<tr class="separator:a5a5403a9fd83857575fcb696f082acbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef38cd2012e4a6871469c37092ffd46c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_i_component.html">IComponent</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_i_component.html#aef38cd2012e4a6871469c37092ffd46c">operator=</a> (<a class="el" href="class_i_component.html">IComponent</a> &amp;&amp;rhs) noexcept=default</td></tr>
+<tr class="separator:aef38cd2012e4a6871469c37092ffd46c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Interface for all components. </p>
@@ -214,8 +217,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4cdf3cad14aa80497458333a4a952544" name="a4cdf3cad14aa80497458333a4a952544"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cdf3cad14aa80497458333a4a952544">&#9670;&#160;</a></span>IComponent() <span class="overload">[3/3]</span></h2>
+<a id="a07c6b51f0fffb9fdf5457d6febdf50b8" name="a07c6b51f0fffb9fdf5457d6febdf50b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07c6b51f0fffb9fdf5457d6febdf50b8">&#9670;&#160;</a></span>IComponent() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -233,7 +236,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -267,8 +270,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a5a5403a9fd83857575fcb696f082acbf" name="a5a5403a9fd83857575fcb696f082acbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a5403a9fd83857575fcb696f082acbf">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="aef38cd2012e4a6871469c37092ffd46c" name="aef38cd2012e4a6871469c37092ffd46c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef38cd2012e4a6871469c37092ffd46c">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -286,7 +289,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

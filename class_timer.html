@@ -97,6 +97,9 @@ $(document).ready(function(){initNavTree('class_timer.html',''); initResizable()
 </div><!--header-->
 <div class="contents">
 
+<p>This class is used to create, modify and encapsulate a Sf::Clock.  
+ <a href="class_timer.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="_timer_8hpp_source.html">Timer.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -109,28 +112,30 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ad1c1f04201783a4332e46d50e91d199b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a21411ed591c245bc85bd7792e8bdb730"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a21411ed591c245bc85bd7792e8bdb730">Timer</a> (const <a class="el" href="class_timer.html">Timer</a> &amp;other) noexcept=default</td></tr>
 <tr class="separator:a21411ed591c245bc85bd7792e8bdb730"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a086bf320338b8f9abba8dc9948d9ab0a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a086bf320338b8f9abba8dc9948d9ab0a">Timer</a> (<a class="el" href="class_timer.html">Timer</a> &amp;&amp;other) noexcept=delete</td></tr>
-<tr class="separator:a086bf320338b8f9abba8dc9948d9ab0a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa27ab34974cda898dbb9239a48cb8a54"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#aa27ab34974cda898dbb9239a48cb8a54">operator=</a> (const <a class="el" href="class_timer.html">Timer</a> &amp;rhs) noexcept=delete</td></tr>
-<tr class="separator:aa27ab34974cda898dbb9239a48cb8a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aace7637178f52f05ca767400c13cfcf9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#aace7637178f52f05ca767400c13cfcf9">operator=</a> (<a class="el" href="class_timer.html">Timer</a> &amp;&amp;rhs) noexcept=delete</td></tr>
-<tr class="separator:aace7637178f52f05ca767400c13cfcf9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3a8b5272198d029779dc9302a54305a8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a3a8b5272198d029779dc9302a54305a8">start</a> ()</td></tr>
-<tr class="separator:a3a8b5272198d029779dc9302a54305a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a63f0eb44b27402196590a03781515dba"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a63f0eb44b27402196590a03781515dba">stop</a> ()</td></tr>
-<tr class="separator:a63f0eb44b27402196590a03781515dba"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9020542d73357a4eef512eefaf57524b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a9020542d73357a4eef512eefaf57524b">reset</a> ()</td></tr>
-<tr class="separator:a9020542d73357a4eef512eefaf57524b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a44467228f93b850a7950518cbc864d92"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a44467228f93b850a7950518cbc864d92">isOver</a> ()</td></tr>
-<tr class="separator:a44467228f93b850a7950518cbc864d92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a480f26479147ff5259ee40fefba59cca"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a480f26479147ff5259ee40fefba59cca">getElapsedTime</a> ()</td></tr>
-<tr class="separator:a480f26479147ff5259ee40fefba59cca"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9ede7a0ed020bb90b67f70de8c6be919"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a9ede7a0ed020bb90b67f70de8c6be919">setLimit</a> (float limit)</td></tr>
-<tr class="separator:a9ede7a0ed020bb90b67f70de8c6be919"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b48f80fdb0f04c27a0f5e5c791b2cff"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a3b48f80fdb0f04c27a0f5e5c791b2cff">getLimit</a> () const</td></tr>
-<tr class="separator:a3b48f80fdb0f04c27a0f5e5c791b2cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a71d14cef0693782dcb21b3f267652a77"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a71d14cef0693782dcb21b3f267652a77">Timer</a> (<a class="el" href="class_timer.html">Timer</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="separator:a71d14cef0693782dcb21b3f267652a77"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:addee623777f9b510e297bb00db9f8e5e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#addee623777f9b510e297bb00db9f8e5e">operator=</a> (const <a class="el" href="class_timer.html">Timer</a> &amp;rhs) noexcept=default</td></tr>
+<tr class="separator:addee623777f9b510e297bb00db9f8e5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbc33baa3644740f94c0802f2eb9deea"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_timer.html">Timer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#abbc33baa3644740f94c0802f2eb9deea">operator=</a> (<a class="el" href="class_timer.html">Timer</a> &amp;&amp;rhs) noexcept=default</td></tr>
+<tr class="separator:abbc33baa3644740f94c0802f2eb9deea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19375c7e1d21fb6bdca3bbfa4cb2ff6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a19375c7e1d21fb6bdca3bbfa4cb2ff6a">start</a> () noexcept</td></tr>
+<tr class="separator:a19375c7e1d21fb6bdca3bbfa4cb2ff6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a68c7d66dda98f14c2872f061a288e29c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a68c7d66dda98f14c2872f061a288e29c">stop</a> () noexcept</td></tr>
+<tr class="separator:a68c7d66dda98f14c2872f061a288e29c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff7d0fa13afae45e52d6fa84683b93d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#aff7d0fa13afae45e52d6fa84683b93d3">reset</a> () noexcept</td></tr>
+<tr class="separator:aff7d0fa13afae45e52d6fa84683b93d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abee26228ad21b5f65e2a15a7efacb54e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#abee26228ad21b5f65e2a15a7efacb54e">isOver</a> () noexcept</td></tr>
+<tr class="separator:abee26228ad21b5f65e2a15a7efacb54e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca770b04165b4f9a385c32277ba052d3"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#aca770b04165b4f9a385c32277ba052d3">getElapsedTime</a> () const noexcept</td></tr>
+<tr class="separator:aca770b04165b4f9a385c32277ba052d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a66fbe26f95145897763f6b5b7f6a0135"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#a66fbe26f95145897763f6b5b7f6a0135">setLimit</a> (float limit) noexcept</td></tr>
+<tr class="separator:a66fbe26f95145897763f6b5b7f6a0135"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4e0cf29da555004dab93032cce6a6b1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_timer.html#af4e0cf29da555004dab93032cce6a6b1">getLimit</a> () const noexcept</td></tr>
+<tr class="separator:af4e0cf29da555004dab93032cce6a6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p >This class is used to create, modify and encapsulate a Sf::Clock. </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3d18ff196960cc65f19ff5452ece31db" name="a3d18ff196960cc65f19ff5452ece31db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3d18ff196960cc65f19ff5452ece31db">&#9670;&#160;</a></span>Timer() <span class="overload">[1/4]</span></h2>
 
@@ -153,6 +158,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It initializes the limit_ and active_ members to 0 and false, respectively </p>
 
 </div>
 </div>
@@ -179,6 +185,13 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It initializes the limit_ and active_ member variables</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">limit</td><td>The time limit for the timer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
@@ -233,8 +246,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a086bf320338b8f9abba8dc9948d9ab0a" name="a086bf320338b8f9abba8dc9948d9ab0a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a086bf320338b8f9abba8dc9948d9ab0a">&#9670;&#160;</a></span>Timer() <span class="overload">[4/4]</span></h2>
+<a id="a71d14cef0693782dcb21b3f267652a77" name="a71d14cef0693782dcb21b3f267652a77"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71d14cef0693782dcb21b3f267652a77">&#9670;&#160;</a></span>Timer() <span class="overload">[4/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +265,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -260,28 +273,41 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a480f26479147ff5259ee40fefba59cca" name="a480f26479147ff5259ee40fefba59cca"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a480f26479147ff5259ee40fefba59cca">&#9670;&#160;</a></span>getElapsedTime()</h2>
+<a id="aca770b04165b4f9a385c32277ba052d3" name="aca770b04165b4f9a385c32277ba052d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca770b04165b4f9a385c32277ba052d3">&#9670;&#160;</a></span>getElapsedTime()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">float Timer::getElapsedTime </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >It returns the time elapsed since the last call to <a class="el" href="class_timer.html#aff7d0fa13afae45e52d6fa84683b93d3">reset()</a></p>
+<dl class="section return"><dt>Returns</dt><dd>The time elapsed since the clock was started. </dd></dl>
 
 </div>
 </div>
-<a id="a3b48f80fdb0f04c27a0f5e5c791b2cff" name="a3b48f80fdb0f04c27a0f5e5c791b2cff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b48f80fdb0f04c27a0f5e5c791b2cff">&#9670;&#160;</a></span>getLimit()</h2>
+<a id="af4e0cf29da555004dab93032cce6a6b1" name="af4e0cf29da555004dab93032cce6a6b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4e0cf29da555004dab93032cce6a6b1">&#9670;&#160;</a></span>getLimit()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">float Timer::getLimit </td>
@@ -290,15 +316,25 @@ Public Member Functions</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p ><code>getLimit</code> returns the limit of the timer</p>
+<dl class="section return"><dt>Returns</dt><dd>The limit_ variable. </dd></dl>
 
 </div>
 </div>
-<a id="a44467228f93b850a7950518cbc864d92" name="a44467228f93b850a7950518cbc864d92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a44467228f93b850a7950518cbc864d92">&#9670;&#160;</a></span>isOver()</h2>
+<a id="abee26228ad21b5f65e2a15a7efacb54e" name="abee26228ad21b5f65e2a15a7efacb54e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abee26228ad21b5f65e2a15a7efacb54e">&#9670;&#160;</a></span>isOver()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">bool Timer::isOver </td>
@@ -307,12 +343,19 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >If the timer is active and the elapsed time is greater than the limit, restart the clock and return true. Otherwise, return false</p>
+<dl class="section return"><dt>Returns</dt><dd>A boolean value. </dd></dl>
 
 </div>
 </div>
-<a id="aa27ab34974cda898dbb9239a48cb8a54" name="aa27ab34974cda898dbb9239a48cb8a54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa27ab34974cda898dbb9239a48cb8a54">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+<a id="addee623777f9b510e297bb00db9f8e5e" name="addee623777f9b510e297bb00db9f8e5e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#addee623777f9b510e297bb00db9f8e5e">&#9670;&#160;</a></span>operator=() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -330,15 +373,15 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="aace7637178f52f05ca767400c13cfcf9" name="aace7637178f52f05ca767400c13cfcf9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aace7637178f52f05ca767400c13cfcf9">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+<a id="abbc33baa3644740f94c0802f2eb9deea" name="abbc33baa3644740f94c0802f2eb9deea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc33baa3644740f94c0802f2eb9deea">&#9670;&#160;</a></span>operator=() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -356,18 +399,21 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">delete</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 </div>
 </div>
-<a id="a9020542d73357a4eef512eefaf57524b" name="a9020542d73357a4eef512eefaf57524b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9020542d73357a4eef512eefaf57524b">&#9670;&#160;</a></span>reset()</h2>
+<a id="aff7d0fa13afae45e52d6fa84683b93d3" name="aff7d0fa13afae45e52d6fa84683b93d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff7d0fa13afae45e52d6fa84683b93d3">&#9670;&#160;</a></span>reset()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timer::reset </td>
@@ -376,15 +422,24 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >Resets the timer to zero. </p>
 
 </div>
 </div>
-<a id="a9ede7a0ed020bb90b67f70de8c6be919" name="a9ede7a0ed020bb90b67f70de8c6be919"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9ede7a0ed020bb90b67f70de8c6be919">&#9670;&#160;</a></span>setLimit()</h2>
+<a id="a66fbe26f95145897763f6b5b7f6a0135" name="a66fbe26f95145897763f6b5b7f6a0135"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66fbe26f95145897763f6b5b7f6a0135">&#9670;&#160;</a></span>setLimit()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timer::setLimit </td>
@@ -394,15 +449,30 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >It sets the limit of the timer</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">limit</td><td>The time limit for the timer. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>
-<a id="a3a8b5272198d029779dc9302a54305a8" name="a3a8b5272198d029779dc9302a54305a8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3a8b5272198d029779dc9302a54305a8">&#9670;&#160;</a></span>start()</h2>
+<a id="a19375c7e1d21fb6bdca3bbfa4cb2ff6a" name="a19375c7e1d21fb6bdca3bbfa4cb2ff6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19375c7e1d21fb6bdca3bbfa4cb2ff6a">&#9670;&#160;</a></span>start()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timer::start </td>
@@ -411,15 +481,24 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >It sets the active_ member variable to true </p>
 
 </div>
 </div>
-<a id="a63f0eb44b27402196590a03781515dba" name="a63f0eb44b27402196590a03781515dba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a63f0eb44b27402196590a03781515dba">&#9670;&#160;</a></span>stop()</h2>
+<a id="a68c7d66dda98f14c2872f061a288e29c" name="a68c7d66dda98f14c2872f061a288e29c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a68c7d66dda98f14c2872f061a288e29c">&#9670;&#160;</a></span>stop()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Timer::stop </td>
@@ -428,7 +507,13 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+<p >It stops the timer. </p>
 
 </div>
 </div>

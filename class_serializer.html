@@ -98,7 +98,7 @@ $(document).ready(function(){initNavTree('class_serializer.html',''); initResiza
 </div><!--header-->
 <div class="contents">
 
-<p>Object used to serialize objects for network.  
+<p>class used to serialize objects for network  
  <a href="class_serializer.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="_serializer_8hpp_source.html">Serializer.hpp</a>&gt;</code></p>
@@ -124,9 +124,11 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:aff63019bd71949d11aa23971aed67bbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d81caa364ef0003bbd06dac3644b950"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#a6d81caa364ef0003bbd06dac3644b950">serialize</a> (int keyCode)</td></tr>
 <tr class="separator:a6d81caa364ef0003bbd06dac3644b950"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad029fe856e6318edbdcdeab68d1e5d34"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_serializer.html#ad029fe856e6318edbdcdeab68d1e5d34">serializeMusic</a> (std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;entity) noexcept</td></tr>
+<tr class="separator:ad029fe856e6318edbdcdeab68d1e5d34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Object used to serialize objects for network. </p>
+<div class="textblock"><p >class used to serialize objects for network </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a43467fe9129c4afbdbcdf22a12233805" name="a43467fe9129c4afbdbcdf22a12233805"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a43467fe9129c4afbdbcdf22a12233805">&#9670;&#160;</a></span>Serializer() <span class="overload">[1/3]</span></h2>
@@ -306,6 +308,14 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+<p >It takes an integer and returns a vector of bytes</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">keyCode</td><td>The key code to send.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A vector of uint8_t </dd></dl>
 
 </div>
 </div>
@@ -340,6 +350,32 @@ Static Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A vector of uint8_t </dd></dl>
+
+</div>
+</div>
+<a id="ad029fe856e6318edbdcdeab68d1e5d34" name="ad029fe856e6318edbdcdeab68d1e5d34"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad029fe856e6318edbdcdeab68d1e5d34">&#9670;&#160;</a></span>serializeMusic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a> Serializer::serializeMusic </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; const &amp;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>

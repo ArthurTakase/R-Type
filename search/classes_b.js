@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['player_0',['Player',['../struct_player.html',1,'']]]
+  ['networkerror_0',['NetworkError',['../class_network_error.html',1,'']]]
 ];

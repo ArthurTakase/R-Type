@@ -108,6 +108,10 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a3bc52612b7f7519f380a68f7861b518e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0e96656d59130faaf23b381938ef4362"><td class="memItemLeft" align="right" valign="top">std::queue&lt; <a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a0e96656d59130faaf23b381938ef4362">dataToSend</a> = {}</td></tr>
 <tr class="separator:a0e96656d59130faaf23b381938ef4362"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d6dd0bfc2dce704eabe3533ea4bd5ce"><td class="memItemLeft" align="right" valign="top">std::chrono::high_resolution_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a9d6dd0bfc2dce704eabe3533ea4bd5ce">lastPing</a> = {}</td></tr>
+<tr class="separator:a9d6dd0bfc2dce704eabe3533ea4bd5ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f2eb8cbde0a06473572bfaeff43106b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_client.html#a0f2eb8cbde0a06473572bfaeff43106b">isPingSent</a> = false</td></tr>
+<tr class="separator:a0f2eb8cbde0a06473572bfaeff43106b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Encapsulate a client address and the data to send. </p>
@@ -134,6 +138,34 @@ Public Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::queue&lt;<a class="el" href="_i_socket_8hpp.html#a9ec61fac08972b313051895fdf9dec7e">RawData</a>&gt; Client::dataToSend = {}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0f2eb8cbde0a06473572bfaeff43106b" name="a0f2eb8cbde0a06473572bfaeff43106b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f2eb8cbde0a06473572bfaeff43106b">&#9670;&#160;</a></span>isPingSent</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Client::isPingSent = false</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9d6dd0bfc2dce704eabe3533ea4bd5ce" name="a9d6dd0bfc2dce704eabe3533ea4bd5ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d6dd0bfc2dce704eabe3533ea4bd5ce">&#9670;&#160;</a></span>lastPing</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::high_resolution_clock::time_point Client::lastPing = {}</td>
         </tr>
       </table>
 </div><div class="memdoc">

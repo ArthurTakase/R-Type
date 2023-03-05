@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connect_0',['CONNECT',['../_bit_size_8hpp.html#a65528c74adc6691eac2c7a2f39328064',1,'BitSize.hpp']]]
+  ['font_0',['FONT',['../_shortcuts_8hpp.html#a2379608b62da0aaca0a25a7971fdb16b',1,'Shortcuts.hpp']]]
 ];

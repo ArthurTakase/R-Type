@@ -7,7 +7,10 @@ var dir_eba7f6b8b7d3fd8e024a882aba073963 =
     [ "HitboxComponent.cpp", "_hitbox_component_8cpp.html", null ],
     [ "InputComponent.cpp", "_input_component_8cpp.html", null ],
     [ "MouvementComponent.cpp", "_mouvement_component_8cpp.html", null ],
+    [ "MusicComponent.cpp", "_music_component_8cpp.html", null ],
+    [ "SoundComponent.cpp", "_sound_component_8cpp.html", null ],
     [ "StatComponent.cpp", "_stat_component_8cpp.html", null ],
+    [ "TextComponent.cpp", "_text_component_8cpp.html", null ],
     [ "TimerComponent.cpp", "_timer_component_8cpp.html", null ],
     [ "TransformComponent.cpp", "_transform_component_8cpp.html", null ]
 ];

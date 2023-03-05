@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['no_5findex_0',['NO_INDEX',['../_stat_component_8hpp.html#ab6cb9b05ea204a7905d0ae0143950a03',1,'StatComponent.hpp']]]
+  ['sprite_0',['SPRITE',['../_shortcuts_8hpp.html#a6d69a28e03ae71ead3f4457cf0308459',1,'Shortcuts.hpp']]]
 ];

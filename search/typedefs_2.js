@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['packetname_0',['PacketName',['../_bit_size_8hpp.html#aa1aaf974061168237cd62271f9ad6036',1,'BitSize.hpp']]],
-  ['player_1',['Player',['../_server_8hpp.html#a480a040facb94f90060562cd65274385',1,'Server.hpp']]],
-  ['port_2',['Port',['../struct_address.html#ae45ef09ad9e7f1a977f00fcd7d637935',1,'Address']]]
+  ['json_0',['json',['../_json_tools_8hpp.html#ab701e3ac61a85b337ec5c1abaad6742d',1,'json():&#160;JsonTools.hpp'],['../_json_tools__t_8cpp.html#ab701e3ac61a85b337ec5c1abaad6742d',1,'json():&#160;JsonTools_t.cpp']]]
 ];

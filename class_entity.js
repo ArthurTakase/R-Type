@@ -1,10 +1,10 @@
 var class_entity =
 [
     [ "Entity", "class_entity.html#a0d81cc16ca853f5105fbf6aa5b807a89", null ],
-    [ "~Entity", "class_entity.html#a3787180835364a80712e64af85019b2d", null ],
     [ "Entity", "class_entity.html#a5763e37f387ef3155d27aa1aabd58cf4", null ],
     [ "Entity", "class_entity.html#adaec626476fc9b7816b2487b4eb759fa", null ],
-    [ "addComponent", "class_entity.html#a43e3e04bf71eb494b3b3c509f092ad07", null ],
+    [ "~Entity", "class_entity.html#a5a9c9f7c0e9c699e2c77c362f5aa8eec", null ],
+    [ "addComponent", "class_entity.html#a81c3d014440689b06aa57e9d48155e89", null ],
     [ "getComponent", "class_entity.html#a581c44fee015724f57366fca3c85c164", null ],
     [ "getComponents", "class_entity.html#acb1dc847fddaad6617d9826a566b1813", null ],
     [ "getId", "class_entity.html#a1b07798d5ba9be2b36b0c3c52bea27de", null ],

@@ -108,6 +108,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab587f9a1af59c5616c560e74fa98e876"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac9373adbab81c59c42047ee9a72b5a2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_udp_client.html#ac9373adbab81c59c42047ee9a72b5a2c">UdpClient</a> (<a class="el" href="struct_address.html">Address</a> serverAddress, <a class="el" href="struct_address.html#ae45ef09ad9e7f1a977f00fcd7d637935">Address::Port</a> clientPort)</td></tr>
 <tr class="separator:ac9373adbab81c59c42047ee9a72b5a2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb7ac5a7852a4a553a54a1dba409bb06"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_udp_client.html#abb7ac5a7852a4a553a54a1dba409bb06">UdpClient</a> (<a class="el" href="struct_address.html#ae45ef09ad9e7f1a977f00fcd7d637935">Address::Port</a> clientPort)</td></tr>
+<tr class="separator:abb7ac5a7852a4a553a54a1dba409bb06"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a858629194a1765397334d161743caeb0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_udp_client.html#a858629194a1765397334d161743caeb0">UdpClient</a> (const <a class="el" href="class_udp_client.html">UdpClient</a> &amp;other) noexcept=delete</td></tr>
 <tr class="separator:a858629194a1765397334d161743caeb0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8b5cabdab5e1f4564470475c607c0f2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_udp_client.html#a8b5cabdab5e1f4564470475c607c0f2c">UdpClient</a> (<a class="el" href="class_udp_client.html">UdpClient</a> &amp;&amp;other) noexcept=delete</td></tr>
@@ -129,7 +131,7 @@ Public Member Functions</h2></td></tr>
 <div class="textblock"><p ><a class="el" href="struct_client.html" title="Encapsulate a client address and the data to send.">Client</a> class using UDP protocol. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ab587f9a1af59c5616c560e74fa98e876" name="ab587f9a1af59c5616c560e74fa98e876"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab587f9a1af59c5616c560e74fa98e876">&#9670;&#160;</a></span>UdpClient() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ab587f9a1af59c5616c560e74fa98e876">&#9670;&#160;</a></span>UdpClient() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -154,7 +156,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="ac9373adbab81c59c42047ee9a72b5a2c" name="ac9373adbab81c59c42047ee9a72b5a2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9373adbab81c59c42047ee9a72b5a2c">&#9670;&#160;</a></span>UdpClient() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9373adbab81c59c42047ee9a72b5a2c">&#9670;&#160;</a></span>UdpClient() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -186,8 +188,7 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p >It creates a socket, a selector, a deserializer, a game, and two threads.</p>
-<dl class="params"><dt>Parameters</dt><dd>
+<p >Constructor for my UDP client's class. It initializes its socket, a deserializer, a game object, and two threads for its execution. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">serverAddress</td><td>The address of the server to connect to. </td></tr>
     <tr><td class="paramname">clientPort</td><td>The port that the client will use to communicate with the server. </td></tr>
@@ -197,8 +198,40 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="abb7ac5a7852a4a553a54a1dba409bb06" name="abb7ac5a7852a4a553a54a1dba409bb06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb7ac5a7852a4a553a54a1dba409bb06">&#9670;&#160;</a></span>UdpClient() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">UdpClient::UdpClient </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_address.html#ae45ef09ad9e7f1a977f00fcd7d637935">Address::Port</a>&#160;</td>
+          <td class="paramname"><em>clientPort</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p >Constructor for my UDP client's class. It initializes its socket, a deserializer, a game object, and two threads for its execution. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">clientPort</td><td>The port that the client will use to communicate with the server. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a858629194a1765397334d161743caeb0" name="a858629194a1765397334d161743caeb0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a858629194a1765397334d161743caeb0">&#9670;&#160;</a></span>UdpClient() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a858629194a1765397334d161743caeb0">&#9670;&#160;</a></span>UdpClient() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +257,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a8b5cabdab5e1f4564470475c607c0f2c" name="a8b5cabdab5e1f4564470475c607c0f2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8b5cabdab5e1f4564470475c607c0f2c">&#9670;&#160;</a></span>UdpClient() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b5cabdab5e1f4564470475c607c0f2c">&#9670;&#160;</a></span>UdpClient() <span class="overload">[5/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">

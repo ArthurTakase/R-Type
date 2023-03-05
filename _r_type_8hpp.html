@@ -98,13 +98,16 @@ $(document).ready(function(){initNavTree('_r_type_8hpp.html',''); initResizable(
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><code>#include &lt;<a class="el" href="_mouvement_component_8hpp_source.html">ECS/Components/MouvementComponent.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_stat_component_8hpp_source.html">ECS/Components/StatComponent.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_entity_manager_8hpp_source.html">ECS/Entity/EntityManager.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_animation_system_8hpp_source.html">ECS/Systems/AnimationSystem.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_behavior_system_8hpp_source.html">ECS/Systems/BehaviorSystem.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_destroyable_system_8hpp_source.html">ECS/Systems/DestroyableSystem.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_hitbox_system_8hpp_source.html">ECS/Systems/HitboxSystem.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_mouvement_system_8hpp_source.html">ECS/Systems/MouvementSystem.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_json_tools_8hpp_source.html">Json/JsonTools.hpp</a>&gt;</code><br />
 <code>#include &lt;<a class="el" href="_bit_size_8hpp_source.html">Serializer/BitSize.hpp</a>&gt;</code><br />
+<code>#include &lt;<a class="el" href="_shortcuts_8hpp_source.html">Tools/Shortcuts.hpp</a>&gt;</code><br />
 <code>#include &lt;memory&gt;</code><br />
 </div>
 <p><a href="_r_type_8hpp_source.html">Go to the source code of this file.</a></p>
@@ -122,10 +125,15 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:a1d32cd6f30839ba42b098395a36e3b66"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66">RTypeStats</a> { <a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66ac9d5db092bc7a12cfcf11c5dc3c1038b">Life</a> = 0
+<tr class="memitem:a1d32cd6f30839ba42b098395a36e3b66"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66">RTypeStats</a> { <br />
+&#160;&#160;<a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66ac9d5db092bc7a12cfcf11c5dc3c1038b">Life</a> = 0
 , <a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66a5c92456d9eeeaf69f06e8e768044694c">Damage</a> = 1
 , <a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66a2891de101c03df22f3bf8137f8622908">Speed</a> = 2
 , <a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66aff9abf2b1a689f70a77a18da50c01d9f">Size</a> = 3
+, <br />
+&#160;&#160;<a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66aa41cf1576329ca1df1952727825ed727">Level</a> = 4
+, <a class="el" href="_r_type_8hpp.html#a1d32cd6f30839ba42b098395a36e3b66a501a99846e15f9e28e3150f19a8a85fa">Angle</a> = 5
+<br />
  }</td></tr>
 <tr class="separator:a1d32cd6f30839ba42b098395a36e3b66"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -161,6 +169,8 @@ Enumerations</h2></td></tr>
 <tr><td class="fieldname"><a id="a1d32cd6f30839ba42b098395a36e3b66a5c92456d9eeeaf69f06e8e768044694c" name="a1d32cd6f30839ba42b098395a36e3b66a5c92456d9eeeaf69f06e8e768044694c"></a>Damage&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1d32cd6f30839ba42b098395a36e3b66a2891de101c03df22f3bf8137f8622908" name="a1d32cd6f30839ba42b098395a36e3b66a2891de101c03df22f3bf8137f8622908"></a>Speed&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a1d32cd6f30839ba42b098395a36e3b66aff9abf2b1a689f70a77a18da50c01d9f" name="a1d32cd6f30839ba42b098395a36e3b66aff9abf2b1a689f70a77a18da50c01d9f"></a>Size&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d32cd6f30839ba42b098395a36e3b66aa41cf1576329ca1df1952727825ed727" name="a1d32cd6f30839ba42b098395a36e3b66aa41cf1576329ca1df1952727825ed727"></a>Level&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a1d32cd6f30839ba42b098395a36e3b66a501a99846e15f9e28e3150f19a8a85fa" name="a1d32cd6f30839ba42b098395a36e3b66a501a99846e15f9e28e3150f19a8a85fa"></a>Angle&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 </div>
