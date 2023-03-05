@@ -109,4 +109,7 @@ Our complete documentation can be found [here](https://arthurtakase.github.io/R-
 - [Geoffrey L.](https://github.com/GeoffreyLabruyere)
 - [Guillaume V.](https://github.com/GuillaumeVernizeau)
 
-Want to become a contributor ? Check out our [Contributor's guide](docs/Contributor.md) !
+## Game improvements
+
+- Want to contribute to the project ? Check out our [Contributor's guide](docs/Contributor.md) !
+- Want to create your own custom levels ? Check out our [Level's guide](docs/CustomLevel.md) !

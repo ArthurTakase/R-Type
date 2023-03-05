@@ -1,4 +1,4 @@
-# HOWTO: Customize your game levels
+# Custom Level's guide
 
 Now that you've played our game, you might want to spice things up a bit and add new enemy patterns. Our project allows you to do so simply, and this guide will explain you how to do it.
 
