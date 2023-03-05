@@ -5,6 +5,10 @@
 ** main_network
 */
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
 #include <Error/Error.hpp>
 #include <Server/Server.hpp>
 #include <iostream>
@@ -16,6 +20,8 @@
  */
 int main()
 {
+    srand(time(NULL));
+
     try {
         Server server(Server::SERVER_PORT);
 
