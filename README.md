@@ -24,6 +24,28 @@ For further details about the implementation of these notions, you can click [he
 
 ## Usage for Linux users
 
+### Release usage
+
+- Download the latest `linux.zip` [here](https://github.com/ArthurTakase/R-Type/releases)
+- Unzip the file
+- Move to the `build` folder :
+
+```bash
+cd build
+```
+
+- Launch the server with LD_LIBRARY_PATH :
+
+```bash
+LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json ./r-type_server
+```
+
+- Launch a client with LD_LIBRARY_PATH :
+
+```bash
+LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json ./r-type_client
+```
+
 ### Build
 
 - Debug mode: `just debug`
@@ -32,7 +54,7 @@ For further details about the implementation of these notions, you can click [he
 Be careful, if you want to use the `justfile`, you need to install [just](https://just.systems/man/en/), you can do it with the following command:
 
 ```bash
-    cargo install just
+cargo install just
 ```
 
 ### Run
@@ -42,19 +64,19 @@ Be careful, if you want to use the `justfile`, you need to install [just](https:
 - Launch a client:
 
 ```bash
-    cd build && ./r-type_client
+cd build && ./r-type_client
 ```
 
 or
 
 ```bash
-    cd build && ./r-type_client [server port] [server ip] [client port]
+cd build && ./r-type_client [server port] [server ip] [client port]
 ```
 
 - Launch the server:
 
 ```bash
-    cd build && ./r-type_server
+cd build && ./r-type_server
 ```
 
 ## Usage for Windows users
