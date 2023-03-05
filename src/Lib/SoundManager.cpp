@@ -7,6 +7,7 @@
 
 #include <Error/Error.hpp>
 #include <Lib/SoundManager.hpp>
+#include <algorithm>
 #include <iostream>
 
 void SoundManager::addSoundBuffer(const std::string_view& path) noexcept
