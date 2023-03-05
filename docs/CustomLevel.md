@@ -65,7 +65,7 @@ Now that we've seen how to set our enemies's properties, let's add a new wave to
 First, you need to understand the format of our JSON file.
 Each wave is defined as is:
 
-```json
+```c++
 {
     [
         {
@@ -81,7 +81,7 @@ This example will of course not work because it is not composed of the correct v
 
 If you want to add more enemies to the wave, you can simply add more objects to the array:
 
-```json
+```c++
 {
     // Wave 1
     [
@@ -108,6 +108,5 @@ As you can see, the wave is contained between the square brackets. Each enemy is
 - Be careful ! the last enemy of the wave must not have a comma after it, and the last wave must not have a comma after it.
 - The `type` property must be one of the following: `basic`, `curve`, `boss`, `powerup`
 - You can add as many enemies as you want in a wave, and as many waves as you want, but you need to respect the format of the file.
-- Don't forget to recompile the game after you've edited the JSON file for the changes to take effect!
 
 If you followed this guide correctly, you should be able to add new waves to the game. Have fun and good luck !
