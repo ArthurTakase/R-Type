@@ -102,7 +102,6 @@ mv .\build\_deps\sfml-build\bin\Debug\sfml-network-d-3.dll ./build
 mv .\build\_deps\sfml-build\bin\Debug\sfml-graphics-d-3.dll ./build
 mv .\build\_deps\sfml-build\bin\Debug\sfml-system-d-3.dll ./build
 mv .\build\_deps\sfml-build\bin\Debug\sfml-window-d-3.dll ./build
-mv .\build\_deps\sfml-src\extlibs\bin\x86 ./build
 mv .\build\_deps\sfml-src\extlibs\bin\x64\openal32.dll ./build
 ```
 
