@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest
     needs: [Tests, Linux]
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
     permissions:
       contents: write
     steps:
