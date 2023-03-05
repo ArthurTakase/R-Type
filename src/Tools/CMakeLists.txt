@@ -3,6 +3,7 @@ project(Tools LANGUAGES CXX)
 
 add_library(
     ${PROJECT_NAME}
+    STATIC
     Curve.cpp
 )
 

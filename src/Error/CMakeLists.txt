@@ -3,6 +3,7 @@ project(Error LANGUAGES CXX)
 
 add_library(
     ${PROJECT_NAME}
+    STATIC
     Error.cpp
 )
 

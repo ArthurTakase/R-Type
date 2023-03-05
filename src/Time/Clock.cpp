@@ -11,7 +11,7 @@
  * It initializes the Clock class object and its member variables
  */
 Clock::Clock() noexcept
-    : end_(std::chrono::system_clock::now())
+    : end_(std::chrono::high_resolution_clock::now())
     , start_(std::chrono::high_resolution_clock::now())
     , actualTime_(std::chrono::high_resolution_clock::now())
     , lastPing_(std::chrono::high_resolution_clock::now())
@@ -23,7 +23,7 @@ Clock::Clock() noexcept
  *
  * @return The end_ variable is being returned.
  */
-std::chrono::system_clock::time_point Clock::getEnd() const noexcept
+std::chrono::high_resolution_clock::time_point Clock::getEnd() const noexcept
 {
     return (end_);
 }
@@ -63,7 +63,7 @@ std::chrono::high_resolution_clock::time_point Clock::getLastPing() const noexce
  *
  * @param end The end time of the clock.
  */
-void Clock::setEnd(std::chrono::system_clock::time_point end) noexcept
+void Clock::setEnd(std::chrono::high_resolution_clock::time_point end) noexcept
 {
     end_ = end;
 }

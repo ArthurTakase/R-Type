@@ -3,6 +3,7 @@ project(Time LANGUAGES CXX)
 
 add_library(
     ${PROJECT_NAME}
+    STATIC
     Clock.cpp
 )
 

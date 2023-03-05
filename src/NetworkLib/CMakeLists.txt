@@ -4,6 +4,7 @@ project(NetworkLib)
 
 add_library(
   ${PROJECT_NAME}
+  STATIC
   LinuxSocketSelector.cpp
   LinuxSocket.cpp
   SocketFactory.cpp

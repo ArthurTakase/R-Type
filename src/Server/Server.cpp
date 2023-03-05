@@ -232,7 +232,7 @@ bool Server::isKnownClient(Address address) const
  * @param address The address of the client
  * @param ping The time the client sent the ping
  */
-void Server::addClient(Address address, std::chrono::system_clock::time_point ping) noexcept
+void Server::addClient(Address address, std::chrono::high_resolution_clock::time_point ping) noexcept
 {
     Client client{.address = address, .lastPing = ping};
     clients_.push_back(client);
