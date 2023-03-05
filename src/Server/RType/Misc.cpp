@@ -55,8 +55,6 @@ int RType::createPowerUp(int x, int y, int type) noexcept
 {
     auto             powerUp = entityManager_.newEntity();
     std::vector<int> sprites = {1, 9};
-    if (x < 0 || x > 239) { return -1; }
-    if (y < 0 || y > 239) { return -1; }
 
     if (type != 0 && type != 1) { return -1; }
 
