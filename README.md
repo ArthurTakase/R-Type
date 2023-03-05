@@ -37,14 +37,22 @@ cd build
 - Launch the server with LD_LIBRARY_PATH :
 
 ```bash
-LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json ./r-type_server
+LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json:_deps/sfml-build/lib ./r-type_server
 ```
 
 - Launch a client with LD_LIBRARY_PATH :
 
 ```bash
-LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json ./r-type_client
+LD_LIBRARY_PATH=src/Serializer:src/Tools:src/Time:src/Lib:src/ECS:src/Error:src/Json:_deps/sfml-build/lib ./r-type_client
 ```
+
+If .so are missing, try to install the following packages
+
+- xorg-dev
+- libudev-dev
+- libopenal-dev
+- libvorbis-dev
+- libflac-dev
 
 ### Build
 
@@ -81,9 +89,23 @@ cd build && ./r-type_server
 
 ## Usage for Windows users
 
-- Compile with `Cmake GUI`
-- Use Visual Studio
-- Launch .exe `r-type_client.exe` and `r-type_server.exe`
+### Build Windows
+
+```bat
+mkdir build
+cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build
+```
+
+### Windows Missing DLL
+
+```bat
+coucou
+```
+
+### Run Windows
+
+Launch .exe `r-type_client.exe` and `r-type_server.exe`
 
 ## Continuous integration/Continuous Deployment
 
