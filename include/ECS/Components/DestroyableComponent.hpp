@@ -9,10 +9,7 @@
 
 #include <ECS/Components/IComponent.hpp>
 #include <ECS/Entity/Entity.hpp>
-#include <Lib/Sprite.hpp>
-#include <Lib/Timer.hpp>
 #include <functional>
-#include <memory>
 
 /**
  * @brief Component assigned to drawable entities.
@@ -20,18 +17,22 @@
 class DestroyableComponent : public IComponent
 {
   public:
-    DestroyableComponent() noexcept;
+    DestroyableComponent() noexcept = default;
     DestroyableComponent(int destroy) noexcept;
-    ~DestroyableComponent() noexcept                                 = default;
     DestroyableComponent(const DestroyableComponent& other) noexcept = default;
-    DestroyableComponent(DestroyableComponent&& other) noexcept      = delete;
+    DestroyableComponent(DestroyableComponent&& other) noexcept      = default;
+    ~DestroyableComponent() noexcept                                 = default;
 
-    DestroyableComponent& operator=(const DestroyableComponent& rhs) noexcept = delete;
-    DestroyableComponent& operator=(DestroyableComponent&& rhs) noexcept      = delete;
+    DestroyableComponent& operator=(const DestroyableComponent& rhs) noexcept = default;
+    DestroyableComponent& operator=(DestroyableComponent&& rhs) noexcept      = default;
 
     bool getDestroyed() const noexcept;
     void destroy() noexcept;
 
+    void setOnDestroy(std::function<void(Entity* self)> onDestroy) noexcept;
+    void onDestroy(Entity* self) const noexcept;
+
   private:
-    bool destroyed = false;
+    bool                              destroyed_ = false;
+    std::function<void(Entity* self)> onDestroy_;
 };

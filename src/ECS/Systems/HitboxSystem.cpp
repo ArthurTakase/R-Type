@@ -8,8 +8,6 @@
 #include <ECS/Components/HitboxComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <ECS/Systems/HitboxSystem.hpp>
-#include <cassert>
-#include <iostream>
 
 /**
  * It takes an iterator of entities with a position and hitbox component, and stores it in a private
@@ -33,11 +31,7 @@ void HitboxSystem::run()
     for (; !it_.isEnd(); ++it_) {
         if (!(it_.get()->hasComponents<HitboxComponent, TransformComponent>())) { continue; }
 
-        try {
-            checkCollision(it_.get());
-        } catch (const std::exception& e) {
-            std::cerr << e.what() << std::endl;
-        }
+        checkCollision(it_.get());
     }
     it_.reset();
 }

@@ -19,13 +19,13 @@ class TimerComponent : public IComponent
     TimerComponent(float time);
     ~TimerComponent() noexcept                           = default;
     TimerComponent(const TimerComponent& other) noexcept = default;
-    TimerComponent(TimerComponent&& other) noexcept      = delete;
+    TimerComponent(TimerComponent&& other) noexcept      = default;
 
-    TimerComponent& operator=(const TimerComponent& rhs) noexcept = delete;
-    TimerComponent& operator=(TimerComponent&& rhs) noexcept      = delete;
+    TimerComponent& operator=(const TimerComponent& rhs) noexcept = default;
+    TimerComponent& operator=(TimerComponent&& rhs) noexcept      = default;
 
     Timer& getTimer() noexcept;
 
   private:
-    Timer timer;
+    Timer timer_;
 };

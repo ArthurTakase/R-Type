@@ -9,23 +9,45 @@
 #include <Error/Error.hpp>
 #include <NetworkLib/SocketFactory.hpp>
 #include <NetworkLib/SocketSelectorFactory.hpp>
+#include <Tools/Keyboard.hpp>
 #include <iostream>
 #include <memory>
 
 /**
- * It creates a socket, a selector, a deserializer, a game, and two threads.
- *
+ * Constructor for my UDP client's class.
+ * It initializes its socket, a deserializer, a game object, and two threads for its execution.
  * @param serverAddress The address of the server to connect to.
  * @param clientPort The port that the client will use to communicate with the
  * server.
  */
 [[nodiscard]] UdpClient::UdpClient(Address serverAddress, Address::Port clientPort)
-    : serverAddress_(serverAddress)
-    , socket_(SocketFactory::createSocket(clientPort))
+    : socket_(SocketFactory::createSocket(clientPort))
     , selector_(SocketSelectorFactory::createSocketSelector())
     , game_(dataReceived_, mutexForPacket_)
+    , looping_(true)
 {
     selector_->add(*socket_, true, true, false);
+    serverInfos_.address = serverAddress;
+
+    gameThread_    = std::thread([&]() { gameLoop(); });
+    networkThread_ = std::thread([&]() { communicate(); });
+}
+
+/**
+ * Constructor for my UDP client's class.
+ * It initializes its socket, a deserializer, a game object, and two threads for its execution.
+ * @param clientPort The port that the client will use to communicate with the
+ * server.
+ */
+[[nodiscard]] UdpClient::UdpClient(Address::Port clientPort)
+    : socket_(SocketFactory::createSocket(clientPort))
+    , selector_(SocketSelectorFactory::createSocketSelector())
+    , game_(dataReceived_, mutexForPacket_)
+    , looping_(false)
+{
+    selector_->add(*socket_, true, true, false);
+    serverInfos_.address.port = 0;
+    serverInfos_.address.ip   = 0;
 
     gameThread_    = std::thread([&]() { gameLoop(); });
     networkThread_ = std::thread([&]() { communicate(); });
@@ -52,8 +74,8 @@ void UdpClient::reset() noexcept
  */
 void UdpClient::run()
 {
-    gameThread_.join();
     networkThread_.join();
+    gameThread_.join();
 }
 
 /**
@@ -62,17 +84,22 @@ void UdpClient::run()
  */
 void UdpClient::communicate() noexcept
 {
-    RawData data = {12};
-    dataToSend_.push(data);
+    if (serverInfos_.address.ip == 0 || serverInfos_.address.port == 0) {
+        std::unique_lock<std::mutex> lock(mutexForNetworkThread_);
+        cv_.wait(lock);
+    }
 
+    dataToSend_.push({PING});
     while (looping_) {
         try {
             selector_->select(true, true, false);
-        } catch (const NetworkExecError& message) {
+        } catch (const NetworkError& message) {
             std::cerr << message.what() << std::endl;
         }
         if (selector_->isSet(*socket_, SocketSelector::Operation::READ)) { receive(); }
         if (selector_->isSet(*socket_, SocketSelector::Operation::WRITE)) { send(); }
+
+        checkServerConnection();
     }
 }
 
@@ -83,15 +110,33 @@ void UdpClient::communicate() noexcept
 void UdpClient::gameLoop() noexcept
 {
     auto& lib = game_.getLib();
-    lib.getWindow().open(256, 256, "Client RTYPE");
+    lib.getWindow().open(WIDTH_WINDOW, HEIGHT_WINDOW, WINDOW_NAME.data());
+
+    if (serverInfos_.address.ip == 0 || serverInfos_.address.port == 0) {
+        try {
+            serverInfos_.address = menu_.run(lib.getWindow());
+            reset();
+            cv_.notify_all();
+        } catch (const Error& e) {
+            std::cerr << e.what() << std::endl;
+            stop();
+            cv_.notify_all();
+            isFirstConnection_ = false;
+        }
+    }
+
+    while (isFirstConnection_) {
+        std::unique_lock<std::mutex> lock(mutexForGameThread_);
+        cvGame_.wait(lock);
+    }
 
     while (looping_) {
         auto input = lib.getWindow().getKeyPressed();
-        if (input == 255 || input == 36) {
-            looping_ = false;
+        if (input == Input::Exit) {
+            stop();
             break;
         }
-        if (input != 0) { dataToSend_.push({(uint8_t)input}); }
+        if (input != 0) { dataToSend_.push({static_cast<uint8_t>(input)}); }
         game_.run();
     }
 
@@ -107,7 +152,7 @@ void UdpClient::receive()
     try {
         ReceivedInfos infoReceived = socket_->receive();
         handleData(infoReceived);
-    } catch (const NetworkExecError& e) {
+    } catch (const NetworkError& e) {
         std::cerr << e.what() << std::endl;
     }
 }
@@ -120,8 +165,8 @@ void UdpClient::send()
     if (dataToSend_.size() != 0) {
         auto blob = getDataFromQueue();
         try {
-            socket_->send(blob.data(), blob.size(), serverAddress_);
-        } catch (const NetworkExecError& e) {
+            socket_->send(blob.data(), blob.size(), serverInfos_.address);
+        } catch (const NetworkError& e) {
             std::cerr << e.what() << std::endl;
             dataToSend_.push(blob);
         }
@@ -150,40 +195,80 @@ RawData UdpClient::getDataFromQueue() noexcept
  */
 void UdpClient::handleData(ReceivedInfos infos) noexcept
 {
-    {
-        if (infos.data.size() == 0) { return; }
-        if (infos.data.size() == 1) {
-            int value = infos.data[0];
-            if (value == ESCAPE || value == WINDOW_CLOSE) {
-                stop();
-                auto& lib = game_.getLib();
-                lib.getWindow().close();
+    serverInfos_.lastPing = clock_.getActualTime();
+
+    if (infos.data.size() == 0) { return; }
+    if (infos.data.size() == 1) {
+        int value = infos.data[0];
+        if (value == Input::Exit) {
+            stop();
+            auto& lib = game_.getLib();
+            lib.getWindow().close();
+        }
+        if (value == PING) { dataToSend_.push({PONG}); }
+        if (value == PONG) {
+            if (isFirstConnection_) {
+                cvGame_.notify_all();
+                isFirstConnection_ = false;
+                std::cout << "Connected to server" << std::endl;
             }
-        } else {
-            if (infos.data.size() % PACKET_SIZE == 0) {
-                for (int i = 0; i < infos.data.size(); i += PACKET_SIZE) {
-                    // TODO call the real method deserialize
-                    // GamePacket entity = Deserializer::deserialize(infos.data);
-                    GamePacket packet;
-                    packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
-                    packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
-                    packet.x         = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
-                    packet.y         = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
-                    packet.idSprite  = infos.data[i + PacketName::ID_SPRITE];
-                    packet.width     = infos.data[i + PacketName::WIDTH];
-                    packet.height    = infos.data[i + PacketName::HEIGHT];
-                    packet.scaleX    = infos.data[i + PacketName::SCALE_X] / 10;
-                    packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
-                    packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
-                    packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
-                    packet.id        = infos.data[i + PacketName::ID];
-                    packet.destroyed = infos.data[i + PacketName::DESTROYED];
-                    {
-                        std::lock_guard<std::mutex> lock(mutexForPacket_);
-                        dataReceived_.push(packet);
-                    }
+            serverInfos_.isPingSent = false;
+        }
+
+    } else {
+        if (infos.data.size() >= MUSIC_NB && (infos.data.size() - MUSIC_NB) % PACKET_SIZE == 0) {
+            auto& manager = game_.getManager();
+
+            for (int m = 0; m < MUSIC_NB; m++) {
+                if (infos.data[m]) {
+                    auto sound = manager.getEntity(m)->getComponent<SoundComponent>();
+                    if (sound) sound->setPlayed(true);
                 }
             }
+
+            for (int i = MUSIC_NB; i < infos.data.size(); i += PACKET_SIZE) {
+                GamePacket packet;
+                packet.x         = infos.data[i + PacketName::X1] | (infos.data[i + PacketName::X2] << 8);
+                packet.y         = infos.data[i + PacketName::Y1] | (infos.data[i + PacketName::Y2] << 8);
+                packet.x         = infos.data[i + PacketName::XPOSITIVE] ? packet.x : -packet.x;
+                packet.y         = infos.data[i + PacketName::YPOSITIVE] ? packet.y : -packet.y;
+                packet.idSprite  = infos.data[i + PacketName::ID_SPRITE];
+                packet.width     = infos.data[i + PacketName::WIDTH];
+                packet.height    = infos.data[i + PacketName::HEIGHT];
+                packet.scaleX    = infos.data[i + PacketName::SCALE_X] / 10;
+                packet.scaleY    = infos.data[i + PacketName::SCALE_Y] / 10;
+                packet.offsetX   = infos.data[i + PacketName::OFFSET_X];
+                packet.offsetY   = infos.data[i + PacketName::OFFSET_Y];
+                packet.id        = infos.data[i + PacketName::ID1] | (infos.data[i + PacketName::ID2] << 8);
+                packet.destroyed = infos.data[i + PacketName::DESTROYED];
+                {
+                    std::lock_guard<std::mutex> lock(mutexForPacket_);
+                    dataReceived_.push(packet);
+                }
+            }
+        }
+    }
+}
+
+/**
+ * It checks if the server is still connected to the client
+ */
+void UdpClient::checkServerConnection() noexcept
+{
+    clock_.setActualTime(std::chrono::high_resolution_clock::now());
+
+    auto timelapse = std::chrono::duration_cast<std::chrono::seconds>(clock_.getActualTime() - serverInfos_.lastPing);
+    if (timelapse >= std::chrono::seconds(MAX_TIMEOFF)) {
+        if (serverInfos_.isPingSent) {
+            std::cout << "Connection to the server failed" << std::endl;
+            cvGame_.notify_all();
+            stop();
+            isFirstConnection_ = false;
+        } else {
+            std::cout << "Trying to connect to the server" << std::endl;
+            serverInfos_.isPingSent = true;
+            serverInfos_.lastPing   = clock_.getActualTime();
+            dataToSend_.push({PING});
         }
     }
 }

@@ -8,13 +8,12 @@
 #pragma once
 
 #include <Lib/Sprite.hpp>
+#include <Lib/Text.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
 #include <bitset>
-
-enum WINDOW_KEY { QUIT = 255 };
 
 /**
  * @brief This class is used to create a window.
@@ -31,14 +30,16 @@ class Window
     Window& operator=(const Window& rhs) noexcept = delete;
     Window& operator=(Window&& rhs) noexcept      = delete;
 
-    void open(int width, int height, const std::string& title);
-    void close();
-    void clear();
-    void refresh();
-    bool isOpen();
-    int  getKeyPressed();
-    void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height);
+    void open(int width, int height, const std::string& title) noexcept;
+    void close() noexcept;
+    void clear() noexcept;
+    void refresh() noexcept;
+    bool isOpen() const noexcept;
+    int  getKeyPressed() noexcept;
+    void draw(Sprite& sprite, int xtexture, int ytexture, int width, int height) noexcept;
+    void draw(Text& text) noexcept;
 
   private:
-    sf::RenderWindow window;
+    sf::RenderWindow              window_;
+    static constexpr unsigned int FRAMERATE_LIMIT = 30;
 };

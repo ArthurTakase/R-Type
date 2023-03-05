@@ -35,10 +35,10 @@ InitError::InitError(std::string message) noexcept
     : Error(std::move(message)){};
 
 /**
- * It's a constructor for the NetworkExecError class that takes a string as an argument and passes it
+ * It's a constructor for the NetworkError class that takes a string as an argument and passes it
  * to the Error class constructor
  *
  * @param message The message to be displayed when the error is thrown.
  */
-NetworkExecError::NetworkExecError(std::string message) noexcept
+NetworkError::NetworkError(std::string message) noexcept
     : Error(std::move(message)){};

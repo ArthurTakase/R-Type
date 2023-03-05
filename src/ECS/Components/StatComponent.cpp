@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/StatComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor that takes two parameters and assigns them to the two member variables
@@ -14,24 +13,33 @@
  * @param life The life of the entity.
  * @param damage The damage of the entity.
  */
-StatComponent::StatComponent(std::vector<float> stats)
-    : stats(stats)
+StatComponent::StatComponent(std::vector<float> statistics_) noexcept
+    : statistics_(statistics_)
 {
 }
 
 /**
- * It's the destructor of the class StatComponent
+ * If the index is valid, return the value at that index, otherwise return
+ * NO_INDEX.
+ *
+ * @param index The index of the stat to get.
+ *
+ * @return A reference to the stat at the given index.
  */
-StatComponent::~StatComponent() noexcept {}
-
 float StatComponent::getStat(int index) const noexcept
 {
-    if (index >= stats.size()) { return NO_INDEX; }
-    return stats[index];
+    if (index >= statistics_.size()) { return NO_INDEX; }
+    return statistics_[index];
 }
 
+/**
+ * It sets the value of a statistic
+ *
+ * @param index The index of the stat to set.
+ * @param value The value to set the stat to.
+ */
 void StatComponent::setStat(int index, float value) noexcept
 {
-    while (index >= stats.size()) { stats.push_back(0); }
-    stats[index] = value;
+    while (index >= statistics_.size()) { statistics_.push_back(0); }
+    statistics_[index] = value;
 }

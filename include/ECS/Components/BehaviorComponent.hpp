@@ -18,13 +18,13 @@
 class BehaviorComponent : public IComponent
 {
   public:
-    BehaviorComponent();
-    ~BehaviorComponent() noexcept                              = default;
+    BehaviorComponent()                                        = default;
     BehaviorComponent(const BehaviorComponent& other) noexcept = default;
-    BehaviorComponent(BehaviorComponent&& other) noexcept      = delete;
+    BehaviorComponent(BehaviorComponent&& other) noexcept      = default;
+    ~BehaviorComponent() noexcept                              = default;
 
-    BehaviorComponent& operator=(const BehaviorComponent& rhs) noexcept = delete;
-    BehaviorComponent& operator=(BehaviorComponent&& rhs) noexcept      = delete;
+    BehaviorComponent& operator=(const BehaviorComponent& rhs) noexcept = default;
+    BehaviorComponent& operator=(BehaviorComponent&& rhs) noexcept      = default;
 
     void setOnUpdate(std::function<void(Entity* self)> onUpdate) noexcept;
     void onUpdate(Entity* self) const noexcept;

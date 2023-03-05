@@ -12,20 +12,19 @@
 /**
  * @brief Component used to set the direction and speed of the movement of an entity
  */
-
 class MouvementComponent : public IComponent
 {
   public:
-    MouvementComponent(int dirX, int dirY, float speed);
-    ~MouvementComponent() noexcept;
+    MouvementComponent(int dirX, int dirY, float speed) noexcept;
     MouvementComponent(const MouvementComponent& other) noexcept = default;
-    MouvementComponent(MouvementComponent&& other) noexcept      = delete;
+    MouvementComponent(MouvementComponent&& other) noexcept      = default;
+    ~MouvementComponent() noexcept                               = default;
 
-    MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = delete;
-    MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = delete;
+    MouvementComponent& operator=(const MouvementComponent& rhs) noexcept = default;
+    MouvementComponent& operator=(MouvementComponent&& rhs) noexcept      = default;
 
-    float getDirX() const noexcept;
-    float getDirY() const noexcept;
+    int getDirX() const noexcept;
+    int getDirY() const noexcept;
     float getSpeed() const noexcept;
     void  setDirX(int x) noexcept;
     void  setDirY(int y) noexcept;

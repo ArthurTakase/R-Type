@@ -6,7 +6,6 @@
 */
 
 #include <ECS/Components/MouvementComponent.hpp>
-#include <iostream>
 
 /**
  * It's a constructor that takes three parameters and assigns them to the three member variables
@@ -15,7 +14,7 @@
  * @param dirY The direction of the movement on the Y axis. (-1, 0 or 1)
  * @param speed the speed of the entity
  */
-MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)
+MouvementComponent::MouvementComponent(int dirX, int dirY, float speed) noexcept
     : dirX_(dirX)
     , dirY_(dirY)
     , speed_(speed)
@@ -23,16 +22,11 @@ MouvementComponent::MouvementComponent(int dirX, int dirY, float speed)
 }
 
 /**
- * It's the destructor of the class MouvementComponent
- */
-MouvementComponent::~MouvementComponent() noexcept {}
-
-/**
  * It returns the value of the private member _dirX
  *
  * @return The direction of the x axis.
  */
-float MouvementComponent::getDirX() const noexcept
+int MouvementComponent::getDirX() const noexcept
 {
     return dirX_;
 }
@@ -42,7 +36,7 @@ float MouvementComponent::getDirX() const noexcept
  *
  * @return The direction of the Y axis.
  */
-float MouvementComponent::getDirY() const noexcept
+int MouvementComponent::getDirY() const noexcept
 {
     return dirY_;
 }
@@ -87,6 +81,12 @@ void MouvementComponent::setSpeed(float speed) noexcept
     speed_ = speed;
 }
 
+/**
+ * It sets the direction of the entity
+ *
+ * @param x The x-coordinate of the direction vector.
+ * @param y The y-coordinate of the direction vector.
+ */
 void MouvementComponent::setDir(int x, int y) noexcept
 {
     dirX_ = x;

@@ -12,6 +12,10 @@
 #include <SFML/Window.hpp>
 #include <SFML/Window/Keyboard.hpp>
 
+/**
+ * @brief This class is used to create, modify and encapsulate a Sf::Clock.
+ *
+ */
 class Timer
 {
   public:
@@ -19,21 +23,21 @@ class Timer
     Timer(float limit) noexcept;
     ~Timer() noexcept                  = default;
     Timer(const Timer& other) noexcept = default;
-    Timer(Timer&& other) noexcept      = delete;
+    Timer(Timer&& other) noexcept      = default;
 
-    Timer& operator=(const Timer& rhs) noexcept = delete;
-    Timer& operator=(Timer&& rhs) noexcept      = delete;
+    Timer& operator=(const Timer& rhs) noexcept = default;
+    Timer& operator=(Timer&& rhs) noexcept      = default;
 
-    void  start();
-    void  stop();
-    void  reset();
-    bool  isOver();
-    float getElapsedTime();
-    void  setLimit(float limit);
-    float getLimit() const;
+    void  start() noexcept;
+    void  stop() noexcept;
+    void  reset() noexcept;
+    bool  isOver() noexcept;
+    float getElapsedTime() const noexcept;
+    void  setLimit(float limit) noexcept;
+    float getLimit() const noexcept;
 
   private:
-    sf::Clock clock;
-    float     limit;
-    bool      active;
+    sf::Clock clock_;
+    float     limit_;
+    bool      active_;
 };

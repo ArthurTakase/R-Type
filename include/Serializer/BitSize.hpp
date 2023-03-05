@@ -1,10 +1,21 @@
 #pragma once
 #include <cstdint>
+#include <string_view>
 
-#define ESCAPE 120
-#define WINDOW_CLOSE 36
-#define CONNECT 12
+static constexpr unsigned int     ESCAPE        = 120;
+static constexpr unsigned int     WINDOW_CLOSE  = 36;
+static constexpr unsigned int     CLOSE_VALUE   = 255;
+static constexpr unsigned int     PACKET_SIZE   = 16;
+static constexpr unsigned int     MAX_TIMEOFF   = 5;
+static constexpr unsigned int     PING          = 1;
+static constexpr unsigned int     PONG          = 2;
+static constexpr unsigned int     MAX_PLAYERS   = 4;
+static constexpr unsigned int     MUSIC_NB      = 6;
+static constexpr std::string_view PATH_BG_MUSIC = "./assets/audio/loading.wav";
 
+/**
+ * @brief This enum class is used to process the packets received from the server in order.
+ */
 typedef enum PacketName {
     X1        = 0,
     X2        = 1,
@@ -19,8 +30,9 @@ typedef enum PacketName {
     SCALE_Y   = 10,
     OFFSET_X  = 11,
     OFFSET_Y  = 12,
-    ID        = 13,
-    DESTROYED = 14,
+    ID1       = 13,
+    ID2       = 14,
+    DESTROYED = 15
 } PacketName;
 
 /**
@@ -40,4 +52,7 @@ struct GamePacket {
     std::uint8_t destroyed;
 };
 
-typedef enum Input { LeftArrow = 71, RightArrow = 72, UpArrow = 73, DownArrow = 74, Space = 57, Shift = 38 } Input;
+/**
+ * @brief This enum defines all sounds handled in our game
+ */
+typedef enum RTypeSounds { EXPLOSION_SOUND, HEAL_SOUND, HURT_SOUND, MENU_SOUND, PIOU_SOUND, POWERUP_SOUND } RTypeSounds;

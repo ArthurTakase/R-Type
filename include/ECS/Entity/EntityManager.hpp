@@ -19,12 +19,12 @@
 #include <vector>
 
 /**
- * @brief Object used to create the different entities of the software
+ * @brief Object used to create the different entities of the game
  */
 class EntityManager
 {
   public:
-    EntityManager();
+    EntityManager()                                    = default;
     ~EntityManager() noexcept                          = default;
     EntityManager(const EntityManager& other) noexcept = default;
     EntityManager(EntityManager&& other) noexcept      = delete;
@@ -35,10 +35,12 @@ class EntityManager
     bool                                  removeEntity(size_t id) noexcept;
     Entity*                               getEntity(size_t id) const noexcept;
     std::vector<std::unique_ptr<Entity>>& getEntities() noexcept;
-    void                                  addEntity(std::unique_ptr<Entity>&& entity) noexcept;
     Entity*                               newEntity() noexcept;
+    Entity*                               newEntity(int id) noexcept;
+    void                                  log() const noexcept;
 
   private:
-    size_t                               createId() const noexcept;
+    size_t createId() const noexcept;
+
     std::vector<std::unique_ptr<Entity>> entities_;
 };

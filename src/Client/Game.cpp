@@ -8,6 +8,7 @@
 #include <Client/Game.hpp>
 #include <ECS/Components/DestroyableComponent.hpp>
 #include <ECS/Components/DrawableComponent.hpp>
+#include <ECS/Components/MusicComponent.hpp>
 #include <ECS/Components/TransformComponent.hpp>
 #include <iostream>
 
@@ -22,8 +23,19 @@ Game::Game(std::queue<GamePacket>& packets, std::mutex& mutex)
     , mutexForPacket_(mutex)
     , drawableSystem_(&manager_)
     , destroyableSystem_(&manager_)
+    , soundSystem_(&manager_)
+    , musicSystem_(&manager_)
 {
     drawableSystem_.setWindow(&lib_.getWindow());
+    soundSystem_.setSoundManager(&soundManager_);
+
+    for (auto& path : soundPaths_) { soundManager_.addSoundBuffer(path); }
+    createSound(EXPLOSION_PATH);
+    createSound(HEAL_PATH);
+    createSound(HURT_PATH);
+    createSound(MENU_PATH);
+    createSound(PIOU_PATH);
+    createSound(POWERUP_PATH);
 }
 
 /**
@@ -41,6 +53,8 @@ void Game::run() noexcept
     }
     destroyableSystem_.run();
     drawableSystem_.run();
+    soundSystem_.run();
+    musicSystem_.run();
 }
 
 /**
@@ -62,10 +76,10 @@ Lib& Game::getLib() noexcept
  */
 void Game::updateOrCreateEntity(GamePacket packet) noexcept
 {
-    auto m_entity = manager_.getEntity(packet.id);
+    auto m_entity = manager_.getEntity(static_cast<size_t>(packet.id));
 
     if (m_entity == nullptr) {
-        auto entity = manager_.newEntity();
+        auto entity = manager_.newEntity(packet.id);
 
         auto transform = TransformComponent(packet.x, packet.y);
 
@@ -83,6 +97,8 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         auto drawable  = m_entity->getComponent<DrawableComponent>();
         auto destroy   = m_entity->getComponent<DestroyableComponent>();
 
+        if (transform == nullptr || drawable == nullptr || destroy == nullptr) { return; }
+
         transform->setX(packet.x);
         transform->setY(packet.y);
         drawable->setScale(packet.scaleX, packet.scaleY);
@@ -90,7 +106,36 @@ void Game::updateOrCreateEntity(GamePacket packet) noexcept
         drawable->setOffsetY(packet.offsetY);
         drawable->setWidth(packet.width);
         drawable->setHeight(packet.height);
-        drawable->setTextureId(packet.idSprite);
+
+        if (packet.idSprite != drawable->getTextureId()) {
+            drawable->getSprite().setSpritePath("assets/img/r-typesheet" + std::to_string(packet.idSprite) + ".gif");
+            drawable->setTextureId(packet.idSprite);
+        }
+
         if (packet.destroyed) destroy->destroy();
     }
+}
+
+/**
+ * It creates a new entity, adds a sound component to it, and returns the entity's ID
+ *
+ * @param path The path to the sound file.
+ *
+ * @return The id of the entity.
+ */
+int Game::createSound(const std::string_view& path) noexcept
+{
+    auto sound = manager_.newEntity();
+
+    sound->addComponent(SoundComponent(soundManager_.getBufferFromPath(path)));
+
+    return sound->getId();
+}
+
+/**
+ * It returns a reference to our entities manager
+ */
+EntityManager& Game::getManager() noexcept
+{
+    return manager_;
 }

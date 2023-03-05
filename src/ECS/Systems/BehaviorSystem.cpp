@@ -6,9 +6,6 @@
 */
 
 #include <ECS/Systems/BehaviorSystem.hpp>
-#include <cassert>
-#include <iostream>
-#include <memory>
 
 /**
  * It takes a reference to a unique pointer to an EntityManager, and then it initializes the manager_
@@ -33,7 +30,7 @@ void BehaviorSystem::run()
     for (; !it_.isEnd(); ++it_) {
         Entity* entity = it_.get();
 
-        if (!entity->hasComponents<BehaviorComponent>()) { continue; }
+        if (!entity->hasComponent<BehaviorComponent>()) { continue; }
 
         entity->getComponent<BehaviorComponent>()->onUpdate(entity);
     }

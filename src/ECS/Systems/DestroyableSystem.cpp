@@ -6,9 +6,6 @@
 */
 
 #include <ECS/Systems/DestroyableSystem.hpp>
-#include <cassert>
-#include <iostream>
-#include <memory>
 
 /**
  * It takes a reference to a unique pointer to an EntityManager, and then it initializes the manager_
@@ -36,6 +33,7 @@ void DestroyableSystem::run()
         auto dest = entity->getComponent<DestroyableComponent>();
 
         if (dest->getDestroyed()) {
+            dest->onDestroy(entity);
             manager_->removeEntity(entity->getId());
             --it_;
         }

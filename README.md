@@ -1,91 +1,51 @@
-# R-TYPE
+# {EPITECH} | Third year | Network | OOP | R-Type
 
-Implementation of a multithreaded server and a graphical client for a game called R-Type, using an engine of our own design.
+## About the project
 
-## Team
+This project aims to recreate the cross-platform video game R-Type with an online mutiplayer mode.
+It required the implementation of a multithreaded server and a graphical client, using an engine of our own design.
 
-* Arthur Decaen (arthur.decaen@epitech.eu)
-* Corentin Roy (corentin.roy@epitech.eu)
-* Solène Lefeu (solene.lefeu@epitech.eu)
-* Guillaume Vernizeau (guillaume.vernizeau@epitech.eu)
-* Geoffrey Labruyère (geoffrey.labruyere@epitech.eu)
+- `Tools:`
+  - Project made in `C++` version 20
+  - use of the `SFML` graphical library to display game elements
+  - Compiled with `CMake`, minimum version required : `3.17`
+  - `Google Test` for unit tests
+  - `Doxygen` for documentation
+  - A `justfile` is provided to compile, run and test the project
+
+- Some of the features we implemented:
+  - A `multithreaded` server, to handle communication and game logic at the same time
+  - A graphical client, to display the game and handle user input
+  - A generic `Entity Component System` architecture and game engine
+  - A encapsulated implementation of an `UDP socket`, compatible with Linux and Windows
+  - A client-server communication protocol
+
+For further details about the implementation of these notions, you can click [here](https://arthurtakase.github.io/R-Type/) to be redirected to our documentation.
 
 ## Usage
 
-### Linux
+- For Linux users, check out our [Usage for Linux users](docs/UsageLinux.md) guide.
+- For Windows users, check out our [Usage for Windows users](docs/UsageWindows.md) guide.
 
-* Build
+## Documentation
 
-    ```bash
-    mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. -GNinja && ninja && cd ..
-    ```
+- ECS architecture graph : [documentation](docs/ECS.md)
+- Client protocol graph : [documentation](docs/ClientProtocol.md)
+- Server protocol graph : [documentation](docs/ServerProtocol.md)
 
-* Launch Client
+Our complete documentation can be found [here](https://arthurtakase.github.io/R-Type/).
 
-    ```bash
-    cd build && ./r-type_client 
-    ```
-    or
-    ```bash
-    cd build && ./r-type_client [server port] [server ip] [client port]
-    ```
+## Game improvements
 
-* Launch Server
+- Want to contribute to the project ? Check out our [Contributor's guide](docs/Contributor.md) !
+- Want to create your own custom levels ? Check out our [Level's guide](docs/CustomLevel.md) !
 
-    ```bash
-    cd build && ./r-type_server
-    ```
+## Continuous integration/Continuous Deployment
 
-### Window
+- Automatic build on `main` and `develop` branches.
+- Running Google Test unit tests on `main` and `develop` branches.
+- Generating coverage on `main` and `develop` branches.
+- Automatic generation of Doxygen documentation on `main` and `develop` branches accessible [here](https://arthurtakase.github.io/R-Type/).
+- Sending a discord message on push/merge on all branches.
 
-* Compile with Cmake GUI
-* Use Visual Studio
-* Launch .exe (r-type_client.exe and r-type_server.exe)
-
-## Dev Infos
-
-### ECS
-
-![ECS](docs/ECS.png)
-
-### Commit norm
-
-Exemples :
-
-* **ADD:** good ECS
-* **FIX:** no collision on same entity
-* **UP:** remove useless print
-
-| Name | Explanation                                                            |
-| ---- | ---------------------------------------------------------------------- |
-| ADD  | If you add files, features...                                          |
-| FIX  | If you were working on a bug or any form of default that you corrected |
-| DEL  | If you removed files, features...                                      |
-| UP   | If you change something without adding any features or content         |
-
-### CI/CD
-
-* Automatic build on main and dev branches.
-* Running Google Test unit tests on main and dev branches.
-* Generating coverage on main and dev branches.
-* Automatic generation of Doxygen documentation on main and dev branches accessible here.
-* Sending a discord message on push/merge on all branches.
-
-### Doxygen
-
-For proper documentation generation, please put comments above your functions using the following format.
-
-```cpp
-/**
- * @brief Description of the function's behavior
- * 
- * @param parameter1 description of the parameter
- * @param parameter2 description of the parameter
- * 
- * @return explanation of the return value
- */
-```
-
-### Google Test
-
-Every function must have at least one unit test. The tests work with Google Test, documentation is here.
+Project made by [Arthur D.](https://github.com/ArthurTakase), [Solène L.](https://github.com/slefeu), [Corentin R.](https://github.com/roy-corentin), [Geoffrey L.](https://github.com/GeoffreyLabruyere) and [Guillaume V.](https://github.com/GuillaumeVernizeau)

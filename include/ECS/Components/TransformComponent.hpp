@@ -16,12 +16,12 @@ class TransformComponent : public IComponent
 {
   public:
     TransformComponent(int x, int y);
-    ~TransformComponent() noexcept;
     TransformComponent(const TransformComponent& other) noexcept = default;
-    TransformComponent(TransformComponent&& other) noexcept      = delete;
+    TransformComponent(TransformComponent&& other) noexcept      = default;
+    ~TransformComponent() noexcept                               = default;
 
-    TransformComponent& operator=(const TransformComponent& rhs) noexcept = delete;
-    TransformComponent& operator=(TransformComponent&& rhs) noexcept      = delete;
+    TransformComponent& operator=(const TransformComponent& rhs) noexcept = default;
+    TransformComponent& operator=(TransformComponent&& rhs) noexcept      = default;
 
     int  getX() const noexcept;
     int  getY() const noexcept;

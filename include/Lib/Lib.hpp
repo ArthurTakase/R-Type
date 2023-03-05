@@ -27,5 +27,5 @@ class Lib
     Window& getWindow();
 
   private:
-    Window window;
+    Window window_;
 };
