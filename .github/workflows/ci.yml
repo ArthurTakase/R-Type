@@ -49,14 +49,6 @@ jobs:
       run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
     - name: Launch build
       run: cmake --build build
-    - name: Cache build
-      uses: actions/cache@v3
-      with:
-        path: build
-        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
   Tests:
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest
@@ -105,32 +97,6 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
-  ReleaseWindows:
-    runs-on: ubuntu-latest
-    needs: [Tests, Windows]
-    permissions:
-      contents: write
-    steps:
-      - name: Restore Build
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: Windows-build-${{ hashFiles('**/CMakeLists.txt') }}
-          restore-keys: |
-            Windows-build-
-            Windows-
-      - name: Archive Build
-        uses: thedoctor0/zip-release@0.7.0
-        with:
-          path: build
-          type: 'zip'
-          filename: 'windows.zip'
-      - name: Upload Build
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: windows.zip
-          overwrite: true
   ReleaseLinux:
     runs-on: ubuntu-latest
     container: epitechcontent/epitest-docker:latest

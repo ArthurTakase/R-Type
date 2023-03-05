@@ -1,0 +1,60 @@
+name: Rtype CI
+
+on: push
+
+jobs:
+  Windows:
+    runs-on: windows-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup MSVC
+      uses: ilammy/msvc-dev-cmd@v1
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.0.2
+    - name: Setup cmake
+      uses: jwlawson/actions-setup-cmake@v1.13
+      with:
+        cmake-version: "3.17.x"
+    - name: Install Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+    - name: Create build folder
+      run: mkdir build
+    - name: Launch cmake
+      run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+    - name: Launch build
+      run: cmake --build build
+    - name: Cache build
+      uses: actions/cache@v3
+      with:
+        path: build
+        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+  ReleaseWindows:
+    runs-on: windows-latest
+    needs: [Windows]
+    permissions:
+      contents: write
+    steps:
+      - name: Restore Build
+        uses: actions/cache@v3
+        with:
+          path: build
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Archive Build
+        uses: thedoctor0/zip-release@0.7.0
+        with:
+          path: build
+          type: 'zip'
+          filename: 'windows.zip'
+      - name: Upload Build
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: windows.zip
+          overwrite: true
