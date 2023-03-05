@@ -5,6 +5,8 @@ on: push
 jobs:
   Windows:
     runs-on: windows-latest
+    permissions:
+      contents: write
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -24,37 +26,15 @@ jobs:
       run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
     - name: Launch build
       run: cmake --build build
-    - name: Cache build
-      uses: actions/cache@v3
+    - name: Archive Build
+      uses: thedoctor0/zip-release@0.7.0
       with:
         path: build
-        key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
-        restore-keys: |
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
-  ReleaseWindows:
-    runs-on: windows-latest
-    needs: [Windows]
-    permissions:
-      contents: write
-    steps:
-      - name: Restore Build
-        uses: actions/cache@v3
-        with:
-          path: build
-          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
-      - name: Archive Build
-        uses: thedoctor0/zip-release@0.7.0
-        with:
-          path: build
-          type: 'zip'
-          filename: 'windows.zip'
-      - name: Upload Build
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: windows.zip
-          overwrite: true
+        type: 'zip'
+        filename: 'windows.zip'
+    - name: Upload Build
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: windows.zip
+        overwrite: true
